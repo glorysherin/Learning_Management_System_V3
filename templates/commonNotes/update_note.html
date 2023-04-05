@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" value="{{ note.department }}" required>
+        <br>
+        <label for="semester">Semester:</label>
+        <input type="text" id="semester" name="semester" value="{{ note.semester }}" required>
+        <br>
+        <label for="notes_title">Notes Title:</label>
+        <input type="text" id="notes_title" name="notes_title" value="{{ note.notes_title }}" required>
+        <br>
+        <label for="regulation">Regulation:</label>
+        <input type="text" id="regulation" name="regulation" value="{{ note.regulation }}" required>
+        <br>
+        <label for="subcode">Subcode:</label>
+        <input type="text" id="subcode" name="subcode" value="{{ note.subcode }}" required>
+        <br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>{{ note.description }}</textarea>
+        <br>
+        <label for="file">File:</label>
+        <input type="file" id="file" name="file">
+        <br>
+        <input type="submit" value="Update">
+    </form>
+</body>
+
+</html>

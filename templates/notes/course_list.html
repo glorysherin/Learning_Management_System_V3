@@ -1,0 +1,25 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<div class="card" style="
+	margin: 0 auto;
+	max-width: 400px; margin-top: 20px; ">
+	<div class="card-header">
+	  <h2 style="text-align: center;">Course List</h2>
+	</div>
+	<div class="card-body" style="margin: 0 auto;
+	max-width: 800px;">
+	  <ul>
+		{% for course in courses %}
+		  <li><a href="{% url 'course_detail' course.pk %}">{{ course.name }}</a></li>
+		{% endfor %}
+	  </ul>
+	  <br>
+	  <div class="form-group">
+		<a href="{% url 'ebook_add' %}" class="btn btn-primary">Add Ebook</a>
+	  </div>
+	</div>
+  </div>
+  
+
+{% endblock %}

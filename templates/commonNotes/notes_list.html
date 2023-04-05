@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Notes List</title>
+</head>
+
+<body>
+    <h1>Notes List</h1>
+    <ul>
+        {% for note in notes %}
+        <li><a href="{% url 'note_detail' note_id=note.id %}">{{ note.notes_title }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_note' %}">Add New Note</a>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+meet
+class room
+group chat
+notes = { link notes, website, pdf }
+blog
+attendes
+mark update
+mcq
+Tools                                                                       
+Events = { update }
+chatbot
+dynamic forms ---> Not in use
+
+New ideas :-
+
+google search
+youotube video download
+
+wikkipidea
+cources
+auto code generation
+
+class room :
+
+1. Homework assaign ->{ admin:[tab1->(assaign homework with pic and text, assaign homework with text only), tab2->()]}
+
+to connect meet,chat,notes
+
+
+<==== works ====>
+
+class edit
+attendes view and edit
+attendes mail
+
+daily test
+unit test
+assignment mark
+
+notes link
+events
+youotube video download
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

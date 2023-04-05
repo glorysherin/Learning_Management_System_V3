@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Data</title>
+</head>
+
+<body>
+    <h1>Add Data</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject"><br><br>
+
+        <label for="student_id">Student ID:</label>
+        <select name="cars" id="student_id" name="student_id">
+            {% for i in people %}
+            <option value="{{ i.role_no }}">{{ i.get_name }}
+            </option>
+            {% endfor %}
+        </select><br><br>
+        <label for="Mark">Mark:</label>
+        <input type="text" id="Mark" name="Mark"><br><br>
+        <button onclick="send_data('/add_mark_data',['#subject','#student_id','#Mark'])">Add</button>
+    </form>
+</body>
+<script>
+    function send_data(url, datas) {
+
+        var data = new FormData();
+
+        data.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
+        for (let i = 0; i < datas.length; i++) {
+            data.append(datas[i], $(datas[i]).val())
+        }
+        console.log(data)
+        $.ajax({
+            method: "POST",
+            url: url,
+            processData: false,
+            contentType: false,
+            mimeType: "multipart/form-data",
+            data: data,
+            success: function (data) {
+                if (data.status == "Upload Done") {
+                    console.log("Uploading Done successfully")
+                }
+                else {
+                    console.log('error')
+                }
+            }
+        })
+    }
+</script>
+
+</html>

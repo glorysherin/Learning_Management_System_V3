@@ -1,0 +1,16 @@
+{% block content %}
+<h1>Student Detail</h1>
+<img src="{{ student.profile_pic.url }}" width="100" height="100">
+<p>Name: {{ student.get_name }}</p>
+<p>Address: {{ student.address }}</p>
+<p>Mobile: {{ student.mobile }}</p>
+<p>Joined Year: {{ student.joinned_year }}</p>
+<p>Role No: {{ student.role_no }}</p>
+<p>Department: {{ student.department }}</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

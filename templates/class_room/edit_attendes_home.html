@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Attendees</title>
+</head>
+
+<body>
+    <form method="get" action="edit_attendes">
+        <label for="class_id">Class ID:</label>
+        <input type="text" id="class_id" name="class_id" value="{{ request.GET.class_id }}">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" value="{{ request.GET.date }}">
+        <button type="submit">Filter</button>
+    </form>
+</body>
+
+</html>

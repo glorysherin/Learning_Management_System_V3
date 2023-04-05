@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Note Detail</title>
+</head>
+
+<body>
+    <h1>{{ note.notes_title }}</h1>
+    <p>Department: {{ note.department }}</p>
+    <p>Semester: {{ note.semester }}</p>
+    <p>Regulation: {{ note.regulation }}</p>
+    <p>Subcode: {{ note.subcode }}</p>
+    <p>Description: {{ note.description }}</p>
+    <p>File: <a href="{{ note.file.url }}" target="_blank">{{ note.file.name }}</a></p>
+    <a href="{% url 'notes_list' %}">Back to Notes List</a>
+    <a href="{% url 'update_note' note_id=note.id %}">Edit Note</a>
+    <form method="post" action="{% url 'delete_note' note_id=note.id %}"
+        onsubmit="return confirm('Are you sure you want to delete this note?')">
+        {% csrf_token %}
+        <button type="submit">Delete Note</button>
+    </form>
+</body>
+
+</html>

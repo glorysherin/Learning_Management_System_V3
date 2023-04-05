@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Attendees</title>
+</head>
+
+<body>
+    <form method="get">
+        <label for="class_id">Class ID:</label>
+        <input type="text" id="class_id" name="class_id" value="{{ request.GET.class_id }}">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" value="{{ request.GET.date }}">
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if attendees %}
+    <h1>Attendees</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Class ID</th>
+                <th>User Name</th>
+                <th>Subject States</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attendee in attendees %}
+            <tr>
+                <td>{{ attendee.id }}</td>
+                <td>{{ attendee.class_id }}</td>
+                <td>{{ attendee.user_name }}</td>
+                <td>{{ attendee.subject_states }}</td>
+                <td>{{ attendee.Date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No attendees found.</p>
+    {% endif %}
+</body>
+
+</html>

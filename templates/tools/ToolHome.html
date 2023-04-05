@@ -1,0 +1,443 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <style>
+    :root {
+      --gradient: linear-gradient(to left top, black 10%, #461107 90%) !important;
+    }
+
+    body {
+      background: #f8f9fa !important;
+    }
+
+    .card {
+      background: white;
+      border: 0.1px solid rgb(51, 51, 51);
+      color: black;
+      margin-bottom: 3rem;
+      box-shadow: 5px black;
+    }
+
+    .btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 14px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+      border-radius: 6px;
+      border: none;
+
+      color: #fff;
+      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+      background-origin: border-box;
+      box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      margin-left: 90px;
+    }
+
+    .button-10:focus {
+      box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+      outline: 0;
+    }
+
+
+
+    .btn:hover,
+    .btn:focus {
+
+      box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+      outline: 0;
+
+
+
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+    <div class="container mx-auto mt-4">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://media.istockphoto.com/id/1195585116/vector/isometric-flat-vector-concept-of-literature-reading-language-learning.jpg?s=612x612&w=0&k=20&c=O5ulm78RDRI6kMUzrShbDBbptmTwQSAZhiEhc296jEM="
+              class="card-img-top" alt="Dictionary" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Dictionary</h5>
+              <p class="card-text">
+                I was reading the dictionary, I thought it was a poem about
+                everything.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://10015.io/assets/tools/list/text-to-handwriting-converter.svg" class="card-img-top"
+              alt="Text To Hand Written" style="height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Text To Hand Written</h5>
+              <p class="card-text">
+                Write your own story.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://kenaztranslations.com/wp-content/uploads/2019/09/translator_var5.png" class="card-img-top"
+              alt="Transluator" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Transluator</h5>
+              <p class="card-text">
+                Transulating word is just not a transulating language,It is
+                a transulating ideas.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://www.techsmith.com/blog/wp-content/uploads/2022/10/blog_audiate_recording-tips_1500x1100.png"
+              class="card-img-top" alt="Fissure in Sandstone" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Keyword to Audio</h5>
+              <p class="card-text">
+                Imagination will take you everywhere in the world with
+                audio.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://nichesss-images.vercel.app/Keyword%20to%20Paragraph%20Generator.png?image_url= {% static 'https%3A%2F%2Fd1p0dj4qzdpf9u.cloudfront.net%2Fimages%2Fog_image_4.png"
+              class' %}="card-img-top" alt="Keyword to paragraph" style="height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">Keyword to paragraph</h5>
+              <p class="card-text">
+                Tell a single word i can tell a story.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://www.thestartupfounder.com/wp-content/uploads/2022/12/speech-to-text-abstract-concept-vector-illustration-multi-language-recognizer-convert-voice-software-recognition-technology-226985978-2.jpg"
+              class="card-img-top" alt="Text to voice" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Text to voice</h5>
+              <p class="card-text">
+                Students need there own voice to change the world.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://vox-cpaas.com/blog/wp-content/uploads/2020/06/Different-types-of-video-conferencing.png"
+              class="card-img-top" alt="vedio meeting" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">vedio meeting</h5>
+              <p class="card-text">
+                visual connection between two or more remote parties over the internet that simulates a face-to-face
+                meeting.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://www.wideanglesoftware.com/blog/images/best-pdf-to-word-converter-google.jpg"
+              class="card-img-top" alt="pdf to docx" style="height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">PDF To Docx</h5>
+              <p class="card-text">
+                Convert PDF to DOCX in seconds with our online PDF to DOCX converter tool.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://images.idgesg.net/images/article/2022/05/cw-pdf-to-excel-100928235-large.jpg?auto=webp&quality=85,70"
+              class="card-img-top" alt="pdf to excel" style="height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">PDF TO EXCEL</h5>
+              <p class="card-text">
+                Extract all your PDF tables to EXCEL spreadsheets automatically in just a few clicks.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://play-lh.googleusercontent.com/1ig9EgfJR9ijVJOBAywFhNiP3uCaLrVKCTFm09kcCDzhCqR07VljgECUzi1MYdDpuK8R"
+              class="card-img-top" alt="GPA Calculator" style="height: 130px;">
+            <div class="card-body">
+              <h5 class="card-title">GPA CALCULATOR</h5>
+              <p class="card-text">
+                This GPA calculator computes GPA and generates a report based on course credits and the achieved grade.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://www.techsmith.com/blog/wp-content/uploads/2022/10/blog_audiate_recording-tips_1500x1100.png"
+              class="card-img-top" alt="Keyword To Audio" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Keyword To Audio</h5>
+
+              <p class="card-text">Online Text to Speech converts text into very human like natural sounding AI voices.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://xpiksapp.com/images/posts/2022/keywording-analysis/header.jpg" class="card-img-top"
+              alt="Keyword to image" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Keyword to image</h5>
+
+              <p class="card-text">Text-to-image generators can create more or less any kind of image from text input.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://img.freepik.com/free-vector/sticker-design-with-calculator-isolated_1308-60994.jpg?w=2000"
+              class="card-img-top" alt="Calculator" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Calculator</h5>
+              <p class="card-text">
+                I was reading the dictionary, I thought it was a poem about
+                everything.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://m.media-amazon.com/images/I/517KT12eSRL.png" class="card-img-top" alt="Cgpa Calculator"
+              style="height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Cgpa Calculator</h5>
+              <p class="card-text">
+                Write your own story.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://png.pngtree.com/png-vector/20190806/ourmid/pngtree-code-coding-file-programming-script-flat-color-icon-vector-png-image_1651456.jpg"
+              class="card-img-top" alt="Code Scrapping" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Code Scrapping</h5>
+              <p class="card-text">
+                Transulating word is just not a transulating language,It is
+                a transulating ideas.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://www.print-driver.com/wp-content/uploads/2013/08/word-to-pdf.jpg" class="card-img-top"
+              alt="Doc to pdf" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Keyword To Audio</h5>
+              <p class="card-text">
+                Imagination will take you everywhere in the world with
+                audio.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://cdn140.picsart.com/19366458595847172769.svg" class="card-img-top" alt="Excel to pdf"
+              style="height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">Excel to pdf</h5>
+              <p class="card-text">
+                Tell a single word i can tell a story.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://www.adobe.com/dc-shared/assets/images/frictionless/how-to-images/jpg-to-pdf-how-to.svg"
+              class="card-img-top" alt="Jpg to pdf" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Jpg to pdf</h5>
+              <p class="card-text">
+                Students need there own voice to change the world.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://storage.googleapis.com/download/storage/v1/b/hireup_files/o/6099fbe6d9d89d04ed729b3e%2Fproduct%2F0.9914981574068675jpg-to-word.png?generation=1660877885741668&alt=media"
+              class="card-img-top" alt="Jpg to Word" style="height: 150px;">
+            <div class="card-body">
+              <h5 class="card-title">Jpg to Word</h5>
+              <p class="card-text">
+                visual connection between two or more remote parties over the internet that simulates a face-to-face
+                meeting.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://cdn-icons-png.flaticon.com/512/6213/6213385.png" class="card-img-top" alt="Code Writer"
+              style="height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">Code Writer</h5>
+              <p class="card-text">
+                Convert PDF to DOCX in seconds with our online PDF to DOCX converter tool.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/006/430/508/original/game-console-with-website-coding-flat-icon-of-game-development-vector.jpg"
+              class="card-img-top" alt="Playground" style="height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">Playground</h5>
+              <p class="card-text">
+                Extract all your PDF tables to EXCEL spreadsheets automatically in just a few clicks.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="https://resources.clearvoice.com/wp-content/uploads/2020/05/05.07.20-M_Hero_1360x646-810x385.png"
+              class="card-img-top" alt="Content Generator" style="height: 130px;">
+            <div class="card-body">
+              <h5 class="card-title">Content Generator</h5>
+              <p class="card-text">
+                This GPA calculator computes GPA and generates a report based on course credits and the achieved grade.
+              </p>
+
+              <button class="btn">TRY</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- <div class="card" style="width: 18rem;">
+  <img src="https://www.techsmith.com/blog/wp-content/uploads/2022/10/blog_audiate_recording-tips_1500x1100.png" class="card-img-top"  alt="Keyword To Audio" style="height: 150px;">
+  <div class="card-body">
+    <h5 class="card-title">Keyword To Audio</h5>
+
+    <p class="card-text">Online Text to Speech converts text into very human like natural sounding AI voices. </p>
+    
+    <button class="btn">TRY</button>
+  </div>
+  </div> -->
+        </div>
+        <div class="col-md-4">
+          <!-- <div class="card" style="width: 18rem;">
+  <img src="https://xpiksapp.com/images/posts/2022/keywording-analysis/header.jpg" class="card-img-top" alt="Keyword to image" style="height: 150px;">
+  <div class="card-body">
+    <h5 class="card-title">Keyword to image</h5>
+        
+    <p class="card-text">Text-to-image generators can create more or less any kind of image from text input. </p>
+    
+    <button class="btn">TRY</button>
+  </div>
+     
+  </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+{% endblock content %}

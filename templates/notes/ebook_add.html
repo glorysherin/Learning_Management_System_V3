@@ -1,0 +1,21 @@
+{% extends 'teacher/teacherbase.html' %}
+
+
+{% block content %}
+<div class="card" style=" margin: 0 auto;
+max-width: 500px; margin-top: 20px;">
+  <div class="card-header">
+    <h2 style="text-align: center;">Add Ebook</h2>
+  </div>
+  <div class="card-body" style="margin:0 auto">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

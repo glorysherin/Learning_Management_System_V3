@@ -1,0 +1,20 @@
+{% block content %}
+<h1>Edit Classroom</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="class_name">Class Name:</label>
+    <input type="text" name="class_name" value="{{ classroom.class_name }}"><br>
+    <label for="subject_code">Subject Code:</label>
+    <input type="text" name="subject_code" value="{{ classroom.subject_code }}"><br>
+    <label for="semester">Semester:</label>
+    <input type="text" name="semester" value="{{ classroom.semester }}"><br>
+    <label for="department">Department:</label>
+    <input type="text" name="department" value="{{ classroom.department }}"><br>
+    <label for="discription">Description:</label>
+    <input type="text" name="image_url" value="{{ classroom.class_image }}"><br>
+    <label for="discription">Description:</label>
+    <input type="text" name="discription" value="{{ classroom.discription }}"><br>
+    <input type="submit" value="Save Changes">
+</form>
+
+{% endblock %}

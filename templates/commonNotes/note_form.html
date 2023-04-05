@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Note Form</title>
+</head>
+
+<body>
+    <h1>Note Form</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="department">Department:</label>
+        <input type="text" name="department" id="department" value="{{ note.department }}" required>
+        <br>
+        <label for="semester">Semester:</label>
+        <input type="text" name="semester" id="semester" value="{{ note.semester }}" required>
+        <br>
+        <label for="notes_title">Notes Title:</label>
+        <input type="text" name="notes_title" id="notes_title" value="{{ note.notes_title }}" required>
+        <br>
+        <label for="regulation">Regulation:</label>
+        <input type="text" name="regulation" id="regulation" value="{{ note.regulation }}" required>
+        <br>
+        <label for="subcode">Subcode:</label>
+        <input type="text" name="subcode" id="subcode" value="{{ note.subcode }}" required>
+        <br>
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" required>{{ note.description }}</textarea>
+        <br>
+        <label for="file">File:</label>
+        <input type="file" name="file" id="file">
+        {% if note.file %}
+        <p>Current File: <a href="{{ note.file.url }}" target="_blank">{{ note.file.name }}</a></p>
+        {% endif %}
+        <br>
+        <button type="submit">Save</button>
+        <a href="{% url 'notes_list' %}">Cancel</a>
+    </form>
+</body>
+
+</html>
