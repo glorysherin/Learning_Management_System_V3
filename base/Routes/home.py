@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from .Tool.blogTool import get_images
 
 
 def pre_home(request):
-    return render(request, 'pre_home/index.html')
+    item = get_images()
+    return render(request, 'pre_home/index.html', {"categories": item[0], "images": item[1]})
 
 
 def contactus(request):

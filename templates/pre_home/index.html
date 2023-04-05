@@ -60,10 +60,12 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="pre_home">Home</a></li>
-          <li><a href="about">About</a></li>
-          <li><a href="services">Services</a></li>
-          <li><a href="contactus" class="active">Contact us</a></li>
+          <li><a href=" {% static 'index.html' %} " class="active">Home</a></li>
+          <li><a href=" {% static 'about.html' %} ">About</a></li>
+          <li><a href=" {% static 'services.html' %} ">Services</a></li>
+          <li><a href=" {% static 'contactus.html' %} ">Contact us</a></li>
+
+
         </ul>
       </nav><!-- .navbar -->
 
@@ -107,11 +109,11 @@
       <!-- <div class="carousel-item" style="background-image: url( {% static 'assets/img/hero-carousel/hero-carousel-4.jpg' %} )"></div>
       <div class="carousel-item" style="background-image: url( {% static 'assets/img/hero-carousel/hero-carousel-5.jpg' %} )"></div> -->
 
-      <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+      <a class="carousel-control-prev" href=" {% static '#hero-carousel' %} " role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
       </a>
 
-      <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+      <a class="carousel-control-next" href=" {% static '#hero-carousel' %} " role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
       </a>
 
