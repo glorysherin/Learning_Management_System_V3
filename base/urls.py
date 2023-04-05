@@ -11,6 +11,7 @@ from .Routes.study import *
 from .Routes.notes import *
 from .Routes.exam import *
 from .Routes.blog import *
+from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.admin_page import *
 
@@ -55,9 +56,10 @@ tools = [
 common = [
     path('student_home', student_home),
     path('staff_home', staff_home),
-    # path('login_',login_page),
-    # path('login_to_home',login_into_home),
-    path('personal_detials', Personal_detials),
+    path('pre_home', pre_home),
+    path('contactus', contactus),
+    path('services', services),
+    path('about', about),
 
 ]
 
