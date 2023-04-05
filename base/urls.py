@@ -11,6 +11,7 @@ from .Routes.study import *
 from .Routes.notes import *
 from .Routes.exam import *
 from .Routes.blog import *
+from .Routes.Events import *
 from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.admin_page import *
@@ -250,8 +251,17 @@ note = [
     path('note/<int:note_id>/delete/', delete_note, name='delete_note'),
 ]
 
+event = [
+    path('event_list', event_list, name='event_list'),
+    path('event_add', event_add, name='event_add'),
+    path('event_detail/<int:event_id>', event_detail, name='event_detail'),
+    path('edit/<int:event_id>', event_edit, name='event_edit'),
+    path('delete/<int:event_id>', event_delete, name='event_delete'),
+    path('detail/<int:event_id>', event_detail, name='event_detail'),
+]
 
-urlpatterns.extend(Make_Join([tools, note, gallery_, blog_url, common,
+
+urlpatterns.extend(Make_Join([tools, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

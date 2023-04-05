@@ -327,6 +327,19 @@ class Note(models.Model):
 
     def __str__(self):
         return self.notes_title
+
+
+class Event(models.Model):
+    id = models.AutoField(primary_key=True)
+    date = models.DateField()
+    event_name = models.CharField(max_length=100)
+    event_photo = models.URLField()
+    event_description = models.TextField()
+    poster_link = models.URLField()
+
+    def __str__(self):
+        return self.event_name
+
 # classRoom ........................
 
 # class ClassRommNotification(models.Model):

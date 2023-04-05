@@ -1,0 +1,9 @@
+<!-- event_detail.html -->
+<h1>{{ event.event_name }}</h1>
+<p>Date: {{ event.date }}</p>
+<p>Description: {{ event.event_description }}</p>
+<p><a href="{{ event.event_photo }}">Photo</a></p>
+<p><a href="{{ event.poster_link }}">Poster link</a></p>
+
+<a href="/edit/{{ event.id }}">Edit event</a>
+<a href="/delete/{{ event.id }}">Edit event</a>

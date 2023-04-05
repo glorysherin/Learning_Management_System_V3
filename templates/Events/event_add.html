@@ -1,0 +1,20 @@
+<h1>Add Event</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="id_date">Date:</label>
+    <input type="date" name="date" id="id_date"><br>
+
+    <label for="id_event_name">Event name:</label>
+    <input type="text" name="event_name" id="id_event_name"><br>
+
+    <label for="id_event_photo">Event photo URL:</label>
+    <input type="url" name="event_photo" id="id_event_photo"><br>
+
+    <label for="id_event_description">Event description:</label>
+    <textarea name="event_description" id="id_event_description"></textarea><br>
+
+    <label for="id_poster_link">Poster link:</label>
+    <input type="url" name="poster_link" id="id_poster_link"><br>
+
+    <button type="submit">Add</button>
+</form>
