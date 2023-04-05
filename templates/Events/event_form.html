@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Event Form</title>
+</head>
+
+<body>
+    <h1>Add Event</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_date">Date:</label>
+        <input type="date" id="id_date" name="date" value="{{ event.date|default_if_none:'' }}"><br><br>
+        <label for="id_event_name">Event Name:</label>
+        <input type="text" id="id_event_name" name="event_name"
+            value="{{ event.event_name|default_if_none:'' }}"><br><br>
+        <label for="id_event_photo">Event Photo:</label>
+        <input type="url" id="id_event_photo" name="event_photo"
+            value="{{ event.event_photo|default_if_none:'' }}"><br><br>
+        <label for="id_event_description">Event Description:</label><br>
+        <textarea id="id_event_description"
+            name="event_description">{{ event.event_description|default_if_none:'' }}</textarea><br><br>
+        <label for="id_poster_link">Poster Link:</label>
+        <input type="url" id="id_poster_link" name="poster_link"
+            value="{{ event.poster_link|default_if_none:'' }}"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
