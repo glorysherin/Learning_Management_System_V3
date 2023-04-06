@@ -1,0 +1,12 @@
+<!-- teachers.html -->
+<h1>Teachers by Department</h1>
+{% for department in departments %}
+<h2>{{ department }}</h2>
+<ul>
+    {% for teacher in teachers %}
+    {% if teacher.department == department %}
+    <li>{{ teacher.get_name }} - {{ teacher.role }} - {{ teacher.department }} - {{ teacher.id }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endfor %}

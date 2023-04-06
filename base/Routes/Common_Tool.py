@@ -29,12 +29,13 @@ from django.shortcuts import render
 from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gfg, get_answer_from_given_link
 
 
-def toolHome(request):
-    return render(request, "tools/ToolHome.html")
+def Common_toolHome(request):
+    return render(request, "Common_Page_Tools/ToolHome.html")
 
+def Common_base(request):
+    return render(request,"Common_Page_Tools/Common_base.html")
 
-
-def Code_scriping(request):
+def Common_Code_scriping(request):
     context = {}
     if request.method == 'POST':
         question = request.POST.get('question')
@@ -62,14 +63,14 @@ def Code_scriping(request):
                 context['error'] = 'No Stack Overflow link found for the given question'
         else:
             context['error'] = 'Please enter a question'
-    return render(request, 'tools/CodeScriping.html', context)
+    return render(request, 'Common_Page_Tools/CodeScriping.html', context)
 
 
-def calculator(request):
-    return render(request, 'tools/calculator.html')
+def Common_calculator(request):
+    return render(request, 'Common_Page_Tools/calculator.html')
 
 
-def translate_(request):
+def Common_translate_(request):
     text = request.POST.get('text')
     source_lang = request.POST.get('source_lang')
     target_lang = request.POST.get('target_lang')
@@ -87,10 +88,10 @@ def translate_(request):
         'translation': translation,
         'LANGUAGES': LANGUAGES
     }
-    return render(request, 'tools/translate.html', context)
+    return render(request, 'Common_Page_Tools/translate.html', context)
 
 
-def convert_text(request):
+def Common_convert_text(request):
     if request.method == 'POST':
         filename = os.path.join(
             BASE_DIR, "generated_files/audio_files/output.mp3")
@@ -103,10 +104,10 @@ def convert_text(request):
             response = HttpResponse(f.read(), content_type='audio/mpeg')
             response['Content-Disposition'] = 'attachment; filename="output.mp3"'
             return response
-    return render(request, 'tools/text_to_audio.html')
+    return render(request, 'Common_Page_Tools/text_to_audio.html')
 
 
-def wikipedia_summary(request):
+def Common_wikipedia_summary(request):
     if request.method == 'POST':
         keyword = request.POST.get('keyword')
         sentence = request.POST.get('sentence')
@@ -114,7 +115,7 @@ def wikipedia_summary(request):
         try:
             summary = wikipedia.summary(keyword, sentences=sentence)
             if request.POST.get('action') == 'view':
-                return render(request, 'tools/wikipedia_summary.html', {"summary": summary})
+                return render(request, 'Common_Page_Tools/wikipedia_summary.html', {"summary": summary})
             elif request.POST.get('action') == 'download':
                 response = HttpResponse(summary, content_type='text/plain')
                 response['Content-Disposition'] = f'attachment; filename="{keyword}.txt"'
@@ -124,10 +125,10 @@ def wikipedia_summary(request):
         except wikipedia.exceptions.DisambiguationError as e:
             return HttpResponse("Disambiguation Error!")
     else:
-        return render(request, 'tools/wikipedia_summary.html')
+        return render(request, 'Common_Page_Tools/wikipedia_summary.html')
 
 
-def convert_docx_to_pdf(request):
+def Common_convert_docx_to_pdf(request):
     if request.method == 'POST' and request.FILES['docx_file']:
         docx_file = request.FILES['docx_file']
         filename = docx_file.name
@@ -146,10 +147,10 @@ def convert_docx_to_pdf(request):
         os.remove(docx_path)
         return response
     else:
-        return render(request, 'tools/convert_docx_to_pdf.html')
+        return render(request, 'Common_Page_Tools/convert_docx_to_pdf.html')
 
 
-def convert_pdf_to_docx(request):
+def Common_convert_pdf_to_docx(request):
     if request.method == 'POST' and request.FILES['pdf_file']:
         pdf_file = request.FILES['pdf_file']
         filename = default_storage.save('tmp/' + pdf_file.name, pdf_file)
@@ -168,10 +169,10 @@ def convert_pdf_to_docx(request):
 
         return response
 
-    return render(request, 'tools/convert_pdf_to_docx.html')
+    return render(request, 'Common_Page_Tools/convert_pdf_to_docx.html')
 
 
-def convert_pdf_to_excel(request):
+def Common_convert_pdf_to_excel(request):
     if request.method == 'POST' and request.FILES['pdf_file']:
         # get the uploaded PDF file
         pdf_file = request.FILES['pdf_file']
@@ -188,10 +189,10 @@ def convert_pdf_to_excel(request):
             response['Content-Disposition'] = 'attachment; filename=output.xlsx'
             return response
     else:
-        return render(request, 'tools/convert_pdf_to_excel.html')
+        return render(request, 'Common_Page_Tools/convert_pdf_to_excel.html')
 
 
-def convert_excel_to_pdf(request):
+def Common_convert_excel_to_pdf(request):
     if request.method == 'POST' and request.FILES.get('excel_file'):
         excel_file = request.FILES['excel_file']
         wb = load_workbook(excel_file, read_only=True)
@@ -218,10 +219,10 @@ def convert_excel_to_pdf(request):
 
         return response
 
-    return render(request, 'tools/convert_excel_to_pdf.html')
+    return render(request, 'Common_Page_Tools/convert_excel_to_pdf.html')
 
 
-def convert_images_to_pdf(images):
+def Common_convert_images_to_pdf(images):
     filename = tempfile.mktemp(".pdf")
     c = canvas.Canvas(filename)
     for image in images:
@@ -235,7 +236,7 @@ def convert_images_to_pdf(images):
     return filename
 
 
-def convert_jpg_to_pdf(request):
+def Common_convert_jpg_to_pdf(request):
     if request.method == 'POST':
         files = request.FILES.getlist('file')
         if len(files) == 0:
@@ -259,10 +260,10 @@ def convert_jpg_to_pdf(request):
         # Delete temporary files
         shutil.rmtree(temp_dir)
 
-    return render(request, 'tools/convert_jpg_to_pdf.html')
+    return render(request, 'Common_Page_Tools/convert_jpg_to_pdf.html')
 
 
-def convert_jpg_to_word(request):
+def Common_convert_jpg_to_word(request):
     if request.method == 'POST' and request.FILES['files']:
         # Get the uploaded images
         images = request.FILES.getlist('files')
@@ -293,10 +294,10 @@ def convert_jpg_to_word(request):
                 filename)
             return response
 
-    return render(request, 'tools/convert_jpg_to_word.html')
+    return render(request, 'Common_Page_Tools/convert_jpg_to_word.html')
 
 
-def cgpa_calculator(request):
+def Common_cgpa_calculator(request):
     if request.method == 'POST':
         total_credits = 0
         total_weighted_points = 0
@@ -313,12 +314,12 @@ def cgpa_calculator(request):
         except:
             context = {'cgpa': 'cgpa', 'len': [i for i in range(1, 10)]}
             print("error/...")
-        return render(request, 'tools/cgpa_calculator.html', context)
+        return render(request, 'Common_Page_Tools/cgpa_calculator.html', context)
     else:
-        return render(request, 'tools/cgpa_calculator.html', context)
+        return render(request, 'Common_Page_Tools/cgpa_calculator.html', context)
 
 
-def get_grade_points(grade):
+def Common_get_grade_points(grade):
     if grade == 'S':
         return 10
     elif grade == 'A':
@@ -338,16 +339,16 @@ def get_grade_points(grade):
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-def get_subject(request):
+def Common_get_subject(request):
     if request.method == 'POST':
         num = request.POST.get('number')
         print(type(int(num)))
-        return render(request, 'tools/gpa_calculator.html', {'num_sub': [i for i in range(1, int(num)+1)]})
+        return render(request, 'Common_Page_Tools/gpa_calculator.html', {'num_sub': [i for i in range(1, int(num)+1)]})
 
-    return render(request, 'tools/num_of_sub.html')
+    return render(request, 'Common_Page_Tools/num_of_sub.html')
 
 
-def gpa_calculator(request):
+def Common_gpa_calculator(request):
     credits = request.POST.getlist('credits')
     grades = request.POST.getlist('grades')
 
@@ -386,11 +387,11 @@ def gpa_calculator(request):
     except:
         gpa = 0.0
     context = {'gpa': round(gpa, 2)}
-    return render(request, 'tools/gpa_calculator.html', context)
+    return render(request, 'Common_Page_Tools/gpa_calculator.html', context)
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-def handwriting_converter(request):
+def Common_handwriting_converter(request):
     if request.method == 'POST':
         # Get input text from form
         input_text = request.POST.get('input_text')
@@ -408,23 +409,23 @@ def handwriting_converter(request):
             response['Content-Disposition'] = 'attachment; filename=' + filename
             return response
     else:
-        return render(request, 'tools/handwriting.html')
+        return render(request, 'Common_Page_Tools/handwriting.html')
 
 
-def keyword_to_image(request):
+def Common_keyword_to_image(request):
     if request.method == 'POST':
         keyword = request.POST.get('keyword')
         urls = get_image_url(keyword)
         print(keyword, urls)
-        return render(request, 'tools/keyword_to_image.html', {'image_urls': urls})
-    return render(request, 'tools/keyword_to_image.html')
+        return render(request, 'Common_Page_Tools/keyword_to_image.html', {'image_urls': urls})
+    return render(request, 'Common_Page_Tools/keyword_to_image.html')
 
 # views.py
 
 
-def video_meeting(request):
-    return render(request, 'tools/video_meeting.html')
+def Common_video_meeting(request):
+    return render(request, 'Common_Page_Tools/video_meeting.html')
 
 
-def Common_tool(request):
-    return render(request, "tools/Common_tool.html")
+def Common_Common_tool(request):
+    return render(request, "Common_Page_Tools/Common_tool.html")

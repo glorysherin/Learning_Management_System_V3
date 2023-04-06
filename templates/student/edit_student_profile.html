@@ -1,0 +1,33 @@
+<h2>Edit Student</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" value="{{ student.user.first_name }}"><br>
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" value="{{ student.user.last_name }}"><br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="{{ student.mail_id }}"><br>
+    <label for="address">Address:</label>
+    <input type="text" name="address" value="{{ student.address }}"><br>
+    <label for="mobile">Mobile:</label>
+    <input type="text" name="mobile" value="{{ student.mobile }}"><br>
+    <label for="joinned_year">Joined Year:</label>
+    <input type="date" name="joinned_year" id="joinned_year"><br>
+    <label for="role_no">Role No:</label>
+    <input type="text" name="role_no" value="{{ student.role_no }}"><br>
+    <label for="file_">Profile photo:</label>
+    <input type="file" name="file_"><br>
+    <label for="department">Department:</label>
+    <input type="text" name="department" value="{{ student.department }}"><br>
+    <input type="submit" value="Save">
+</form>
+<script>
+    const dateStr = "{{ student.joinned_year }}";
+    const date = new Date(dateStr);
+    const day = ("0" + date.getDate()).slice(-2);
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const year = date.getFullYear();
+    const formattedDate = `${year}-${month}-${day}`;
+    console.log(formattedDate)
+    document.getElementById("joinned_year").defaultValue = formattedDate;
+</script>
