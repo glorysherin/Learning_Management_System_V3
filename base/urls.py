@@ -96,6 +96,7 @@ chatroom = [
 
 
 classroom = [
+    path('list_users_by_class/<str:class_id>', list_users_by_class),
     path('class_room', home_classroom),
     path('message/<str:room>/', chatgetMessages, name="message"),
     path('classroom/<str:pk>/<str:class_id>', nave_home_classroom),
@@ -119,6 +120,7 @@ classroom = [
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
     path('class_ebook/<int:pk>/delete/',
          class_ebook_delete, name='class_ebook_delete'),
+
 ]
 
 

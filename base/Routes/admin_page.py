@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from ..models import Faculty_details, Users, Teacher, ClassRooms
+from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled
 from django.contrib.auth.models import User
 
 
@@ -81,3 +81,10 @@ def class_list(request):
 
     context = {'class_dict': class_dict}
     return render(request, 'admin_actions/class_list.html', context)
+
+
+def list_users_by_class(request, class_id):
+    enrolled_users = class_enrolled.objects.filter(class_id=class_id)
+    mail_ids = [user.mail_id for user in enrolled_users]
+    context = {'mail_ids': mail_ids}
+    return render(request, 'admin_actions/list_users.html', context)
