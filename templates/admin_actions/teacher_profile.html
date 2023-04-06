@@ -1,0 +1,15 @@
+<!-- profile.html -->
+<h1>Teacher Profile</h1>
+
+{% if teacher %}
+<h2>{{ teacher.get_name }}</h2>
+<img src="{{ teacher.profile_pic.url }}" alt="{{ teacher.get_name }} profile picture">
+<p>Address: {{ teacher.address }}</p>
+<p>Mobile: {{ teacher.mobile }}</p>
+<p>Role: {{ teacher.role }}</p>
+<p>Status: {{ teacher.status }}</p>
+<p>Department: {{ teacher.department }}</p>
+<p>Salary: {{ teacher.salary }}</p>
+{% else %}
+<p>Teacher not found.</p>
+{% endif %}
