@@ -31,9 +31,9 @@ def Make_Join(Componets):
 
 # Urls............................
 
-
 tools = [
-    path('toolHome', toolHome),
+    path('Common_tool',Common_tool), 
+    path('toolHome',toolHome),
     path('trans', translate_),
     path('convert_text', convert_text),
     path('wikipedia_summary', wikipedia_summary),
@@ -52,6 +52,30 @@ tools = [
     path('gpa_calculator', gpa_calculator),
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping),
+]
+
+
+Common_tool = [
+    path('Common_Common_tool',Common_tool), 
+    path('Common_toolHome',toolHome),
+    path('Common_trans', translate_),
+    path('Common_convert_text', convert_text),
+    path('Common_wikipedia_summary', wikipedia_summary),
+    path('Common_convert_docx_to_pdf', convert_docx_to_pdf),
+    path('Common_convert_pdf_to_docx', convert_pdf_to_docx),
+    path('Common_convert_pdf_to_excel', convert_pdf_to_excel),
+    path('Common_convert_excel_to_pdf', convert_excel_to_pdf),
+    path('Common_convert_jpg_to_pdf', convert_jpg_to_pdf),
+    path('Common_convert_jpg_to_word', convert_jpg_to_word),
+    path('Common_calculator', calculator),
+    path('Common_cgpa_calculator', cgpa_calculator),
+    path('Common_handwriting_converter', handwriting_converter),
+    path('Common_keyword_to_image', keyword_to_image),
+    path('Common_video_meeting', video_meeting),
+
+    path('Common_gpa_calculator', gpa_calculator),
+    path('Common_get_subject', get_subject),
+    path('Common_Code_scriping', Code_scriping),
 ]
 
 common = [
@@ -270,7 +294,7 @@ event = [
 ]
 
 
-urlpatterns.extend(Make_Join([tools, note, gallery_, blog_url, common, event,
+urlpatterns.extend(Make_Join([tools,Common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
