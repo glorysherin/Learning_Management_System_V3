@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled
+from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student
 from django.contrib.auth.models import User
 
 
@@ -88,3 +88,19 @@ def list_users_by_class(request, class_id):
     mail_ids = [user.mail_id for user in enrolled_users]
     context = {'mail_ids': mail_ids}
     return render(request, 'admin_actions/list_users.html', context)
+
+
+def get_class_peoples(request):
+    class_id = ""
+    peoples = []
+    people = class_enrolled.objects.filter(subject_code=class_id)
+    for i in people:
+        print(i.class_id, i.mail_id)
+        person_obj = User.objects.get(id=i.user_id)
+        try:
+            obj = Student.objects.get(user=person_obj)
+            print(obj.role_no)
+            peoples.append(obj)
+        except:
+            pass
+    return render(request, 'admin_actions/list_users.html', {"people": peoples})
