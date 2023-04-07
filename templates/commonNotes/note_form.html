@@ -1,41 +1,80 @@
-<!DOCTYPE html>
+<!-- component -->
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<!-- component -->
 <html>
 
 <head>
-    <title>Note Form</title>
+    <link rel="stylesheet"
+        href="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/css/main.ad49aa9b.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 
-<body>
-    <h1>Note Form</h1>
+<body >
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="department">Department:</label>
-        <input type="text" name="department" id="department" value="{{ note.department }}" required>
-        <br>
-        <label for="semester">Semester:</label>
-        <input type="text" name="semester" id="semester" value="{{ note.semester }}" required>
-        <br>
-        <label for="notes_title">Notes Title:</label>
-        <input type="text" name="notes_title" id="notes_title" value="{{ note.notes_title }}" required>
-        <br>
-        <label for="regulation">Regulation:</label>
-        <input type="text" name="regulation" id="regulation" value="{{ note.regulation }}" required>
-        <br>
-        <label for="subcode">Subcode:</label>
-        <input type="text" name="subcode" id="subcode" value="{{ note.subcode }}" required>
-        <br>
-        <label for="description">Description:</label>
-        <textarea name="description" id="description" required>{{ note.description }}</textarea>
-        <br>
-        <label for="file">File:</label>
-        <input type="file" name="file" id="file">
-        {% if note.file %}
-        <p>Current File: <a href="{{ note.file.url }}" target="_blank">{{ note.file.name }}</a></p>
-        {% endif %}
-        <br>
-        <button type="submit">Save</button>
-        <a href="{% url 'notes_list' %}">Cancel</a>
+    <div style="margin: 0 auto ; width: 500px;" class="flex flex-col justify-center items-center h-[100vh]">
+        <div style="margin-top: 10px; padding:  30px "
+            class="!z-5 relative flex flex-col rounded-[20px] max-w-[300px] md:max-w-[400px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-6 3xl:p-![18px] bg-white undefined">
+
+            <div class="relative flex flex-row justify-between">
+                <br>
+                <h2  style=" margin-right: 200px; margin-top: 10px;" class="text-xl font-bold text-navy-700 dark:text-white mb-3" >
+                    Note Form
+                </h2>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Department:</label>
+                <input  type="text" name="department" id="department" value="{{ note.department }}" required placeholder="Department"
+                    class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Semester:</label>
+                <input  type="text" name="semester" id="semester" value="{{ note.semester }}" required placeholder="Semester"
+                    class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Notes Title:</label>
+                <input type="text" name="notes_title" id="notes_title" value="{{ note.notes_title }}" required placeholder="Department"
+                    class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Regulation:</label>
+                <input type="text" name="regulation" id="regulation" value="{{ note.regulation }}" required placeholder="Department"
+                    class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Subcode:</label>
+                <input type="text" name="subcode" id="subcode" value="{{ note.subcode }}" required placeholder="Department"
+                    class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Description:</label>
+                <hr>
+                <textarea style="" name="description" id="description" required>{{ note.description }}</textarea placeholder="Department"
+                    class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">File:</label>
+                <input type="file" name="file" id="file" required placeholder="File:" > 
+            </div>
+            <!-- {% if note.file %} -->
+            <p>Current File: <a href="{{ note.file.url }}" target="_blank">{{ note.file.name }}</a></p>
+            <!-- {% endif %} -->
+           
+            <button type="submit" style="background-color: rgb(14, 11, 173); color: azure;border-radius: 10px; width: 50px;">Save</button>
+            
+            <a href="{% url 'notes_list' %}" style="">Cancel</a>
+        </div>
+    </div>
+    
+    </div>
     </form>
 </body>
 
 </html>
+{% endblock %}
