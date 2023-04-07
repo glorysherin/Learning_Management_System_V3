@@ -4,7 +4,9 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView, LoginView
 
 from .Routes.common import *
+from .Routes.Common_Tool import *
 from .Routes.tool import *
+from .Routes.Common_Tool import *
 from .Routes.staff import *
 from .Routes.students import *
 from .Routes.study import *
@@ -14,6 +16,7 @@ from .Routes.blog import *
 from .Routes.Events import *
 from .Routes.home import *
 from .Routes.CommonNotes import *
+from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
 
 
@@ -54,29 +57,42 @@ tools = [
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping),
 ]
+alternative_url=[  path('student/video_meeting', video_meeting),
+                path('student/class_room', home_classroom),
+               path('student/chat_lobby', lobby),
+               path('student/list_blog', list_blog),
+               path('student/chat_home/', chat_home),
+                   path('student/note/notes_list', notes_list, name='notes_list'),
+                       path('student/toolHome', toolHome),
+                           path('student/logout', LogoutView.as_view)
 
 
-Common_tool = [
-    path('Common_Common_tool', Common_tool),
-    path('Common_toolHome', toolHome),
-    path('Common_trans', translate_),
-    path('Common_convert_text', convert_text),
-    path('Common_wikipedia_summary', wikipedia_summary),
-    path('Common_convert_docx_to_pdf', convert_docx_to_pdf),
-    path('Common_convert_pdf_to_docx', convert_pdf_to_docx),
-    path('Common_convert_pdf_to_excel', convert_pdf_to_excel),
-    path('Common_convert_excel_to_pdf', convert_excel_to_pdf),
-    path('Common_convert_jpg_to_pdf', convert_jpg_to_pdf),
-    path('Common_convert_jpg_to_word', convert_jpg_to_word),
-    path('Common_calculator', calculator),
-    path('Common_cgpa_calculator', cgpa_calculator),
-    path('Common_handwriting_converter', handwriting_converter),
-    path('Common_keyword_to_image', keyword_to_image),
-    path('Common_video_meeting', video_meeting),
 
-    path('Common_gpa_calculator', gpa_calculator),
-    path('Common_get_subject', get_subject),
-    path('Common_Code_scriping', Code_scriping),
+
+               
+
+
+]
+
+common_tool = [
+    path('Common_Common_tool', Common_Common_tool),
+    path('Common_toolHome', Common_toolHome),
+    path('Common_trans', Common_translate_),
+    path('Common_convert_text', Common_convert_text),
+    path('Common_wikipedia_summary', Common_wikipedia_summary),
+    path('Common_convert_docx_to_pdf', Common_convert_docx_to_pdf),
+    path('Common_convert_pdf_to_docx', Common_convert_pdf_to_docx),
+    path('Common_convert_pdf_to_excel', Common_convert_pdf_to_excel),
+    path('Common_convert_excel_to_pdf', Common_convert_excel_to_pdf),
+    path('Common_convert_jpg_to_word', Common_convert_jpg_to_word),
+    path('Common_calculator', Common_calculator),
+    path('Common_cgpa_calculator', Common_cgpa_calculator),
+    path('Common_handwriting_converter', Common_handwriting_converter),
+    path('Common_keyword_to_image', Common_keyword_to_image),
+    path('Common_video_meeting', Common_video_meeting),
+    path('Common_gpa_calculator', Common_gpa_calculator),
+    path('Common_get_subject', Common_get_subject),
+    path('Common_Code_scriping', Common_Code_scriping),
 ]
 
 common = [
@@ -87,7 +103,6 @@ common = [
     path('contactus', contactus),
     path('services', services),
     path('about', about),
-
 ]
 
 admin = [
@@ -111,7 +126,7 @@ videochat = [
 
 
 chatroom = [
-    path('chat_home/', chat_home),
+    path('chat_home/', chat_home, name='chat_home'),
     # problem...................
     path('chat/<str:room>/', chat_room, name="chat_room"),
     path('chat_home/checkview', checkview, name="checkview"),
@@ -297,9 +312,15 @@ event = [
     path('detail/<int:event_id>', event_detail, name='event_detail'),
 ]
 
+dynamicFunctionality = [
+    path('testimonicals_edit', Testimonicals_edit, name='testimonicals_edit'),
+    path('testimonicals', Testimonicals, name='testimonicals'),
+    path('testimonicals_save', Testimonicals_save, name='Testimonicals_save'),
+]
 
-urlpatterns.extend(Make_Join([tools, Common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam]))
+
+urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality,alternative_url]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
