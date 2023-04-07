@@ -85,14 +85,18 @@ def class_list(request):
 
 def get_class_peoples(request, class_id):
     peoples = []
-    people = class_enrolled.objects.filter(class_id=class_id)
+    people = class_enrolled.objects.filter(subject_code=class_id)
+    test = class_enrolled.objects.all()
+    for i in test:
+        print(i.class_id, i.mail_id, i.subject_code)
     for i in people:
-        print(i.class_id, i.mail_id)
+        print(i.class_id, i.mail_id, i.subject_code)
         person_obj = User.objects.get(id=i.user_id)
         try:
-            obj = Student.objects.get(user=person_obj)
+            obj = Student.objects.get(user=person_obj.id)
             print(obj.role_no)
             peoples.append(obj)
         except:
             pass
+    print(peoples)
     return render(request, 'admin_actions/list_users.html', {"people": peoples})
