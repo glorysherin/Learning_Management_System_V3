@@ -96,6 +96,9 @@ admin = [
     path('teachers', teachers),
     path('teachers/profile/<int:pk>/', teacher_profile, name='teacher_profile'),
     path('class_list', class_list, name='class_list'),
+    path('class_listout/<int:class_id>',
+         get_class_peoples, name='class_listout'),
+    path('students_list', students_list, name='students_list'),
 ]
 
 
@@ -118,11 +121,11 @@ chatroom = [
     path('chat_home/Ncheckview', Ncheckview, name="Ncheckview"),
     path('send', send, name="send"),
     path('getMessages/<str:room>/', getMessages, name="getMessages"),
+
 ]
 
 
 classroom = [
-    path('list_users_by_class/<str:class_id>', list_users_by_class),
     path('class_room', home_classroom),
     path('message/<str:room>/', chatgetMessages, name="message"),
     path('classroom/<str:pk>/<str:class_id>', nave_home_classroom),
@@ -151,7 +154,6 @@ classroom = [
 
 
 studet = [
-    path('students_list', students_list, name='students_list'),
     path('students/<int:student_id>', student_profile, name='student_detail'),
     path('students_delete/<int:student_id>/delete',
          student_delete, name='student_delete'),
