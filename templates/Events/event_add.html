@@ -1,20 +1,97 @@
-<h1>Add Event</h1>
-<form method="POST">
-    {% csrf_token %}
-    <label for="id_date">Date:</label>
-    <input type="date" name="date" id="id_date"><br>
+{% extends 'teacher/teacherbase.html' %}
 
-    <label for="id_event_name">Event name:</label>
-    <input type="text" name="event_name" id="id_event_name"><br>
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Event</title>
+    <style>
+        /* Container for the card */
+        .card-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:white;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
 
-    <label for="id_event_photo">Event photo URL:</label>
-    <input type="url" name="event_photo" id="id_event_photo"><br>
+        /* Card title */
+        .card-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    <label for="id_event_description">Event description:</label>
-    <textarea name="event_description" id="id_event_description"></textarea><br>
+        /* Form styles */
+        .card-container form label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    <label for="id_poster_link">Poster link:</label>
-    <input type="url" name="poster_link" id="id_poster_link"><br>
+        .card-container form input[type="date"],
+        .card-container form input[type="text"],
+        .card-container form input[type="url"],
+        .card-container form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 16px;
+        }
 
-    <button type="submit">Add</button>
-</form>
+        .card-container form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .card-container form button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .card-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <h1>Add Event</h1>
+        <div style="margin: 0 auto;padding: 20px;">
+        <form method="POST">
+            {% csrf_token %}
+           
+            <label for="id_date">Date:</label>
+            <input type="date" name="date" id="id_date">
+
+            <label for="id_event_name">Event name:</label>
+            <input type="text" name="event_name" id="id_event_name">
+
+            <label for="id_event_photo">Event photo URL:</label>
+            <input type="url" name="event_photo" id="id_event_photo">
+
+            <label for="id_event_description">Event description:</label>
+            <textarea name="event_description" id="id_event_description"></textarea>
+
+            <label for="id_poster_link">Poster link:</label>
+            <input type="url" name="poster_link" id="id_poster_link">
+            <br>
+
+            <button type="submit" style="width: 60px;margin-left: 150px;">Add</button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

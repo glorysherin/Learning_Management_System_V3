@@ -1,9 +1,65 @@
-<!-- event_detail.html -->
-<h1>{{ event.event_name }}</h1>
-<p>Date: {{ event.date }}</p>
-<p>Description: {{ event.event_description }}</p>
-<p><a href="{{ event.event_photo }}">Photo</a></p>
-<p><a href="{{ event.poster_link }}">Poster link</a></p>
+{% extends 'teacher/teacherbase.html' %}
 
-<a href="/edit/{{ event.id }}">Edit event</a>
-<a href="/delete/{{ event.id }}">Edit event</a>
+{% block content %}<!-- event_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Details</title>
+    <style>
+        /* Container for the card */
+        .card-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        /* Card title */
+        .card-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Card content */
+        .card-container p {
+            margin-bottom: 10px;
+        }
+
+        /* Card links */
+        .card-container a {
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .card-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .card-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" style="margin-top: 20px;">
+       <h1>{{ event.event_name }}</h1>
+       <div style="padding: 30px;"> <p><b> Date:</b> {{ event.date }}</p>
+        <p><b>Description:</b> {{ event.event_description }}</p>
+        <br><div style="display: flex;">
+        <p><a href="{{ event.event_photo }}"><button type="submit" style="background-color: #071f70; color: #fff;border: 0.1px; border-radius: 5px;height: 30px;" >Photo</button></a></p>
+        <p><a href="{{ event.poster_link }}"><button type="submit" style="background-color: #071f70; color: #fff;border: 0.1px; border-radius: 5px;margin-left: 10px;" >Poster link</button></a></p>
+    </div>
+        <a href="/edit/{{ event.id }}"><button type="submit" style="background-color: #071f70; color: #fff;border: 0.1px; border-radius: 5px;height: 30px;" >Edit event</button></a>
+        <a href="/delete/{{ event.id }}"><button type="submit" style="background-color: #071f70; color: #fff;border: 0.1px; border-radius: 5px;height: 30px;" >Delete Event</button></a>
+    </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
