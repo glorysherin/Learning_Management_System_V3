@@ -34,9 +34,9 @@
                 <td>{{ person.joinned_year }}</td>
                 <td>{{ person.role_no }}</td>
                 <td>{{ person.department }}</td>
-                <td><button onclick="nav()">View</button>
+                <td><button><a href="{% url 'student_detail' person.id %}">View</a></button>
                 </td>
-                <td><button><a href="">Edit</a></button></td>
+                <td><button><a href="{% url 'student_edit' person.id %}">Edit</a></button></td>
                 <td><button><a href="">Delete</a></button></td>
             </tr>
             {% endfor %}
