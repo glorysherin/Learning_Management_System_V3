@@ -1,5 +1,7 @@
 <!-- students_list.html -->
+{% extends 'teacher/teacherbase.html' %}
 
+{% block content %}
 {% for dept in departments %}
 <h2>{{ dept }}</h2>
 <table>
@@ -31,3 +33,4 @@
     </tbody>
 </table>
 {% endfor %}
+{% endblock %}
