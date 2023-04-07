@@ -1,0 +1,34 @@
+<h1>Classrooms</h1>
+
+{% for semester, department_dict in class_dict.items %}
+<h2>{{ semester }} Semester</h2>
+{% for department, classrooms in department_dict.items %}
+<h3>{{ department }}</h3>
+<table>
+    <tr>
+        <th>Class Name</th>
+        <th>Subject Code</th>
+        <th>Owner</th>
+        <th>Description</th>
+        <th>View</th>
+        <th>Delete</th>
+    </tr>
+    {% for classroom in classrooms %}
+    <tr>
+        <td>{{ classroom.class_name }}</td>
+        <td>{{ classroom.subject_code }}</td>
+        <td>{{ classroom.owner.name }}</td>
+        <td>{{ classroom.discription }}</td>
+        <td><a href="classroom/class_room/{{classroom.subject_code }}">View</a></td>
+        <td>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="class_id" value="{{ classroom.id }}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endfor %}
+{% endfor %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from base import models
 from .Forms import student_forms
 from ..models import Users, Student
@@ -9,17 +9,55 @@ from base import models as QMODEL
 
 # for showing signup/login button for student
 
+# views.py
 
-def student_detail(request, role_no):
-    student = get_object_or_404(Student, role_no=role_no)
-    form = student_forms.StudentForm(instance=student)
+
+def students_list(request):
+    students = Student.objects.all()
+    departments = set([student.department for student in students])
+    context = {
+        'students': students,
+        'departments': departments,
+    }
+    return render(request, 'student/students_list.html', context)
+
+
+def student_profile(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+    return render(request, 'student/student_profile.html', {'student': student})
+
+
+def student_delete(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    student.delete()
+    students = Student.objects.all()
+    departments = set([student.department for student in students])
+    context = {
+        'students': students,
+        'departments': departments,
+        'student': student
+    }
+    return render(request, 'student/students_list.html', context)
+
+
+def student_edit(request, pk):
+    student = get_object_or_404(Student, pk=pk)
     if request.method == 'POST':
-        form = student_forms.StudentForm(
-            request.POST, request.FILES, instance=student)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/student/{}'.format(student.pk))
-    return render(request, 'student_detail.html', {'student': student, 'form': form})
+        student.user.first_name = request.POST['first_name']
+        student.user.last_name = request.POST['last_name']
+        student.mail_id = request.POST['email']
+        student.address = request.POST['address']
+        student.mobile = request.POST['mobile']
+        student.joinned_year = request.POST['joinned_year']
+        student.role_no = request.POST['role_no']
+        student.department = request.POST['department']
+        student.profile_pic = request.FILES['file_']
+        student.user.save()
+        student.save()
+        return redirect('students_list')
+    else:
+        context = {'student': student}
+        return render(request, 'student/edit_student_profile.html', context)
 
 
 def studentclick_view(request):

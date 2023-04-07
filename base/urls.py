@@ -91,6 +91,9 @@ common = [
 admin = [
     path('add_Faculty', add_faculty),
     path('add_usr', add_usr),
+    path('teachers', teachers),
+    path('teachers/profile/<int:pk>/', teacher_profile, name='teacher_profile'),
+    path('class_list', class_list, name='class_list'),
 ]
 
 
@@ -144,6 +147,12 @@ classroom = [
 
 
 studet = [
+    path('students_list', students_list, name='students_list'),
+    path('students/<int:student_id>', student_profile, name='student_detail'),
+    path('students_delete/<int:student_id>/delete',
+         student_delete, name='student_delete'),
+
+    path('student/<int:pk>/edit', student_edit, name='student_edit'),
     path('student/studentclick', studentclick_view),
     path('student/studentlogin',
          LoginView.as_view(template_name='student/studentlogin.html'), name='studentlogin'),

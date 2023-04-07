@@ -119,10 +119,12 @@ class ClassRooms(models.Model):
 
 
 class Student(models.Model):
+    id = models.IntegerField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(
         upload_to='profile_pic/Student/', null=True, blank=True)
     address = models.CharField(max_length=40)
+    mail_id = models.CharField(max_length=40, default="sample@gmail.com")
     mobile = models.CharField(max_length=20, null=False)
     joinned_year = models.DateField(default=timezone.now)
     role_no = models.IntegerField()
@@ -141,6 +143,7 @@ class Student(models.Model):
 
 
 class Teacher(models.Model):
+    id = models.IntegerField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(
         upload_to='profile_pic/Teacher/', null=True, blank=True)
@@ -150,6 +153,7 @@ class Teacher(models.Model):
     status = models.BooleanField(default=False)
     department = models.CharField(max_length=40)
     salary = models.PositiveIntegerField(null=True)
+    Annauni_num = models.CharField(max_length=40, default="0000000")
 
     @property
     def get_name(self):

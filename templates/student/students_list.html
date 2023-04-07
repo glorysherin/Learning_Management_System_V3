@@ -1,0 +1,33 @@
+<!-- students_list.html -->
+
+{% for dept in departments %}
+<h2>{{ dept }}</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Joined Year</th>
+            <th>Role No</th>
+            <th>Mobile</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        {% if student.department == dept %}
+        <tr>
+            <td>{{ student.get_name }}</td>
+            <td>{{ student.joinned_year|date:"Y" }}</td>
+            <td>{{ student.role_no }}</td>
+            <td>{{ student.mobile }}</td>
+            <td>
+                <a href="students/{{ student.id}}">View</a>
+                <a href="student/{{ student.id }}/edit">Edit</a>
+                <a href="students_delete/{{ student.id }}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
