@@ -57,7 +57,22 @@ tools = [
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping),
 ]
+alternative_url=[  path('student/video_meeting', video_meeting),
+                path('student/class_room', home_classroom),
+               path('student/chat_lobby', lobby),
+               path('student/list_blog', list_blog),
+               path('student/chat_home/', chat_home),
+                   path('student/note/notes_list', notes_list, name='notes_list'),
+                       path('student/toolHome', toolHome),
+                           path('student/logout', LogoutView.as_view)
 
+
+
+
+               
+
+
+]
 
 common_tool = [
     path('Common_Common_tool', Common_Common_tool),
@@ -114,7 +129,7 @@ videochat = [
 
 
 chatroom = [
-    path('chat_home/', chat_home),
+    path('chat_home/', chat_home, name='chat_home'),
     # problem...................
     path('chat/<str:room>/', chat_room, name="chat_room"),
     path('chat_home/checkview', checkview, name="checkview"),
@@ -312,7 +327,7 @@ AternativeUrls = [
 
 
 urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality]))
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality,alternative_url]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
