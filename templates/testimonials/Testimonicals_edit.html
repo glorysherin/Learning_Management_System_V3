@@ -1,0 +1,158 @@
+{% extends 'exam/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Testimonial Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href=" {% static 'vendors/feather/feather.css' %} ">
+  <link rel="stylesheet" href=" {% static 'vendors/ti-icons/css/themify-icons.css' %} ">
+  <link rel="stylesheet" href=" {% static 'vendors/css/vendor.bundle.base.css' %} ">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href=" {% static 'vendors/select2/select2.min.css' %} ">
+  <link rel="stylesheet" href=" {% static 'vendors/select2-bootstrap-theme/select2-bootstrap.min.css' %} ">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href=" {% static 'css/vertical-layout-light/style.css' %} ">
+  <!-- endinject -->
+  <link rel="shortcut icon" href=" {% static 'images/favicon.png' %} " />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- partial -->
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Upload image</h4>
+              <p class="card-description">
+                Upload the images to Gallery
+              </p>
+              <form class="forms-sample" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Name</label>
+                  <input type="text" class="form-control" placeholder="Name" id="Name" name="Name">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">position</label>
+                  <input type="text" class="form-control" placeholder="position" id="position" name="position">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">description</label>
+                  <input type="text" class="form-control" placeholder="description" id="description" name="description">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">categories</label>
+                  <input type="text" class="form-control" placeholder="Category" id="Category" name="Category">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">image</label>
+                  <input type="file" id="fileInput-single" class="form-control drop-zoon__file-input" accept="image/*"
+                    name="image_file">
+                </div>
+                <button id="btn"
+                  onclick="img_upload('testimonicals_save','#fileInput-single',['#Name','#position','#description','#Category'])"
+                  class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <section class="overflow-hidden text-gray-700 ">
+
+          <div
+            class="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2">
+            {% for i in card %}
+            <figure
+              class="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700">
+              <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Card style content</h3>
+                <p class="my-4 font-light">{{ i.description }}"</p>
+              </blockquote>
+              <figcaption class="flex items-center justify-center space-x-3">
+                <img class="rounded-full w-9 h-9" src="{{ i.image.url }}" alt="profile picture">
+                <div class="space-y-0.5 font-medium dark:text-white text-left">
+                  <div>{{ i.Name }}</div>
+                  <div class="text-sm font-light text-gray-500 dark:text-gray-400">{{ i.position }}</div>
+                </div>
+              </figcaption>
+            </figure>
+            {% endfor %}
+
+          </div>
+
+        </section>
+
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <script>
+    function img_upload(url, img, datas) {
+      console.log(datas, img)
+      var data = new FormData();
+      data.append(img, $(img)[0].files[0]);
+      data.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
+      for (let i = 0; i < datas.length; i++) {
+        data.append(datas[i], $(datas[i]).val())
+      }
+      $.ajax({
+        method: "POST",
+        url: url,
+        processData: false,
+        contentType: false,
+        mimeType: "multipart/form-data",
+        data: data,
+        success: function (data) {
+          if (data.status == "Upload Done") {
+            console.log("Uploading Done successfully")
+          }
+          else {
+            console.log('error')
+          }
+        }
+      })
+    }
+
+
+  </script>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src=" {% static 'vendors/js/vendor.bundle.base.js' %} "></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src=" {% static 'vendors/typeahead.js/typeahead.bundle.min.js' %} "></script>
+  <script src=" {% static 'vendors/select2/select2.min.js' %} "></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src=" {% static 'js/off-canvas.js' %} "></script>
+  <script src=" {% static 'js/hoverable-collapse.js' %} "></script>
+  <script src=" {% static 'js/template.js' %} "></script>
+  <script src=" {% static 'js/settings.js' %} "></script>
+  <script src=" {% static 'js/todolist.js' %} "></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src=" {% static 'js/file-upload.js' %} "></script>
+  <script src=" {% static 'js/typeahead.js' %} "></script>
+  <script src=" {% static 'js/select2.js' %} "></script>
+  <!-- End custom js for this page-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
+</body>
+
+</html>
+{% endblock content %}

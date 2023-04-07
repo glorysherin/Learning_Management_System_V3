@@ -29,7 +29,7 @@ def staff_home(request):
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Faculty_details.objects.get(user_name=name.user_name)
     faculty_details = ""
-    return render(request, "home/index.html", {'user_name': usr_obj.username, 'detials': faculty_details})
+    return render(request, "home/staff.html", {'user_name': usr_obj.username, 'detials': faculty_details})
 
 
 # Video Chat.....

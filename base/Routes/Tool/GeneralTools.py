@@ -7,6 +7,23 @@ except:
 import requests
 from bs4 import BeautifulSoup
 from bing_image_downloader import downloader
+from base.models import logo, FooterEditPage, SocialMediaLinks
+
+
+def reguler_datas(data=False):
+    out = dict()
+    try:
+        logo_ = logo.objects.all()
+        last_logo = logo.objects.latest("L_id")
+        if data:
+            out = {'logo': last_logo, 'logo_collection': logo_[::-1], }
+            out = dict(out, **data)
+        else:
+            out = {'logo': last_logo, 'logo_collection': logo_[::-1]}
+    except:
+        print(
+            "Erorr are occers in Tools -> reguler_datas function {may be the db is empty we can't load the icons so you can see this message}")
+    return dict(out, **{'FooterEditPage': FooterEditPage.objects.all()[::-1], 'SocialMediaLinks': SocialMediaLinks.objects.all()[::-1]})
 
 
 class kit:

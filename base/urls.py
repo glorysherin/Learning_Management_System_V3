@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView, LoginView
 
 from .Routes.common import *
+from .Routes.Common_Tool import *
 from .Routes.tool import *
 from .Routes.staff import *
 from .Routes.students import *
@@ -14,6 +15,7 @@ from .Routes.blog import *
 from .Routes.Events import *
 from .Routes.home import *
 from .Routes.CommonNotes import *
+from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
 
 
@@ -56,7 +58,7 @@ tools = [
 ]
 
 
-Common_tool = [
+common_tool = [
     path('Common_Common_tool', Common_tool),
     path('Common_toolHome', toolHome),
     path('Common_trans', translate_),
@@ -297,9 +299,16 @@ event = [
     path('detail/<int:event_id>', event_detail, name='event_detail'),
 ]
 
+dynamicFunctionality = [
+    path('testimonicals_edit', Testimonicals_edit, name='testimonicals_edit'),
+    path('testimonicals', Testimonicals, name='testimonicals'),
+    path('testimonicals_save', Testimonicals_save, name='Testimonicals_save'),
 
-urlpatterns.extend(Make_Join([tools, Common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam]))
+]
+
+
+urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
