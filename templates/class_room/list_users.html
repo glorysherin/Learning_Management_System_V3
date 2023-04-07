@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List of Enrolled Students</title>
+</head>
+
+<body>
+    <h1>List of Enrolled Students</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Joined Year</th>
+                <th>Role No</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in people %}
+            <tr>
+                <td>{{ person.id }}</td>
+                <td>{{ person.get_name }}</td>
+                <td>{{ person.user.email }}</td>
+                <td>{{ person.address }}</td>
+                <td>{{ person.mobile }}</td>
+                <td>{{ person.joinned_year }}</td>
+                <td>{{ person.role_no }}</td>
+                <td>{{ person.department }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
