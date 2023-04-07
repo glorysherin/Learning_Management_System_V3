@@ -33,6 +33,7 @@ def toolHome(request):
     return render(request, "tools/ToolHome.html")
 
 
+
 def Code_scriping(request):
     context = {}
     if request.method == 'POST':
@@ -423,3 +424,7 @@ def keyword_to_image(request):
 
 def video_meeting(request):
     return render(request, 'tools/video_meeting.html')
+
+
+def Common_tool(request):
+    return render(request, "tools/Common_tool.html")
