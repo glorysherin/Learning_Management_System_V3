@@ -60,7 +60,7 @@ tools = [
 alternative_url=[  path('student/video_meeting', video_meeting),
                 path('student/class_room', home_classroom),
                path('student/chat_lobby', lobby),
-               path('student/list_blog', list_blog),
+               path('student/list_blog', student_list_blog),
                path('student/chat_home/', chat_home),
                    path('student/note/notes_list', notes_list, name='notes_list'),
                        path('student/toolHome', toolHome),
@@ -266,7 +266,8 @@ exam = [
 
 
 blog_url = [
-    path('list_blog', list_blog),
+    path('list_blog', student_list_blog,name='student_list_blog'),
+ path('list_blog', teacher_list_blog,name='teacher_list_blog'),
     path('list_edit_blog', list_edit_blog),
     path('view_blog/<str:pk>', view_blog),
     path('edit_blog/<str:pk>', edit_blog),
