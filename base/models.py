@@ -321,6 +321,7 @@ class daily_test(models.Model):
 
 class Note(models.Model):
     id = models.AutoField(primary_key=True)
+    cover_image = models.CharField(max_length=100)
     department = models.CharField(max_length=100)
     semester = models.CharField(max_length=100)
     notes_title = models.CharField(max_length=100)

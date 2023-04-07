@@ -31,9 +31,10 @@ def Make_Join(Componets):
 
 # Urls............................
 
+
 tools = [
-    path('Common_tool',Common_tool), 
-    path('toolHome',toolHome),
+    path('Common_tool', Common_tool),
+    path('toolHome', toolHome),
     path('trans', translate_),
     path('convert_text', convert_text),
     path('wikipedia_summary', wikipedia_summary),
@@ -56,8 +57,8 @@ tools = [
 
 
 Common_tool = [
-    path('Common_Common_tool',Common_tool), 
-    path('Common_toolHome',toolHome),
+    path('Common_Common_tool', Common_tool),
+    path('Common_toolHome', toolHome),
     path('Common_trans', translate_),
     path('Common_convert_text', convert_text),
     path('Common_wikipedia_summary', wikipedia_summary),
@@ -79,9 +80,10 @@ Common_tool = [
 ]
 
 common = [
+    path('', pre_home),
+    path('pre_home', pre_home),
     path('student_home', student_home),
     path('staff_home', staff_home),
-    path('pre_home', pre_home),
     path('contactus', contactus),
     path('services', services),
     path('about', about),
@@ -120,6 +122,7 @@ chatroom = [
 
 
 classroom = [
+    path('list_users_by_class/<str:class_id>', list_users_by_class),
     path('class_room', home_classroom),
     path('message/<str:room>/', chatgetMessages, name="message"),
     path('classroom/<str:pk>/<str:class_id>', nave_home_classroom),
@@ -143,6 +146,7 @@ classroom = [
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
     path('class_ebook/<int:pk>/delete/',
          class_ebook_delete, name='class_ebook_delete'),
+
 ]
 
 
@@ -195,7 +199,7 @@ teacher = [
 
 exam = [
 
-    path('', home_view, name=''),
+    #     path('', home_view, name=''),
     path('logout', LogoutView.as_view(
         template_name='exam/logout.html'), name='logout'),
     path('contactus',  contactus_view),
@@ -267,7 +271,7 @@ gallery_ = [
 
 
 note = [
-    path('', course_list, name='course_list'),
+    path('course_list', course_list, name='course_list'),
     path('course/course_edit/<int:pk>', course_detail, name='course_detail'),
     path('course/<int:pk>/', course_detail, name='course_detail'),
     path('course/add/', course_add, name='course_add'),
@@ -294,7 +298,7 @@ event = [
 ]
 
 
-urlpatterns.extend(Make_Join([tools,Common_tool, note, gallery_, blog_url, common, event,
+urlpatterns.extend(Make_Join([tools, Common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
