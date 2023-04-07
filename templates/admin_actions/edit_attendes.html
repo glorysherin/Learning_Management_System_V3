@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Attendee</title>
+</head>
+
+<body>
+    <h1>Edit Attendee</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">User Name:</label>
+        <input type="text" id="username" name="username" value="{{attendee.user_name}}">
+        <br><br>
+        <label for="rollno">Roll No:</label>
+        <input type="text" id="rollno" name="rollno" value="{{attendee.roll_no}}">
+        <br><br>
+        <label for="class_id">class id :</label>
+        <input type="text" id="class_id" name="class_id" value="{{attendee.class_id}}" disabled>
+        <br><br>
+        <label for="status">Subject Status:</label>
+        <select name="status" id="status" name="status">
+            {% if attendee.subject_states == 'Present' %}
+            <option value="Present" selected>Present</option>
+            {% else %}
+            <option value="Present">Present</option>
+            {% endif %}
+
+            {% if attendee.subject_states == 'Absent' %}
+            <option value="Absent" selected>Absent</option>
+            {% else %}
+            <option value="Absent">Absent</option>
+            {% endif %}
+
+            {% if attendee.subject_states == 'OnDuty' %}
+            <option value="OnDuty" selected>OnDuty</option>
+            {% else %}
+            <option value="OnDuty">OnDuty</option>
+            {% endif %}
+        </select>
+        <br><br>
+        <input type="submit" value="Save">
+    </form>
+    <br>
+    <a href="{% url 'user_details' class_id=attendee.class_id date=attendee.Date %}">Cancel</a>
+</body>
+
+</html>
