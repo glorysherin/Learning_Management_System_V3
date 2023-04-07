@@ -17,37 +17,7 @@
 <body >
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-<<<<<<< HEAD
-        <label for="department">Department:</label>
-        <input type="text" name="department" id="department" value="{{ note.department }}" required>
-        <br>
-        <label for="department">cover_image url:</label>
-        <input type="text" name="cover_image" id="cover_image" value="{{ note.cover_image }}" required>
-        <br>
-        <label for="semester">Semester:</label>
-        <input type="text" name="semester" id="semester" value="{{ note.semester }}" required>
-        <br>
-        <label for="notes_title">Notes Title:</label>
-        <input type="text" name="notes_title" id="notes_title" value="{{ note.notes_title }}" required>
-        <br>
-        <label for="regulation">Regulation:</label>
-        <input type="text" name="regulation" id="regulation" value="{{ note.regulation }}" required>
-        <br>
-        <label for="subcode">Subcode:</label>
-        <input type="text" name="subcode" id="subcode" value="{{ note.subcode }}" required>
-        <br>
-        <label for="description">Description:</label>
-        <textarea name="description" id="description" required>{{ note.description }}</textarea>
-        <br>
-        <label for="file">File:</label>
-        <input type="file" name="file" id="file">
-        {% if note.file %}
-        <p>Current File: <a href="{{ note.file.url }}" target="_blank">{{ note.file.name }}</a></p>
-        {% endif %}
-        <br>
-        <button type="submit">Save</button>
-        <a href="{% url 'notes_list' %}">Cancel</a>
-=======
+
     <div style="margin: 0 auto ; width: 500px;" class="flex flex-col justify-center items-center h-[100vh]">
         <div style="margin-top: 10px; padding:  30px "
             class="!z-5 relative flex flex-col rounded-[20px] max-w-[300px] md:max-w-[400px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-6 3xl:p-![18px] bg-white undefined">
@@ -104,7 +74,7 @@
     </div>
     
     </div>
->>>>>>> 30a263923108d3676010a8149bd9d31b127ef9d9
+
     </form>
 </body>
 
