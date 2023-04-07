@@ -5,6 +5,7 @@ from django.contrib.auth.views import LogoutView, LoginView
 
 from .Routes.common import *
 from .Routes.tool import *
+from .Routes.Common_Tool import *
 from .Routes.staff import *
 from .Routes.students import *
 from .Routes.study import *
@@ -55,27 +56,26 @@ tools = [
 ]
 
 
-Common_tool = [
-    path('Common_Common_tool',Common_tool), 
-    path('Common_toolHome',toolHome),
-    path('Common_trans', translate_),
-    path('Common_convert_text', convert_text),
-    path('Common_wikipedia_summary', wikipedia_summary),
-    path('Common_convert_docx_to_pdf', convert_docx_to_pdf),
-    path('Common_convert_pdf_to_docx', convert_pdf_to_docx),
-    path('Common_convert_pdf_to_excel', convert_pdf_to_excel),
-    path('Common_convert_excel_to_pdf', convert_excel_to_pdf),
-    path('Common_convert_jpg_to_pdf', convert_jpg_to_pdf),
-    path('Common_convert_jpg_to_word', convert_jpg_to_word),
-    path('Common_calculator', calculator),
-    path('Common_cgpa_calculator', cgpa_calculator),
-    path('Common_handwriting_converter', handwriting_converter),
-    path('Common_keyword_to_image', keyword_to_image),
-    path('Common_video_meeting', video_meeting),
+common_tool = [
+    path('Common_Common_tool', Common_Common_tool), 
+    path('Common_toolHome', Common_toolHome),
+    path('Common_trans', Common_translate_),
+    path('Common_convert_text', Common_convert_text),
+    path('Common_wikipedia_summary', Common_wikipedia_summary),
+    path('Common_convert_docx_to_pdf', Common_convert_docx_to_pdf),
+    path('Common_convert_pdf_to_docx', Common_convert_pdf_to_docx),
+    path('Common_convert_pdf_to_excel', Common_convert_pdf_to_excel),
+    path('Common_convert_excel_to_pdf', Common_convert_excel_to_pdf),
+    path('Common_convert_jpg_to_word', Common_convert_jpg_to_word),
+    path('Common_calculator', Common_calculator),
+    path('Common_cgpa_calculator', Common_cgpa_calculator),
+    path('Common_handwriting_converter', Common_handwriting_converter),
+    path('Common_keyword_to_image', Common_keyword_to_image),
+    path('Common_video_meeting', Common_video_meeting),
 
-    path('Common_gpa_calculator', gpa_calculator),
-    path('Common_get_subject', get_subject),
-    path('Common_Code_scriping', Code_scriping),
+    path('Common_gpa_calculator', Common_gpa_calculator),
+    path('Common_get_subject', Common_get_subject),
+    path('Common_Code_scriping', Common_Code_scriping),
 ]
 
 common = [
@@ -294,7 +294,7 @@ event = [
 ]
 
 
-urlpatterns.extend(Make_Join([tools,Common_tool, note, gallery_, blog_url, common, event,
+urlpatterns.extend(Make_Join([tools,common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
