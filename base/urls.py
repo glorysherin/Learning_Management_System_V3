@@ -60,25 +60,7 @@ tools = [
 
 
 common_tool = [
-<<<<<<< HEAD
-    path('Common_Common_tool', Common_tool),
-    path('Common_toolHome', toolHome),
-    path('Common_trans', translate_),
-    path('Common_convert_text', convert_text),
-    path('Common_wikipedia_summary', wikipedia_summary),
-    path('Common_convert_docx_to_pdf', convert_docx_to_pdf),
-    path('Common_convert_pdf_to_docx', convert_pdf_to_docx),
-    path('Common_convert_pdf_to_excel', convert_pdf_to_excel),
-    path('Common_convert_excel_to_pdf', convert_excel_to_pdf),
-    path('Common_convert_jpg_to_pdf', convert_jpg_to_pdf),
-    path('Common_convert_jpg_to_word', convert_jpg_to_word),
-    path('Common_calculator', calculator),
-    path('Common_cgpa_calculator', cgpa_calculator),
-    path('Common_handwriting_converter', handwriting_converter),
-    path('Common_keyword_to_image', keyword_to_image),
-    path('Common_video_meeting', video_meeting),
-=======
-    path('Common_Common_tool', Common_Common_tool), 
+    path('Common_Common_tool', Common_Common_tool),
     path('Common_toolHome', Common_toolHome),
     path('Common_trans', Common_translate_),
     path('Common_convert_text', Common_convert_text),
@@ -93,8 +75,6 @@ common_tool = [
     path('Common_handwriting_converter', Common_handwriting_converter),
     path('Common_keyword_to_image', Common_keyword_to_image),
     path('Common_video_meeting', Common_video_meeting),
->>>>>>> 6aba37bc57acc29d36f5f470b4f5e003669e7e22
-
     path('Common_gpa_calculator', Common_gpa_calculator),
     path('Common_get_subject', Common_get_subject),
     path('Common_Code_scriping', Common_Code_scriping),
@@ -108,7 +88,6 @@ common = [
     path('contactus', contactus),
     path('services', services),
     path('about', about),
-
 ]
 
 admin = [
@@ -322,17 +301,11 @@ dynamicFunctionality = [
     path('testimonicals_edit', Testimonicals_edit, name='testimonicals_edit'),
     path('testimonicals', Testimonicals, name='testimonicals'),
     path('testimonicals_save', Testimonicals_save, name='Testimonicals_save'),
-
-<<<<<<< HEAD
 ]
 
 
 urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality]))
-=======
-urlpatterns.extend(Make_Join([tools,common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam]))
->>>>>>> 6aba37bc57acc29d36f5f470b4f5e003669e7e22
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
