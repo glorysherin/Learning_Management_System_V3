@@ -1,0 +1,8 @@
+<h1>Users Enrolled in Class {{ class_id }}</h1>
+<ul>
+    {% for mail_id in mail_ids %}
+    <li>{{ mail_id }}</li>
+    {% empty %}
+    <li>No users enrolled in this class.</li>
+    {% endfor %}
+</ul>
