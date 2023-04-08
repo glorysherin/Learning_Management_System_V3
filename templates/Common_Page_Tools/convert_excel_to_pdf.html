@@ -1,12 +1,15 @@
 {% extends 'Common_Page_Tools/Common_base.html' %}
 {% block content %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Convert Excel to PDF</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <style>
         #card {
-			border: 4px solid black;
+		
   width: 400px;
   height: 250px;
   background-color: #e1ebe4;
@@ -17,6 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
   
 }
 #card1{
@@ -32,21 +36,21 @@ h2 {
   margin-bottom: 50px;
 }
 
-
     </style>
 </head>
 <body>
-    <div id="card1"><br><br>
-        <div id="card">
-    <h2>Convert Excel to PDF</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label style="font-size: 16px;" for="excel_file">Select Excel file to convert:</label>
-        <input type="file" name="excel_file" id="excel_file"><br><br>
-        <input type="submit" value="Convert to PDF">
-    </form>
-</div>
-</div>
+    <div class="flex justify-center items-center h-screen">
+        <div style="margin: 0 auto;margin-top: 30px;margin-bottom: 30px;" id="card" class="bg-white shadow-md p-8 rounded-lg w-full sm:w-96">
+            <h2 class="text-2xl font-semibold mb-4">Convert Excel to PDF</h2>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="block text-gray-700 font-bold mb-2" for="excel_file">Select Excel file to convert:</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="file" name="excel_file" id="excel_file" /><br><br>
+            <input class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Convert to PDF" />
+          </form>
+        </div>
+      </div>
+      
 </body>
 </html>
 {% endblock content %}
