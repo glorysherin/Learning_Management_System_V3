@@ -17,7 +17,6 @@ from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
-from django.urls import reverse
 
 
 # Initilizes........................
