@@ -9,7 +9,7 @@
     <title>Document</title>
     <style>
         #card {
-			border: 4px solid black;
+		
   width: 400px;
   height: 250px;
   background-color: #e1ebe4;
@@ -20,6 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
   
 }
 #card1{
@@ -48,18 +49,18 @@ h2 {
     </style>
 </head>
 <body>
-	<div id="card1"><br><br>
-    <div id="card">
-        <h2>Convert PDF to Excel</h2>
+	<div class="flex justify-center items-center h-screen">
+    <div style="margin: 0 auto;margin-top: 30px;" id="card" class="bg-white shadow-md p-8 rounded-lg w-full sm:w-96">
+        <h2 class="text-2xl font-semibold mb-4">Convert PDF to Excel</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-        <label style="font-size: 16px;" for="pdf_file">Select a PDF file to convert:</label><br>
-        <input type="file" name="pdf_file" required><br><br>
-        <button type="submit">Convert to Excel</button>
-    </form>
-     </div>
-	</div>
-      
+            <label class="text-lg" for="pdf_file">Select a PDF file to convert:</label>
+            <input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500" type="file" name="pdf_file" required>
+            <button style="border: 0.5px;padding: 8px;border-radius: 13px;" class="mt-4 bg-blue-500 hover:bg-blue-600 text-black   rounded-md" type="submit">Convert to Excel</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
 {% endblock content %}

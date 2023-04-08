@@ -1,10 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from ..models import Note
+from .Tool.Tools import student_detials
 
 
 def notes_list(request):
     notes = Note.objects.all()
     return render(request, 'commonNotes/notes_list.html', {'notes': notes})
+
+
+def student_notes_list(request):
+    notes = Note.objects.all()
+    return render(request, 'commonNotes/student_note_list.html', student_detials(request, 'Common Notes', {'notes': notes}))
 
 
 def common_notes_list(request):

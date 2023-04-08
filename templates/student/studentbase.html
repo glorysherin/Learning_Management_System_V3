@@ -105,7 +105,7 @@
           </a>
         </li>
 
-       
+
         <li class="nav-item">
           <a class="nav-link  " href="class_room">
             <div
@@ -188,7 +188,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="/admin-course">
+          <a class="nav-link  " href="{% url 'student-marks' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 256 256">
@@ -462,11 +462,11 @@
       <div class="container-fluid py-1" style="    margin-top: 24px;">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5"
-                href=" {% static 'javascript:;' %} ">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Classroom</li>
+            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5" href="{% url 'student_home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">{{ page }}</li>
           </ol>
-          <h6 class="text-white font-weight-bolder ms-2">User.role</h6>
+          <h6 class="text-white font-weight-bolder ms-2">Student</h6>
         </nav>
         <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -595,20 +595,16 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src=" {{ detail.image.url }} " alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              <img src=" {{ usr.profile_pic.url }} " alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                {{ detail.name }}
+                {{ usr.get_name }}
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                {% if detail.role.role == 2 %}
-                HOD of {{ detail.department }}
-                {% else %}
-                Staff of {{ detail.department }}
-                {% endif %}
+                {{ usr.department }}
               </p>
             </div>
           </div>
@@ -616,8 +612,8 @@
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                 <li class="nav-item">
-                  <a style="display: flex;" class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab"
-                    href=" {% static 'javascript:;' %} " role="tab" aria-selected="true">
+                  <a style="display: flex;" class="nav-link mb-0 px-0 py-1 active " href="{% url 'student-dashboard' %}"
+                    role="tab" aria-selected="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <path fill="#67748e" d="M4 21V9l8-6l8 6v12h-6v-7h-4v7H4Z" />
                     </svg>
@@ -643,8 +639,8 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a style="display: flex;" class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab"
-                    href=" {% static 'javascript:;' %} " role="tab" aria-selected="false">
+                  <a style="display: flex;" class="nav-link mb-0 px-0 py-1 " href="{% url 'student_notes_list' %}"
+                    role="tab" aria-selected="false">
                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>document</title>
@@ -667,8 +663,8 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a style="display: flex;" class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab"
-                    href=" {% static 'javascript:;' %} " role="tab" aria-selected="false">
+                  <a style="display: flex;" class="nav-link mb-0 px-0 py-1 "
+                    href=" {% url 'student_detail' student_id=usr.id %} " role="tab" aria-selected="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
                       <g fill="#67748e">
                         <path fill-rule="evenodd"
