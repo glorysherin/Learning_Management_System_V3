@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Faculty_details, Users, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
+from ..models import Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
 from django.contrib.auth.models import User
 from .Tool.Tools import get_user_mail, get_user_name, get_user_role, get_user_obj
 import datetime
@@ -7,6 +7,7 @@ from .Tool.Code_scriping_Tool import get_image_url
 from .Forms.Notes_form import EbookClassForm
 from base import models as TMODEL
 from django.utils import timezone
+from django.urls import reverse
 
 
 def is_teacher(user):
@@ -429,3 +430,81 @@ def update_edited_mark(request):
         obj.subject = request.POST.get('#course')
         obj.save()
     return render(request, 'class_room/edit_mark.html')
+
+
+def add_test_marks(request, class_id):
+    if request.method == 'POST':
+        for i in range(int(request.POST.get('num_rows'))):
+            class_id = request.POST.get('class_id_' + str(i))
+            ass_no = request.POST.get('ass_no_' + str(i))
+            roll_no = request.POST.get('roll_no_' + str(i))
+            subject = request.POST.get('subject_' + str(i))
+            mark = request.POST.get('mark_' + str(i))
+            date = request.POST.get('date_' + str(i))
+            daily_test = Internal_test_mark(
+                class_id=class_id, assesment_no=ass_no, roll_no=roll_no, subject=subject, mark=mark, Date=date)
+            daily_test.save()
+        print(class_id)
+        return redirect('test_marks', class_id=request.POST.get('class_id_'+str(0)))
+
+    peoples = []
+    people = class_enrolled.objects.filter(subject_code=class_id)
+    test = class_enrolled.objects.all()
+    for i in test:
+        print(i.class_id, i.mail_id, i.subject_code)
+    for i in people:
+        print(i.class_id, i.mail_id, i.subject_code)
+        person_obj = User.objects.get(id=i.user_id)
+        try:
+            obj = Student.objects.get(user=person_obj.id)
+            print(obj.role_no)
+            peoples.append(obj)
+        except:
+            pass
+    sub = Course.objects.all()
+    print("sub", sub)
+    return render(request, 'class_room/add_test_marks.html', {'class_id': class_id, 'subjects': sub, 'comp': [[i, j] for i, j in enumerate(peoples)]})
+
+
+def test_marks(request, class_id):
+    if request.method == 'POST':
+        pass
+    peoples = []
+    people = class_enrolled.objects.filter(subject_code=class_id)
+    for i in people:
+        person_obj = User.objects.get(id=i.user_id)
+        try:
+            obj = Student.objects.get(user=person_obj.id)
+            peoples.append(obj)
+        except:
+            pass
+    test_marks = Internal_test_mark.objects.filter(class_id=class_id)
+    return render(request, 'class_room/test_marks.html', {'class_id': class_id, 'test_marks': [[i, j] for i, j in enumerate(test_marks)], 'students': peoples})
+
+
+def edit_test_marks(request, class_id, sub, ass_no):
+    if request.method == 'POST':
+        for i in range(int(request.POST.get('num_rows'))):
+            test = Internal_test_mark.objects.get(
+                id=request.POST.get('test_id_' + str(i)))
+            class_id = request.POST.get('class_id_' + str(i))
+            ass_no = request.POST.get('ass_no_' + str(i))
+            roll_no = request.POST.get('roll_no_' + str(i))
+            subject = request.POST.get('subject_' + str(i))
+            mark = request.POST.get('mark_' + str(i))
+            date = request.POST.get('date_' + str(i))
+            test.class_id = class_id
+            test.assesment_no = ass_no
+            test.roll_no = roll_no
+            test.subject = subject
+            test.mark = mark
+            test.Date = date
+            test.save()
+        print(class_id)
+        return redirect('test_marks', class_id=request.POST.get('class_id_'+str(0)))
+
+    test = Internal_test_mark.objects.filter(
+        class_id=class_id, subject=sub, assesment_no=ass_no)
+    sub = Course.objects.all()
+
+    return render(request, 'class_room/edit_test_mark.html', {'subjects': sub, 'class_id': class_id, 'comp': [[i, j] for i, j in enumerate(test)]})

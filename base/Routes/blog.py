@@ -47,9 +47,9 @@ def save_edit_blog(request,pk):
     return render(request,"blog/blog_edit.html")
 
 
-def list_blog(request):
+def student_list_blog(request):
     items = get_blog()
-    return render(request,"blog/blog.html",{'blogs':items})
+    return render(request,"blog/studentblog.html",{'blogs':items})
 
 def view_blog(request,pk):
     page = blog.objects.get(id=pk)
@@ -71,4 +71,9 @@ def list_edit_blog(request):
 def edit_blog(request,pk):
     obj = blog.objects.get(id=pk)
     return render(request,"blog/blog_re_edit.html",{'obj':obj})
+
+def teacher_list_blog(request):
+    items = get_blog()
+    return render(request,"blog/teacherblog.html",{'blogs':items})
+
 
