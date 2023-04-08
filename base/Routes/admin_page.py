@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees
+from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees, Note
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import xlwt
@@ -170,3 +170,19 @@ def export_attendees(request, class_id, date, date_):
             ws.write(row_num, col_num, str(cell_value), font_style)
     wb.save(response)
     return response
+
+
+def listout_notes(request):
+    dep = []
+    for i in Note.objects.all():
+        dep.append(i.department)
+    lis_work = []
+    for i in set(dep):
+        notes = Note.objects.filter(department=i).exclude(semester='')
+        semesters = set([note.semester for note in notes])
+        notes_dict = {}
+        for semester in semesters:
+            notes_dict[semester] = Note.objects.filter(
+                department=i, semester=semester)
+            lis_work.append(notes_dict)
+    return render(request, 'admin_actions/notes_list.html', {'notes_dict': notes_dict, 'lis': lis_work})
