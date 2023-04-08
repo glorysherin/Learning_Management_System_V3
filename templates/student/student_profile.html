@@ -1,7 +1,39 @@
-<h1>Student Profile</h1>
-<p>Name: {{ student.get_name }}</p>
-<p>Address: {{ student.address }}</p>
-<p>Mobile: {{ student.mobile }}</p>
-<p>Joined Year: {{ student.joinned_year }}</p>
-<p>Role No: {{ student.role_no }}</p>
-<p>Department: {{ student.department }}</p>
+{% extends 'student/studentbase.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href=
+"https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+          rel="stylesheet">
+</head>
+<body>
+    <div>
+        <!-- component -->
+<div style="padding: 3px;" class="bg-gray-200 font-sans h-screen w-full flex flex-row justify-center items-center ">
+    <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+       <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white" src="https://avatars.githubusercontent.com/u/67946056?v=4" alt="">
+       <div class="text-center mt-2 text-3xl font-medium">Student Profile</div>
+       
+       <div class="px-6 text-center mt-2 font-light text-sm" style="text-align: left;">
+         <p>
+            <b> Name:</b> {{ student.get_name }}
+           </p>
+           <p><b> Address: {{ student.address }}</p>
+<p><b> Mobile:</b> {{ student.mobile }}</p>
+<p><b> Joined Year:</b> {{ student.joinned_year }}</p>
+<p><b> Role No: </b>{{ student.role_no }}</p>
+<p><b> Department:</b> {{ student.department }}</p>
+       </div>
+      
+       
+    </div>
+  </div>
+    </div>
+</body>
+</html>
+{% endblock %}
