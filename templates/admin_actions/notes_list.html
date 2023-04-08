@@ -1,8 +1,9 @@
-{% for i in lis %}
-{% if i %}
-{% for semester, notes in i.items %}
-<h1>Notes for {{ semester.department }}</h1>
-<h2>{{ semester }}</h2>
+<h1>Notes List</h1>
+{% if notes_dict %}
+{% for department, semesters in notes_dict.items %}
+<h2>{{ department }}</h2>
+{% for semester, notes in semesters.items %}
+<h3>{{ semester }}</h3>
 <ul>
     {% for note in notes %}
     <li>{{ note.notes_title }}</li>
@@ -11,7 +12,7 @@
     {% endfor %}
 </ul>
 {% endfor %}
+{% endfor %}
 {% else %}
 <p>No notes found.</p>
 {% endif %}
-{% endfor %}

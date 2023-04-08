@@ -173,16 +173,13 @@ def export_attendees(request, class_id, date, date_):
 
 
 def listout_notes(request):
-    dep = []
-    for i in Note.objects.all():
-        dep.append(i.department)
-    lis_work = []
-    for i in set(dep):
-        notes = Note.objects.filter(department=i).exclude(semester='')
+    departments = set([note.department for note in Note.objects.all()])
+    notes_dict = {}
+    for department in departments:
+        notes = Note.objects.filter(department=department).exclude(semester='')
         semesters = set([note.semester for note in notes])
-        notes_dict = {}
+        notes_dict[department] = {}
         for semester in semesters:
-            notes_dict[semester] = Note.objects.filter(
-                department=i, semester=semester)
-            lis_work.append(notes_dict)
-    return render(request, 'admin_actions/notes_list.html', {'notes_dict': notes_dict, 'lis': lis_work})
+            notes_dict[department][semester] = Note.objects.filter(
+                department=department, semester=semester)
+    return render(request, 'admin_actions/notes_list.html', {'notes_dict': notes_dict})

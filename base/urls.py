@@ -17,7 +17,6 @@ from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
-from django.urls import reverse
 
 
 # Initilizes........................
@@ -314,6 +313,7 @@ note = [
     path('ebook/<int:pk>/delete/', ebook_delete, name='ebook_delete'),
 
     path('note/notes_list', notes_list, name='notes_list'),
+    path('note/common_notes_list', common_notes_list, name='common_notes_list'),
     path('note/listout_notes', listout_notes, name='listout_notes'),
     path('note/<int:note_id>/', note_detail, name='note_detail'),
     path('note/create/', create_note, name='create_note'),
