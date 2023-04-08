@@ -1,62 +1,141 @@
-<<<<<<< HEAD
-<h1>Users Enrolled in Class {{ class_id }}</h1>
-<ul>
-    {% for mail_id in mail_ids %}
-    <li>{{ mail_id }}</li>
-    {% empty %}
-    <li>No users enrolled in this class.</li>
-    {% endfor %}
-</ul>
-=======
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>List of Enrolled Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            width: 250px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        th,
+        td:first-child {
+            white-space: nowrap;
+        }
+
+        th:last-child,
+        td:last-child {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        button {
+            cursor: pointer;
+            margin-top: 20px;
+            background-color: rgb(6, 6, 105);
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+        
+        }
+    </style>
 </head>
 
 <body>
     <h1>List of Enrolled Students</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Mobile</th>
-                <th>Joined Year</th>
-                <th>Role No</th>
-                <th>Department</th>
-                <th>view</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for person in people %}
-            <tr>
-                <td>{{ person.id }}</td>
-                <td>{{ person.get_name }}</td>
-                <td>{{ person.user.email }}</td>
-                <td>{{ person.address }}</td>
-                <td>{{ person.mobile }}</td>
-                <td>{{ person.joinned_year }}</td>
-                <td>{{ person.role_no }}</td>
-                <td>{{ person.department }}</td>
-                <td><button><a href="{% url 'student_detail' person.id %}">View</a></button>
-                </td>
-                <td><button><a href="{% url 'student_edit' person.id %}">Edit</a></button></td>
-                <td><button><a href="">Delete</a></button></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="card-container">
+        {% for person in people %}
+        <div class="card" style="width:600px;">
+            <h2>{{ person.get_name }}</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Student ID</td>
+                            <td>{{ person.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{ person.user.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{ person.address }}</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile</td>
+                            <td>{{ person.mobile }}</td>
+                        </tr>
+                        <tr>
+                            <td>Joined Year</td>
+                            <td>{{ person.joinned_year }}</td>
+                        </tr>
+                        <tr>
+                            <td>Role No</td>
+                            <td>{{ person.role_no }}</td>
+                        </tr>
+                        <tr>
+                            <td>Department</td>
+                            <td>{{ person.department }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-buttons">
+                <button ><a href="{% url 'student_detail' person.id %}">View</a></button>
+                <button style="justify-content: right; margin-left: 450px;"><a href="{% url 'student_edit' person.id %}">Edit</a></button>
+                <button ><a href="">Delete</a></button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 
 <script>
-    function nav() { window.location.replace('students/{{ person.id }}') }
+    function nav() {
+        window.location.replace('students/{{ person.id }}');
+    }
 </script>
 
 </html>
->>>>>>> 7119885a3cfc1b7402c3a65f8d8fd36166407e35
