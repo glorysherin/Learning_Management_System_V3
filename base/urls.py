@@ -17,7 +17,6 @@ from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
-from django.urls import reverse
 
 
 # Initilizes........................
@@ -279,6 +278,7 @@ exam = [
 
 
 blog_url = [
+
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
     path('list_edit_blog', list_edit_blog),
