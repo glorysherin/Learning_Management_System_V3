@@ -321,6 +321,7 @@ class daily_test(models.Model):
 
 class Note(models.Model):
     id = models.AutoField(primary_key=True)
+    cover_image = models.CharField(max_length=100)
     department = models.CharField(max_length=100)
     semester = models.CharField(max_length=100)
     notes_title = models.CharField(max_length=100)
@@ -343,6 +344,47 @@ class Event(models.Model):
 
     def __str__(self):
         return self.event_name
+
+
+class Testimonials(models.Model):
+    T_id = models.IntegerField(primary_key=True)
+    Name = models.CharField(max_length=200)
+    position = models.CharField(max_length=200)
+    image = models.ImageField(
+        upload_to='Testimonials/%Y/%m/%d', default='images/user_image.png')
+    description = models.CharField(max_length=200)
+    categories = models.CharField(max_length=200)
+    last_updated_date = models.DateField(default=timezone.now)
+
+
+class logo(models.Model):
+    L_id = models.IntegerField(primary_key=True)
+    Reson = models.CharField(max_length=200)
+    image = models.ImageField(
+        upload_to='logo', default='images/user_image.png')
+    last_updated_date = models.DateField(default=timezone.now)
+
+    class Meta:
+        get_latest_by = ['image']
+
+
+class FooterEditPage(models.Model):
+    id = models.IntegerField(primary_key=True)
+    InstituteName = models.CharField(max_length=200)
+    Address = models.CharField(max_length=200)
+    PhoneNumber = models.CharField(max_length=200)
+    EXN = models.CharField(max_length=200)
+    mail = models.CharField(max_length=200)
+    last_updated_date = models.DateField(default=timezone.now)
+
+
+class SocialMediaLinks(models.Model):
+    id = models.IntegerField(primary_key=True)
+    Twitter = models.CharField(max_length=200)
+    Facebook = models.CharField(max_length=200)
+    Instagram = models.CharField(max_length=200)
+    LinkedIn = models.CharField(max_length=200)
+    last_updated_date = models.DateField(default=timezone.now)
 
 # classRoom ........................
 

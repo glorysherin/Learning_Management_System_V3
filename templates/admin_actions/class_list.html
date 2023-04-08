@@ -15,8 +15,12 @@
     </tr>
     {% for classroom in classrooms %}
     <tr>
-        <td>{{ classroom.class_name }}</td>
-        <td>{{ classroom.subject_code }}</td>
+
+        <td><a href="class_listout/{{ classroom.subject_code }}">{{ classroom.class_name }}</a></td>
+
+        <a href="class_listout/{{ classroom.subject_code }}">
+            <td>{{ classroom.subject_code }}</td>
+        </a>
         <td>{{ classroom.owner.name }}</td>
         <td>{{ classroom.discription }}</td>
         <td><a href="classroom/class_room/{{classroom.subject_code }}">View</a></td>

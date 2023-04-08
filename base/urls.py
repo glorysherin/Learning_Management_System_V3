@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView, LoginView
 
 from .Routes.common import *
+from .Routes.Common_Tool import *
 from .Routes.tool import *
 from .Routes.Common_Tool import *
 from .Routes.staff import *
@@ -15,6 +16,7 @@ from .Routes.blog import *
 from .Routes.Events import *
 from .Routes.home import *
 from .Routes.CommonNotes import *
+from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
 
 
@@ -32,9 +34,10 @@ def Make_Join(Componets):
 
 # Urls............................
 
+
 tools = [
-    path('Common_tool',Common_tool), 
-    path('toolHome',toolHome),
+    path('Common_tool', Common_tool),
+    path('toolHome', toolHome),
     path('trans', translate_),
     path('convert_text', convert_text),
     path('wikipedia_summary', wikipedia_summary),
@@ -54,10 +57,25 @@ tools = [
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping),
 ]
+alternative_url=[  path('student/video_meeting', video_meeting),
+                path('student/class_room', home_classroom),
+               path('student/chat_lobby', lobby),
+               path('student/list_blog', list_blog),
+               path('student/chat_home/', chat_home),
+                   path('student/note/notes_list', notes_list, name='notes_list'),
+                       path('student/toolHome', toolHome),
+                           path('student/logout', LogoutView.as_view)
 
+
+
+
+               
+
+
+]
 
 common_tool = [
-    path('Common_Common_tool', Common_Common_tool), 
+    path('Common_Common_tool', Common_Common_tool),
     path('Common_toolHome', Common_toolHome),
     path('Common_trans', Common_translate_),
     path('Common_convert_text', Common_convert_text),
@@ -72,20 +90,19 @@ common_tool = [
     path('Common_handwriting_converter', Common_handwriting_converter),
     path('Common_keyword_to_image', Common_keyword_to_image),
     path('Common_video_meeting', Common_video_meeting),
-
     path('Common_gpa_calculator', Common_gpa_calculator),
     path('Common_get_subject', Common_get_subject),
     path('Common_Code_scriping', Common_Code_scriping),
 ]
 
 common = [
+    path('', pre_home),
+    path('pre_home', pre_home),
     path('student_home', student_home),
     path('staff_home', staff_home),
-    path('pre_home', pre_home),
     path('contactus', contactus),
     path('services', services),
     path('about', about),
-
 ]
 
 admin = [
@@ -94,6 +111,9 @@ admin = [
     path('teachers', teachers),
     path('teachers/profile/<int:pk>/', teacher_profile, name='teacher_profile'),
     path('class_list', class_list, name='class_list'),
+    path('class_listout/<str:class_id>',
+         get_class_peoples, name='class_listout'),
+    path('students_list', students_list, name='students_list'),
 ]
 
 
@@ -109,13 +129,14 @@ videochat = [
 
 
 chatroom = [
-    path('chat_home/', chat_home),
+    path('chat_home/', chat_home, name='chat_home'),
     # problem...................
     path('chat/<str:room>/', chat_room, name="chat_room"),
     path('chat_home/checkview', checkview, name="checkview"),
     path('chat_home/Ncheckview', Ncheckview, name="Ncheckview"),
     path('send', send, name="send"),
     path('getMessages/<str:room>/', getMessages, name="getMessages"),
+
 ]
 
 
@@ -143,11 +164,11 @@ classroom = [
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
     path('class_ebook/<int:pk>/delete/',
          class_ebook_delete, name='class_ebook_delete'),
+
 ]
 
 
 studet = [
-    path('students_list', students_list, name='students_list'),
     path('students/<int:student_id>', student_profile, name='student_detail'),
     path('students_delete/<int:student_id>/delete',
          student_delete, name='student_delete'),
@@ -195,7 +216,7 @@ teacher = [
 
 exam = [
 
-    path('', home_view, name=''),
+    #     path('', home_view, name=''),
     path('logout', LogoutView.as_view(
         template_name='exam/logout.html'), name='logout'),
     path('contactus',  contactus_view),
@@ -267,7 +288,7 @@ gallery_ = [
 
 
 note = [
-    path('', course_list, name='course_list'),
+    path('course_list', course_list, name='course_list'),
     path('course/course_edit/<int:pk>', course_detail, name='course_detail'),
     path('course/<int:pk>/', course_detail, name='course_detail'),
     path('course/add/', course_add, name='course_add'),
@@ -293,9 +314,20 @@ event = [
     path('detail/<int:event_id>', event_detail, name='event_detail'),
 ]
 
+dynamicFunctionality = [
+    path('testimonicals_edit', Testimonicals_edit, name='testimonicals_edit'),
+    path('testimonicals', Testimonicals, name='testimonicals'),
+    path('testimonicals_save', Testimonicals_save, name='Testimonicals_save'),
+]
 
-urlpatterns.extend(Make_Join([tools,common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam]))
+AternativeUrls = [
+     path('class_listout/<str:class_id>',
+         get_class_peoples, name='class_listout'),
+]
+
+
+urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality,alternative_url]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

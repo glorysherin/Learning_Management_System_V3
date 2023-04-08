@@ -19,10 +19,11 @@ def create_note(request):
         notes_title = request.POST.get('notes_title')
         regulation = request.POST.get('regulation')
         subcode = request.POST.get('subcode')
+        cover_image = request.POST.get('cover_image')
         description = request.POST.get('description')
         file = request.FILES.get('file')
         note = Note(department=department, semester=semester, notes_title=notes_title, regulation=regulation,
-                    subcode=subcode, description=description, file=file)
+                    subcode=subcode, description=description, file=file, cover_image=cover_image)
         note.save()
         return redirect('notes_list')
     return render(request, 'commonNotes/note_form.html')
@@ -36,10 +37,12 @@ def update_note(request, note_id):
         notes_title = request.POST.get('notes_title')
         regulation = request.POST.get('regulation')
         subcode = request.POST.get('subcode')
+        cover_image = request.POST.get('cover_image')
         description = request.POST.get('description')
         file = request.FILES.get('file')
         note.department = department
         note.semester = semester
+        note.cover_image = cover_image
         note.notes_title = notes_title
         note.regulation = regulation
         note.subcode = subcode

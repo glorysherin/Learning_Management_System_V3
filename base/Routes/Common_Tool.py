@@ -32,8 +32,10 @@ from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gf
 def Common_toolHome(request):
     return render(request, "Common_Page_Tools/ToolHome.html")
 
+
 def Common_base(request):
-    return render(request,"Common_Page_Tools/Common_base.html")
+    return render(request, "Common_Page_Tools/Common_base.html")
+
 
 def Common_Code_scriping(request):
     context = {}
