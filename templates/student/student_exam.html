@@ -1,52 +1,65 @@
 {% extends 'student/studentbase.html' %}
 {% block content %}
 {%load static%}
+<!DOCTYPE html>
+<html>
 
 <head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <style media="screen">
-    a:link {
-      text-decoration: none;
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    .card-header {
+      background-color: #007bff;
+      color: #fff;
     }
 
-    h6 {
-      text-align: center;
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 0;
     }
 
-    .row {
-      margin: 100px;
+    .table {
+      margin-bottom: 0;
     }
   </style>
 </head>
-<br><br>
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Available Courses</h6>
+
+<body>
+
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="card-title mb-0">Available Courses</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered" id="dev-table">
+            <thead>
+              <tr>
+                <th>Exam Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in courses %}
+              <tr>
+                <td>{{ t.course_name }}</td>
+                <td><a class="btn btn-success btn-sm" href="{% url 'take-exam' t.id %}"><span
+                      class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <table class="table table-hover table-bordered" id="dev-table">
-      <thead>
-        <tr>
-
-          <th>Exam Name</th>
-          
-          <th>Action</th>
-        </tr>
-      </thead>
-      {% for t in courses %}
-      <tr>
-
-        <td> {{t.course_name}}</td>
-        
-        <td><a class="btn btn-success btn-sm" style="border-radius:0px;" href="{% url 'take-exam' t.id  %}"><span class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
-      </tr>
-      {% endfor %}
-    </table>
   </div>
-</div>
 
-<br><br><br><br><br><br>
+</body>
+
+</html>
+
 {% endblock content %}
