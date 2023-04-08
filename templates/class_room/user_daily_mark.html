@@ -1,0 +1,22 @@
+<h1>{{ user_name }}'s Marks</h1>
+{% for subject in user_subjects %}
+<h2>{{ subject }}</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Mark</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mark in user_marks %}
+        {% if mark.subject == subject %}
+        <tr>
+            <td>{{ mark.Date }}</td>
+            <td>{{ mark.mark }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
