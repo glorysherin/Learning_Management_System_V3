@@ -281,10 +281,6 @@ exam = [
 blog_url = [
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
-<<<<<<< HEAD
-
-=======
->>>>>>> 744dead46131d6976bc3067f5269f44019c5d7cf
     path('list_edit_blog', list_edit_blog),
     path('view_blog/<str:pk>', view_blog),
     path('edit_blog/<str:pk>', edit_blog),
