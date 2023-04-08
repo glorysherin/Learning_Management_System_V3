@@ -508,3 +508,32 @@ def edit_test_marks(request, class_id, sub, ass_no):
     sub = Course.objects.all()
 
     return render(request, 'class_room/edit_test_mark.html', {'subjects': sub, 'class_id': class_id, 'comp': [[i, j] for i, j in enumerate(test)]})
+
+
+def marks_by_class(request, class_id):
+    # retrieve all Sec_Daily_test_mark objects for the specified class
+    marks = Sec_Daily_test_mark.objects.filter(class_id=class_id)
+
+    # create a nested dictionary to store the marks by user and subject
+    class_data = {}
+    for mark in marks:
+        user = mark.user_name
+        subject = mark.subject
+        if user and subject and mark.mark is not None:
+            if user not in class_data:
+                class_data[user] = {}
+            if subject not in class_data[user]:
+                class_data[user][subject] = []
+            class_data[user][subject].append(mark)
+
+    # pass the data to the template
+    context = {'class_id': class_id, 'class_data': class_data}
+    return render(request, 'class_room/daily_mark.html', context)
+
+
+def user_marks(request, user_name):
+    user_marks = Sec_Daily_test_mark.objects.filter(
+        user_name=user_name).order_by('Date')
+    user_subjects = set([mark.subject for mark in user_marks])
+    context = {'user_marks': user_marks, 'user_subjects': user_subjects}
+    return render(request, 'user_marks.html', context)

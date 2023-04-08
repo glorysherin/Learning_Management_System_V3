@@ -170,6 +170,7 @@ classroom = [
     path("edit_mark_home", edit_mark_home),
     path("edit_mark", edit_mark),
     path("update_edited_mark", update_edited_mark),
+    path("marks_by_class/<str:class_id>", marks_by_class),
     path("add_class_notes/<str:pk>", add_class_notes),
     path('class_ebook/book_list', class_book_list, name='class_book_list'),
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
