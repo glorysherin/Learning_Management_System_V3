@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <div></div>
-    <h1>Get Example Code</h1>
+    <div style="margin: 0 auto; margin-top: 30px; width: 600px; background-color: white;padding: 20px; ">
+    <h1 style="text-align: center;">Get Example Code</h1>
     <form method="post">
         {% csrf_token %}
         <label for="question">Enter a question:</label><br>
@@ -49,6 +49,7 @@
     {% if error %}
     <p style="color: red;">{{ error }}</p>
     {% endif %}
+    </div>
 </body>
 
 </html>
