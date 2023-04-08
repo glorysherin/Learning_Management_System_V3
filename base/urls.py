@@ -69,7 +69,7 @@ alternative_url = [path('student/video_meeting', meeting),
                         student_notes_list, name='student_notes_list'),
                    path('student/note/std/notes_list',
                         student_notes_list, name='student_notes_list'),
-                   path('student/toolHome', toolHome),
+                   path('student/toolHome', toolHome, name='toolHome'),
                    path('student/logout', LogoutView.as_view)
 
                    ]

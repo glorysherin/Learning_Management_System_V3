@@ -30,7 +30,7 @@ from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gf
 
 
 def toolHome(request):
-    return render(request, "tools/ToolHome.html")
+    return render(request, "tools/ToolHome.html", student_detials(request, 'Tools-Home'))
 
 
 def Code_scriping(request):
