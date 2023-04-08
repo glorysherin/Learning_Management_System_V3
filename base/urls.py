@@ -70,26 +70,26 @@ alternative_url = [path('student/video_meeting', video_meeting),
                    ]
 
 common_tool = [
-    path('Common_Common_tool', Common_tool),
-    path('Common_toolHome', toolHome),
-    path('Common_trans', translate_),
-    path('Common_convert_text', convert_text),
-    path('Common_wikipedia_summary', wikipedia_summary),
-    path('Common_convert_docx_to_pdf', convert_docx_to_pdf),
-    path('Common_convert_pdf_to_docx', convert_pdf_to_docx),
-    path('Common_convert_pdf_to_excel', convert_pdf_to_excel),
-    path('Common_convert_excel_to_pdf', convert_excel_to_pdf),
-    path('Common_convert_jpg_to_pdf', convert_jpg_to_pdf),
-    path('Common_convert_jpg_to_word', convert_jpg_to_word),
-    path('Common_calculator', calculator),
-    path('Common_cgpa_calculator', cgpa_calculator),
-    path('Common_handwriting_converter', handwriting_converter),
-    path('Common_keyword_to_image', keyword_to_image),
-    path('Common_video_meeting', video_meeting),
+    path('Common_Common_tool', Common_Common_tool),
+    path('Common_toolHome', Common_toolHome),
+    path('Common_trans', Common_translate_),
+    path('Common_convert_text', Common_convert_text),
+    path('Common_wikipedia_summary', Common_wikipedia_summary),
+    path('Common_convert_docx_to_pdf', Common_convert_docx_to_pdf),
+    path('Common_convert_pdf_to_docx', Common_convert_pdf_to_docx),
+    path('Common_convert_pdf_to_excel', Common_convert_pdf_to_excel),
+    path('Common_convert_excel_to_pdf', Common_convert_excel_to_pdf),
+    path('Common_convert_jpg_to_pdf', Common_convert_jpg_to_pdf),
+    path('Common_convert_jpg_to_word', Common_convert_jpg_to_word),
+    path('Common_calculator', Common_calculator),
+    path('Common_cgpa_calculator', Common_cgpa_calculator),
+    path('Common_handwriting_converter', Common_handwriting_converter),
+    path('Common_keyword_to_image', Common_keyword_to_image),
+    path('Common_video_meeting', Common_video_meeting),
 
-    path('Common_gpa_calculator', gpa_calculator),
-    path('Common_get_subject', get_subject),
-    path('Common_Code_scriping', Code_scriping),
+    path('Common_gpa_calculator', Common_gpa_calculator),
+    path('Common_get_subject', Common_get_subject),
+    path('Common_Code_scriping', Common_Code_scriping),
 ]
 
 common = [
@@ -281,7 +281,10 @@ exam = [
 blog_url = [
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
+<<<<<<< HEAD
 
+=======
+>>>>>>> 744dead46131d6976bc3067f5269f44019c5d7cf
     path('list_edit_blog', list_edit_blog),
     path('view_blog/<str:pk>', view_blog),
     path('edit_blog/<str:pk>', edit_blog),
@@ -314,6 +317,7 @@ note = [
     path('ebook/<int:pk>/delete/', ebook_delete, name='ebook_delete'),
 
     path('note/notes_list', notes_list, name='notes_list'),
+    path('note/listout_notes', listout_notes, name='listout_notes'),
     path('note/<int:note_id>/', note_detail, name='note_detail'),
     path('note/create/', create_note, name='create_note'),
     path('note/<int:note_id>/update/', update_note, name='update_note'),
