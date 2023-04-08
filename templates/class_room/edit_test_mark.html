@@ -1,0 +1,71 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="num_rows" value="{{ comp|length }}">
+    <h6>the old selected subject is : {{ comp.0.1.subject }} you should set the subject manaluy for security purpos</h6>
+    <table>
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Roll No</th>
+                <th>Subject</th>
+                <th>Mark</th>
+                <th>Assement_No</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in comp %}
+            <tr>
+                <input type="text" name="test_id_{{ i.0 }}" value="{{ i.1.id }}" readonly>
+                <td><input type="text" name="class_id_{{ i.0 }}" value="{{ class_id }}" readonly></td>
+                <td><input type="text" name="roll_no_{{ i.0 }}" value="{{ i.1.roll_no }}" readonly></td>
+                <td>
+                    <select name="subject_{{ i.0 }}" id="subject_{{ i.0 }}" onchange="replicateValues('{{i.0}}')">
+                        {% for subject in subjects %}
+                        <option value="{{ subject }}" {% if subject == i.1.subject %} selected {% endif %}>{{ subject }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td><input type="number" name="mark_{{ i.0 }}" id="mark_{{ i.0 }}" value="{{ i.1.mark }}" min="0"
+                        max="100" required></td>
+                <td><input type="number" name="ass_no_{{ i.0 }}" id="ass_no_{{ i.0 }}" value="{{ i.1.assesment_no }}"
+                        onchange="replicateValues('{{i.0}}')" required></td>
+                <td><input type="date" name="date_{{ i.0 }}" id="date_{{ i.0 }}" value="{{ i.1.Date }}"
+                        onchange="replicateDateValues('{{i.0}}')" required></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    // Get the date string
+    const dateString = "{{ comp.0.1.Date }}";
+    // replicateDateValues('0')
+    // Convert the string to a date object
+    const date = new Date(dateString);
+
+    // Format the date as a string in the format yyyy-mm-dd
+    const formattedDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+    // Set the default value of the date input field to the formatted date string
+    for (let i = 0; i < {{ comp| length }}; i++) {
+        document.getElementById("date_" + i).defaultValue = formattedDate;
+    }
+    function replicateValues(rowNumber) {
+        var subject = document.getElementById("subject_" + rowNumber).value;
+        {% for i in comp %}
+        document.getElementById("subject_{{ i.0 }}").value = subject;
+        document.getElementById("ass_no_{{ i.0 }}").value = document.getElementById("ass_no_" + rowNumber).value;
+        {% endfor %}
+    }
+
+    function replicateDateValues(rowNumber) {
+        var date = document.getElementById("date_" + rowNumber).value;
+        {% for i in comp %}
+        document.getElementById("date_{{ i.0 }}").value = date;
+        {% endfor %}
+    }
+</script>

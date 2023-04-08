@@ -97,7 +97,8 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                        <div id="val{{i.0}}">{{ i.1.user_name }}~~{{ i.1.class_id }}~~{{ i.1.roll_no }}</div>
+                                        <div id="val{{i.0}}">{{ i.1.user_name }}~~{{ i.1.class_id }}~~{{ i.1.roll_no }}
+                                        </div>
                                         <select name="cars" id="cars{{ i.0 }}" name="{{ i.1.user_name }}"
                                             value="{{ i.1.subject_states }}">
                                             {% if i.1.subject_states == 'Present' %}
@@ -112,10 +113,10 @@
                                             <option value="Absent">Absent</option>
                                             {% endif %}
 
-                                            {% if i.1.subject_states == 'OverDuty' %}
-                                            <option value="OverDuty" selected>OverDuty</option>
+                                            {% if i.1.subject_states == 'OnDuty' %}
+                                            <option value="OnDuty" selected>OnDuty</option>
                                             {% else %}
-                                            <option value="OverDuty">OverDuty</option>
+                                            <option value="OnDuty">OnDuty</option>
                                             {% endif %}
                                         </select>
                                     </td>

@@ -17,6 +17,7 @@ from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
+from django.urls import reverse
 
 
 # Initilizes........................
@@ -56,22 +57,17 @@ tools = [
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping),
 ]
-alternative_url=[  path('student/video_meeting', video_meeting),
-                path('student/class_room', home_classroom),
-               path('student/chat_lobby', lobby),
-               path('student/list_blog', student_list_blog),
-               path('student/chat_home/', chat_home),
-                   path('student/note/notes_list', notes_list, name='notes_list'),
-                       path('student/toolHome', toolHome),
-                           path('student/logout', LogoutView.as_view)
+alternative_url = [path('student/video_meeting', video_meeting),
+                   path('student/class_room', home_classroom),
+                   path('student/chat_lobby', lobby),
+                   path('student/list_blog', student_list_blog),
+                   path('student/chat_home/', chat_home),
+                   path('student/note/notes_list',
+                        notes_list, name='notes_list'),
+                   path('student/toolHome', toolHome),
+                   path('student/logout', LogoutView.as_view)
 
-
-
-
-               
-
-
-]
+                   ]
 
 common_tool = [
     path('Common_Common_tool', Common_tool),
@@ -116,6 +112,15 @@ admin = [
     path('class_listout/<str:class_id>',
          get_class_peoples, name='class_listout'),
     path('students_list', students_list, name='students_list'),
+    path('class_dates', class_dates, name='class_dates'),
+    path('class_dates/data/<str:class_id>/<str:date>/',
+         export_attendees, name='export_attendees'),
+    path('class_dates/<int:id>/delete_attendee/',
+         delete_attendee, name='delete_attendee'),
+    path('class_dates/<int:id>/edit_attendee/',
+         edit_attendee, name='edit_attendee'),
+    path('class_dates/<str:class_id>/<str:date>/user_details/',
+         user_details, name='user_details'),
 ]
 
 
@@ -142,6 +147,11 @@ chatroom = [
 
 
 classroom = [
+    path('test_marks/<str:class_id>/', test_marks, name='test_marks'),
+    path('add_test_marks/<str:class_id>',
+         add_test_marks, name='add_test_marks'),
+    path('edit_test_marks/<str:class_id>/<str:sub>/<int:ass_no>',
+         edit_test_marks, name='edit_test_marks'),
     path('class_room', home_classroom),
     path('message/<str:room>/', chatgetMessages, name="message"),
     path('classroom/<str:pk>/<str:class_id>', nave_home_classroom),
@@ -160,6 +170,7 @@ classroom = [
     path("edit_mark_home", edit_mark_home),
     path("edit_mark", edit_mark),
     path("update_edited_mark", update_edited_mark),
+    path("marks_by_class/<str:class_id>", marks_by_class),
     path("add_class_notes/<str:pk>", add_class_notes),
     path('class_ebook/book_list', class_book_list, name='class_book_list'),
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
@@ -268,8 +279,13 @@ exam = [
 
 
 blog_url = [
+<<<<<<< HEAD
+    path('list_blog', student_list_blog, name='student_list_blog'),
+    path('list_blog', teacher_list_blog, name='teacher_list_blog'),
+=======
     path('list_blog', student_list_blog,name='student_list_blog'),
     path('list_blog', teacher_list_blog,name='teacher_list_blog'),
+>>>>>>> 102b0004052cb834a55347fa5714c19fb91c469e
     path('list_edit_blog', list_edit_blog),
     path('view_blog/<str:pk>', view_blog),
     path('edit_blog/<str:pk>', edit_blog),
@@ -325,13 +341,13 @@ dynamicFunctionality = [
 ]
 
 AternativeUrls = [
-     path('class_listout/<str:class_id>',
+    path('class_listout/<str:class_id>',
          get_class_peoples, name='class_listout'),
 ]
 
 
 urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality,alternative_url]))
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

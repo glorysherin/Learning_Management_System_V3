@@ -1,0 +1,16 @@
+<h1>Marks for Class {{ class_id }}</h1>
+<ul>
+    {% for user, subjects in class_data.items %}
+    <li>{{ user }}</li>
+    <ul>
+        {% for subject, marks in subjects.items %}
+        <li>{{ subject }}</li>
+        <ul>
+            {% for mark in marks %}
+            <li>{{ mark.mark }} ({{ mark.Date }})</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</ul>

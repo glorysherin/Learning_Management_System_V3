@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
-from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student
+from django.shortcuts import render, redirect, get_object_or_404
+from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees
 from django.contrib.auth.models import User
+from django.http import HttpResponse
+import xlwt
 
 
 def add_faculty(request):
@@ -100,3 +102,71 @@ def get_class_peoples(request, class_id):
             pass
     print(peoples)
     return render(request, 'admin_actions/list_users.html', {"people": peoples})
+
+
+def class_dates(request):
+    class_ids = Attendees.objects.values('class_id').distinct()
+    class_dates = {}
+    for class_id in class_ids:
+        dates = Attendees.objects.filter(
+            class_id=class_id['class_id']).dates('Date', 'day')
+        class_dates[class_id['class_id']] = dates
+    context = {'class_dates': class_dates}
+    return render(request, 'admin_actions/class_dates.html', context)
+
+
+def user_details(request, class_id, date):
+    attendees = Attendees.objects.filter(class_id=class_id, Date=date)
+    context = {'attendees': attendees}
+    return render(request, 'admin_actions/user_details.html', context)
+
+
+def delete_attendee(request, id):
+    attendee = Attendees.objects.get(pk=id)
+    attendee.delete()
+    return redirect('class_dates')
+
+
+def edit_attendee(request, id):
+    attendee = get_object_or_404(Attendees, id=id)
+
+    if request.method == 'POST':
+        class_id = request.POST.get('class_id')
+        user_name = request.POST.get('username')
+        roll_no = request.POST.get('rollno')
+        subject_states = request.POST.get('status')
+
+        # attendee.class_id = class_id
+        attendee.user_name = user_name
+        attendee.roll_no = roll_no
+        attendee.subject_states = subject_states
+
+        attendee.save()
+
+        return redirect('class_dates')
+
+    context = {'attendee': attendee}
+    return render(request, 'admin_actions/edit_attendes.html', context)
+
+
+def export_attendees(request, class_id, date, date_):
+    attendees = Attendees.objects.filter(class_id=class_id, Date=date)
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = f'attachment; filename={class_id}_{date}.xls'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Attendees')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+    columns = ['ID', 'Class ID', 'User Name',
+               'Roll No', 'Subject Status', 'Date']
+    for col_num, column_title in enumerate(columns):
+        ws.write(row_num, col_num, column_title, font_style)
+    rows = attendees.values_list(
+        'id', 'class_id', 'user_name', 'roll_no', 'subject_states', 'Date')
+    for row in rows:
+        row_num += 1
+        for col_num, cell_value in enumerate(row):
+            ws.write(row_num, col_num, str(cell_value), font_style)
+    wb.save(response)
+    return response

@@ -295,6 +295,19 @@ class Sec_Daily_test_mark(models.Model):
         return self.class_id
 
 
+class Internal_test_mark(models.Model):
+    id = models.IntegerField(primary_key=True)
+    class_id = models.CharField(max_length=100)
+    roll_no = models.CharField(max_length=100)
+    subject = models.CharField(max_length=50)
+    mark = models.IntegerField()
+    assesment_no = models.IntegerField()
+    Date = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return self.class_id
+
+
 class Daily_test_mark(models.Model):
     id = models.IntegerField(primary_key=True)
     class_id = models.CharField(max_length=100)
