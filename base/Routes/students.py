@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from base import models as QMODEL
-
+from django.contrib.auth.models import User
 # for showing signup/login button for student
 
 # views.py
@@ -96,11 +96,18 @@ def is_student(user):
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
 def student_dashboard_view(request):
+
+    usr_id = request.user.id
+    usr_obj = User.objects.get(id=usr_id)
+    std_data = Student.objects.get(user=usr_obj)
     dict = {
 
         'total_course': QMODEL.Course.objects.all().count(),
         'total_question': QMODEL.Question.objects.all().count(),
+        'usr': std_data,
+        'page': 'Dashboard'
     }
+
     return render(request, 'student/student_dashboard.html', context=dict)
 
 
