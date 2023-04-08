@@ -50,7 +50,7 @@ tools = [
     path('cgpa_calculator', cgpa_calculator),
     path('handwriting_converter', handwriting_converter),
     path('keyword_to_image', keyword_to_image),
-    path('video_meeting', video_meeting),
+    path('video_meeting', video_meeting, name='video_meeting'),
 
     path('gpa_calculator', gpa_calculator),
     path('get_subject', get_subject),
@@ -63,6 +63,10 @@ alternative_url = [path('student/video_meeting', video_meeting),
                    path('student/chat_home/', chat_home),
                    path('student/note/notes_list',
                         notes_list, name='notes_list'),
+                   path('student/note/std/notes_list',
+                        student_notes_list, name='student_notes_list'),
+                   path('student/note/std/notes_list',
+                        student_notes_list, name='student_notes_list'),
                    path('student/toolHome', toolHome),
                    path('student/logout', LogoutView.as_view)
 

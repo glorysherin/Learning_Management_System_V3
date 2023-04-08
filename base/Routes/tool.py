@@ -24,6 +24,7 @@ import tempfile
 from docx import Document
 from docx.shared import Inches
 from .Tool.Code_scriping_Tool import get_image_url
+from .Tool.Tools import student_detials
 
 from django.shortcuts import render
 from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gfg, get_answer_from_given_link
@@ -31,7 +32,6 @@ from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gf
 
 def toolHome(request):
     return render(request, "tools/ToolHome.html")
-
 
 
 def Code_scriping(request):
@@ -423,7 +423,7 @@ def keyword_to_image(request):
 
 
 def video_meeting(request):
-    return render(request, 'tools/video_meeting.html')
+    return render(request, 'tools/video_meeting.html', student_detials(request, 'Meeting'))
 
 
 def Common_tool(request):

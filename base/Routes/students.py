@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from base import models as QMODEL
 from django.contrib.auth.models import User
 # for showing signup/login button for student
+from .Tool.Tools import student_detials
 
 # views.py
 
@@ -24,7 +25,15 @@ def students_list(request):
 
 def student_profile(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
-    return render(request, 'student/student_profile.html', {'student': student})
+    usr_id = request.user.id
+    usr_obj = User.objects.get(id=usr_id)
+    std_data = Student.objects.get(user=usr_obj)
+    dict = {
+        'usr': std_data,
+        'page': 'Student Profile',
+        'student': student
+    }
+    return render(request, 'student/student_profile.html', dict)
 
 
 def student_delete(request, student_id):
@@ -115,7 +124,7 @@ def student_dashboard_view(request):
 @user_passes_test(is_student)
 def student_exam_view(request):
     courses = QMODEL.Course.objects.all()
-    return render(request, 'student/student_exam.html', {'courses': courses})
+    return render(request, 'student/student_exam.html', student_detials(request, 'Examination', {'courses': courses}))
 
 
 @login_required(login_url='studentlogin')
@@ -190,4 +199,4 @@ def check_marks_view(request, pk):
 @user_passes_test(is_student)
 def student_marks_view(request):
     courses = QMODEL.Course.objects.all()
-    return render(request, 'student/student_marks.html', {'courses': courses})
+    return render(request, 'student/student_marks.html', student_detials(request, 'My Marks', {'courses': courses}))

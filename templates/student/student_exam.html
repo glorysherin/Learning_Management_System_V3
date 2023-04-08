@@ -7,48 +7,34 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Include Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Custom CSS -->
-  <style>
-    .card-header {
-      background-color: #007bff;
-      color: #fff;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 0;
-    }
-
-    .table {
-      margin-bottom: 0;
-    }
-  </style>
-</head>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
 <body>
 
   <div class="container mt-4">
-    <div class="card">
-      <div class="card-header">
-        <h6 class="card-title mb-0">Available Courses</h6>
+    <div class="card bg-white shadow-lg">
+      <div class="card-header bg-gray-100">
+        <h6 class="card-title text-gray-700 mb-0 text-lg">Available Courses</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-hover table-bordered" id="dev-table">
             <thead>
               <tr>
-                <th>Exam Name</th>
-                <th>Action</th>
+                <th class="px-4 py-2 text-gray-600">Exam Name</th>
+                <th class="px-4 py-2 text-gray-600">Action</th>
               </tr>
             </thead>
             <tbody>
               {% for t in courses %}
               <tr>
-                <td>{{ t.course_name }}</td>
-                <td><a class="btn btn-success btn-sm" href="{% url 'take-exam' t.id %}"><span
-                      class="glyphicon glyphicon-check"></span> Attend Exam</a></td>
+                <td class="border px-4 py-2">{{ t.course_name }}</td>
+                <td class="border px-4 py-2">
+                  <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    href="{% url 'take-exam' t.id %}">
+                    <span class="glyphicon glyphicon-check"></span> Attend Exam
+                  </a>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
@@ -57,6 +43,7 @@
       </div>
     </div>
   </div>
+
 
 </body>
 
