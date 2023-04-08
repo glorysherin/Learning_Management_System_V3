@@ -7,6 +7,11 @@ def notes_list(request):
     return render(request, 'commonNotes/notes_list.html', {'notes': notes})
 
 
+def common_notes_list(request):
+    notes = Note.objects.all()
+    return render(request, 'commonNotes/Common_notes.html', {'notes': notes})
+
+
 def note_detail(request, note_id):
     note = get_object_or_404(Note, id=note_id)
     return render(request, 'commonNotes/note_detail.html', {'note': note})
