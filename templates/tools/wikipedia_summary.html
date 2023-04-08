@@ -1,69 +1,79 @@
-{% extends 'Common_Page_Tools/Common_base.html' %}
+{% extends 'student/studentbase.html' %}
 {% block content %}
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Wikipedia Summary</title>
 </head>
 <style>
 	#card {
-		
-width: 400px;
-height: 400px;
-background-color: #e1ebe4;
-border-radius: 10px;
-box-shadow: 0 0 20px rgba(14, 13, 13, 0.2);
-padding: 10px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
 
-}
-#card1{
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 10px;
+		width: 400px;
+		height: 400px;
+		background-color: #e1ebe4;
+		border-radius: 10px;
+		box-shadow: 0 0 20px rgba(14, 13, 13, 0.2);
+		padding: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 
-}
+	}
 
-h2 {
-font-size: 24px;
-margin-bottom: 50px;
-}
+	#card1 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 10px;
 
+	}
 
+	h2 {
+		font-size: 24px;
+		margin-bottom: 50px;
+	}
 </style>
+
 <body>
-	<div  id="card1" class="flex justify-center items-center m-10 flex-col">
+	<div id="card1" class="flex justify-center items-center m-10 flex-col">
 		<div id="card" class="bg-white shadow-md p-8 rounded-lg w-full sm:w-96">
 			<h2 class="text-2xl font-semibold mb-4">Wikipedia to Summary</h2>
 			<form method="post">
 				{% csrf_token %}
 				<label class="text-lg" for="keyword">Enter a keyword:</label>
-				<input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500" type="text" name="keyword" id="keyword">
+				<input
+					class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+					type="text" name="keyword" id="keyword">
 				<label class="text-lg mt-2" for="sentence">Sentence Count :</label>
-				<input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500" type="number" name="sentence" id="sentence">
+				<input
+					class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+					type="number" name="sentence" id="sentence">
 				<div class="flex mt-4">
-					<button style="border-radius: 13px;"class="flex-1 mr-2 bg-blue-500 hover:bg-blue-600 text-black  rounded-md" type="submit" name="action" value="view">View Summary</button>
+					<button style="border-radius: 13px;"
+						class="flex-1 mr-2 bg-blue-500 hover:bg-blue-600 text-black  rounded-md" type="submit"
+						name="action" value="view">View Summary</button>
 					<br>
 					<br>
-					<button style="border-radius: 13px;" class="flex-1 ml-2 bg-blue-500 hover:bg-blue-600 text-black rounded-md" type="submit" name="action" value="download">Download Summary</button>
+					<button style="border-radius: 13px;"
+						class="flex-1 ml-2 bg-blue-500 hover:bg-blue-600 text-black rounded-md" type="submit"
+						name="action" value="download">Download Summary</button>
 				</div>
 			</form>
 		</div>
 		<p class="mt-4">
 			{% if summary %}
-			<h1 class="text-2xl font-semibold mb-2">Summary :</h1>
-			<summary>
-				{{ summary }}
-			</summary>
-			{% endif %}
+		<h1 class="text-2xl font-semibold mb-2">Summary :</h1>
+		<summary>
+			{{ summary }}
+		</summary>
+		{% endif %}
 		</p>
 	</div>
-	
+
 </body>
+
 </html>
 
 {% endblock content %}

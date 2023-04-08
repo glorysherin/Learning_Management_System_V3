@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .Tool.blogTool import get_images
+from .Tool.Tools import student_detials
 
 
 def student_home(request):
@@ -97,18 +98,18 @@ def deleteMember(request):
 
 
 def chat_home(request):
-    return render(request, 'chat_room/home.html')
+    return render(request, 'chat_room/home.html', student_detials(request, 'Chat Home'))
 
 
 def chat_room(request, room):
     username = request.GET.get('username')  # henry
     room_details = Room.objects.get(name=room)
-    return render(request, 'chat_room/room.html', {
+    return render(request, 'chat_room/room.html', student_detials(request, 'Chat - '+str(room), {
 
         'username': username,
         'room': room,
         'room_details': room_details,
-    })
+    }))
 
 
 def checkview(request):

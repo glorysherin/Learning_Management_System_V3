@@ -1,6 +1,6 @@
 import pywhatkit as kit
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from googletrans import Translator, LANGUAGES
 from django.http import HttpResponse
 from gtts import gTTS
@@ -26,7 +26,6 @@ from docx.shared import Inches
 from .Tool.Code_scriping_Tool import get_image_url
 from .Tool.Tools import student_detials
 
-from django.shortcuts import render
 from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gfg, get_answer_from_given_link
 
 
@@ -422,8 +421,32 @@ def keyword_to_image(request):
 # views.py
 
 
-def video_meeting(request):
-    return render(request, 'tools/video_meeting.html', student_detials(request, 'Meeting'))
+def join_meeting(request):
+    if request.method == 'POST':
+        room_id = request.POST.get('room_id')
+        return redirect('video_meeting', room_id=room_id)
+    return render(request, 'tools/join_meeting.html', student_detials(request, 'Join Meeting', {}))
+
+
+def meeting(request, room_id):
+    context = {
+        'room_id': room_id,
+    }
+    return render(request, 'tools/video_meeting.html', student_detials(request, 'Meeting', context))
+
+
+def common_join_meeting(request):
+    if request.method == 'POST':
+        room_id = request.POST.get('room_id')
+        return redirect('common_meeting', room_id=room_id)
+    return render(request, 'student/meeting.html', student_detials(request, 'Join Meeting', {}))
+
+
+def common_meeting(request, room_id):
+    context = {
+        'room_id': room_id,
+    }
+    return render(request, 'tools/video_meeting.html', context)
 
 
 def Common_tool(request):

@@ -1,15 +1,17 @@
-{% extends 'Common_Page_Tools/Common_base.html' %}
+{% extends 'student/studentbase.html' %}
 
 {% block Componet %}
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>GPA Calculator</title>
 </head>
+
 <body>
 	<h1>GPA Calculator</h1>
 	<form method="post" action="gpa_calculator">
-        {{ num_courses }}
+		{{ num_courses }}
 		{% csrf_token %}
 		<table>
 			<tr>
@@ -47,6 +49,7 @@
 	<p>Your GPA is {{ gpa }}</p>
 	{% endif %}
 </body>
+
 </html>
 
 {% endblock %}

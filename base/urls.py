@@ -51,13 +51,14 @@ tools = [
     path('cgpa_calculator', cgpa_calculator),
     path('handwriting_converter', handwriting_converter),
     path('keyword_to_image', keyword_to_image),
-    path('video_meeting', video_meeting, name='video_meeting'),
+    path('video_meeting/<str:room_id>', meeting, name='video_meeting'),
+    path('join_meeting', join_meeting, name='join_meeting'),
 
     path('gpa_calculator', gpa_calculator),
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping),
 ]
-alternative_url = [path('student/video_meeting', video_meeting),
+alternative_url = [path('student/video_meeting', meeting),
                    path('student/class_room', home_classroom),
                    path('student/chat_lobby', lobby),
                    path('student/list_blog', student_list_blog),
@@ -283,13 +284,14 @@ exam = [
 
 
 blog_url = [
-
+    path('student_list_blog_course',
+         student_list_blog_course, name='student_list_blog_course'),
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
     path('list_edit_blog', list_edit_blog),
-    path('view_blog/<str:pk>', view_blog),
+    path('view_blog/<str:pk>', view_blog, name='view_blog'),
     path('edit_blog/<str:pk>', edit_blog),
-    path('create_blog', blog_edit),
+    path('create_blog', blog_edit, name='create_blog'),
     path('save_blog', save_blog),
     path('delete_blog', delete_blog),
     path('edit_blog/save_edit_blog/<int:pk>', save_edit_blog),
