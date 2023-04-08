@@ -17,6 +17,7 @@ from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
+from .Routes.staff_tools import *
 
 
 # Initilizes........................
@@ -346,6 +347,29 @@ AternativeUrls = [
          get_class_peoples, name='class_listout'),
 ]
 
+
+common_tool = [
+    path('Staff_Staff_tool', Staff_Staff_tool),
+    path('Staff_toolHome', Staff_toolHome),
+    path('Staff_trans', Staff_translate_),
+    path('Staff_convert_text', Staff_convert_text),
+    path('Staff_wikipedia_summary', Staff_wikipedia_summary),
+    path('Staff_convert_docx_to_pdf', Staff_convert_docx_to_pdf),
+    path('Staff_convert_pdf_to_docx', Staff_convert_pdf_to_docx),
+    path('Staff_convert_pdf_to_excel', Staff_convert_pdf_to_excel),
+    path('Staff_convert_excel_to_pdf', Staff_convert_excel_to_pdf),
+    path('Staff_convert_jpg_to_pdf', Staff_convert_jpg_to_pdf),
+    path('Staff_convert_jpg_to_word', Staff_convert_jpg_to_word),
+    path('Staff_calculator', Staff_calculator),
+    path('Staff_cgpa_calculator', Staff_cgpa_calculator),
+    path('Staff_handwriting_converter', Staff_handwriting_converter),
+    path('Staff_keyword_to_image', Staff_keyword_to_image),
+    path('Staff_video_meeting', Staff_video_meeting),
+
+    path('Staff_gpa_calculator', Staff_gpa_calculator),
+    path('Staff_get_subject', Staff_get_subject),
+    path('Staff_Code_scriping', Staff_Code_scriping),
+]
 
 urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url]))
