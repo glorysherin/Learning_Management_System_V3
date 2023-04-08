@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Export Attendees</h1>
+<form action="{% url 'export_attendees' class_id=date.class_id date=date.Date %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Export to Excel">
+</form>
+{% endblock %}

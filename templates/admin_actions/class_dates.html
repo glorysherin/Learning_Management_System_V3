@@ -1,0 +1,6 @@
+{% for class_id, dates in class_dates.items %}
+<h2>{{ class_id }}</h2>
+{% for date in dates %}
+<a href="{% url 'user_details' class_id=class_id date=date %}">{{ date }}</a>
+{% endfor %}
+{% endfor %}
