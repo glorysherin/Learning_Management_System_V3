@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from agora_token_builder import RtcTokenBuilder
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from ..models import Faculty_details, Users, Room, Message, RoomMember, Gallery
+from ..models import Faculty_details, Users, Room, Message, RoomMember, Gallery, Student
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -16,10 +16,10 @@ from .Tool.blogTool import get_images
 def student_home(request):
     usr_id = request.user.id
     usr_obj = User.objects.get(id=usr_id)
-    name = Users.objects.get(user_name=usr_obj.username)
-    # faculty_details = Faculty_details.objects.get(user_name=name.user_name)
-    faculty_details = ""
-    return render(request, "home/index.html", {'user_name': usr_obj.username, 'detials': faculty_details})
+    std_data = Student.objects.get(user=usr_obj)
+    usr = Users.objects.get(user_name=usr_obj.username)
+    print(std_data)
+    return render(request, "home/index.html", {'user_name': usr_obj.username, 'detials': std_data, 'User': usr, 'std': std_data})
 
 
 @login_required()
