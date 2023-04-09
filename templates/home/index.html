@@ -73,7 +73,7 @@ https://templatemo.com/tm-565-onix-digital
               <li class="scroll-to-section">
                 <div class="main-red-button-hover">
                   <a style="padding-left: 30 px; margin-bottom: 30px; padding-top: 3px;color: aliceblue;"
-                    href="class_room ">Workspace</a>
+                    href="{% url 'student-dashboard' %} ">Workspace</a>
                 </div>
               </li>
               <li class="scroll-to-section">
@@ -296,7 +296,7 @@ https://templatemo.com/tm-565-onix-digital
                     <div class="icon">
                       <img src="{%  static 'home/assets//images/service-icon-01.png' %}" alt="" />
                     </div>
-                    <div class="count-digit">320</div>
+                    <div class="count-digit">{{ total_teacher }}</div>
                     <div class="count-title">Staff</div>
                     <p> Publish class schedules. Communicate with students and parents. Share news and announcements.
                     </p>
@@ -309,7 +309,7 @@ https://templatemo.com/tm-565-onix-digital
                     <div class="icon">
                       <img src="{%  static 'home/assets//images/service-icon-02.png' %}" alt="" />
                     </div>
-                    <div class="count-digit">640</div>
+                    <div class="count-digit">{{ total_student }}</div>
                     <div class="count-title">Student</div>
                     <p>Empowering students with the tools, resources, and support to thrive academically, personally,
                       and professionally .</p>
@@ -322,7 +322,7 @@ https://templatemo.com/tm-565-onix-digital
                     <div class="icon">
                       <img src="{%  static 'home/assets//images/service-icon-03.png' %}" alt="" />
                     </div>
-                    <div class="count-digit">120</div>
+                    <div class="count-digit">{{ total_course }}</div>
                     <div class="count-title">Course</div>
                     <p>Enroll in our dynamic course and embark on a transformative learning journey, acquiring valuable
                       skills and knowledge to fuel your success.</p>
@@ -365,7 +365,7 @@ https://templatemo.com/tm-565-onix-digital
             </div>
             <p><b>Find the best solution for your questions. </b></p>
             <div class="main-blue-button-hover">
-              <a href="note/notes_list">View Notes</a>
+              <a href="{% url 'student_notes_list' %}">View Notes</a>
             </div>
           </div>
         </div>
@@ -381,7 +381,7 @@ https://templatemo.com/tm-565-onix-digital
               </b>
             </p>
             <div class="main-blue-button-hover">
-              <a href="video_meeting">Let's Connect</a>
+              <a href="{% url 'join_meeting' %}">Let's Connect</a>
             </div>
           </div>
         </div>

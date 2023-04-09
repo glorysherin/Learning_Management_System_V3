@@ -1,0 +1,66 @@
+{% extends 'Common_Page_Tools/Common_base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #card {
+		
+  width: 400px;
+  height: 250px;
+  background-color: #e1ebe4;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(14, 13, 13, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  
+}
+#card1{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px;
+	
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+
+/* input[type="text"] {
+  width: 80%;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 18px;
+} */
+
+    </style>
+</head>
+<body>
+	<div class="flex justify-center items-center h-screen">
+    <div style="margin: 0 auto;margin-top: 30px;" id="card" class="bg-white shadow-md p-8 rounded-lg w-full sm:w-96">
+        <h2 class="text-2xl font-semibold mb-4">Convert PDF to Excel</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="text-lg" for="pdf_file">Select a PDF file to convert:</label>
+            <input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500" type="file" name="pdf_file" required>
+            <button style="border: 0.5px;padding: 8px;border-radius: 13px;" class="mt-4 bg-blue-500 hover:bg-blue-600 text-black   rounded-md" type="submit">Convert to Excel</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock content %}

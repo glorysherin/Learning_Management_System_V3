@@ -1,9 +1,15 @@
+{% extends 'student/studentbase.html' %}
+
+{% block Componet %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Generate Code</title>
 </head>
+
 <body>
     <form method="post">
         {% csrf_token %}
@@ -13,8 +19,10 @@
     </form>
 
     {% if answer %}
-        <br><br>
-        <pre>{{ answer }}</pre>
+    <br><br>
+    <pre>{{ answer }}</pre>
     {% endif %}
 </body>
+
 </html>
+{% endblock %}

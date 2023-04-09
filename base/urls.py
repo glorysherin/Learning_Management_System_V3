@@ -17,6 +17,7 @@ from .Routes.home import *
 from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
+from .Routes.staff_tools import *
 
 
 # Initilizes........................
@@ -50,24 +51,25 @@ tools = [
     path('cgpa_calculator', cgpa_calculator),
     path('handwriting_converter', handwriting_converter),
     path('keyword_to_image', keyword_to_image),
-    path('video_meeting', video_meeting, name='video_meeting'),
+    path('video_meeting/<str:room_id>', meeting, name='video_meeting'),
+    path('join_meeting', join_meeting, name='join_meeting'),
 
     path('gpa_calculator', gpa_calculator),
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping),
 ]
-alternative_url = [path('student/video_meeting', video_meeting),
+alternative_url = [path('student/video_meeting', meeting),
                    path('student/class_room', home_classroom),
                    path('student/chat_lobby', lobby),
                    path('student/list_blog', student_list_blog),
-                   path('student/chat_home/', chat_home),
+                   path('student/chat_home/', chat_home, name='chat_home'),
                    path('student/note/notes_list',
                         notes_list, name='notes_list'),
                    path('student/note/std/notes_list',
                         student_notes_list, name='student_notes_list'),
                    path('student/note/std/notes_list',
                         student_notes_list, name='student_notes_list'),
-                   path('student/toolHome', toolHome),
+                   path('student/toolHome', toolHome, name='toolHome'),
                    path('student/logout', LogoutView.as_view)
 
                    ]
@@ -282,13 +284,14 @@ exam = [
 
 
 blog_url = [
-
+    path('student_list_blog_course',
+         student_list_blog_course, name='student_list_blog_course'),
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
     path('list_edit_blog', list_edit_blog),
-    path('view_blog/<str:pk>', view_blog),
+    path('view_blog/<str:pk>', view_blog, name='view_blog'),
     path('edit_blog/<str:pk>', edit_blog),
-    path('create_blog', blog_edit),
+    path('create_blog', blog_edit, name='create_blog'),
     path('save_blog', save_blog),
     path('delete_blog', delete_blog),
     path('edit_blog/save_edit_blog/<int:pk>', save_edit_blog),
@@ -346,6 +349,29 @@ AternativeUrls = [
          get_class_peoples, name='class_listout'),
 ]
 
+
+common_tool = [
+    path('Staff_Staff_tool', Staff_Staff_tool),
+    path('Staff_toolHome', Staff_toolHome),
+    path('Staff_trans', Staff_translate_),
+    path('Staff_convert_text', Staff_convert_text),
+    path('Staff_wikipedia_summary', Staff_wikipedia_summary),
+    path('Staff_convert_docx_to_pdf', Staff_convert_docx_to_pdf),
+    path('Staff_convert_pdf_to_docx', Staff_convert_pdf_to_docx),
+    path('Staff_convert_pdf_to_excel', Staff_convert_pdf_to_excel),
+    path('Staff_convert_excel_to_pdf', Staff_convert_excel_to_pdf),
+    path('Staff_convert_jpg_to_pdf', Staff_convert_jpg_to_pdf),
+    path('Staff_convert_jpg_to_word', Staff_convert_jpg_to_word),
+    path('Staff_calculator', Staff_calculator),
+    path('Staff_cgpa_calculator', Staff_cgpa_calculator),
+    path('Staff_handwriting_converter', Staff_handwriting_converter),
+    path('Staff_keyword_to_image', Staff_keyword_to_image),
+    path('Staff_video_meeting', Staff_video_meeting),
+
+    path('Staff_gpa_calculator', Staff_gpa_calculator),
+    path('Staff_get_subject', Staff_get_subject),
+    path('Staff_Code_scriping', Staff_Code_scriping),
+]
 
 urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url]))
