@@ -1,17 +1,30 @@
 {% extends 'student/studentbase.html' %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-sm-12 mx-auto">
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="room_id">Enter Room ID:</label>
-                    <input type="text" name="room_id" id="room_id" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Join Meeting</button>
-            </form>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href=
+    "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+              rel="stylesheet">
+</head>
+<body>
+    <div style="margin: 50px;" class="bg-white rounded-lg shadow-lg p-6 w-full lg:w-3/4 mx-auto">
+        <form method="post">
+            {% csrf_token %}
+            <div  class="form-group">
+                <label for="room_id" class="block text-gray-700 font-bold mb-2">Enter Room ID:</label>
+                <input type="text" name="room_id" id="room_id" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">Join Meeting</button>
+        </form>
     </div>
-</div>
+    
+</body>
+</html>
+
+
 {% endblock %}
