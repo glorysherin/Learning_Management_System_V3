@@ -38,8 +38,14 @@ def staff_home(request):
     usr_obj = User.objects.get(id=usr_id)
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Faculty_details.objects.get(user_name=name.user_name)
-    faculty_details = ""
-    return render(request, "home/staff.html", {'user_name': usr_obj.username, 'detials': faculty_details})
+    context = {
+        'total_student': SMODEL.Student.objects.all().count(),
+        'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
+        'total_course': models.Course.objects.all().count(),
+        'user_name': usr_obj.username, 'detials': faculty_details,
+        'name_s': faculty_details.name.split(' ')
+    }
+    return render(request, "home/staff.html", context)
 
 
 # Video Chat.....

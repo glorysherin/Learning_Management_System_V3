@@ -52,7 +52,9 @@ tools = [
     path('handwriting_converter', handwriting_converter),
     path('keyword_to_image', keyword_to_image),
     path('video_meeting/<str:room_id>', meeting, name='video_meeting'),
+    path('staff_meeting/<str:room_id>', staff_meeting, name='staff_meeting'),
     path('join_meeting', join_meeting, name='join_meeting'),
+    path('staff_join_meeting', staff_join_meeting, name='staff_join_meeting'),
 
     path('gpa_calculator', gpa_calculator),
     path('get_subject', get_subject),
@@ -105,7 +107,7 @@ common = [
     path('contactus', contactus),
     path('services', services),
     path('about', about),
-
+    path('personal_detials', Personal_detials, name='personal_detials'),
 ]
 
 admin = [
@@ -157,7 +159,7 @@ classroom = [
          add_test_marks, name='add_test_marks'),
     path('edit_test_marks/<str:class_id>/<str:sub>/<int:ass_no>',
          edit_test_marks, name='edit_test_marks'),
-    path('class_room', home_classroom),
+    path('class_room', home_classroom, name='class_room'),
     path('message/<str:room>/', chatgetMessages, name="message"),
     path('classroom/<str:pk>/<str:class_id>', nave_home_classroom),
     path('add_class', add_class),
@@ -211,6 +213,10 @@ teacher = [
     path('teacher/teacherclick', teacherclick_view),
     path('teacher/teacherlogin',
          LoginView.as_view(template_name='teacher/teacherlogin.html'), name='teacherlogin'),
+    path('teacher/addstudentlogin',
+         LoginView.as_view(template_name='student/studentadded.html'), name='addstudentlogin'),
+    path('teacher/addstudentsignup', add_student_signup_view,
+         name='add_student_signup_view'),
     path('teacher/teachersignup', teacher_signup_view, name='teachersignup'),
     path('teacher/teacher-dashboard',
          teacher_dashboard_view, name='teacher-dashboard'),

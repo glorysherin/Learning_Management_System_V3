@@ -191,4 +191,4 @@ def Personal_detials(request):
     edit.image = my_uploaded_file
     edit.bio = bio
     edit.save()
-    return render(request, "home/index.html", {'user_name': usr_obj.username, 'detials': faculty_details})
+    return render(request, "home/staff.html", {'user_name': usr_obj.username, 'detials': faculty_details})

@@ -1,0 +1,17 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 mx-auto">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="room_id">Enter Room ID:</label>
+                    <input type="text" name="room_id" id="room_id" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Join Meeting</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
