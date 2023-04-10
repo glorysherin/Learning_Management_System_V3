@@ -145,7 +145,7 @@ def convert_docx_to_pdf(request):
         os.remove(docx_path)
         return response
     else:
-        return render(request, 'tools/convert_docx_to_pdf.html')
+        return render(request, 'tools/convert_docx_to_pdf.html', student_detials(request, 'Docx to Pdf'))
 
 
 def convert_pdf_to_docx(request):

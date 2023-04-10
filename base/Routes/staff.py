@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from base import models as QMODEL
 from base import models as SMODEL
 from .Forms import exam_forms as QFORM
+from .Tool.Tools import student_detials, staff_detials
 
 
 # for showing signup/login button for teacher
@@ -71,13 +72,13 @@ def teacher_dashboard_view(request):
         'total_question': QMODEL.Question.objects.all().count(),
         'total_student': SMODEL.Student.objects.all().count()
     }
-    return render(request, 'teacher/teacher_dashboard.html', context=dict)
+    return render(request, 'teacher/teacher_dashboard.html', staff_detials(request, 'Dashboard', dict))
 
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_exam_view(request):
-    return render(request, 'teacher/teacher_exam.html')
+    return render(request, 'teacher/teacher_exam.html', staff_detials(request, 'Manage Marks'))
 
 
 @login_required(login_url='teacherlogin')
