@@ -144,9 +144,12 @@ videochat = [
 
 chatroom = [
     path('chat_home/', chat_home, name='chat_home'),
+    path('staff_chat_home/', staff_chat_home, name='staff_chat_home'),
     # problem...................
     path('chat/<str:room>/', chat_room, name="chat_room"),
+    path('staffchat/<str:room>/', staff_chat_room, name="staff_chat_room"),
     path('chat_home/checkview', checkview, name="checkview"),
+    path('chat_home/staff_checkview', staff_checkview, name="staff_checkview"),
     path('chat_home/Ncheckview', Ncheckview, name="Ncheckview"),
     path('send', send, name="send"),
     path('getMessages/<str:room>/', getMessages, name="getMessages"),
@@ -293,15 +296,16 @@ exam = [
 blog_url = [
     path('student_list_blog_course',
          student_list_blog_course, name='student_list_blog_course'),
-    path('student_list_blog_course',
+    path('staff_list_blog_course',
          staff_list_blog_course, name='staff_list_blog_course'),
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('staff_list_blog', staff_list_blog, name='staff_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
-    path('list_edit_blog', list_edit_blog),
+    path('list_edit_blog', list_edit_blog, name='list_edit_blog'),
     path('view_blog/<str:pk>', view_blog, name='view_blog'),
     path('edit_blog/<str:pk>', edit_blog),
     path('create_blog', blog_edit, name='create_blog'),
+    path('staff_create_blog', staff_create_blog, name='staff_create_blog'),
     path('save_blog', save_blog),
     path('delete_blog', delete_blog),
     path('edit_blog/save_edit_blog/<int:pk>', save_edit_blog),
