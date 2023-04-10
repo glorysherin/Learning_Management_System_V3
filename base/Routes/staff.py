@@ -112,7 +112,7 @@ def delete_exam_view(request, pk):
 
 @login_required(login_url='adminlogin')
 def teacher_question_view(request):
-    return render(request, 'teacher/teacher_question.html')
+    return render(request, 'teacher/teacher_question.html', staff_detials(request, 'Manage Course'))
 
 
 @login_required(login_url='teacherlogin')

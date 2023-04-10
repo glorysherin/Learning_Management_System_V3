@@ -82,5 +82,6 @@ def staff_detials(request, page, dict_inp={}):
     dict_ = {
         'stusr': faculty_details,
         'page': page,
+        'staff_name': faculty_details.name
     }
     return {**dict_, **dict_inp}

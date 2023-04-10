@@ -103,7 +103,7 @@ common = [
     path('', pre_home),
     path('pre_home', pre_home),
     path('student_home', student_home, name='student_home'),
-    path('staff_home', staff_home),
+    path('staff_home', staff_home, name='staff_home'),
     path('contactus', contactus),
     path('services', services),
     path('about', about),
