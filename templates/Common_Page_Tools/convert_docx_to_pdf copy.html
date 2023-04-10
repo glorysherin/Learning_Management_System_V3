@@ -39,17 +39,18 @@ h2 {
     </style>
 </head>
 <body>
-    <div id="card1">
-        <div id="card">
-            <h2>Docx to PDF</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label style="font-size: 16px;" for="pdf_file">Select a Docx file to convert:</label><br>
-        <input type="file" name="docx_file" required><br> <br>
-        <button type="submit">Convert to PDF</button>
-    </form>
-</div>
-</div>
+    <div id="card1" style="max-width: 400px; margin: 0 auto; margin-top: 20px;">
+        <div id="card" style="padding: 20px; background-color: #f8f8f8; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <h2 style="text-align: center; margin-bottom: 20px;">Docx to PDF</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label style="font-size: 16px; display: block; margin-bottom: 10px;" for="pdf_file">Select a Docx file to convert:</label>
+                <input type="file" name="docx_file" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+                <button type="submit" style="border: 0.5px;padding: 8px;border-radius: 13px;">Convert to PDF</button>
+            </form>
+        </div>
+    </div>
+    
 </body>
 </html>
 
