@@ -61,7 +61,7 @@ def Code_scriping(request):
                 context['error'] = 'No Stack Overflow link found for the given question'
         else:
             context['error'] = 'Please enter a question'
-    return render(request, 'tools/CodeScriping.html', context)
+    return render(request,  'tools/CodeScriping.html', student_detials(request,'Code Scrapping', context))
 
 
 def calculator(request):
@@ -86,7 +86,7 @@ def translate_(request):
         'translation': translation,
         'LANGUAGES': LANGUAGES
     }
-    return render(request, 'tools/translate.html', context)
+    return render(request, 'tools/translate.html',student_detials(request,'Transulator',context))
 
 
 def convert_text(request):
@@ -102,7 +102,7 @@ def convert_text(request):
             response = HttpResponse(f.read(), content_type='audio/mpeg')
             response['Content-Disposition'] = 'attachment; filename="output.mp3"'
             return response
-    return render(request, 'tools/text_to_audio.html')
+    return render(request, 'tools/text_to_audio.html',student_detials(request,'convert_text'))
 
 
 def wikipedia_summary(request):
@@ -123,7 +123,7 @@ def wikipedia_summary(request):
         except wikipedia.exceptions.DisambiguationError as e:
             return HttpResponse("Disambiguation Error!")
     else:
-        return render(request, 'tools/wikipedia_summary.html')
+        return render(request, 'tools/wikipedia_summary.html',student_detials(request,'keyword to para'))
 
 
 def convert_docx_to_pdf(request):
@@ -167,7 +167,7 @@ def convert_pdf_to_docx(request):
 
         return response
 
-    return render(request, 'tools/convert_pdf_to_docx.html')
+    return render(request, 'tools/convert_pdf_to_docx.html', student_detials(request, 'Pdf to Docx'))
 
 
 def convert_pdf_to_excel(request):
@@ -187,7 +187,7 @@ def convert_pdf_to_excel(request):
             response['Content-Disposition'] = 'attachment; filename=output.xlsx'
             return response
     else:
-        return render(request, 'tools/convert_pdf_to_excel.html')
+        return render(request, 'tools/convert_pdf_to_excel.html',student_detials(request, 'Pdf to Excel'))
 
 
 def convert_excel_to_pdf(request):
@@ -385,7 +385,7 @@ def gpa_calculator(request):
     except:
         gpa = 0.0
     context = {'gpa': round(gpa, 2)}
-    return render(request, 'tools/gpa_calculator.html', context)
+    return render(request, 'tools/gpa_calculator.html',student_detials(request,'Gpa Calculator',context))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -407,7 +407,7 @@ def handwriting_converter(request):
             response['Content-Disposition'] = 'attachment; filename=' + filename
             return response
     else:
-        return render(request, 'tools/handwriting.html')
+        return render(request,'tools/handwriting.html', student_detials(request,'Text to Hand Written'))
 
 
 def keyword_to_image(request):
@@ -416,7 +416,7 @@ def keyword_to_image(request):
         urls = get_image_url(keyword)
         print(keyword, urls)
         return render(request, 'tools/keyword_to_image.html', {'image_urls': urls})
-    return render(request, 'tools/keyword_to_image.html')
+    return render(request, 'tools/keyword_to_image.html',student_detials(request,'keyword to image'))
 
 # views.py
 
