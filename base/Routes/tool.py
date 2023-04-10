@@ -167,7 +167,7 @@ def convert_pdf_to_docx(request):
 
         return response
 
-    return render(request, 'tools/convert_pdf_to_docx.html')
+    return render(request, 'tools/convert_pdf_to_docx.html', student_detials(request, 'Pdf to Docx'))
 
 
 def convert_pdf_to_excel(request):
@@ -187,7 +187,7 @@ def convert_pdf_to_excel(request):
             response['Content-Disposition'] = 'attachment; filename=output.xlsx'
             return response
     else:
-        return render(request, 'tools/convert_pdf_to_excel.html')
+        return render(request, 'tools/convert_pdf_to_excel.html',student_detials(request, 'Pdf to Excel'))
 
 
 def convert_excel_to_pdf(request):
@@ -385,7 +385,7 @@ def gpa_calculator(request):
     except:
         gpa = 0.0
     context = {'gpa': round(gpa, 2)}
-    return render(request, 'tools/gpa_calculator.html', context)
+    return render(request, 'tools/gpa_calculator.html',student_detials(request,'Gpa Calculator',context))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -416,7 +416,7 @@ def keyword_to_image(request):
         urls = get_image_url(keyword)
         print(keyword, urls)
         return render(request, 'tools/keyword_to_image.html', {'image_urls': urls})
-    return render(request, 'tools/keyword_to_image.html')
+    return render(request, 'tools/keyword_to_image.html',student_detials(request,'keyword to image'))
 
 # views.py
 
