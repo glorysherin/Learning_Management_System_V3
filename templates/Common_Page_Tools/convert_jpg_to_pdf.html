@@ -6,50 +6,53 @@
     <meta charset="UTF-8">
     <title>Convert JPG to PDF</title>
     <style>
-        #card {
-			border: 4px solid black;
-  width: 400px;
-  height: 250px;
-  background-color: #e1ebe4;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(14, 13, 13, 0.2);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-}
-#card1{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 10px;
-	
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 50px;
-}
+         #card {
+		
+        width: 400px;
+        height: 250px;
+        background-color: #e1ebe4;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(14, 13, 13, 0.2);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 20px;
+        
+      }
+      #card1{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 10px;
+          
+      }
+      
+      h2 {
+        font-size: 24px;
+        margin-bottom: 50px;
+      }
+      
 
 
     </style>
 </head>
 <body>
-    <div id="card1">
-        <div id="card">
-    <h2>Convert JPG to PDF</h2>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="file" style="font-size: 16px;">Select JPG files to upload:</label>
-        <input type="file" id="file" name="file" accept=".jpg, .jpeg" multiple required>
-        <br><br>
-        <button type="submit">Convert and Download PDF</button>
-    </form>
-</div>
-</div>
+    <div id="card1"  >
+        <div id="card" style="display: flex;justify-content: center; max-width: 400px;height: 300px; margin: 0 auto; margin-top: 10px; padding: 20px; background-color: white; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <h2 style="text-align: center; margin-top: 30px;" >Convert JPG to PDF</h2>
+    
+            <form method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+                {% csrf_token %}
+                <label for="file" style="font-size: 16px;">Select JPG files to upload:</label>
+                <input type="file" id="file" name="file" accept=".jpg, .jpeg" multiple required style="width: 100%; padding: 10px; margin-top: 10px;">
+                <br><br>
+                <button type="submit" style="border: 0.5px;padding: 8px;border-radius: 13px;margin-bottom: 20px;margin-left: 0px;">Convert and Download PDF</button>
+            </form>
+        </div>
+    </div>
+    
 </body>
 </html>
 {% endblock content %}

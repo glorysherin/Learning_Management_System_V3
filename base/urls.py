@@ -365,8 +365,7 @@ AternativeUrls = [
          get_class_peoples, name='class_listout'),
 ]
 
-
-common_tool = [
+Staff_tool = [
     path('Staff_Staff_tool', Staff_Staff_tool),
     path('Staff_toolHome', Staff_toolHome),
     path('Staff_trans', Staff_translate_),
@@ -390,7 +389,7 @@ common_tool = [
 ]
 
 urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url]))
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url,Staff_tool]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

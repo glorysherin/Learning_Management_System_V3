@@ -40,8 +40,8 @@ h2 {
 </head>
 <body>
     <div class="flex justify-center items-center h-screen">
-        <div style="margin: 0 auto;margin-top: 30px;margin-bottom: 30px;" id="card" class="bg-white shadow-md p-8 rounded-lg w-full sm:w-96">
-            <h2 class="text-2xl font-semibold mb-4">Convert Excel to PDF</h2>
+        <div style="margin: 0 auto;margin-top: 30px;margin-bottom: 30px;padding: 50px;height: 300px;" id="card" class="bg-white shadow-md p-8 rounded-lg w-full sm:w-96">
+            <h2 style="margin-top: 20px;" class="text-2xl font-semibold mb-4">Convert Excel to PDF</h2>
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label class="block text-gray-700 font-bold mb-2" for="excel_file">Select Excel file to convert:</label>
