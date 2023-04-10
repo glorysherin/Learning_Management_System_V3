@@ -211,6 +211,7 @@ studet = [
 
 teacher = [
     path('teacher/teacherclick', teacherclick_view),
+    path('staff/chat_lobby', staff_lobby, name='staff_chat_lobby'),
     path('teacher/teacherlogin',
          LoginView.as_view(template_name='teacher/teacherlogin.html'), name='teacherlogin'),
     path('teacher/addstudentlogin',
@@ -292,7 +293,10 @@ exam = [
 blog_url = [
     path('student_list_blog_course',
          student_list_blog_course, name='student_list_blog_course'),
+    path('student_list_blog_course',
+         staff_list_blog_course, name='staff_list_blog_course'),
     path('list_blog', student_list_blog, name='student_list_blog'),
+    path('staff_list_blog', staff_list_blog, name='staff_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
     path('list_edit_blog', list_edit_blog),
     path('view_blog/<str:pk>', view_blog, name='view_blog'),

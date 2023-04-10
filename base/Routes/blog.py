@@ -2,7 +2,7 @@ from base.models import blog
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .Tool.blogTool import get_blog, get_course, get_blog_by_cat
-from .Tool.Tools import student_detials
+from .Tool.Tools import student_detials, staff_detials
 
 
 # ...............Blog........................................
@@ -56,9 +56,19 @@ def student_list_blog(request):
     return render(request, "blog/studentblog.html", student_detials(request, 'Blog', {'blogs': items}))
 
 
+def staff_list_blog(request):
+    items = get_blog()
+    return render(request, "blog/staffblog.html", staff_detials(request, 'Blog', {'blogs': items}))
+
+
 def student_list_blog_course(request):
     items = get_course()
     return render(request, "blog/studentblog.html", student_detials(request, 'Blog', {'blogs': items}))
+
+
+def staff_list_blog_course(request):
+    items = get_course()
+    return render(request, "blog/staffblog.html", staff_detials(request, 'Blog', {'blogs': items}))
 
 
 def view_blog(request, pk):

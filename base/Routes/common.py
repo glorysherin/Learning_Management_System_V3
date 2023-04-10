@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .Tool.blogTool import get_images
-from .Tool.Tools import student_detials
+from .Tool.Tools import student_detials, staff_detials
 from base import models as TMODEL
 from base import models as SMODEL
 from base import models
@@ -51,6 +51,10 @@ def staff_home(request):
 # Video Chat.....
 def lobby(request):
     return render(request, 'base/lobby.html', student_detials(request, 'Conference'))
+
+
+def staff_lobby(request):
+    return render(request, 'base/staff_lobby.html', staff_detials(request, 'Conference'))
 
 
 def video_chat_room(request):
