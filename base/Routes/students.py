@@ -1,20 +1,34 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from base import models
 from .Forms import student_forms
-from ..models import Users, Student
+from ..models import Users, Student, Faculty_details
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from base import models as QMODEL
 from django.contrib.auth.models import User
 # for showing signup/login button for student
-from .Tool.Tools import student_detials
+from .Tool.Tools import student_detials, staff_detials
 
 # views.py
 
 
 def students_list(request):
     students = Student.objects.all()
+    departments = set([student.department for student in students])
+    context = {
+        'students': students,
+        'departments': departments,
+    }
+    return render(request, 'student/students_list.html', context)
+
+
+def students_list_by_dep(request):
+    usr_id = request.user.id
+    usr_obj = User.objects.get(id=usr_id)
+    name = Users.objects.get(user_name=usr_obj.username)
+    faculty_details = Faculty_details.objects.get(user_name=name.user_name)
+    students = Student.objects.filter(department=faculty_details.department)
     departments = set([student.department for student in students])
     context = {
         'students': students,
@@ -66,7 +80,7 @@ def student_edit(request, pk):
         return redirect('students_list')
     else:
         context = {'student': student}
-        return render(request, 'student/edit_student_profile.html', context)
+        return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
 
 
 def studentclick_view(request):

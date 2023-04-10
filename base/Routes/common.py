@@ -120,10 +120,36 @@ def chat_home(request):
     return render(request, 'chat_room/home.html', student_detials(request, 'Chat Home'))
 
 
-def chat_room(request, room):
+def staff_chat_home(request):
+    return render(request, 'chat_room/staff_home.html', staff_detials(request, 'Chat Home'))
+
+
+def staff_chat_room(request, room):
     username = request.GET.get('username')  # henry
     room_details = Room.objects.get(name=room)
+    return render(request, 'chat_room/home_room.html', staff_detials(request, 'Chat - '+str(room), {
+
+        'username': username,
+        'room': room,
+        'room_details': room_details,
+    }))
+
+
+def chat_room(request, room):
+    username = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
     return render(request, 'chat_room/room.html', student_detials(request, 'Chat - '+str(room), {
+
+        'username': username,
+        'room': room,
+        'room_details': room_details,
+    }))
+
+
+def staff_chat_room(request, room):
+    username = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+    return render(request, 'chat_room/staff_room.html', staff_detials(request, 'Chat - '+str(room), {
 
         'username': username,
         'room': room,
@@ -141,6 +167,18 @@ def checkview(request):
         new_room = Room.objects.create(name=room)
         new_room.save()
         return redirect('/chat'+'/'+room+'/?username='+username)
+
+
+def staff_checkview(request):
+    room = request.POST['room_name']
+    username = request.POST['username']
+
+    if Room.objects.filter(name=room).exists():
+        return redirect('/staffchat'+'/'+room+'/?username='+username)
+    else:
+        new_room = Room.objects.create(name=room)
+        new_room.save()
+        return redirect('/staffchat'+'/'+room+'/?username='+username)
 
 
 def Ncheckview(request):

@@ -6,9 +6,12 @@ from .Tool.Tools import student_detials, staff_detials
 
 
 # ...............Blog........................................
-@login_required(login_url='/FourNotFout')
 def blog_edit(request):
     return render(request, "blog/blog_edit.html", student_detials(request, 'Create Blog'))
+
+
+def staff_create_blog(request):
+    return render(request, "blog/staff_blog_create.html", staff_detials(request, 'Create Blog'))
 
 
 def save_blog(request):
@@ -88,7 +91,7 @@ def delete_blog(request):
 @login_required(login_url='/FourNotFout')
 def list_edit_blog(request):
     items = get_blog()
-    return render(request, "blog/edit_blog_list.html", {'blogs': items})
+    return render(request, "blog/edit_blog_list.html", staff_detials(request, 'Manage Blog', {'blogs': items}))
 
 
 def edit_blog(request, pk):
