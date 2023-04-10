@@ -38,9 +38,9 @@ def Make_Join(Componets):
 tools = [
     path('Common_tool', Common_tool),
     path('toolHome', toolHome),
-    path('trans', translate_),
-    path('convert_text', convert_text),
-    path('wikipedia_summary', wikipedia_summary),
+    path('trans', translate_, name='trans'),
+    path('convert_text', convert_text,name='convert_text'),
+    path('wikipedia_summary', wikipedia_summary,name='wikipedia_summary'),
     path('convert_docx_to_pdf', convert_docx_to_pdf),
     path('convert_pdf_to_docx', convert_pdf_to_docx),
     path('convert_pdf_to_excel', convert_pdf_to_excel),
@@ -49,7 +49,7 @@ tools = [
     path('convert_jpg_to_word', convert_jpg_to_word),
     path('calculator', calculator),
     path('cgpa_calculator', cgpa_calculator),
-    path('handwriting_converter', handwriting_converter),
+    path('handwriting_converter', handwriting_converter, name='handwriting_converter'),
     path('keyword_to_image', keyword_to_image),
     path('video_meeting/<str:room_id>', meeting, name='video_meeting'),
     path('staff_meeting/<str:room_id>', staff_meeting, name='staff_meeting'),
@@ -58,7 +58,7 @@ tools = [
 
     path('gpa_calculator', gpa_calculator),
     path('get_subject', get_subject),
-    path('Code_scriping', Code_scriping),
+    path('Code_scriping', Code_scriping, name='Code_scriping'),
 ]
 alternative_url = [path('student/video_meeting', meeting),
                    path('student/class_room', home_classroom),
