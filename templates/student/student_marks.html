@@ -16,11 +16,9 @@
 
   <div class="container mx-auto mt-20">
     <div class="w-full max-w-lg mx-auto">
-      <h6 style="padding:24px;" class="text-center text-xl font-bold mb-4">My Marks</h6>
-      <div style="padding: 50px;margin-top:10px;display: flex; justify-content: center;"
-        class="bg-white shadow-md rounded-lg px-8 py-6 pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 overflow-x-auto">
-
-        <div class="table-responsive">
+      <h6 class="text-center text-xl font-bold mb-4">My Marks</h6>
+      <!-- <div class="bg-white shadow-md rounded-lg px-8 py-6 pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 overflow-x-auto"> -->
+        <div class="table-responsive" style="margin-left: 30px;">
           <table class="table-auto w-full border-collapse">
             <thead>
               <tr class="bg-gray-100">
@@ -37,7 +35,7 @@
                 <td class="border border-gray-300 px-4 py-2">{{ t.course_name }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ t.course_name }}</td>
                 <td class="border border-gray-300 px-4 py-2">
-                  <a class="bg-green-500 text-white rounded-lg px-4 py-2 text-sm"
+                  <a class="bg-green-500 text-gray rounded-lg px-4 py-2 text-xl"
                     href="{% url 'check-marks' t.id %}">View Marks</a>
                 </td>
               </tr>
@@ -45,12 +43,12 @@
             </tbody>
           </table>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
   </div>
+
 </body>
 
 </html>
-
 
 {% endblock content %}
