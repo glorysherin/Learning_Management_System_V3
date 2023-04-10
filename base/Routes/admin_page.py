@@ -183,3 +183,34 @@ def listout_notes(request):
             notes_dict[department][semester] = Note.objects.filter(
                 department=department, semester=semester)
     return render(request, 'admin_actions/notes_list.html', {'notes_dict': notes_dict})
+
+
+def teacher_list(request):
+    teachers = Teacher.objects.all()
+    return render(request, 'admin_actions/teacher_list.html', {'teachers': teachers})
+
+
+def teacher_delete(request, teacher_id):
+    teacher = Teacher.objects.get(id=teacher_id)
+    teacher.delete()
+    return redirect('teacher_list')
+
+
+def teacher_edit(request, teacher_id):
+    teacher = Teacher.objects.get(id=teacher_id)
+
+    if request.method == 'POST':
+        teacher.user.first_name = request.POST.get('first_name')
+        teacher.user.last_name = request.POST.get('last_name')
+        teacher.address = request.POST.get('address')
+        teacher.mobile = request.POST.get('mobile')
+        teacher.role = request.POST.get('role')
+        teacher.status = request.POST.get('status') == 'on'
+        teacher.department = request.POST.get('department')
+        teacher.salary = request.POST.get('salary')
+        teacher.Annauni_num = request.POST.get('Annauni_num')
+        teacher.save()
+
+        return redirect('teacher_list')
+
+    return render(request, 'admin_actions/teacher_edit.html', {'teacher': teacher})

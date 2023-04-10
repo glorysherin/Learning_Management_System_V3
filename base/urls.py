@@ -39,24 +39,26 @@ tools = [
     path('Common_tool', Common_tool),
     path('toolHome', toolHome),
     path('trans', translate_, name='trans'),
-    path('convert_text', convert_text,name='convert_text'),
-    path('wikipedia_summary', wikipedia_summary,name='wikipedia_summary'),
+    path('convert_text', convert_text, name='convert_text'),
+    path('wikipedia_summary', wikipedia_summary, name='wikipedia_summary'),
     path('convert_docx_to_pdf', convert_docx_to_pdf),
-    path('convert_pdf_to_docx', convert_pdf_to_docx,name='convert_pdf_to_docx'),
-    path('convert_pdf_to_excel', convert_pdf_to_excel,name='convert_pdf_to_excel'),
+    path('convert_pdf_to_docx', convert_pdf_to_docx, name='convert_pdf_to_docx'),
+    path('convert_pdf_to_excel', convert_pdf_to_excel,
+         name='convert_pdf_to_excel'),
     path('convert_excel_to_pdf', convert_excel_to_pdf),
     path('convert_jpg_to_pdf', convert_jpg_to_pdf),
     path('convert_jpg_to_word', convert_jpg_to_word),
     path('calculator', calculator),
     path('cgpa_calculator', cgpa_calculator),
-    path('handwriting_converter', handwriting_converter, name='handwriting_converter'),
-    path('keyword_to_image', keyword_to_image,name='keyword_to_image'),
+    path('handwriting_converter', handwriting_converter,
+         name='handwriting_converter'),
+    path('keyword_to_image', keyword_to_image, name='keyword_to_image'),
     path('video_meeting/<str:room_id>', meeting, name='video_meeting'),
     path('staff_meeting/<str:room_id>', staff_meeting, name='staff_meeting'),
     path('join_meeting', join_meeting, name='join_meeting'),
     path('staff_join_meeting', staff_join_meeting, name='staff_join_meeting'),
 
-    path('gpa_calculator', gpa_calculator,name='gpa_calculator'),
+    path('gpa_calculator', gpa_calculator, name='gpa_calculator'),
     path('get_subject', get_subject),
     path('Code_scriping', Code_scriping, name='Code_scriping'),
 ]
@@ -112,6 +114,10 @@ common = [
 
 admin = [
     path('add_Faculty', add_faculty),
+    path('teacher_list', teacher_list, name='teacher_list'),
+    path('teacher_delete/<str:teacher_id>',
+         teacher_delete, name='teacher_delete'),
+    path('teacher_edit/<str:teacher_id>', teacher_edit, name='teacher_edit'),
     path('add_usr', add_usr),
     path('teachers', teachers),
     path('teachers/profile/<int:pk>/', teacher_profile, name='teacher_profile'),
@@ -119,6 +125,7 @@ admin = [
     path('class_listout/<str:class_id>',
          get_class_peoples, name='class_listout'),
     path('students_list', students_list, name='students_list'),
+    path('admin_students_list', admin_students_list, name='admin_students_list'),
     path('students_list_by_dep', students_list_by_dep,
          name='students_list_by_dep'),
     path('class_dates', class_dates, name='class_dates'),
@@ -246,7 +253,6 @@ teacher = [
 
 exam = [
 
-    #     path('', home_view, name=''),
     path('logout', LogoutView.as_view(
         template_name='exam/logout.html'), name='logout'),
     path('contactus',  contactus_view),
@@ -317,7 +323,8 @@ blog_url = [
 gallery_ = [
 
     path("gallery", gallery),
-    path('image_upload_page_gallery', image_upload_page_gallery),
+    path('image_upload_page_gallery', image_upload_page_gallery,
+         name='image_upload_page_gallery'),
     path('upload_image', upload_image),
     path('delete_image', delete_image),
 
@@ -389,7 +396,7 @@ Staff_tool = [
 ]
 
 urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url,Staff_tool]))
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

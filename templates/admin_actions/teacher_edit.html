@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Edit Teacher Information</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ teacher.user.first_name }}" class="form-control"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ teacher.user.last_name }}" class="form-control"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ teacher.user.email }}" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="profile_pic">Profile Picture:</label>
+        <input type="file" id="profile_pic" name="profile_pic" accept="image/*" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{{ teacher.address }}" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" value="{{ teacher.mobile }}" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="role">Role:</label>
+        <input type="text" id="role" name="role" value="{{ teacher.role }}" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <input type="checkbox" id="status" name="status" {% if teacher.status %}checked{% endif %}
+            class="form-check-input">
+    </div>
+    <div class="form-group">
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" value="{{ teacher.department }}" class="form-control"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" value="{{ teacher.salary }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="Annauni_num">Anna University Number:</label>
+        <input type="text" id="Annauni_num" name="Annauni_num" value="{{ teacher.Annauni_num }}" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

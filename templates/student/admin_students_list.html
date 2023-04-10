@@ -1,0 +1,96 @@
+{% extends 'student/adminbase.html' %}
+
+{% block content %}
+{% for dept in departments %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card-container {
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        a {
+            margin-right: 5px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-container">
+        <h2>{{ dept }}</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Joined Year</th>
+                        <th>Role No</th>
+                        <th>Mobile</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    {% if student.department == dept %}
+                    <tr>
+                        <td>{{ student.get_name }}</td>
+                        <td>{{ student.joinned_year|date:"Y" }}</td>
+                        <td>{{ student.role_no }}</td>
+                        <td>{{ student.mobile }}</td>
+                        <td>
+                            <a href="students/{{ student.id}}">View</a>
+                            <a href="student/{{ student.id }}/edit">Edit</a>
+                            <a href="students_delete/{{ student.id }}/delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% endfor %}
+{% endblock %}
