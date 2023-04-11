@@ -241,4 +241,4 @@ def delete_image(request):
 
 def image_upload_page_gallery(request):
     item = get_images()
-    return render(request, "Gallery/empty.html", {"categories": item[0], "images": item[1]})
+    return render(request, "Gallery/gallery.html", {"categories": item[0], "images": item[1]})

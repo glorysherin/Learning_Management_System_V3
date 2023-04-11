@@ -1,0 +1,37 @@
+{% extends 'student/adminbase.html' %}
+{% block content %}
+<h1>Teacher List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Annauni Num</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.id }}</td>
+            <td>{{ teacher.get_name }}</td>
+            <td>{{ teacher.mobile }}</td>
+            <td>{{ teacher.role }}</td>
+            <td>{{ teacher.status }}</td>
+            <td>{{ teacher.department }}</td>
+            <td>{{ teacher.salary }}</td>
+            <td>{{ teacher.Annauni_num }}</td>
+            <td>
+                <a href="{% url 'update-teacher' teacher.id  %}">Edit</a>
+                <a href="{% url 'delete-teacher' teacher.id  %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
