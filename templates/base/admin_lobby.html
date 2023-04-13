@@ -1,0 +1,142 @@
+{% extends 'student/adminbase.html' %}
+
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyChat</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        #cards {
+            width: 100%;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .logo {
+            max-width: 50%;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* input[type="text"] {
+			background-color: #f7f7f7;
+			border: none;
+			border-radius: 5px;
+			padding: 10px;
+			margin-bottom: 20px;
+			width: 100%;
+		} */
+
+        input[type="submit"] {
+            background-color: #e5e5e5;
+            border: none;
+            border-radius: 5px;
+            color: #222;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div style="width: 400px; margin-top: 20px;padding: 30px;" class="card" id="cards">
+            <div>
+                <img style="margin-left: 25%;" class="logo"
+                    src="https://media.istockphoto.com/id/1277134944/vector/chat-icon-people-chat-icon-group-chat-icon.jpg?s=170667a&w=0&k=20&c=tSapjp8GM0ILZh7ylNwerk8kbnxeSP1DCAEmhTo8-U4="
+                    alt="MyChat logo">
+                <h1 style="text-align: center;">Start Your Chat</h1>
+                <p style="font-size: 15px;">A group video calling platform made just for you!</p>
+                <form id="form">
+                    <label for="room">Room:</label>
+                    <input type="text" id="room" name="room" placeholder="Enter a room name..." style="text-transform:uppercase;width:60%;margin-left: 40px;background-color: #f7f7f7;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                margin-bottom: 20px;
+                width: 60%;" />
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name..." style="text-transform:uppercase;width:60%;margin-left: 40px;background-color: #f7f7f7;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                margin-bottom: 20px;
+                width: 60%;" /><br>
+                    <input type="submit" value="Join Stream" />
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let form = document.getElementById('form')
+
+        let handleSubmit = async (e) => {
+            e.preventDefault()
+            let room = e.target.room.value.toUpperCase()
+            let name = e.target.name.value
+
+            let response = await fetch(`/get_token/?channel=${room}`)
+            let data = await response.json()
+
+            let UID = data.uid
+            let token = data.token
+
+            sessionStorage.setItem('UID', UID)
+            sessionStorage.setItem('token', token)
+            sessionStorage.setItem('room', room)
+            sessionStorage.setItem('name', name)
+
+
+
+            window.open('/room/', '_self')
+        }
+
+
+
+        form.addEventListener('submit', handleSubmit)
+    </script>
+</body>
+
+</html>
+
+
+{% endblock content %}

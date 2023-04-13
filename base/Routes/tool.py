@@ -61,7 +61,7 @@ def Code_scriping(request):
                 context['error'] = 'No Stack Overflow link found for the given question'
         else:
             context['error'] = 'Please enter a question'
-    return render(request,  'tools/CodeScriping.html', student_detials(request,'Code Scrapping', context))
+    return render(request,  'tools/CodeScriping.html', student_detials(request, 'Code Scrapping', context))
 
 
 def calculator(request):
@@ -86,7 +86,7 @@ def translate_(request):
         'translation': translation,
         'LANGUAGES': LANGUAGES
     }
-    return render(request, 'tools/translate.html',student_detials(request,'Transulator',context))
+    return render(request, 'tools/translate.html', student_detials(request, 'Transulator', context))
 
 
 def convert_text(request):
@@ -102,7 +102,7 @@ def convert_text(request):
             response = HttpResponse(f.read(), content_type='audio/mpeg')
             response['Content-Disposition'] = 'attachment; filename="output.mp3"'
             return response
-    return render(request, 'tools/text_to_audio.html',student_detials(request,'convert_text'))
+    return render(request, 'tools/text_to_audio.html', student_detials(request, 'convert_text'))
 
 
 def wikipedia_summary(request):
@@ -123,7 +123,7 @@ def wikipedia_summary(request):
         except wikipedia.exceptions.DisambiguationError as e:
             return HttpResponse("Disambiguation Error!")
     else:
-        return render(request, 'tools/wikipedia_summary.html',student_detials(request,'keyword to para'))
+        return render(request, 'tools/wikipedia_summary.html', student_detials(request, 'keyword to para'))
 
 
 def convert_docx_to_pdf(request):
@@ -187,7 +187,7 @@ def convert_pdf_to_excel(request):
             response['Content-Disposition'] = 'attachment; filename=output.xlsx'
             return response
     else:
-        return render(request, 'tools/convert_pdf_to_excel.html',student_detials(request, 'Pdf to Excel'))
+        return render(request, 'tools/convert_pdf_to_excel.html', student_detials(request, 'Pdf to Excel'))
 
 
 def convert_excel_to_pdf(request):
@@ -385,7 +385,7 @@ def gpa_calculator(request):
     except:
         gpa = 0.0
     context = {'gpa': round(gpa, 2)}
-    return render(request, 'tools/gpa_calculator.html',student_detials(request,'Gpa Calculator',context))
+    return render(request, 'tools/gpa_calculator.html', student_detials(request, 'Gpa Calculator', context))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -407,7 +407,7 @@ def handwriting_converter(request):
             response['Content-Disposition'] = 'attachment; filename=' + filename
             return response
     else:
-        return render(request,'tools/handwriting.html', student_detials(request,'Text to Hand Written'))
+        return render(request, 'tools/handwriting.html', student_detials(request, 'Text to Hand Written'))
 
 
 def keyword_to_image(request):
@@ -416,7 +416,7 @@ def keyword_to_image(request):
         urls = get_image_url(keyword)
         print(keyword, urls)
         return render(request, 'tools/keyword_to_image.html', {'image_urls': urls})
-    return render(request, 'tools/keyword_to_image.html',student_detials(request,'keyword to image'))
+    return render(request, 'tools/keyword_to_image.html', student_detials(request, 'keyword to image'))
 
 # views.py
 
@@ -435,6 +435,13 @@ def staff_join_meeting(request):
     return render(request, 'tools/staff_join_meeting.html', staff_detials(request, 'Join Meeting', {}))
 
 
+def admin_join_meeting(request):
+    if request.method == 'POST':
+        room_id = request.POST.get('room_id')
+        return redirect('admin_meeting', room_id=room_id)
+    return render(request, 'tools/admin_join_meeting.html')
+
+
 def meeting(request, room_id):
     context = {
         'room_id': room_id,
@@ -447,6 +454,13 @@ def staff_meeting(request, room_id):
         'room_id': room_id,
     }
     return render(request, 'tools/staff_video_meeting.html', staff_detials(request, 'Meeting', context))
+
+
+def admin_meeting(request, room_id):
+    context = {
+        'room_id': room_id,
+    }
+    return render(request, 'tools/admin_video_meeting.html', context)
 
 
 def common_join_meeting(request):

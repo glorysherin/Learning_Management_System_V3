@@ -42,20 +42,23 @@ tools = [
     path('convert_text', convert_text, name='convert_text'),
     path('wikipedia_summary', wikipedia_summary, name='wikipedia_summary'),
     path('convert_docx_to_pdf', convert_docx_to_pdf),
-    path('convert_pdf_to_docx', convert_pdf_to_docx,name='convert_pdf_to_docx'),
-    path('convert_pdf_to_excel', convert_pdf_to_excel,name='convert_pdf_to_excel'),
-    path('convert_excel_to_pdf', convert_excel_to_pdf,name='convert_excel_to_pdf'),
-    path('convert_jpg_to_pdf', convert_jpg_to_pdf,name='convert_jpg_to_pdf'),
-    path('convert_jpg_to_word', convert_jpg_to_word,name='convert_jpg_to_word'),
-    path('calculator', calculator,name='calculator'),
+    path('convert_pdf_to_docx', convert_pdf_to_docx, name='convert_pdf_to_docx'),
+    path('convert_pdf_to_excel', convert_pdf_to_excel,
+         name='convert_pdf_to_excel'),
+    path('convert_excel_to_pdf', convert_excel_to_pdf),
+    path('convert_jpg_to_pdf', convert_jpg_to_pdf),
+    path('convert_jpg_to_word', convert_jpg_to_word),
+    path('calculator', calculator),
     path('cgpa_calculator', cgpa_calculator),
     path('handwriting_converter', handwriting_converter,
          name='handwriting_converter'),
     path('keyword_to_image', keyword_to_image, name='keyword_to_image'),
     path('video_meeting/<str:room_id>', meeting, name='video_meeting'),
     path('staff_meeting/<str:room_id>', staff_meeting, name='staff_meeting'),
+    path('admin_meeting/<str:room_id>', admin_meeting, name='admin_meeting'),
     path('join_meeting', join_meeting, name='join_meeting'),
     path('staff_join_meeting', staff_join_meeting, name='staff_join_meeting'),
+    path('admin_join_meeting', admin_join_meeting, name='admin_join_meeting'),
 
     path('gpa_calculator', gpa_calculator, name='gpa_calculator'),
     path('get_subject', get_subject),
@@ -78,6 +81,7 @@ alternative_url = [path('student/video_meeting', meeting),
                    ]
 
 common_tool = [
+<<<<<<< HEAD
     path('Common_Common_tool', Common_Common_tool,name='Common_Common_tool'),
     path('Common_toolHome', Common_toolHome,name='Common_toolHome'),
     path('Common_trans', Common_translate_,name='Common_trans'),
@@ -94,6 +98,24 @@ common_tool = [
     path('Common_handwriting_converter', Common_handwriting_converter,name='Common_handwriting_converter'),
     path('Common_keyword_to_image', Common_keyword_to_image,name='Common_keyword_to_image'),
     path('Common_video_meeting', Common_video_meeting,name='Common_video_meeting'),
+=======
+    path('Common_Common_tool', Common_Common_tool),
+    path('Common_toolHome', Common_toolHome, name='Common_toolHome'),
+    path('Common_trans', Common_translate_),
+    path('Common_convert_text', Common_convert_text),
+    path('Common_wikipedia_summary', Common_wikipedia_summary),
+    path('Common_convert_docx_to_pdf', Common_convert_docx_to_pdf),
+    path('Common_convert_pdf_to_docx', Common_convert_pdf_to_docx),
+    path('Common_convert_pdf_to_excel', Common_convert_pdf_to_excel),
+    path('Common_convert_excel_to_pdf', Common_convert_excel_to_pdf),
+    path('Common_convert_jpg_to_pdf', Common_convert_jpg_to_pdf),
+    path('Common_convert_jpg_to_word', Common_convert_jpg_to_word),
+    path('Common_calculator', Common_calculator),
+    path('Common_cgpa_calculator', Common_cgpa_calculator),
+    path('Common_handwriting_converter', Common_handwriting_converter),
+    path('Common_keyword_to_image', Common_keyword_to_image),
+    path('Common_video_meeting', Common_video_meeting),
+>>>>>>> 9882dcfd90e853498afb40d756a0ff492bf44318
 
     path('Common_gpa_calculator', Common_gpa_calculator,name='Common_gpa_calculator'),
     path('Common_get_subject', Common_get_subject,name='Common_get_subject'),
@@ -153,11 +175,14 @@ videochat = [
 chatroom = [
     path('chat_home/', chat_home, name='chat_home'),
     path('staff_chat_home/', staff_chat_home, name='staff_chat_home'),
+    path('admin_chat_home/', admin_chat_home, name='admin_chat_home'),
     # problem...................
     path('chat/<str:room>/', chat_room, name="chat_room"),
     path('staffchat/<str:room>/', staff_chat_room, name="staff_chat_room"),
+    path('adminchat/<str:room>/', admin_chat_room, name="staff_chat_room"),
     path('chat_home/checkview', checkview, name="checkview"),
     path('chat_home/staff_checkview', staff_checkview, name="staff_checkview"),
+    path('chat_home/admin_checkview', admin_checkview, name="admin_checkview"),
     path('chat_home/Ncheckview', Ncheckview, name="Ncheckview"),
     path('send', send, name="send"),
     path('getMessages/<str:room>/', getMessages, name="getMessages"),
@@ -223,6 +248,7 @@ studet = [
 teacher = [
     path('teacher/teacherclick', teacherclick_view),
     path('staff/chat_lobby', staff_lobby, name='staff_chat_lobby'),
+    path('admin/chat_lobby', admin_lobby, name='admin_chat_lobby'),
     path('teacher/teacherlogin',
          LoginView.as_view(template_name='teacher/teacherlogin.html'), name='teacherlogin'),
     path('teacher/addstudentlogin',
@@ -305,10 +331,18 @@ blog_url = [
          student_list_blog_course, name='student_list_blog_course'),
     path('staff_list_blog_course',
          staff_list_blog_course, name='staff_list_blog_course'),
+
+    path('admin_list_blog_course',
+         admin_list_blog_course, name='admin_list_blog_course'),
+    path('admin_create_blog', admin_create_blog, name='admin_create_blog'),
+    path('staff_list_blog', admin_list_blog, name='admin_list_blog'),
+
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('staff_list_blog', staff_list_blog, name='staff_list_blog'),
     path('list_blog', teacher_list_blog, name='teacher_list_blog'),
     path('list_edit_blog', list_edit_blog, name='list_edit_blog'),
+    path('admin_list_edit_blog', admin_list_edit_blog,
+         name='admin_list_edit_blog'),
     path('view_blog/<str:pk>', view_blog, name='view_blog'),
     path('edit_blog/<str:pk>', edit_blog),
     path('create_blog', blog_edit, name='create_blog'),
@@ -316,7 +350,6 @@ blog_url = [
     path('save_blog', save_blog),
     path('delete_blog', delete_blog),
     path('edit_blog/save_edit_blog/<int:pk>', save_edit_blog),
-
 ]
 
 gallery_ = [
