@@ -57,6 +57,10 @@ def staff_lobby(request):
     return render(request, 'base/staff_lobby.html', staff_detials(request, 'Conference'))
 
 
+def admin_lobby(request):
+    return render(request, 'base/admin_lobby.html')
+
+
 def video_chat_room(request):
     return render(request, 'base/room.html')
 
@@ -124,8 +128,23 @@ def staff_chat_home(request):
     return render(request, 'chat_room/staff_home.html', staff_detials(request, 'Chat Home'))
 
 
+def admin_chat_home(request):
+    return render(request, 'chat_room/admin_home.html')
+
+
+def admin_chat_room(request, room):
+    username = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+    return render(request, 'chat_room/admin_room.html', {
+        'page': 'Chat - '+str(room),
+        'username': username,
+        'room': room,
+        'room_details': room_details,
+    })
+
+
 def staff_chat_room(request, room):
-    username = request.GET.get('username')  # henry
+    username = request.GET.get('username')
     room_details = Room.objects.get(name=room)
     return render(request, 'chat_room/home_room.html', staff_detials(request, 'Chat - '+str(room), {
 
@@ -179,6 +198,18 @@ def staff_checkview(request):
         new_room = Room.objects.create(name=room)
         new_room.save()
         return redirect('/staffchat'+'/'+room+'/?username='+username)
+
+
+def admin_checkview(request):
+    room = request.POST['room_name']
+    username = request.POST['username']
+
+    if Room.objects.filter(name=room).exists():
+        return redirect('/adminchat'+'/'+room+'/?username='+username)
+    else:
+        new_room = Room.objects.create(name=room)
+        new_room.save()
+        return redirect('/adminchat'+'/'+room+'/?username='+username)
 
 
 def Ncheckview(request):
@@ -241,4 +272,4 @@ def delete_image(request):
 
 def image_upload_page_gallery(request):
     item = get_images()
-    return render(request, "Gallery/gallery.html", {"categories": item[0], "images": item[1]})
+    return render(request, "Gallery/upload_image.html", {"categories": item[0], "images": item[1]})

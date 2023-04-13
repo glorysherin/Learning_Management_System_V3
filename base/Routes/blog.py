@@ -14,6 +14,10 @@ def staff_create_blog(request):
     return render(request, "blog/staff_blog_create.html", staff_detials(request, 'Create Blog'))
 
 
+def admin_create_blog(request):
+    return render(request, "blog/admin_blog_create.html", {'page': 'Create Blog'})
+
+
 def save_blog(request):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
     title = request.POST.get(ids[0])
@@ -64,6 +68,16 @@ def staff_list_blog(request):
     return render(request, "blog/staffblog.html", staff_detials(request, 'Blog', {'blogs': items}))
 
 
+def admin_list_blog(request):
+    items = get_blog()
+    return render(request, "blog/adminblog.html", {'page': 'Blog', 'blogs': items})
+
+
+def admin_list_blog_course(request):
+    items = get_course()
+    return render(request, "blog/adminblog.html", {'page': 'Blog', 'blogs': items})
+
+
 def student_list_blog_course(request):
     items = get_course()
     return render(request, "blog/studentblog.html", student_detials(request, 'Blog', {'blogs': items}))
@@ -92,6 +106,11 @@ def delete_blog(request):
 def list_edit_blog(request):
     items = get_blog()
     return render(request, "blog/edit_blog_list.html", staff_detials(request, 'Manage Blog', {'blogs': items}))
+
+
+def admin_list_edit_blog(request):
+    items = get_blog()
+    return render(request, "blog/edit_blog_list.html", {'page': 'Manage Blog', 'blogs': items})
 
 
 def edit_blog(request, pk):
