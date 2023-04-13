@@ -78,11 +78,9 @@
             <div class="card-body">
               <h5 class="card-title">CodeScrapping</h5>
               <p class="card-text">
-                Transulating word is just not a transulating language,It is
-                a transulating ideas.
-              </p>
+                process of creating or generating computer code, which is a set of instructions written in a programming language              </p>
 
-              <a href="Code_scriping"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_Code_scriping' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 " class="btn">TRY</button></a>
             </div>
           </div>
@@ -98,7 +96,7 @@
                 Write your own story.
               </p>
 
-              <a href="handwriting_converter"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_handwriting_converter' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
@@ -114,29 +112,13 @@
                 a transulating ideas.
               </p>
 
-              <a href="trans"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_trans' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 " class="btn">TRY</button></a>
             </div>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
-            <img
-              src="https://www.techsmith.com/blog/wp-content/uploads/2022/10/blog_audiate_recording-tips_1500x1100.png"
-              class="card-img-top" alt="Fissure in Sandstone" style="height: 150px;">
-            <div class="card-body">
-              <h5 class="card-title">Keyword to Audio</h5>
-              <p class="card-text">
-                Imagination will take you everywhere in the world with
-                audio.
-              </p>
-
-              <button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
-              ">TRY</button>
-            </div>
-          </div>
-        </div>
+        
         <div class="col-md-4">
           <div class="card" style="width: 18rem;">
             <img
@@ -148,7 +130,7 @@
                 Tell a single word i can tell a story.
               </p>
 
-              <a href="wikipedia_summary"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_wikipedia_summary' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
@@ -157,14 +139,14 @@
           <div class="card" style="width: 18rem;">
             <img
               src="https://www.thestartupfounder.com/wp-content/uploads/2022/12/speech-to-text-abstract-concept-vector-illustration-multi-language-recognizer-convert-voice-software-recognition-technology-226985978-2.jpg"
-              class="card-img-top" alt="Text to voice" style="height: 150px;">
+              class="card-img-top" alt="Text to voice" style="height: 180px;">
             <div class="card-body">
               <h5 class="card-title">Text to voice</h5>
               <p class="card-text">
                 Students need there own voice to change the world.
               </p>
 
-              <a href="convert_text"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_convert_text' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
@@ -173,7 +155,7 @@
         <div class="col-md-4">
           <div class="card" style="width: 18rem;">
             <img src="https://vox-cpaas.com/blog/wp-content/uploads/2020/06/Different-types-of-video-conferencing.png"
-              class="card-img-top" alt="vedio meeting" style="height: 150px;">
+              class="card-img-top" alt="vedio meeting" style="height: 180px;">
             <div class="card-body">
               <h5 class="card-title">vedio meeting</h5>
               <p class="card-text">
@@ -181,7 +163,7 @@
                 meeting.
               </p>
 
-              <a href="video_meeting"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_video_meeting' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
@@ -196,7 +178,7 @@
                 Convert PDF to DOCX in seconds with our online PDF to DOCX converter tool.
               </p>
 
-              <a href="convert_pdf_to_docx"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_convert_pdf_to_docx' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
@@ -212,7 +194,7 @@
                 Extract all your PDF tables to EXCEL spreadsheets automatically in just a few clicks.
               </p>
 
-              <a href="convert_pdf_to_excel"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_convert_pdf_to_excel' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
@@ -222,14 +204,14 @@
           <div class="card" style="width: 18rem;">
             <img
               src="https://play-lh.googleusercontent.com/1ig9EgfJR9ijVJOBAywFhNiP3uCaLrVKCTFm09kcCDzhCqR07VljgECUzi1MYdDpuK8R"
-              class="card-img-top" alt="GPA Calculator" style="height: 130px;">
+              class="card-img-top" alt="GPA Calculator" style="height: 180px;">
             <div class="card-body">
               <h5 class="card-title">GPA CALCULATOR</h5>
               <p class="card-text">
                 This GPA calculator computes GPA and generates a report based on course credits and the achieved grade.
               </p>
 
-              <a href="get_subject"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_gpa_calculator' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
@@ -244,7 +226,7 @@
               <p class="card-text">Text-to-image generators can create more or less any kind of image from text input.
               </p>
 
-              <a href="keyword_to_image"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_keyword_to_image' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
 
@@ -258,51 +240,16 @@
             <div class="card-body">
               <h5 class="card-title">Calculator</h5>
               <p class="card-text">
-                I was reading the dictionary, I thought it was a poem about
-                everything.
+                I'm always crunching number,so my calculator watch is a must
               </p>
 
-              <a href="calculator"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+              <a href="{% url 'Common_calculator' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                 ">TRY</button></a>
             </div>
           </div>
         </div>
-
-
-        <div class="row">
-
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img src="https://m.media-amazon.com/images/I/517KT12eSRL.png" class="card-img-top" alt="Cgpa Calculator"
-                style="height: 200px;">
-              <div class="card-body">
-                <h5 class="card-title">Cgpa Calculator</h5>
-                <p class="card-text">
-                  Write your own story.
-                </p>
-
-                <button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
-                ">TRY</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img
-                src="https://png.pngtree.com/png-vector/20190806/ourmid/pngtree-code-coding-file-programming-script-flat-color-icon-vector-png-image_1651456.jpg"
-                class="card-img-top" alt="Code Scrapping" style="height: 150px;">
-              <div class="card-body">
-                <h5 class="card-title">Code Scrapping</h5>
-                <p class="card-text">
-                  Transulating word is just not a transulating language,It is
-                  a transulating ideas.
-                </p>
-
-                <a href="Code_scriping"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
-                  " class="btn">TRY</button></a>
-              </div>
-            </div>
-          </div>
+        
+          
 
           <div class="col-md-4">
             <div class="card" style="width: 18rem;">
@@ -311,10 +258,9 @@
               <div class="card-body">
                 <h5 class="card-title">Excel to pdf</h5>
                 <p class="card-text">
-                  Tell a single word i can tell a story.
-                </p>
+                  Make EXCEL spreadsheets easy to read by converting them to PDF.                </p>
 
-                <a href="convert_excel_to_pdf"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                <a href="{% url 'Common_convert_excel_to_pdf' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                   " class="btn">TRY</button></a>
               </div>
             </div>
@@ -322,74 +268,37 @@
           <div class="col-md-4">
             <div class="card" style="width: 18rem;">
               <img src="https://www.adobe.com/dc-shared/assets/images/frictionless/how-to-images/jpg-to-pdf-how-to.svg"
-                class="card-img-top" alt="Jpg to pdf" style="height: 150px;">
+                class="card-img-top" alt="Jpg to pdf" style="height: 180px;">
               <div class="card-body">
                 <h5 class="card-title">Jpg to pdf</h5>
                 <p class="card-text">
-                  Students need there own voice to change the world.
-                </p>
+                  Convert JPG images to PDF in seconds.                </p>
 
-                <a href="convert_jpg_to_pdf"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                <a href="{% url 'Common_convert_jpg_to_pdf' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                   " class="btn">TRY</button></a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4" >
             <div class="card" style="width: 18rem;">
               <img
                 src="https://storage.googleapis.com/download/storage/v1/b/hireup_files/o/6099fbe6d9d89d04ed729b3e%2Fproduct%2F0.9914981574068675jpg-to-word.png?generation=1660877885741668&alt=media"
-                class="card-img-top" alt="Jpg to Word" style="height: 150px;">
+                class="card-img-top" alt="Jpg to Word" style="height: 180px;">
               <div class="card-body">
                 <h5 class="card-title">Jpg to Word</h5>
                 <p class="card-text">
-                  visual connection between two or more remote parties over the internet that simulates a face-to-face
-                  meeting.
+                  You can easily convert your JPG files to WORD with this online tool.
                 </p>
 
-                <a href="convert_jpg_to_word"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                <a href="{% url 'Common_convert_jpg_to_word' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
                   " class="btn">TRY</button></a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img src="https://cdn-icons-png.flaticon.com/512/6213/6213385.png" class="card-img-top" alt="Code Writer"
-                style="height: 180px;">
-              <div class="card-body">
-                <h5 class="card-title">Code Writer</h5>
-                <p class="card-text">
-                  Convert PDF to DOCX in seconds with our online PDF to DOCX converter tool.
-                </p>
-
-                <a href="Code_scriping"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
-                  " class="btn">TRY</button></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img
-                src="https://resources.clearvoice.com/wp-content/uploads/2020/05/05.07.20-M_Hero_1360x646-810x385.png"
-                class="card-img-top" alt="Content Generator" style="height: 130px;">
-              <div class="card-body">
-                <h5 class="card-title">Content Generator</h5>
-                <p class="card-text">
-                  This GPA calculator computes GPA and generates a report based on course credits and the achieved
-                  grade.
-                </p>
-
-                <a href="create_blog"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
-                  " class="btn">TRY</button></a>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="col-md-4">
+          
+        <div class="col-md-4">
             <div class="card" style="width: 18rem;">
               <img
                 src="https://static.vecteezy.com/system/resources/previews/006/430/508/original/game-console-with-website-coding-flat-icon-of-game-development-vector.jpg"
@@ -397,7 +306,7 @@
               <div class="card-body">
                 <h5 class="card-title">Playground</h5>
                 <p class="card-text">
-                  Extract all your PDF tables to EXCEL spreadsheets automatically in just a few clicks.
+                 Play with your code in different languages.
                 </p>
 
                 <button style=" margin-left: 90px ;     background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
