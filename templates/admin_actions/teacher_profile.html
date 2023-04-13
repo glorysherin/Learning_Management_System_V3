@@ -1,15 +1,76 @@
-<!-- profile.html -->
-<h1>Teacher Profile</h1>
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href=
+    "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+              rel="stylesheet">
+</head>
+<body>
+    <div >
+        <!-- component -->
+<div class="h-screen w-full bg-gray-50 flex justify-center items-center">
+    <div class="h-56 w-72 absolute flex justify-center items-center">
+      <img
+        class="object-cover h-20 w-20 rounded-full"
+        src="{{ teacher.profile_pic.url }}" alt="{{ teacher.get_name }} profile picture"
+      />
+    </div>
 
-{% if teacher %}
-<h2>{{ teacher.get_name }}</h2>
-<img src="{{ teacher.profile_pic.url }}" alt="{{ teacher.get_name }} profile picture">
-<p>Address: {{ teacher.address }}</p>
-<p>Mobile: {{ teacher.mobile }}</p>
-<p>Role: {{ teacher.role }}</p>
-<p>Status: {{ teacher.status }}</p>
-<p>Department: {{ teacher.department }}</p>
-<p>Salary: {{ teacher.salary }}</p>
+    <div
+      class="
+        h-56
+        mx-4
+        w-5/6
+        bg-blue-400
+        rounded-3xl
+        shadow-md
+        sm:w-80 sm:mx-0
+      "
+    >
+      <div class="h-1/2 w-full flex justify-between items-baseline px-3 py-5">
+        <h1 class="text-gray-700 font-bold"><!-- profile.html -->
+            Teacher Profile</h1>
+       
+      </div>
+
+      <div style="height: 400px;padding: 20px;margin-bottom: 30px;" class="bg-white
+          h-1/2
+          w-full
+          rounded-3xl
+          flex flex-col
+          justify-around
+          items-center
+        ">
+        <div style="margin-top: -50px;" class="w-full h-1/2 flex flex-col justify-center items-center">
+          <!-- <h1 class="text-gray-700 font-bold">
+            Teacher Profile</h1>
+         -->
+          {% if teacher %}
+<h2 >{{ teacher.get_name }}</h2>
+<br>
+<div style="text-align: left;">
+<p> <b> Address:</b> {{ teacher.address }}</p>
+<p><b>Mobile:</b> {{ teacher.mobile }}</p>
+<p><b>Role: </b>{{ teacher.role }}</p>
+<p><b>Status:</b> {{ teacher.status }}</p>
+<p><b>Department:</b> {{ teacher.department }}</p>
+<p><b>Salary:</b> {{ teacher.salary }}</p>
 {% else %}
 <p>Teacher not found.</p>
 {% endif %}
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

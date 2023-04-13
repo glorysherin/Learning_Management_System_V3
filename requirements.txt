@@ -11,7 +11,9 @@ pyttsx3
 pydub
 langdetect
 fpdf
-
+tkinter
+django-widget-tweaks
+pdf2docx
 pytesseract 
 docx 
 python-docx 
@@ -19,3 +21,8 @@ Pillow
 PyPDF2
 django-downloadview
 pytube
+tabula
+pandas
+openpyxl
+googlesearch-python
+xlwt
