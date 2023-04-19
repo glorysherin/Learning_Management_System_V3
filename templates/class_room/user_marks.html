@@ -1,0 +1,24 @@
+{% if marks %}
+<table>
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Date</th>
+            <th>Subject</th>
+            <th>Mark</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mark in marks %}
+        <tr>
+            <td>{{ mark.user_name }}</td>
+            <td>{{ mark.Date }}</td>
+            <td>{{ mark.subject }}</td>
+            <td>{{ mark.mark }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No marks found.</p>
+{% endif %}

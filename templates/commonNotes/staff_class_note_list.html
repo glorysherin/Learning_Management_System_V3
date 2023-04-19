@@ -1,0 +1,95 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+<body>
+    <!-- component -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 mt-12 mb-12">
+        <article style="margin-top: -20%;">
+            <h2 class="text-2xl font-extrabold text-gray-900">Notes</h2>
+            <div class="flex justify-center mt-6 mb-6">
+                <input id="search-box" type="text" placeholder="Search notes by title, course, subject, or date"
+                    class="w-full p-2 rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+            </div>
+            {% for notes in note_lis %}
+            <h1>{{ notes.0.course }}</h1>
+            <section class="note-section mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+                {% for note in notes %}
+                <article
+                    class="note-article bg-white group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform duration-200"
+                    data-title="{{ note.title }}" data-course="{{ note.course }}" data-subject="{{ note.subject }}"
+                    data-date="{{ note.date }}">
+                    <div class="relative w-full h-80 md:h-64 lg:h-44">
+                        <img src="{{ note.cover_image }}"
+                            alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug."
+                            class="w-full h-full object-center object-cover">
+                    </div>
+                    <div class="px-3 py-4">
+                        <h3 class="text-sm text-gray-500 pb-2">
+                            {% if note.file %}
+                            <a class="bg-indigo-600 py-1 px-2 text-white rounded-lg" href="{{ note.file.url }}">
+                                {% endif %}
+                                <span class="absolute inset-0"></span>
+                                {{ note.Class_id }}
+                            </a>
+                        </h3>
+                        <p class="text-base font-semibold text-gray-900 group-hover:text-indigo-600">
+                            <td><strong>{{ note.title }}</strong></td>
+                            <td>
+                                <ul>
+                                    <li><strong>Course:</strong> {{ note.course }}</li>
+                                    <li><strong>Subject:</strong> {{ note.subject }}</li>
+                                    <li><strong>Date:</strong> {{ note.date }}</li>
+                                    <div style="    display: flex;
+                                        flex-direction: row;
+                                        justify-content: space-evenly;
+                                        align-items: center;">
+                                        <button onclick="window.location.href='/class_ebook/{{ note.id }}/edit/'"
+                                            style="width: 25%;"
+                                            class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm py-2.5 text-center mr-2 mb-2"><a
+                                                href="{{ note.file.url }}">View</a></button>
+                                        <button onclick="window.location.href='/class_ebook/{{ note.id }}/delete/'"
+                                            style="width: 25%;"
+                                            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm py-2.5 text-center mr-2 mb-2">Delete</button>
+                                    </div>
+                                </ul>
+                            </td>
+                        </p>
+                    </div>
+                </article>
+                {% endfor %}
+            </section>
+            <br>
+            <br>
+            {% endfor %}
+        </article>
+    </section>
+    <script>
+        const searchBox = document.getElementById('search-box');
+        const noteArticles = document.querySelectorAll('.note-article');
+
+        searchBox.addEventListener('input', () => {
+            const searchTerm = searchBox.value.trim().toLowerCase();
+
+            noteArticles.forEach(note => {
+                const title = note.dataset.title.toLowerCase();
+                const course = note.dataset.course.toLowerCase();
+                const subject = note.dataset.subject.toLowerCase();
+                const date = note.dataset.date.toLowerCase();
+                const matches = [];
+
+                if (title.includes(searchTerm) || course.includes(searchTerm) || subject.includes(searchTerm) || date.includes(searchTerm)) {
+                    matches.push(true);
+                } else {
+                    matches.push(false);
+                } if (matches.includes(true)) {
+                    note.style.display = 'block';
+                } else {
+                    note.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+{% endblock %}

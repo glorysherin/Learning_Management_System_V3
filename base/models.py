@@ -255,6 +255,7 @@ class EbookForClass(models.Model):
     subject = models.CharField(max_length=50)
     course = models.ForeignKey(NoteCourse, on_delete=models.CASCADE)
     file = models.FileField(upload_to='ebooks')
+    date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.title

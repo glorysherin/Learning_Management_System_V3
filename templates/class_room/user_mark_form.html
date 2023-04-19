@@ -1,0 +1,18 @@
+{% extends 'teacher/teacherbase.html' %} {% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <label for="cars">User Name:</label>
+    <select name="user_name" id="user_name">
+        {% for i in people %}
+        <option value="{{ i.get_name }}">{{ i.get_name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date"><br><br>
+    <label for="department">subject:</label>
+    <input type="text" id="department" name="department"><br><br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock content%}

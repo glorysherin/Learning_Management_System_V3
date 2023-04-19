@@ -13,11 +13,11 @@
         </tr>
     </thead>
     <tbody>
-        {% for i, mark in test_marks %}
+        {% for i, mark, name in test_marks %}
         <tr>
             <th scope="row">{{ i }}</th>
             <td>{{ mark.roll_no }}</td>
-            <td>{{ mark.student.user.first_name }} {{ mark.student.user.last_name }}</td>
+            <td>{{ name }}</td>
             <td>{{ mark.assesment_no }}</td>
             <td>{{ mark.subject }}</td>
             <td>{{ mark.mark }}</td>

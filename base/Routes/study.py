@@ -96,31 +96,31 @@ def nave_home_classroom(request, pk, class_id):
             obj = User.objects.get(id=request.user.id)
             student_data = Student.objects.get(user=obj)
             if Room.objects.filter(name=class_id).exists():
-                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books})
+                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
             else:
                 new_room = Room.objects.create(name=class_id)
                 new_room.save()
-                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books})
+                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
 
         elif is_teacher(request.user):
             accountapproval = TMODEL.Teacher.objects.all().filter(
                 user_id=request.user.id, status=True)
             if accountapproval:
                 if Room.objects.filter(name=class_id).exists():
-                    return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books})
+                    return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
                 else:
                     new_room = Room.objects.create(name=class_id)
                     new_room.save()
-                    return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books})
+                    return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
             else:
                 return render(request, 'teacher/teacher_wait_for_approval.html')
         else:
             if Room.objects.filter(name=class_id).exists():
-                return render(request, 'class_room/student_class_room.html', {'people': peoples, "detail": detials, 'books': books})
+                return render(request, 'class_room/student_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
             else:
                 new_room = Room.objects.create(name=class_id)
                 new_room.save()
-                return render(request, 'class_room/student_class_room.html', {'people': peoples, "detail": detials, 'books': books})
+                return render(request, 'class_room/student_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
 
 
 def home_classroom(request):
@@ -479,7 +479,7 @@ def test_marks(request, class_id):
         except:
             pass
     test_marks = Internal_test_mark.objects.filter(class_id=class_id)
-    return render(request, 'class_room/test_marks.html', {'class_id': class_id, 'test_marks': [[i, j] for i, j in enumerate(test_marks)], 'students': peoples})
+    return render(request, 'class_room/test_marks.html', {'class_id': class_id, 'test_marks': [[i, j, Student.objects.filter(role_no=j.roll_no)[0].get_name] for i, j in enumerate(test_marks)], 'students': peoples})
 
 
 def edit_test_marks(request, class_id, sub, ass_no):
@@ -537,3 +537,132 @@ def user_marks(request, user_name):
     user_subjects = set([mark.subject for mark in user_marks])
     context = {'user_marks': user_marks, 'user_subjects': user_subjects}
     return render(request, 'user_marks.html', context)
+
+
+def show_actions(request, class_id):
+    cls_obj = ClassRooms.objects.get(subject_code=class_id)
+
+    return render(request, "class_room/action_options.html", {'class_obj': cls_obj})
+
+
+def mark_option(request, class_id):
+    cls_obj = ClassRooms.objects.get(subject_code=class_id)
+    return render(request, "class_room/mark_option.html", {'class_obj': cls_obj})
+
+
+def attendes_option(request, class_id):
+    cls_obj = ClassRooms.objects.get(subject_code=class_id)
+    return render(request, "class_room/attendes_actions.html", {'class_obj': cls_obj})
+
+
+def Dailytest_marksby_date(request, user_name):
+    # Retrieve all marks for the given user
+    user_marks = Sec_Daily_test_mark.objects.filter(
+        user_name=user_name).order_by('Date')
+
+    # Get all unique dates for the retrieved marks
+    dates = user_marks.values_list('Date', flat=True).distinct()
+
+    # Get all unique subjects for the retrieved marks
+    subjects = user_marks.values_list('subject', flat=True).distinct()
+
+    # Generate HTML table
+    table = '<table><thead><tr><th>Subject</th>'
+    for date in dates:
+        table += f'<th>{date}</th>'
+    table += '</tr></thead><tbody>'
+    for subject in subjects:
+        table += f'<tr><td>{subject}</td>'
+        for date in dates:
+            try:
+                mark = user_marks.get(subject=subject, Date=date).mark
+                table += f'<td>{mark}</td>'
+            except Sec_Daily_test_mark.DoesNotExist:
+                table += '<td></td>'
+        table += '</tr>'
+    table += '</tbody></table>'
+
+    context = {'marks_table': table}
+    # return render(request, 'user_marks.html', context)
+    return render(request, 'class_room/Dailytest_marksby_date.html', context)
+
+
+def list_user_for_mark(request, class_id):
+    peoples = []
+    people = class_enrolled.objects.filter(subject_code=class_id)
+    test = class_enrolled.objects.all()
+    for i in test:
+        print(i.class_id, i.mail_id, i.subject_code)
+    for i in people:
+        print(i.class_id, i.mail_id, i.subject_code)
+        person_obj = User.objects.get(id=i.user_id)
+        try:
+            obj = Student.objects.get(user=person_obj.id)
+            print(obj.role_no)
+            peoples.append(obj)
+        except:
+            pass
+    return render(request, 'class_room/list_user_for_mark.html', {'people': peoples})
+
+
+def user_mark_view(request, class_id):
+    peoples = []
+    people = class_enrolled.objects.filter(subject_code=class_id)
+    test = class_enrolled.objects.all()
+    for i in test:
+        print(i.class_id, i.mail_id, i.subject_code)
+    for i in people:
+        print(i.class_id, i.mail_id, i.subject_code)
+        person_obj = User.objects.get(id=i.user_id)
+        try:
+            obj = Student.objects.get(user=person_obj.id)
+            print(obj.role_no)
+            peoples.append(obj)
+        except:
+            pass
+    if request.method == 'POST':
+        user_name = request.POST['user_name']
+        date = request.POST['date']
+        department = request.POST['department']
+        if department == '':
+            marks = Sec_Daily_test_mark.objects.filter(
+                user_name=user_name, Date=date)
+        else:
+            marks = Sec_Daily_test_mark.objects.filter(
+                user_name=user_name, Date=date, subject=department)
+        context = {'marks': marks}
+        return render(request, 'class_room/user_marks.html', context)
+    return render(request, 'class_room/user_mark_form.html', {'people': peoples})
+
+
+def get_internal_test_marks(request):
+    marks = None
+    class_id = ''
+    assesment_no = ''
+    date_str = ''
+
+    if request.method == 'GET':
+        class_id = request.GET.get('class_id')
+        assesment_no = request.GET.get('assesment_no')
+        date_str = request.GET.get('date')
+
+        if class_id and assesment_no:
+            marks = Internal_test_mark.objects.filter(
+                class_id=class_id, assesment_no=assesment_no)
+
+            if date_str:
+                # Parse the date string to get the year
+                date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
+                year = date.year
+
+                # Filter marks based on year
+                marks = marks.filter(Date__year=year)
+
+    context = {
+        'marks': marks,
+        'class_id': class_id,
+        'assesment_no': assesment_no,
+        'date': date_str,
+    }
+
+    return render(request, 'class_room/internal_test_marks.html', context)
