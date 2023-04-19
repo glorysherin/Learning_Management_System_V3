@@ -1,0 +1,183 @@
+{% extends 'teacher/teacherbase.html' %} {% block content %}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+                <div class="card">
+                    <div class="d-flex justify-content-between p-3">
+                        <p class="lead mb-0">Update Internal Mark</p>
+                        <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 small">1</p>
+                        </div>
+                    </div>
+                    <img src="https://st2.depositphotos.com/1915171/45974/v/600/depositphotos_459741242-stock-illustration-new-update-paper-banner-circle.jpg"
+                        class="card-img-top" alt="Laptop" />
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="small"><a href="#!" class="text-muted">{{ class_obj.class_name }}</a></p>
+                            <p class="small text-danger"><s>Sem-{{ class_obj.semester }}</s></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">Subject code</h5>
+                            <h5 class="text-dark mb-0">SubCode {{ class_obj.subject_code }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted mb-0">department:
+                                <span class="fw-bold">{{ class_obj.department }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <a style="    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;" href="{% url 'add_test_marks' class_id=class_obj.subject_code %}"><button type="button"
+                            class="btn btn-primary btn-rounded">Update</button></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                <div class="card" style="    height: 100%;">
+                    <div class="d-flex justify-content-between p-3">
+                        <p class="lead mb-0">Update Daily Test Mark</p>
+                        <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 small">2</p>
+                        </div>
+                    </div>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/009/742/351/small/3d-online-deliver-service-delivery-tracking-laptop-pin-location-point-marker-of-map-for-shipment-concept-product-shipping-packing-come-out-from-notebook-logistic-icon-3d-render-illustration-vector.jpg"
+                        class="card-img-top" alt="Laptop" />
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="small"><a href="#!" class="text-muted">{{ class_obj.class_name }}</a></p>
+                            <p class="small text-danger"><s>Sem-{{ class_obj.semester }}</s></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">Subject code</h5>
+                            <h5 class="text-dark mb-0">SubCode {{ class_obj.subject_code }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted mb-0">department:
+                                <span class="fw-bold">{{ class_obj.department }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <a style="    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;" href="{% url 'mark' class_id=class_obj.subject_code %}"><button type="button"
+                            class="btn btn-primary btn-rounded">Update</button></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                <div class="card" style="    height: 100%;">
+                    <div class="d-flex justify-content-between p-3">
+                        <p class="lead mb-0">View marks</p>
+                        <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 small">3</p>
+                        </div>
+                    </div>
+                    <img src="https://www.jing.fm/clipimg/full/246-2468001_once-youve-gone-through-the-syllabus-its-time.png"
+                        class="card-img-top" alt="Gaming Laptop" />
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="small"><a href="#!" class="text-muted">{{ class_obj.class_name }}</a></p>
+                            <p class="small text-danger"><s>Sem-{{ class_obj.semester }}</s></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">Subject code</h5>
+                            <h5 class="text-dark mb-0">SubCode {{ class_obj.subject_code }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted mb-0">department:
+                                <span class="fw-bold">{{ class_obj.department }}</span>
+                            </p>
+                        </div>
+                    </div><a style="    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;" href="{% url 'mark_option' class_id=class_obj.subject_code %}"><button type="button"
+                            class="btn btn-primary btn-rounded">View</button></a>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                <div class="card" style="    height: 100%;">
+                    <div class="d-flex justify-content-between p-3">
+                        <p class="lead mb-0">Edit Daily test marks</p>
+                        <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 small">4</p>
+                        </div>
+                    </div>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/008/243/440/small/woman-using-a-tablet-computer-in-a-cafe-girl-surfing-in-the-social-network-female-rewriting-in-social-network-concept-flat-design-illustration-isolated-on-yellow-background-vector.jpg"
+                        class="card-img-top" alt="Gaming Laptop" />
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="small"><a href="#!" class="text-muted">{{ class_obj.class_name }}</a></p>
+                            <p class="small text-danger"><s>Sem-{{ class_obj.semester }}</s></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">Subject code</h5>
+                            <h5 class="text-dark mb-0">SubCode {{ class_obj.subject_code }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted mb-0">department:
+                                <span class="fw-bold">{{ class_obj.department }}</span>
+                            </p>
+                        </div>
+                    </div><a style="    display: flex;
+                align-content: center;
+                justify-content: center;
+                align-items: center;" href="{% url 'edit_mark_home' %}"><button type="button"
+                            class="btn btn-primary btn-rounded">Edit</button></a>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                <div class="card" style="    height: 100%;">
+                    <div class="d-flex justify-content-between p-3">
+                        <p class="lead mb-0">Edit Internal marks</p>
+                        <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 small">5</p>
+                        </div>
+                    </div>
+                    <img src="https://png.pngtree.com/png-vector/20200411/ourlarge/pngtree-women-with-laptop-working-from-home-activity-during-pandemic-ncov-2019-png-image_2182432.jpg"
+                        class="card-img-top" alt="Gaming Laptop" />
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="small"><a href="#!" class="text-muted">{{ class_obj.class_name }}</a></p>
+                            <p class="small text-danger"><s>Sem-{{ class_obj.semester }}</s></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">Subject code</h5>
+                            <h5 class="text-dark mb-0">SubCode {{ class_obj.subject_code }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted mb-0">department:
+                                <span class="fw-bold">{{ class_obj.department }}</span>
+                            </p>
+                        </div>
+                    </div><a style="    display: flex;
+                align-content: center;
+                justify-content: center;
+                align-items: center;" href="{% url 'mark_option' class_id=class_obj.subject_code %}"><button
+                            type="button" class="btn btn-primary btn-rounded">Edit</button></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content%}
