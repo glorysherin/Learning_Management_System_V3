@@ -1,0 +1,13 @@
+<h1>Search Results for "{{ query }}"</h1>
+{% if not results %}
+<p>No results found.</p>
+{% else %}
+<ul>
+    {% for result in results %}
+    <li>
+        <h3><a href="{{ result.title }}" target="_blank">{{ result.title }}</a></h3>
+        <p>{{ result.description }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}

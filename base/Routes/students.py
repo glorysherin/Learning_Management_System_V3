@@ -188,7 +188,7 @@ def take_exam_view(request, pk):
     for q in questions:
         total_marks = total_marks + q.marks
 
-    return render(request, 'student/take_exam.html', {'course': course, 'total_questions': total_questions, 'total_marks': total_marks})
+    return render(request, 'student/take_exam.html', student_detials(request, 'Take Exam', {'course': course, 'total_questions': total_questions, 'total_marks': total_marks}))
 
 
 @login_required(login_url='studentlogin')
@@ -198,8 +198,8 @@ def start_exam_view(request, pk):
     questions = QMODEL.Question.objects.all().filter(course=course)
     if request.method == 'POST':
         pass
-    response = render(request, 'student/start_exam.html',
-                      {'course': course, 'questions': questions})
+    response = render(request, 'student/start_exam.html', student_detials(request,
+                      'start-exam', {'course': course, 'questions': questions}))
     response.set_cookie('course_id', course.id)
     return response
 

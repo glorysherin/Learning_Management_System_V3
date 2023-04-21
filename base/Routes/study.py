@@ -1,3 +1,5 @@
+import requests
+from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from ..models import Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
 from django.contrib.auth.models import User
@@ -8,6 +10,11 @@ from .Tool.Code_scriping_Tool import get_image_url
 from .Forms.Notes_form import EbookClassForm
 from base import models as TMODEL
 from django.utils import timezone
+from googlesearch import search
+import urllib.parse
+
+from bs4 import BeautifulSoup
+
 from .Tool.Tools import student_detials
 
 
@@ -761,3 +768,26 @@ def student_int_test_marks(request, roll_no):
         'queryset': queryset
     }
     return render(request, 'class_room/internal_test_mark_by_user.html', context)
+
+
+def view_attendees_by_roolno(request, roll_no):
+    attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
+
+    context = {
+        'roll_no': roll_no,
+        'attendees': attendees,
+    }
+    return render(request, 'class_room/view_attendeesbyroolno.html', context)
+
+
+def search_view(request):
+    if request.method == 'GET':
+        query = request.GET.get('google_search')
+        if query:
+            query = urllib.parse.quote(query)
+            results = []
+            for url in search(query, num_results=50):
+                # process the search results
+                results.append(url)
+            return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
+    return render(request, 'class_room/search_results.html')

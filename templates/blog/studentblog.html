@@ -271,6 +271,10 @@
     }
 </style>
 <div>
+    <div>
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="button" onclick="searchBlogs()">Search</button>
+    </div>
     <section style="display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -364,4 +368,31 @@
         location.href = "view_blog/" + id;
     }
 </script>
+<script>
+    function searchBlogs() {
+        // Get the input value
+        var input = document.getElementById("searchInput").value.toLowerCase();
+
+        // Get all blog elements
+        var blogs = document.querySelectorAll(".grid > div");
+
+        // Loop through all blog elements
+        for (var i = 0; i < blogs.length; i++) {
+            var blog = blogs[i];
+
+            // Get the title, category and author name
+            var title = blog.querySelector("h2").textContent.toLowerCase();
+            var category = blog.querySelector("p").textContent.toLowerCase();
+            var author = blog.querySelector(".text-gray-600").textContent.toLowerCase();
+
+            // Check if the input matches the title, category or author name
+            if (title.indexOf(input) > -1 || category.indexOf(input) > -1 || author.indexOf(input) > -1) {
+                blog.style.display = "";
+            } else {
+                blog.style.display = "none";
+            }
+        }
+    }
+</script>
+
 {% endblock script %}

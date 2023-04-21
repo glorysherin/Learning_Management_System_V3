@@ -173,6 +173,9 @@ chatroom = [
 
 
 classroom = [
+    path('search_view', search_view, name='search_view'),
+    path('view_attendees_by_roolno/<int:roll_no>',
+         view_attendees_by_roolno, name='view_attendees_by_roolno'),
     path('student_int_test_marks/<int:roll_no>',
          student_int_test_marks, name='student_int_test_marks'),
     path('student_mark_option/<str:class_id>',
