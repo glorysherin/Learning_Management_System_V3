@@ -60,8 +60,18 @@ integeration
 Attendees Edit 
 Common Notes update
 Staff and hod integration
+members images in class list
+
+resume builder
+
 
 -------------------------------------------------------
+====================== UI =============================
+
+Admin, Stall, Hod = Common notes
+Edting Works
+PlayGround in student also resume
+google search
 
 
 

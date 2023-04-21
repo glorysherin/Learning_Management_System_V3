@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from base import models
 from .Forms import student_forms
-from ..models import Users, Student, Faculty_details
+from ..models import Users, Student, Faculty_details, Sec_Daily_test_mark
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -156,8 +156,12 @@ def student_dashboard_view(request):
     usr_id = request.user.id
     usr_obj = User.objects.get(id=usr_id)
     std_data = Student.objects.get(user=usr_obj)
+    data = Sec_Daily_test_mark.objects.filter(
+        user_name=Student.get_name).order_by('Date')
+    for i in data:
+        print(i.class_id, i.user_name)
     dict = {
-
+        'datas': data,
         'total_course': QMODEL.Course.objects.all().count(),
         'total_question': QMODEL.Question.objects.all().count(),
         'usr': std_data,

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Internal Test Marks</title>
+</head>
+
+<body>
+    <h1>Internal Test Marks for Roll No. {{ roll_no }}</h1>
+
+    <form method="get">
+        <label for="year">Filter by year:</label>
+        <input type="text" name="year" id="year" placeholder="YYYY">
+        <button type="submit">Filter</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Assessment No.</th>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Mark</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in queryset %}
+            <tr>
+                <td>{{ data.assesment_no }}</td>
+                <td>{{ data.Date }}</td>
+                <td>{{ data.subject }}</td>
+                <td>{{ data.mark }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

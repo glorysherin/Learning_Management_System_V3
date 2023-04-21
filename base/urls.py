@@ -18,6 +18,7 @@ from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
 from .Routes.staff_tools import *
+from .Routes.NoCodeViews import *
 
 
 # Initilizes........................
@@ -154,6 +155,7 @@ videochat = [
 
 
 chatroom = [
+    path('todolist', ToDoList, name='todolist'),
     path('chat_home/', chat_home, name='chat_home'),
     path('staff_chat_home/', staff_chat_home, name='staff_chat_home'),
     path('admin_chat_home/', admin_chat_home, name='admin_chat_home'),
@@ -171,6 +173,14 @@ chatroom = [
 
 
 classroom = [
+    path('student_int_test_marks/<int:roll_no>',
+         student_int_test_marks, name='student_int_test_marks'),
+    path('student_mark_option/<str:class_id>',
+         student_mark_option, name='student_mark_option'),
+    path('student_get_mark/<str:user_name>',
+         student_get_mark, name='student_get_mark'),
+    path('Dailystudenttest_marksby_date/<str:user_name>',
+         Dailystudenttest_marksby_date, name='Dailystudenttest_marksby_date'),
     path('get_internal_test_marks',
          get_internal_test_marks, name='get_internal_test_marks'),
     path('user_mark_view/<str:class_id>',
@@ -425,7 +435,24 @@ Staff_tool = [
     path('Staff_Code_scriping', Staff_Code_scriping),
 ]
 
-urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
+NoCodeMaker = [
+    path('view_pages', index, name='home'),
+
+    path('add', addPage, name="addpage"),
+    path('edit/<id>', editPage, name="editpage"),
+    path('page/create', savePage, name="create_page"),
+    path('editPage/<id>', editPageContent, name="editPageContent"),
+    path('preview/<id>', previewPage, name='previewPage'),
+    path('Own_Gpt', Own_Gpt, name='Own_Gpt'),
+    path('chat_view', chat_view, name='chat_view'),
+    path('autogenerate', autogenerate, name='autogenerate'),
+    path('url', url, name='url'),
+    path('edits', edits, name='edits'),
+    path('Download_file', Download_file, name='Download_file'),
+    path('ResumeBuilder', ResumeBuilder, name='ResumeBuilder'),
+]
+
+urlpatterns.extend(Make_Join([tools, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

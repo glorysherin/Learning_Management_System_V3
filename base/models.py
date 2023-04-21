@@ -433,3 +433,11 @@ class SocialMediaLinks(models.Model):
 
 #     def __str__(self):
 #         return self.title
+
+class Pages(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
+    html = models.TextField()
+    css = models.TextField()
+    preview_link = models.TextField()

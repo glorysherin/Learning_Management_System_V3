@@ -3,11 +3,12 @@ from ..models import Faculty_details, Internal_test_mark, Course, Sec_Daily_test
 from django.contrib.auth.models import User
 from .Tool.Tools import get_user_mail, get_user_name, get_user_role, get_user_obj
 import datetime
+from datetime import datetime
 from .Tool.Code_scriping_Tool import get_image_url
 from .Forms.Notes_form import EbookClassForm
 from base import models as TMODEL
 from django.utils import timezone
-from django.urls import reverse
+from .Tool.Tools import student_detials
 
 
 def is_teacher(user):
@@ -666,3 +667,97 @@ def get_internal_test_marks(request):
     }
 
     return render(request, 'class_room/internal_test_marks.html', context)
+
+
+def Dailystudenttest_marksby_date(request, user_name):
+    # Retrieve all marks for the given user
+    user_marks = Sec_Daily_test_mark.objects.filter(
+        user_name=user_name).order_by('Date')
+
+    # Get all unique dates for the retrieved marks
+    dates = user_marks.values_list('Date', flat=True).distinct()
+
+    # Get all unique subjects for the retrieved marks
+    subjects = user_marks.values_list('subject', flat=True).distinct()
+
+    # Generate HTML table
+    table = '<table><thead><tr><th>Subject</th>'
+    for date in dates:
+        table += f'<th>{date}</th>'
+    table += '</tr></thead><tbody>'
+    for subject in subjects:
+        table += f'<tr><td>{subject}</td>'
+        for date in dates:
+            try:
+                mark = user_marks.get(subject=subject, Date=date).mark
+                table += f'<td>{mark}</td>'
+            except Sec_Daily_test_mark.DoesNotExist:
+                table += '<td></td>'
+        table += '</tr>'
+    table += '</tbody></table>'
+
+    context = {'marks_table': table}
+    # return render(request, 'user_marks.html', context)
+    return render(request, 'class_room/Dailystudenttest_marksby_date.html', context)
+
+
+def ToDoList(request):
+    return render(request, "ToDoList/index.html", student_detials(request, 'ToDo-List'))
+
+
+def student_mark_option(request, class_id):
+    cls_obj = ClassRooms.objects.get(subject_code=class_id)
+    return render(request, "class_room/student_mark_option.html", student_detials(request, 'Mark Options', {'class_obj': cls_obj}))
+
+
+def student_get_mark(request, user_name):
+    # Retrieve all marks for the given user
+    user_marks = Sec_Daily_test_mark.objects.filter(
+        user_name=user_name).order_by('Date')
+
+    # Get all unique dates for the retrieved marks
+    dates = user_marks.values_list('Date', flat=True).distinct()
+
+    # Get all unique subjects for the retrieved marks
+    subjects = user_marks.values_list('subject', flat=True).distinct()
+
+    # Generate HTML table
+    table = '<table><thead><tr><th>Subject</th>'
+    for date in dates:
+        table += f'<th>{date}</th>'
+    table += '</tr></thead><tbody>'
+    for subject in subjects:
+        table += f'<tr><td>{subject}</td>'
+        for date in dates:
+            try:
+                mark = user_marks.get(subject=subject, Date=date).mark
+                table += f'<td>{mark}</td>'
+            except Sec_Daily_test_mark.DoesNotExist:
+                table += '<td></td>'
+        table += '</tr>'
+    table += '</tbody></table>'
+
+    context = {'marks_table': table}
+    # return render(request, 'user_marks.html', context)
+    return render(request, 'class_room/get_test__mark.html', context)
+
+
+def student_int_test_marks(request, roll_no):
+    queryset = Internal_test_mark.objects.filter(
+        roll_no=roll_no
+    ).order_by('-assesment_no', '-Date')
+
+    year = request.GET.get('year')
+    if year:
+        start_date = datetime.strptime(f"{year}-01-01", "%Y-%m-%d").date()
+        end_date = datetime.strptime(f"{year}-12-31", "%Y-%m-%d").date()
+
+        queryset = queryset.filter(
+            Date__range=(start_date, end_date)
+        )
+
+    context = {
+        'roll_no': roll_no,
+        'queryset': queryset
+    }
+    return render(request, 'class_room/internal_test_mark_by_user.html', context)
