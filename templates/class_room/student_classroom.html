@@ -380,7 +380,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{% url 'student_detail' student_id=usr.id %}">
+                    <a class="nav-link  active" href="{% url 'student_detail' student_id=student_data.id %}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
@@ -406,7 +406,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">{{ usr.get_name }}</span>
+                        <span class="nav-link-text ms-1">{{ student_data.get_name }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
