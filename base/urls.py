@@ -81,7 +81,6 @@ alternative_url = [path('student/video_meeting', meeting),
                    ]
 
 common_tool = [
-<<<<<<< HEAD
     path('Common_Common_tool', Common_Common_tool,name='Common_Common_tool'),
     path('Common_toolHome', Common_toolHome,name='Common_toolHome'),
     path('Common_trans', Common_translate_,name='Common_trans'),
@@ -98,24 +97,6 @@ common_tool = [
     path('Common_handwriting_converter', Common_handwriting_converter,name='Common_handwriting_converter'),
     path('Common_keyword_to_image', Common_keyword_to_image,name='Common_keyword_to_image'),
     path('Common_video_meeting', Common_video_meeting,name='Common_video_meeting'),
-=======
-    path('Common_Common_tool', Common_Common_tool),
-    path('Common_toolHome', Common_toolHome, name='Common_toolHome'),
-    path('Common_trans', Common_translate_),
-    path('Common_convert_text', Common_convert_text),
-    path('Common_wikipedia_summary', Common_wikipedia_summary),
-    path('Common_convert_docx_to_pdf', Common_convert_docx_to_pdf),
-    path('Common_convert_pdf_to_docx', Common_convert_pdf_to_docx),
-    path('Common_convert_pdf_to_excel', Common_convert_pdf_to_excel),
-    path('Common_convert_excel_to_pdf', Common_convert_excel_to_pdf),
-    path('Common_convert_jpg_to_pdf', Common_convert_jpg_to_pdf),
-    path('Common_convert_jpg_to_word', Common_convert_jpg_to_word),
-    path('Common_calculator', Common_calculator),
-    path('Common_cgpa_calculator', Common_cgpa_calculator),
-    path('Common_handwriting_converter', Common_handwriting_converter),
-    path('Common_keyword_to_image', Common_keyword_to_image),
-    path('Common_video_meeting', Common_video_meeting),
->>>>>>> 9882dcfd90e853498afb40d756a0ff492bf44318
 
     path('Common_gpa_calculator', Common_gpa_calculator,name='Common_gpa_calculator'),
     path('Common_get_subject', Common_get_subject,name='Common_get_subject'),
