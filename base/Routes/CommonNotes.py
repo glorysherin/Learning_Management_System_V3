@@ -1,16 +1,53 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from ..models import Note
+from ..models import Note, EbookForClass
 from .Tool.Tools import student_detials, staff_detials
+
+
+def note_by_class(request, class_id):
+    books = EbookForClass.objects.filter(Class_id=class_id)
+    collections = []
+    course = []
+    for i in books:
+        course.append(i.course)
+    for j in list(set(course)):
+        collections.append(EbookForClass.objects.filter(course=j))
+    return render(request, 'commonNotes/student_class_note_list.html', student_detials(request, 'Common Notes', {'note_lis': collections}))
+
+
+def note_by_class_staff(request, class_id):
+    books = EbookForClass.objects.filter(Class_id=class_id)
+    collections = []
+    course = []
+    for i in books:
+        course.append(i.course)
+    for j in list(set(course)):
+        collections.append(EbookForClass.objects.filter(course=j))
+    return render(request, 'commonNotes/staff_class_note_list.html', staff_detials(request, 'Common Notes', {'note_lis': collections}))
 
 
 def notes_list(request):
     notes = Note.objects.all()
-    return render(request, 'commonNotes/notes_list.html', {'notes': notes})
+    dep = {}
+    note_lis = []
+    for i in notes:
+        dep.update(i.department)
+    print(dep)
+    for j in list(dep):
+        obj = Note.objects.filter(department=j)
+        note_lis.append(obj)
+    return render(request, 'commonNotes/notes_list.html', {'notes': notes, 'note_lis': note_lis})
 
 
 def student_notes_list(request):
     notes = Note.objects.all()
-    return render(request, 'commonNotes/student_note_list.html', student_detials(request, 'Common Notes', {'notes': notes}))
+    dep = []
+    note_lis = []
+    for i in notes:
+        dep.append(i.department)
+    for j in list(set(dep)):
+        obj = Note.objects.filter(department=j)
+        note_lis.append(obj)
+    return render(request, 'commonNotes/student_note_list.html', student_detials(request, 'Common Notes', {'notes': notes, 'note_lis': note_lis}))
 
 
 def staff_notes_list(request):

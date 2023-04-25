@@ -9,17 +9,17 @@
         <article style="margin-top: -20%;">
             <h2 class="text-2xl font-extrabold text-gray-900">Notes</h2>
             <div class="flex justify-center mt-6 mb-6">
-                <input id="search-box" type="text" placeholder="Search notes by department, subcode, or description"
+                <input id="search-box" type="text" placeholder="Search notes by title, course, subject, or date"
                     class="w-full p-2 rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5">
             </div>
             {% for notes in note_lis %}
-            <h1>{{ notes.0.department }}</h1>
+            <h1>{{ notes.0.course }}</h1>
             <section class="note-section mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
                 {% for note in notes %}
                 <article
                     class="note-article bg-white group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform duration-200"
-                    data-department="{{ note.department }}" data-subcode="{{ note.subcode }}"
-                    data-description="{{ note.description }}">
+                    data-title="{{ note.title }}" data-course="{{ note.course }}" data-subject="{{ note.subject }}"
+                    data-date="{{ note.date }}">
                     <div class="relative w-full h-80 md:h-64 lg:h-44">
                         <img src="{{ note.cover_image }}"
                             alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug."
@@ -31,18 +31,16 @@
                             <a class="bg-indigo-600 py-1 px-2 text-white rounded-lg" href="{{ note.file.url }}">
                                 {% endif %}
                                 <span class="absolute inset-0"></span>
-                                {{ note.subcode }}
+                                {{ note.Class_id }}
                             </a>
                         </h3>
                         <p class="text-base font-semibold text-gray-900 group-hover:text-indigo-600">
-                            <td><strong>{{ note.notes_title }}</strong></td>
+                            <td><strong>{{ note.title }}</strong></td>
                             <td>
                                 <ul>
-                                    <li><strong>department:</strong> {{ note.department }}</li>
-                                    <li><strong>semester:</strong> {{ note.semester }}</li>
-                                    <li><strong>Regulation:</strong> {{ note.regulation }}</li>
-                                    <li><strong>Subject Code:</strong> {{ note.subcode }}</li>
-                                    <li><strong>Description:</strong> {{ note.description }}</li>
+                                    <li><strong>Course:</strong> {{ note.course }}</li>
+                                    <li><strong>Subject:</strong> {{ note.subject }}</li>
+                                    <li><strong>Date:</strong> {{ note.date }}</li>
                                 </ul>
                             </td>
                         </p>
@@ -63,23 +61,20 @@
             const searchTerm = searchBox.value.trim().toLowerCase();
 
             noteArticles.forEach(note => {
-                const department = note.dataset.department.toLowerCase();
-                const subcode = note.dataset.subcode.toLowerCase();
-                const description = note.dataset.description.toLowerCase();
+                const title = note.dataset.title.toLowerCase();
+                const course = note.dataset.course.toLowerCase();
+                const subject = note.dataset.subject.toLowerCase();
+                const date = note.dataset.date.toLowerCase();
                 const matches = [];
 
-                if (department.includes(searchTerm) || subcode.includes(searchTerm) || description.includes(searchTerm)) {
-                    note.classList.remove('hidden');
+                if (title.includes(searchTerm) || course.includes(searchTerm) || subject.includes(searchTerm) || date.includes(searchTerm)) {
                     matches.push(true);
                 } else {
-                    note.classList.add('hidden');
                     matches.push(false);
-                }
-
-                if (matches.includes(true)) {
-                    note.classList.remove('hidden');
+                } if (matches.includes(true)) {
+                    note.style.display = 'block';
                 } else {
-                    note.classList.add('hidden');
+                    note.style.display = 'none';
                 }
             });
         });

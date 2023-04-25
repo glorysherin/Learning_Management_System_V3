@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Internal Test Marks</title>
+</head>
+
+<body>
+    <h1>Internal Test Marks</h1>
+
+    <form method="GET">
+        <label for="class_id">Class ID:</label>
+        <input type="text" id="class_id" name="class_id" value="{{ class_id }}"><br><br>
+
+        <label for="assesment_no">Assessment Number:</label>
+        <input type="number" id="assesment_no" name="assesment_no" value="{{ assesment_no }}"><br><br>
+
+        <label for="date">Date (optional):</label>
+        <input type="date" id="date" name="date" value="{{ date }}"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if marks %}
+    <h2>Marks:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Class ID</th>
+                <th>Roll No</th>
+                <th>Subject</th>
+                <th>Mark</th>
+                <th>Assessment No</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mark in marks %}
+            <tr>
+                <td>{{ mark.id }}</td>
+                <td>{{ mark.class_id }}</td>
+                <td>{{ mark.roll_no }}</td>
+                <td>{{ mark.subject }}</td>
+                <td>{{ mark.mark }}</td>
+                <td>{{ mark.assesment_no }}</td>
+                <td>{{ mark.Date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+
+</html>

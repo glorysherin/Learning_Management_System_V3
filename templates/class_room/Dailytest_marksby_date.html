@@ -1,0 +1,6 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<h1>Marks for {{ user_name }}</h1>
+{{ marks_table|safe }}
+{% endblock %}

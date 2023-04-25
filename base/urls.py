@@ -18,6 +18,7 @@ from .Routes.CommonNotes import *
 from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
 from .Routes.staff_tools import *
+from .Routes.NoCodeViews import *
 
 
 # Initilizes........................
@@ -154,6 +155,7 @@ videochat = [
 
 
 chatroom = [
+    path('todolist', ToDoList, name='todolist'),
     path('chat_home/', chat_home, name='chat_home'),
     path('staff_chat_home/', staff_chat_home, name='staff_chat_home'),
     path('admin_chat_home/', admin_chat_home, name='admin_chat_home'),
@@ -171,6 +173,32 @@ chatroom = [
 
 
 classroom = [
+    path('search_view', search_view, name='search_view'),
+    path('view_attendees_by_roolno/<int:roll_no>',
+         view_attendees_by_roolno, name='view_attendees_by_roolno'),
+    path('student_int_test_marks/<int:roll_no>',
+         student_int_test_marks, name='student_int_test_marks'),
+    path('student_mark_option/<str:class_id>',
+         student_mark_option, name='student_mark_option'),
+    path('student_get_mark/<str:user_name>',
+         student_get_mark, name='student_get_mark'),
+    path('Dailystudenttest_marksby_date/<str:user_name>',
+         Dailystudenttest_marksby_date, name='Dailystudenttest_marksby_date'),
+    path('get_internal_test_marks',
+         get_internal_test_marks, name='get_internal_test_marks'),
+    path('user_mark_view/<str:class_id>',
+         user_mark_view, name='user_mark_view'),
+    path('Dailytest_marksby_date/<str:user_name>',
+         Dailytest_marksby_date, name='Dailytest_marksby_date'),
+    path('list_user_for_mark/<str:class_id>',
+         list_user_for_mark, name='list_user_for_mark'),
+    path('show_actions/<str:class_id>', show_actions, name='show_actions'),
+    path('mark_option/<str:class_id>', mark_option, name='mark_option'),
+    path('attendes_option/<str:class_id>',
+         attendes_option, name='attendes_option'),
+    path('note_by_class/<str:class_id>/', note_by_class, name='note_by_class'),
+    path('note_by_class_staff/<str:class_id>/',
+         note_by_class_staff, name='note_by_class_staff'),
     path('test_marks/<str:class_id>/', test_marks, name='test_marks'),
     path('add_test_marks/<str:class_id>',
          add_test_marks, name='add_test_marks'),
@@ -182,19 +210,21 @@ classroom = [
     path('add_class', add_class),
     path('delete_class/<str:room>', delete_class),
     path("save_added_class", save_add_class),
-    path("edit_classroom/<str:classroom_id>", edit_classroom),
+    path("edit_classroom/<str:classroom_id>",
+         edit_classroom, name='edit_classroom'),
     path("attendes", attendes),
-    path("update_attendes", update_attendes),
+    path("update_attendes", update_attendes, name='update_attendes'),
     path("update_edited_attendes", update_edited_attendes),
-    path("edit_attendes_home", edit_attendes_home),
-    path("view_attendes", view_attendes),
+    path("edit_attendes_home", edit_attendes_home, name='edit_attendes_home'),
+    path("view_attendes", view_attendes, name='view_attendes'),
     path("edit_attendes", edit_attendes),
-    path("mark/<str:class_id>", mark),
+    path("mark/<str:class_id>", mark, name='mark'),
     path("update_marks", update_mark),
-    path("edit_mark_home", edit_mark_home),
+    path("edit_mark_home", edit_mark_home, name='edit_mark_home'),
     path("edit_mark", edit_mark),
     path("update_edited_mark", update_edited_mark),
-    path("marks_by_class/<str:class_id>", marks_by_class),
+    path("marks_by_class/<str:class_id>",
+         marks_by_class, name='marks_by_class'),
     path("add_class_notes/<str:pk>", add_class_notes),
     path('class_ebook/book_list', class_book_list, name='class_book_list'),
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
@@ -408,7 +438,24 @@ Staff_tool = [
     path('Staff_Code_scriping', Staff_Code_scriping),
 ]
 
-urlpatterns.extend(Make_Join([tools, common_tool, note, gallery_, blog_url, common, event,
+NoCodeMaker = [
+    path('view_pages', index, name='home'),
+
+    path('add', addPage, name="addpage"),
+    path('edit/<id>', editPage, name="editpage"),
+    path('page/create', savePage, name="create_page"),
+    path('editPage/<id>', editPageContent, name="editPageContent"),
+    path('preview/<id>', previewPage, name='previewPage'),
+    path('Own_Gpt', Own_Gpt, name='Own_Gpt'),
+    path('chat_view', chat_view, name='chat_view'),
+    path('autogenerate', autogenerate, name='autogenerate'),
+    path('url', url, name='url'),
+    path('edits', edits, name='edits'),
+    path('Download_file', Download_file, name='Download_file'),
+    path('ResumeBuilder', ResumeBuilder, name='ResumeBuilder'),
+]
+
+urlpatterns.extend(Make_Join([tools, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

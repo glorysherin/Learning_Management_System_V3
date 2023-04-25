@@ -2,6 +2,28 @@ import openai
 from django.shortcuts import get_object_or_404
 from ...models import Faculty_details, Student, Users
 from django.contrib.auth.models import User
+from bs4 import BeautifulSoup
+import requests
+import random
+
+
+def random_image():
+
+    # URL of website with SVG images
+    url = "https://www.google.com/search?q=nocode+svg+images&tbm=isch&ved=2ahUKEwj0j47uy6v-AhVc1HMBHQtXBaYQ2-cCegQIABAA&oq=nocode+svg+images&gs_lcp=CgNpbWcQAzoKCAAQigUQsQMQQzoHCAAQigUQQzoFCAAQgARQrQNYjAtgyw1oAHAAeACAAacCiAHoC5IBBTAuNC40mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=73A6ZLTcItyoz7sPi66VsAo&bih=760&biw=1536&rlz=1C1RXQR_enIN1038IN1038"
+    # Make a GET request to the URL and get the HTML content
+    response = requests.get(url)
+    html_content = response.content
+
+    # Parse the HTML content using BeautifulSoup
+    soup = BeautifulSoup(html_content, 'html.parser')
+    image_urls = set()
+    for img in soup.find_all('img'):
+        img_url = img.get('src')
+        if img_url:
+            image_urls.add(img_url)
+
+    return random.choice(list(image_urls))
 
 
 def get_user_mail(request):
