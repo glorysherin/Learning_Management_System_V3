@@ -1,7 +1,7 @@
 {% extends 'NoCodeBuilderPages/base.html' %} {% block content %}
 <style>
   .parent_builder {
-    background-color: #444;
+    background-color: #444444;
   }
 
   #blocks {
@@ -29,8 +29,25 @@
   <div class="panel__switcher flex justify-center">
     <form onsubmit="saveContent(event)">
       {% csrf_token %}
-      <input type="text" name="Project_name" id="Project_name">
-      <button class="py-2 px-6 rounded text-white btn bg-blue-500 hover:bg-blue-600 mr-4" type="submit">Save</button>
+
+      <input type="text" name="Project_name" id="Project_name"
+        class="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+        placeholder="Add title" autocomplete="off">
+      <!-- <button class="py-2 px-6 rounded text-white btn bg-blue-500 hover:bg-blue-600 mr-4" type="submit">Save</button> -->
+      <a type="submit" onclick="saveContent(event)"
+        class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+        <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+        <span
+          class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+        <span class="relative text-white">Save</span>
+      </a>
+      <a type="submit" onclick="saveContent1(event)"
+        class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+        <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+        <span
+          class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+        <span class="relative text-white">Download</span>
+      </a>
     </form>
   </div>
 </div>
@@ -4382,7 +4399,7 @@
       {
         id: "export",
         className: "btn-open-export",
-        label: "Exp",
+        label: "Export",
         command: "export-template",
         context: "export-template", // For grouping context of buttons from the same panel
       },
@@ -4473,6 +4490,33 @@
     formData.append('Project_name', document.getElementById('Project_name').value);
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     const url = id ? `/editPage/${id}` : 'page/create';
+    const request = new Request(
+      url,
+      {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken },
+        mode: 'same-origin', // Do not send CSRF token to another domain.
+        body: formData
+      }
+    );
+    fetch(request).then((resp) => resp.json()).then((response) => {
+      console.log(response)
+      alert('Template Saved Sucessfully...')
+    }).catch((error) => {
+      console.log(error)
+      alert('Error')
+    })
+  }
+  function saveContent1(e) {
+    e.preventDefault()
+    console.log(editor.getHtml(), editor.getCss());
+    const id = "{{ page.id }}"
+    const formData = new FormData()
+    formData.append('html', editor.getHtml());
+    formData.append('css', editor.getCss());
+    formData.append('Project_name', document.getElementById('Project_name').value);
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const url = 'savePage_download';
     const request = new Request(
       url,
       {
