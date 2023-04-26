@@ -1,3 +1,6 @@
+from xhtml2pdf import pisa
+from django.http import HttpResponse
+from io import BytesIO
 from bs4 import BeautifulSoup
 import htmlmin
 import requests
@@ -8,6 +11,8 @@ from django.core.serializers import serialize
 import json
 from .Tool.Tools import random_image
 import io
+import pdfkit
+
 from django.http import FileResponse
 # Create your views here.
 
@@ -30,6 +35,34 @@ def savePage(request):
             name=Project_name, html=html, css=css, image=random_image())
         page.save()
     return JsonResponse({"result": (json.loads(serialize('json', [page])))[0]})
+
+
+def savePage_download(request):
+    if request.method == 'POST':
+        html = request.POST['html']
+        css = request.POST['css']
+        Project_name = request.POST['Project_name']
+
+        # Generate a random filename for the PDF
+        filename = f"{Project_name}.pdf"
+
+        # Save the HTML and CSS to temporary files
+        with open('temp.html', 'w') as f:
+            f.write(html)
+        with open('temp.css', 'w') as f:
+            f.write(css)
+
+        # Convert the HTML and CSS to PDF
+        pdfkit.from_file('temp.html', 'temp.pdf', css='temp.css')
+
+        # Open the PDF and read the contents
+        with open('temp.pdf', 'rb') as f:
+            pdf_data = f.read()
+
+        # Create a response with the PDF contents and download it
+        response = HttpResponse(pdf_data, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
 
 
 def editPage(request, id):
@@ -60,40 +93,6 @@ def ResumeBuilder(request):
 
 def Own_Gpt(request):
     return render(request, 'gpt\index.html')
-
-
-def chat_view(request):
-    if request.method == 'POST':
-        prompt = request.POST.get('prompt')
-        response = Code_scriping(prompt)
-        chat_message = ChatMessage(prompt=prompt, response=response)
-        chat_message.save()
-        return JsonResponse({'bot': response})
-
-    return render(request, 'gpt/index.html', {'chat_messages': ChatMessage.objects.all()})
-
-
-def autogenerate(request):
-    if request.method == 'POST':
-        query = request.POST.get('query')
-        ProjectName = request.POST.get('ProjectName')
-        print(query, ProjectName)
-        a = Make_web(query, ProjectName)
-        print("connected..........")
-        code = a.create_page()
-        print("buffering.....")
-        buffer = io.BytesIO()
-        buffer.write(code.encode('utf-8'))
-        buffer.seek(0)
-        # Generate a file name for the minified HTML file
-        filename = 'Generated_code.html'
-
-        # Create a FileResponse object with the minified HTML data and the specified filename
-        response = FileResponse(
-            buffer, as_attachment=True, filename=filename)
-
-        return response
-    return render(request, 'common/Autogenerate.html')
 
 
 def url(request):

@@ -11,7 +11,6 @@ pyttsx3
 pydub
 langdetect
 fpdf
-tkinter
 django-widget-tweaks
 pdf2docx
 pytesseract 

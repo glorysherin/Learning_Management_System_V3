@@ -23,21 +23,41 @@
 
     .card {
       background: white;
-
       color: black;
       margin-bottom: 3rem;
-      box-shadow: 5px black;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 6px rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      padding: 1rem;
+    }
+
+    .card:hover {
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2), 0px 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .card p {
+      margin: 0;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #4B91F7;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
     }
 
     .btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: inline-block;
       padding: 6px 14px;
       font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
       border-radius: 6px;
       border: none;
-
       color: #fff;
       background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
       background-origin: border-box;
@@ -45,24 +65,16 @@
       user-select: none;
       -webkit-user-select: none;
       touch-action: manipulation;
-      margin-left: 90px;
+      margin: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
-
-    .button-10:focus {
-      box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
-      outline: 0;
-    }
-
-
 
     .btn:hover,
     .btn:focus {
-
       box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
-      outline: 0;
-
-
-
+      outline: none;
+      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -387,36 +399,10 @@
               </div>
             </div>
           </div>
-
-
-          <div class="col-md-4">
-            <!-- <div class="card" style="width: 18rem;">
-  <img src="https://www.techsmith.com/blog/wp-content/uploads/2022/10/blog_audiate_recording-tips_1500x1100.png" class="card-img-top"  alt="Keyword To Audio" style="height: 150px;">
-  <div class="card-body">
-    <h5 class="card-title">Keyword To Audio</h5>
-
-    <p class="card-text">Online Text to Speech converts text into very human like natural sounding AI voices. </p>
-    
-    <button class="btn">TRY</button>
-  </div>
-  </div> -->
-          </div>
-          <div class="col-md-4">
-            <!-- <div class="card" style="width: 18rem;">
-  <img src="https://xpiksapp.com/images/posts/2022/keywording-analysis/header.jpg" class="card-img-top" alt="Keyword to image" style="height: 150px;">
-  <div class="card-body">
-    <h5 class="card-title">Keyword to image</h5>
-        
-    <p class="card-text">Text-to-image generators can create more or less any kind of image from text input. </p>
-    
-    <button class="btn">TRY</button>
-  </div>
-     
-  </div> -->
-          </div>
         </div>
       </div>
     </div>
+  </div>
 </body>
 
 </html>
