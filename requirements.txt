@@ -25,3 +25,6 @@ pandas
 openpyxl
 googlesearch-python
 xlwt
+htmlmin
+xhtml2pdf
+pdfkit
