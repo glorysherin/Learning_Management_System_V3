@@ -3,10 +3,10 @@
 {%load static%}
 
 <head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<!-- 
   <style media="screen">
     a:link {
       text-decoration: none;
@@ -19,13 +19,13 @@
     .row {
       margin: 100px;
     }
-  </style>
+  </style> -->
 </head>
 <br><br>
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title">Courses</h6>
+      <h6 style="margin-bottom: 20px; margin-left: 45%;"class="panel-title">Courses</h6>
     </div>
     <table class="table table-hover table-bordered" id="dev-table">
       <thead>
@@ -44,7 +44,7 @@
         <td>{{t.question_number}}</td>
         <td>{{t.total_marks}}</td>
         
-        <td><a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'delete-course' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+        <td><a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'delete-course' t.id  %}">DELETE<span class="glyphicon glyphicon-trash"></span></a></td>
       </tr>
       {% endfor %}
     </table>
