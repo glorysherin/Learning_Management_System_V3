@@ -77,9 +77,9 @@
                         <td>{{ student.role_no }}</td>
                         <td>{{ student.mobile }}</td>
                         <td>
-                            <a href="students/{{ student.id}}">View</a>
-                            <a href="student/{{ student.id }}/edit">Edit</a>
-                            <a href="students_delete/{{ student.id }}/delete">Delete</a>
+                            <a class="btn btn-light btn-xs" href="students/{{ student.id}}">View</a>
+                            <a class="btn btn-success btn-xs" href="student/{{ student.id }}/edit">Edit</a>
+                            <a  class="btn btn-danger btn-xs"href="students_delete/{{ student.id }}/delete">Delete</a>
                         </td>
                     </tr>
                     {% endif %}
