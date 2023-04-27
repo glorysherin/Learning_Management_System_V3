@@ -55,6 +55,8 @@
 </head>
 
 <body>
+    <center><input type="text" id="search" placeholder="Search..." oninput="filterTable()"></center>
+
     <div class="card-container">
         <h2>{{ dept }}</h2>
         <div class="table-container">
@@ -89,7 +91,43 @@
         </div>
     </div>
 </body>
+<script>
+    function filterTable() {
+  // Get user's search query
+  var query = document.getElementById("search").value.toLowerCase();
+  
+  // Get all the rows in the table
+  var rows = document.getElementsByTagName("tr");
 
+  // Loop through all the rows
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+
+    // Get the cells in the row
+    var cells = row.getElementsByTagName("td");
+
+    // Loop through all the cells in the row
+    var match = false;
+    for (var j = 0; j < cells.length; j++) {
+      var cell = cells[j];
+
+      // If the cell contains the search query, show the row
+      if (cell.innerHTML.toLowerCase().indexOf(query) > -1) {
+        match = true;
+        break;
+      }
+    }
+
+    // Hide or show the row based on the search query
+    if (match) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  }
+}
+
+</script>
 </html>
 
 {% endfor %}

@@ -192,16 +192,21 @@ def home_classroom(request):
         accountapproval = TMODEL.Teacher.objects.all().filter(
             user_id=request.user.id, status=True)
         if accountapproval:
+            print(teacher_data.department)
             classrooms = ClassRooms.objects.filter(
-                subject_code=teacher_data.department)
-            print()
+                department=teacher_data.department)
+            print(classrooms)
             print(get_role.role, type(get_role.role))
             try:
                 if get_role.role == 2:
                     return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                if get_role.role == 3:
+                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
             except:
                 if get_role.role == 2:
                     return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+                if get_role.role == 3:
+                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
         else:
             return render(request, 'teacher/teacher_wait_for_approval.html')
     else:
