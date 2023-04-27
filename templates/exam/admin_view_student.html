@@ -1,59 +1,91 @@
 {% extends 'student/adminbase.html' %}
 {% block content %}
-{%load static%}
+{% load static %}
 
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
-<br><br>
 <div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Students</h6>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-12">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search" id="search-input">
+        <div class="input-group-append">
+          <button style="margin-top: 10px;" class="btn btn-primary" type="button" id="search-btn">Filter</button>
+        </div>
+      </div>
     </div>
-    <table class="table table-hover table-bordered" id="dev-table">
-      <thead>
-        <tr>
-
-          <th>Name</th>
-          <th>Photo</th>
-          <th>Contact</th>
-          <th>Address</th>
-         
-          <th>Actions</th>
-        </tr>
-      </thead>
-      {% for t in students %}
-      <tr>
-
-        <td> {{t.get_name}}</td>
-        <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{t.mobile}}</td>
-        <td>{{t.address}}</td>
-        
-        <td><a class="btn btn-success btn-xs" style="border-radius: 0%;" href="{% url 'update-student' t.id  %}"><span class="glyphicon glyphicon-edit"></span></a>
-        <a class="btn btn-danger btn-xs" style="border-radius: 0%;" href="{% url 'delete-student' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      </tr>
-      {% endfor %}
-    </table>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg text-white">
+          <h6 style="padding-left: 400px;" class="card-title mb-0">Students</h6>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered mb-0" id="dev-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Photo</th>
+                  <th>Contact</th>
+                  <th>Address</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for t in students %}
+                <tr>
+                  <td>{{t.get_name}}</td>
+                  <td><img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+                  <td>{{t.mobile}}</td>
+                  <td>{{t.address}}</td>
+                  <td>
+                    <a class="btn btn-success btn-sm" href="{% url 'update-student' t.id  %}">EDIT
+                      <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete-student' t.id  %}">DELETE
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<br><br><br><br><br><br>
+<script>
+  document.getElementById("search-btn").addEventListener("click", filterTable);
+  function filterTable() {
+    // Get the search input value
+    var input = document.getElementById("search-input");
+    var filter = input.value.toUpperCase();
+
+    // Get the table rows
+    var table = document.getElementById("dev-table");
+    var rows = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (var i = 0; i < rows.length; i++) {
+      var name = rows[i].getElementsByTagName("td")[0];
+      var photo = rows[i].getElementsByTagName("td")[1];
+      var contact = rows[i].getElementsByTagName("td")[2];
+      var address = rows[i].getElementsByTagName("td")[3];
+      if (name || photo || contact || address) {
+        if (name.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+            contact.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+            address.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+
 {% endblock content %}
+``
