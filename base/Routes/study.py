@@ -1,7 +1,7 @@
 import requests
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
+from ..models import Users, Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
 from django.contrib.auth.models import User
 from .Tool.Tools import get_user_mail, get_user_name, get_user_role, get_user_obj
 import datetime
@@ -188,13 +188,20 @@ def home_classroom(request):
         obj = User.objects.get(id=request.user.id)
         teacher_data = Teacher.objects.get(user=obj)
         teacher_data_1 = Faculty_details.objects.get(user_name=obj.username)
+        get_role = Users.objects.get(user_name=obj.username)
         accountapproval = TMODEL.Teacher.objects.all().filter(
             user_id=request.user.id, status=True)
         if accountapproval:
+            classrooms = ClassRooms.objects.filter(
+                subject_code=teacher_data.department)
+            print()
+            print(get_role.role, type(get_role.role))
             try:
-                return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                if get_role.role == 2:
+                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
             except:
-                return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+                if get_role.role == 2:
+                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
         else:
             return render(request, 'teacher/teacher_wait_for_approval.html')
     else:
@@ -226,8 +233,8 @@ def save_add_class(request):
                             department=department, semester=semester, discription=discription, owner=Faculty_details.objects.get(mail=get_user_mail(request)))
     class_room.save()
     class_id = ClassRooms.objects.get(subject_code=subject_code)
-    enroll_class = class_enrolled(mail_id=get_user_mail(
-        request), subject_code=subject_code, class_id=class_id.id)
+    enroll_class = class_enrolled(
+        user_id=request.user.id, mail_id=request.user.username, subject_code=subject_code, class_id=class_id.id)
     enroll_class.save()
 
     return render(request, 'class_room/new_add.html')

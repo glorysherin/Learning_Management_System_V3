@@ -15,7 +15,7 @@ class TeacherUserForm(forms.ModelForm):
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = models.Teacher
-        fields = ['address', 'mobile', 'profile_pic', 'role']
+        fields = ['address', 'mobile', 'profile_pic', 'role', 'department']
     DEPARTMENT_CHOICES = (
         ('none', 'Selected Staff'),
         ('CSE', 'Computer Science and Engineering'),
