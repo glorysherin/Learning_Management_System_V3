@@ -111,7 +111,7 @@ common = [
     path('staff_home', staff_home, name='staff_home'),
     path('contactus', contactus),
     path('services', services),
-    path('about', about),
+    path('about', about,name='about'),
     path('personal_detials', Personal_detials, name='personal_detials'),
 ]
 
