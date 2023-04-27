@@ -234,7 +234,7 @@ def save_add_class(request):
     class_room.save()
     class_id = ClassRooms.objects.get(subject_code=subject_code)
     enroll_class = class_enrolled(
-        mail_id=request.username, subject_code=subject_code, class_id=class_id.id)
+        user_id=request.user.id, mail_id=request.user.username, subject_code=subject_code, class_id=class_id.id)
     enroll_class.save()
 
     return render(request, 'class_room/new_add.html')
