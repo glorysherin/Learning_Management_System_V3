@@ -136,7 +136,7 @@ admin = [
     path('teacher_edit/<str:teacher_id>', teacher_edit, name='teacher_edit'),
     path('add_usr', add_usr),
     path('teachers', teachers),
-    path('teachers/profile/<int:pk>/', teacher_profile, name='teacher_profile'),
+    path('teachers/profile/<int:pk>', teacher_profile, name='teacher_profile'),
     path('class_list', class_list, name='class_list'),
     path('class_listout/<str:class_id>',
          get_class_peoples, name='class_listout'),
