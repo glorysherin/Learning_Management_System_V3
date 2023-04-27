@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="bumblebee">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link rel="stylesheet" href=" {% static 'css/style.css' %} ">
+
+    <!--- Tailwind CSS & Daisy UI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.18.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Favicon -->
+    <link rel="icon" href=" {% static 'res/favicon.svg' %} ">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <header>
+            <h1>Todo List</h1>
+            <!-- Error message -->
+            <div class="alert-message">
+
+            </div>
+
+            <div class="input-section">
+                <input type="text" placeholder="Add a todo . . ."
+                    class="input input-bordered input-secondary w-full max-w-xs" />
+                <button class="btn btn-secondary add-task-button">
+                    <i class="bx bx-plus bx-sm"></i>
+                </button>
+            </div>
+        </header>
+
+        <div class="todos-filter">
+            <!-- <div class="dropdown">
+                <label tabindex="0" class="btn m-1">Filter</label>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>All</a></li>
+                    <li><a>Pending</a></li>
+                    <li><a>Completed</a></li>
+                </ul>
+            </div> -->
+
+            <button class="btn btn-secondary delete-all-btn">
+                Delete All
+            </button>
+        </div>
+
+        <ul class="todos-list">
+
+        </ul>
+    </div>
+
+    <!--Theme switcher-->
+    <div class="theme-switcher">
+        <a href="{% url 'teacher-dashboard' %}" class="relative px-5 py-2 font-medium text-white group">
+            <span
+                class="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
+            <span
+                class="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
+            <span
+                class="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
+            <span
+                class="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
+            <span class="relative">Return To Home</span>
+        </a>
+        <div class="dropdown dropdown-left">
+            <label tabindex="0" class="btn m-1">
+                <i class='bx bxs-palette bx-sm'></i>
+            </label>
+            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li class="theme-item" theme="cupcake"><a>cupcake</a></li>
+                <li class="theme-item" theme="dark"><a>dark</a></li>
+                <li class="theme-item" theme="light"><a>light</a></li>
+                <li class="theme-item" theme="bumblebee"><a>bumblebee</a></li>
+                <li class="theme-item" theme="synthwave"><a>synthwave</a></li>
+                <li class="theme-item" theme="halloween"><a>halloween</a></li>
+                <li class="theme-item" theme="fantasy"><a>fantasy</a></li>
+                <li class="theme-item" theme="dracula"><a>dracula</a></li>
+                <li class="theme-item" theme="aqua"><a>aqua</a></li>
+                <li class="theme-item" theme="luxury"><a>luxury</a></li>
+                <li class="theme-item" theme="night"><a>night</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src=" {% static 'js/main.js' %} "></script>
+    <script src=" {% static 'js/theme_switcher.js' %} "></script>
+    <script>
+        const task_input = document.querySelector('input');
+        const add_btn = document.querySelector('.add-task-button');
+        const todos_list = document.querySelector('.todos-list');
+        const alert_message = document.querySelector('.alert-message');
+        const delete_all_btn = document.querySelector('.delete-all-btn');
+
+
+        let todos = JSON.parse(localStorage.getItem('todos')) || [];
+
+        window.addEventListener('DOMContentLoaded', showAllTodos);
+
+        //get random unique id
+        function getRandomId() {
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        }
+
+        function addToDo(task_input) {
+            let task = {
+                id: getRandomId(),
+                task: task_input.value,
+                completed: false
+            }
+            todos.push(task);
+        }
+
+        task_input.addEventListener('keyup', (e) => {
+            if (e.keyCode === 13 && task_input.value.length > 0) {
+                addToDo(task_input);
+                saveToLocalStorage();
+                task_input.value = '';
+                showAllTodos();
+            }
+        });
+
+        add_btn.addEventListener('click', () => {
+            if (task_input.value === '') {
+                showAlertMessage('Please enter a task', 'error');
+            } else {
+                addToDo(task_input);
+                saveToLocalStorage();
+                showAllTodos();
+                task_input.value = '';
+                showAlertMessage('Task added successfully', 'success');
+            }
+        });
+
+        delete_all_btn.addEventListener('click', clearAllTodos);
+
+        //show all todos
+        function showAllTodos() {
+            todos_list.innerHTML = '';
+            todos.forEach((todo) => {
+                todos_list.innerHTML += `
+            <li class="todo-item" data-id="${todo.id}">
+                <p class="task-body">
+                    ${todo.task}
+                </p>
+                <div class="todo-actions">
+                    <button class="btn btn-success" onclick="editTodo('${todo.id}')">
+                        <i class="bx bx-edit-alt bx-sm"></i>    
+                    </button>
+                    <button class="btn btn-error" onclick="deleteTodo('${todo.id}')">
+                        <i class="bx bx-trash bx-sm"></i>
+                    </button>
+                </div>
+            </li>
+        `;
+            });
+        }
+
+        //save todos to local storage
+        function saveToLocalStorage() {
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        //show alert message
+        function showAlertMessage(message, type) {
+            let alert_box = `
+        <div class="alert alert-${type} shadow-lg mb-5 w-full">
+            <div>
+                <span>
+                    ${message}
+                </span>
+            </div>
+        </div>
+    `
+            alert_message.innerHTML = alert_box;
+            alert_message.classList.remove('hide');
+            alert_message.classList.add('show');
+            setTimeout(() => {
+                alert_message.classList.remove('show');
+                alert_message.classList.add('hide');
+            }, 3000);
+        }
+
+        //delete todo
+        function deleteTodo(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            saveToLocalStorage();
+            showAlertMessage('Todo deleted successfully', 'success');
+            showAllTodos();
+        }
+
+        //edit todo
+        function editTodo(id) {
+            let todo = todos.find(todo => todo.id === id);
+            task_input.value = todo.task;
+            todos = todos.filter(todo => todo.id !== id);
+            add_btn.innerHTML = "<i class='bx bx-check bx-sm'></i>";
+            saveToLocalStorage();
+            add_btn.addEventListener('click', () => {
+                add_btn.innerHTML = "<i class='bx bx-plus bx-sm'></i>";
+                showAlertMessage('Todo updated successfully', 'success');
+            });
+        }
+
+        //clear all todos
+        function clearAllTodos() {
+            if (todos.length > 0) {
+                todos = [];
+                saveToLocalStorage();
+                showAlertMessage('All todos cleared successfully', 'success');
+                showAllTodos();
+            } else {
+                showAlertMessage('No todos to clear', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>
