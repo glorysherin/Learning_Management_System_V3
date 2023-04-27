@@ -15,7 +15,7 @@ import urllib.parse
 
 from bs4 import BeautifulSoup
 
-from .Tool.Tools import student_detials
+from .Tool.Tools import student_detials, staff_detials
 
 
 def is_teacher(user):
@@ -722,6 +722,10 @@ def Dailystudenttest_marksby_date(request, user_name):
 
 def ToDoList(request):
     return render(request, "ToDoList/index.html", student_detials(request, 'ToDo-List'))
+
+
+def staffToDoList(request):
+    return render(request, "ToDoList/staff_index.html", staff_detials(request, 'ToDo-List'))
 
 
 def student_mark_option(request, class_id):
