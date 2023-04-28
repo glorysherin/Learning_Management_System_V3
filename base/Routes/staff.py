@@ -92,14 +92,14 @@ def teacher_add_exam_view(request):
         else:
             print("form is invalid")
         return HttpResponseRedirect('/teacher/teacher-view-exam')
-    return render(request, 'teacher/teacher_add_exam.html', {'courseForm': courseForm})
+    return render(request, 'teacher/teacher_add_exam.html', staff_detials(request,'Add Course',{'courseForm': courseForm}))
 
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_view_exam_view(request):
     courses = QMODEL.Course.objects.all()
-    return render(request, 'teacher/teacher_view_exam.html', {'courses': courses})
+    return render(request, 'teacher/teacher_view_exam.html', staff_detials(request,'View Course',{'courses': courses}))
 
 
 @login_required(login_url='teacherlogin')
@@ -129,14 +129,14 @@ def teacher_add_question_view(request):
         else:
             print("form is invalid")
         return HttpResponseRedirect('/teacher/teacher-view-question')
-    return render(request, 'teacher/teacher_add_question.html', {'questionForm': questionForm})
+    return render(request, 'teacher/teacher_add_question.html', staff_detials(request,'Add Question',{'questionForm': questionForm}))
 
 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_view_question_view(request):
     courses = QMODEL.Course.objects.all()
-    return render(request, 'teacher/teacher_view_question.html', {'courses': courses})
+    return render(request, 'teacher/teacher_view_question.html', staff_detials(request,'View Question',{'courses': courses}))
 
 
 @login_required(login_url='teacherlogin')

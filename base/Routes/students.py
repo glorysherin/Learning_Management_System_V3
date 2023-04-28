@@ -44,7 +44,7 @@ def students_list_by_dep(request):
         'students': students,
         'departments': departments,
     }
-    return render(request, 'student/students_list.html', context)
+    return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Students',context))
 
 
 def student_profile(request, student_id):
@@ -142,7 +142,7 @@ def add_student_signup_view(request):
             my_student_group = Group.objects.get_or_create(name='STUDENT')
             my_student_group[0].user_set.add(user)
         return HttpResponseRedirect('addstudentlogin')
-    return render(request, 'student/studentsignup.html', context=mydict)
+    return render(request, 'student/studentsignup.html', staff_detials(request,'Add Student',mydict))
 
 
 def is_student(user):
