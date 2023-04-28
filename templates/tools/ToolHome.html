@@ -25,56 +25,42 @@
       background: white;
       color: black;
       margin-bottom: 3rem;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 6px rgba(0, 0, 0, 0.2);
-      border-radius: 6px;
-      padding: 1rem;
-    }
-
-    .card:hover {
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2), 0px 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .card h3 {
-      font-size: 1.2rem;
-      margin: 0 0 0.5rem 0;
-    }
-
-    .card p {
-      margin: 0;
-    }
-
-    .card a {
-      text-decoration: none;
-      color: #4B91F7;
-    }
-
-    .card a:hover {
-      text-decoration: underline;
+      box-shadow: 5px black;
     }
 
     .btn {
-      display: inline-block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 6px 14px;
       font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
       border-radius: 6px;
       border: none;
+
       color: #fff;
-      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
       background-origin: border-box;
       box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
       user-select: none;
       -webkit-user-select: none;
       touch-action: manipulation;
-      margin: 0.5rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
+     
     }
+
+    .button-10:focus {
+      box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+      outline: 0;
+    }
+
+
 
     .btn:hover,
     .btn:focus {
+
       box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
-      outline: none;
-      transform: translateY(-1px);
+      outline: 0;
+
+
+
     }
   </style>
 </head>
@@ -85,70 +71,41 @@
     <div class="container mx-auto mt-4">
       <div class="row">
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem; height: 80%;">
             <img
               src="https://png.pngtree.com/png-vector/20190806/ourmid/pngtree-code-coding-file-programming-script-flat-color-icon-vector-png-image_1651456.jpg"
               class="card-img-top" alt="Code Scrapping" style="height: 150px;">
             <div class="card-body">
-              <h5 class="card-title">Code Scrapping</h5>
+              <h5 class="card-title">CodeScrapping</h5>
               <p class="card-text">
-                Transulating word is just not a transulating language,It is
-                a transulating ideas.
-              </p>
+                process of creating or generating computer code. </p>
 
-              <a href="{% url 'Code_scriping' %}"><button class="btn">TRY</button></a>
+              <a href="{% url 'Code_scriping' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                " class="btn">TRY</button></a>
             </div>
           </div>
         </div>
 
+        
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
-            <img src="https://10015.io/assets/tools/list/text-to-handwriting-converter.svg" class="card-img-top"
-              alt="Text To Hand Written" style="height: 200px;">
-            <div class="card-body">
-              <h5 class="card-title">Text To Hand Written</h5>
-              <p class="card-text">
-                Write your own story.
-              </p>
-
-              <a href="{% url 'handwriting_converter' %}"><button class="btn">TRY</button></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;  height: 80%;">
             <img src="https://kenaztranslations.com/wp-content/uploads/2019/09/translator_var5.png" class="card-img-top"
               alt="Transluator" style="height: 150px;">
             <div class="card-body">
               <h5 class="card-title">Transluator</h5>
               <p class="card-text">
-                Transulating word is just not a transulating language,It is
-                a transulating ideas.
+                Lets you dynamically translate between languages.
               </p>
 
-              <a href="{% url 'trans' %}"><button class="btn">TRY</button></a>
+              <a href="{% url 'trans' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                " class="btn">TRY</button></a>
             </div>
           </div>
         </div>
 
+        
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
-            <img
-              src="https://www.techsmith.com/blog/wp-content/uploads/2022/10/blog_audiate_recording-tips_1500x1100.png"
-              class="card-img-top" alt="Fissure in Sandstone" style="height: 150px;">
-            <div class="card-body">
-              <h5 class="card-title">Keyword to Audio</h5>
-              <p class="card-text">
-                Imagination will take you everywhere in the world with
-                audio.
-              </p>
-
-              <button class="btn">TRY</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;  height: 80%;">
             <img
               src="https://nichesss-images.vercel.app/Keyword%20to%20Paragraph%20Generator.png?image_url= {% static 'https%3A%2F%2Fd1p0dj4qzdpf9u.cloudfront.net%2Fimages%2Fog_image_4.png"
               class' %}="card-img-top" alt="Keyword to paragraph" style="height: 180px;">
@@ -158,30 +115,32 @@
                 Tell a single word i can tell a story.
               </p>
 
-              <a href="{% url 'wikipedia_summary' %}"><button class="btn">TRY</button></a>
+              <a href="{% url 'wikipedia_summary' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a>
             </div>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;  height: 80%;">
             <img
               src="https://www.thestartupfounder.com/wp-content/uploads/2022/12/speech-to-text-abstract-concept-vector-illustration-multi-language-recognizer-convert-voice-software-recognition-technology-226985978-2.jpg"
-              class="card-img-top" alt="Text to voice" style="height: 150px;">
+              class="card-img-top" alt="Text to voice" style="height: 180px;">
             <div class="card-body">
               <h5 class="card-title">Text to voice</h5>
               <p class="card-text">
                 Students need there own voice to change the world.
               </p>
 
-              <a href="convert_text"><button class="btn">TRY</button></a>
+              <a href="{% url 'convert_text' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a>
             </div>
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;  height: 80%;">
             <img src="https://vox-cpaas.com/blog/wp-content/uploads/2020/06/Different-types-of-video-conferencing.png"
-              class="card-img-top" alt="vedio meeting" style="height: 150px;">
+              class="card-img-top" alt="vedio meeting" style="height: 180px;">
             <div class="card-body">
               <h5 class="card-title">vedio meeting</h5>
               <p class="card-text">
@@ -189,12 +148,13 @@
                 meeting.
               </p>
 
-              <a href="video_meeting"><button class="btn">TRY</button></a>
+              <a href="{% url 'join_meeting' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a>
             </div>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;  height: 80%;">
             <img src="https://www.wideanglesoftware.com/blog/images/best-pdf-to-word-converter-google.jpg"
               class="card-img-top" alt="pdf to docx" style="height: 180px;">
             <div class="card-body">
@@ -203,43 +163,46 @@
                 Convert PDF to DOCX in seconds with our online PDF to DOCX converter tool.
               </p>
 
-              <a href="{%url 'convert_pdf_to_docx' %}"><button class="btn">TRY</button></a>
+              <a href="{% url 'convert_pdf_to_docx' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a>
             </div>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem;  height: 80%;">
             <img
               src="https://images.idgesg.net/images/article/2022/05/cw-pdf-to-excel-100928235-large.jpg?auto=webp&quality=85,70"
               class="card-img-top" alt="pdf to excel" style="height: 180px;">
             <div class="card-body">
               <h5 class="card-title">PDF TO EXCEL</h5>
               <p class="card-text">
-                Extract all your PDF tables to EXCEL spreadsheets automatically in just a few clicks.
+                Extract all your PDF to EXCEL spreadsheets automatically.
               </p>
 
-              <a href="{%url 'convert_pdf_to_excel' %}"><button class="btn">TRY</button></a>
+              <a href="{% url 'convert_pdf_to_excel' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a>
             </div>
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem; height: 80%;">
             <img
               src="https://play-lh.googleusercontent.com/1ig9EgfJR9ijVJOBAywFhNiP3uCaLrVKCTFm09kcCDzhCqR07VljgECUzi1MYdDpuK8R"
-              class="card-img-top" alt="GPA Calculator" style="height: 130px;">
+              class="card-img-top" alt="GPA Calculator" style="height: 180px;">
             <div class="card-body">
               <h5 class="card-title">GPA CALCULATOR</h5>
               <p class="card-text">
-                This GPA calculator computes GPA and generates a report based on course credits and the achieved grade.
+                This GPA calculator computes GPA and generates a report.
               </p>
 
-              <a href="{%url 'gpa_calculator' %}"><button class="btn">TRY</button></a>
+              <a href="{% url 'gpa_calculator' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a><br>
             </div>
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem; height: 80%;">
             <img src="https://xpiksapp.com/images/posts/2022/keywording-analysis/header.jpg" class="card-img-top"
               alt="Keyword to image" style="height: 150px;">
             <div class="card-body">
@@ -248,163 +211,125 @@
               <p class="card-text">Text-to-image generators can create more or less any kind of image from text input.
               </p>
 
-              <a href="{%url 'keyword_to_image' %}"><button class="btn">TRY</button></a>
+              <a href="{% url 'keyword_to_image' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a>
             </div>
 
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem; height: 80%;">
             <img src="https://img.freepik.com/free-vector/sticker-design-with-calculator-isolated_1308-60994.jpg?w=2000"
               class="card-img-top" alt="Calculator" style="height: 150px;">
             <div class="card-body">
               <h5 class="card-title">Calculator</h5>
               <p class="card-text">
-                I was reading the dictionary, I thought it was a poem about
-                everything.
+                I'm always crunching number,so my calculator watch is a must
               </p>
 
-              <a href="calculator"><button class="btn">TRY</button></a>
+              <a href="{% url 'calculator' %}"><button class="btn" style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ">TRY</button></a>
             </div>
           </div>
         </div>
-
-
-        <div class="row">
-
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img src="https://m.media-amazon.com/images/I/517KT12eSRL.png" class="card-img-top" alt="Cgpa Calculator"
-                style="height: 200px;">
-              <div class="card-body">
-                <h5 class="card-title">Cgpa Calculator</h5>
-                <p class="card-text">
-                  Write your own story.
-                </p>
-
-                <button class="btn">TRY</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img
-                src="https://png.pngtree.com/png-vector/20190806/ourmid/pngtree-code-coding-file-programming-script-flat-color-icon-vector-png-image_1651456.jpg"
-                class="card-img-top" alt="Code Scrapping" style="height: 150px;">
-              <div class="card-body">
-                <h5 class="card-title">Code Scrapping</h5>
-                <p class="card-text">
-                  Transulating word is just not a transulating language,It is
-                  a transulating ideas.
-                </p>
-
-                <a href="Code_scriping"><button class="btn">TRY</button></a>
-              </div>
-            </div>
-          </div>
+        
+          
 
           <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem; height: 80%;">
               <img src="https://cdn140.picsart.com/19366458595847172769.svg" class="card-img-top" alt="Excel to pdf"
                 style="height: 180px;">
               <div class="card-body">
                 <h5 class="card-title">Excel to pdf</h5>
                 <p class="card-text">
-                  Tell a single word i can tell a story.
-                </p>
+                  Make EXCEL spreadsheets easy to read by converting them to PDF.                </p>
 
-                <a href="convert_excel_to_pdf"><button class="btn">TRY</button></a>
+                <a href="{% url 'convert_excel_to_pdf' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                  " class="btn">TRY</button></a>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem; height: 80%;">
               <img src="https://www.adobe.com/dc-shared/assets/images/frictionless/how-to-images/jpg-to-pdf-how-to.svg"
-                class="card-img-top" alt="Jpg to pdf" style="height: 150px;">
+                class="card-img-top" alt="Jpg to pdf" style="height: 180px;">
               <div class="card-body">
                 <h5 class="card-title">Jpg to pdf</h5>
                 <p class="card-text">
-                  Students need there own voice to change the world.
-                </p>
+                  Convert JPG images to PDF in seconds.                </p>
 
-                <a href="convert_jpg_to_pdf"><button class="btn">TRY</button></a>
+                <a href="{% url 'convert_jpg_to_pdf' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                  " class="btn">TRY</button></a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+          <div class="col-md-4" >
+            <div class="card" style="width: 18rem; height: 80%;">
               <img
                 src="https://storage.googleapis.com/download/storage/v1/b/hireup_files/o/6099fbe6d9d89d04ed729b3e%2Fproduct%2F0.9914981574068675jpg-to-word.png?generation=1660877885741668&alt=media"
-                class="card-img-top" alt="Jpg to Word" style="height: 150px;">
+                class="card-img-top" alt="Jpg to Word" style="height: 180px;">
               <div class="card-body">
                 <h5 class="card-title">Jpg to Word</h5>
                 <p class="card-text">
-                  visual connection between two or more remote parties over the internet that simulates a face-to-face
-                  meeting.
+                  You can easily convert your JPG files to WORD with this online tool.
                 </p>
 
-                <a href="convert_jpg_to_word"><button class="btn">TRY</button></a>
+                <a href="{% url 'convert_jpg_to_word' %}"><button style=" margin-left: 90px;      background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                  " class="btn">TRY</button></a>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img src="https://cdn-icons-png.flaticon.com/512/6213/6213385.png" class="card-img-top" alt="Code Writer"
-                style="height: 180px;">
-              <div class="card-body">
-                <h5 class="card-title">Code Writer</h5>
-                <p class="card-text">
-                  Convert PDF to DOCX in seconds with our online PDF to DOCX converter tool.
-                </p>
-
-                <a href="Code_scriping"><button class="btn">TRY</button></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-              <img
-                src="https://resources.clearvoice.com/wp-content/uploads/2020/05/05.07.20-M_Hero_1360x646-810x385.png"
-                class="card-img-top" alt="Content Generator" style="height: 130px;">
-              <div class="card-body">
-                <h5 class="card-title">Content Generator</h5>
-                <p class="card-text">
-                  This GPA calculator computes GPA and generates a report based on course credits and the achieved
-                  grade.
-                </p>
-
-                <a href="create_blog"><button class="btn">TRY</button></a>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+          
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem; height: 80%;">
               <img
                 src="https://static.vecteezy.com/system/resources/previews/006/430/508/original/game-console-with-website-coding-flat-icon-of-game-development-vector.jpg"
                 class="card-img-top" alt="Playground" style="height: 180px;">
               <div class="card-body">
                 <h5 class="card-title">Playground</h5>
                 <p class="card-text">
-                  Extract all your PDF tables to EXCEL spreadsheets automatically in just a few clicks.
+                 Play with your code in different languages.
                 </p>
 
-                <button class="btn">TRY</button>
+                <button style=" margin-left: 90px ;     background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+                ;" class="btn">TRY</button>
               </div>
             </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <!-- <div class="card" style="width: 18rem;">
+  <img src="https://www.techsmith.com/blog/wp-content/uploads/2022/10/blog_audiate_recording-tips_1500x1100.png" class="card-img-top"  alt="Keyword To Audio" style="height: 150px;">
+  <div class="card-body">
+    <h5 class="card-title">Keyword To Audio</h5>
+
+    <p class="card-text">Online Text to Speech converts text into very human like natural sounding AI voices. </p>
+    
+    <button class="btn">TRY</button>
+  </div>
+  </div> -->
+          </div>
+          <div class="col-md-4">
+            <!-- <div class="card" style="width: 18rem;">
+  <img src="https://xpiksapp.com/images/posts/2022/keywording-analysis/header.jpg" class="card-img-top" alt="Keyword to image" style="height: 150px;">
+  <div class="card-body">
+    <h5 class="card-title">Keyword to image</h5>
+        
+    <p class="card-text">Text-to-image generators can create more or less any kind of image from text input. </p>
+    
+    <button class="btn">TRY</button>
+  </div>
+     
+  </div> -->
           </div>
         </div>
       </div>
     </div>
-  </div>
 </body>
 
 </html>
-
 {% endblock content %}
