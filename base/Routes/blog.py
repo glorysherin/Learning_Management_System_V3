@@ -110,7 +110,7 @@ def list_edit_blog(request):
 
 def admin_list_edit_blog(request):
     items = get_blog()
-    return render(request, "blog/edit_blog_list.html", {'page': 'Manage Blog', 'blogs': items})
+    return render(request, "blog/edit_blog_list.html", staff_detials(request,"blog",{'page': 'Manage Blog', 'blogs': items}))
 
 
 def edit_blog(request, pk):

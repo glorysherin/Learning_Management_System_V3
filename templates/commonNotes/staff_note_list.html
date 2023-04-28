@@ -4,14 +4,21 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
 <body>
+
     <!-- component -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 mt-12 mb-12">
-        <article>
+        <article style="margin-top: -20%;">
             <h2 class="text-2xl font-extrabold text-gray-900">Notes</h2>
+            <div class="flex justify-center mt-6 mb-6">
+                <input id="search-box" type="text" placeholder="Search notes by department, subcode, or description"
+                    class="w-full p-2 rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+            </div>
             <section class="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
                 {% for note in notes %}
                 <article
-                    class="bg-white group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform duration-200">
+                class="note-article bg-white group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform duration-200"
+                data-department="{{ note.department }}" data-subcode="{{ note.subcode }}"
+                data-description="{{ note.description }}">
                     <div class="relative w-full h-80 md:h-64 lg:h-44">
                         <img src="{{ note.cover_image }}"
                             alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug."
@@ -21,7 +28,7 @@
                         <h3 class="text-sm text-gray-500 pb-2">
                             {% if note.file %}
                             <a class="bg-indigo-600 py-1 px-2 text-white rounded-lg" href="{{ note.file.url }}">
-                                {% endif %}
+                                 {% endif %}
                                 <span class="absolute inset-0"></span>
                                 {{ note.subcode }}
                             </a>
@@ -44,4 +51,35 @@
             </section>
         </article>
     </section>
-    {% endblock %}
+    <script>
+        const searchBox = document.getElementById('search-box');
+        const noteArticles = document.querySelectorAll('.note-article');
+
+        searchBox.addEventListener('input', () => {
+            const searchTerm = searchBox.value.trim().toLowerCase();
+
+            noteArticles.forEach(note => {
+                const department = note.dataset.department.toLowerCase();
+                const subcode = note.dataset.subcode.toLowerCase();
+                const description = note.dataset.description.toLowerCase();
+                const matches = [];
+
+                if (department.includes(searchTerm) || subcode.includes(searchTerm) || description.includes(searchTerm)) {
+                    note.classList.remove('hidden');
+                    matches.push(true);
+                } else {
+                    note.classList.add('hidden');
+                    matches.push(false);
+                }
+
+                if (matches.includes(true)) {
+                    note.classList.remove('hidden');
+                } else {
+                    note.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+    
+    {% endblock %} 
