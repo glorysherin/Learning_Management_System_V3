@@ -37,20 +37,21 @@ def Make_Join(Componets):
 
 
 tools = [
-    path('Common_tool', Common_tool,name='Common_tool'),
-    path('toolHome', toolHome,name='toolHome'),
+    path('Common_tool', Common_tool, name='Common_tool'),
+    path('toolHome', toolHome, name='toolHome'),
     path('trans', translate_, name='trans'),
     path('convert_text', convert_text, name='convert_text'),
     path('wikipedia_summary', wikipedia_summary, name='wikipedia_summary'),
-    path('convert_docx_to_pdf', convert_docx_to_pdf,name='convert_docx_to_pdf'),
+    path('convert_docx_to_pdf', convert_docx_to_pdf, name='convert_docx_to_pdf'),
     path('convert_pdf_to_docx', convert_pdf_to_docx, name='convert_pdf_to_docx'),
     path('convert_pdf_to_excel', convert_pdf_to_excel,
          name='convert_pdf_to_excel'),
-    path('convert_excel_to_pdf', convert_excel_to_pdf,name='convert_excel_to_pdf'),
-    path('convert_jpg_to_pdf', convert_jpg_to_pdf,name='convert_jpg_to_pdf'),
-    path('convert_jpg_to_word', convert_jpg_to_word,name='convert_jpg_to_word'),
-    path('calculator', calculator,name='calculator'),
-    path('cgpa_calculator', cgpa_calculator,name='cgpa_calculator'),
+    path('convert_excel_to_pdf', convert_excel_to_pdf,
+         name='convert_excel_to_pdf'),
+    path('convert_jpg_to_pdf', convert_jpg_to_pdf, name='convert_jpg_to_pdf'),
+    path('convert_jpg_to_word', convert_jpg_to_word, name='convert_jpg_to_word'),
+    path('calculator', calculator, name='calculator'),
+    path('cgpa_calculator', cgpa_calculator, name='cgpa_calculator'),
     path('handwriting_converter', handwriting_converter,
          name='handwriting_converter'),
     path('keyword_to_image', keyword_to_image, name='keyword_to_image'),
@@ -62,7 +63,7 @@ tools = [
     path('admin_join_meeting', admin_join_meeting, name='admin_join_meeting'),
 
     path('gpa_calculator', gpa_calculator, name='gpa_calculator'),
-    path('get_subject', get_subject,name='get_subject'),
+    path('get_subject', get_subject, name='get_subject'),
     path('Code_scriping', Code_scriping, name='Code_scriping'),
 ]
 alternative_url = [path('student/video_meeting', meeting),
@@ -361,7 +362,7 @@ blog_url = [
     path('admin_list_blog_course',
          admin_list_blog_course, name='admin_list_blog_course'),
     path('admin_create_blog', admin_create_blog, name='admin_create_blog'),
-    path('staff_list_blog', admin_list_blog, name='admin_list_blog'),
+    path('admin_list_blog', admin_list_blog, name='admin_list_blog'),
 
     path('list_blog', student_list_blog, name='student_list_blog'),
     path('staff_list_blog', staff_list_blog, name='staff_list_blog'),
