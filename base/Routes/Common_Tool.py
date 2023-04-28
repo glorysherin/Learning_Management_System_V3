@@ -97,7 +97,10 @@ def Common_convert_text(request):
     if request.method == 'POST':
         filename = os.path.join(
             BASE_DIR, "generated_files/audio_files/output.mp3")
-        os.remove(filename)
+        try:
+            os.remove(filename)
+        except:
+            pass
         text = request.POST['text']
         language = detect(text)
         tts = gTTS(text=text, lang=language)

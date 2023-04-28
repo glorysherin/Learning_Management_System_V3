@@ -3,6 +3,7 @@ from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import xlwt
+from .Tool.Tools import student_detials, staff_detials
 
 
 def add_faculty(request):
@@ -53,10 +54,10 @@ def teachers(request):
     return render(request, 'admin_actions/list_teacher.html', context)
 
 
-def teacher_profile(request, pk):
+def teacher_profile(request, staff_id):
     # teacher = get_object_or_404(Teacher, id=pk)
-    teacher = Teacher.objects.get(id=pk)
-    return render(request, 'admin_actions/teacher_profile.html', {'teacher': teacher})
+    teacher = Teacher.objects.get(id=staff_id)
+    return render(request, 'admin_actions/teacher_profile.html', staff_detials(request, teacher.role+' Profile', {'teacher': teacher}))
 
 # classes
 
