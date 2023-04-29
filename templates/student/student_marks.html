@@ -14,12 +14,12 @@
 
 <body class="bg-gray-100">
 
-  <center><input type="text" id="search" placeholder="Search..." oninput="filterTable()"></center>
+  <center><input type="text" id="search" style="margin-top: 10px;" placeholder="Search..." oninput="filterTable()"></center>
 
 
   <div class="container mx-auto mt-20">
     <div class="w-full max-w-lg mx-auto">
-      <h6 class="text-center text-xl font-bold mb-4">My Marks</h6>
+      <h6 class="text-center text-xl font-bold mb-4" style="margin-top: 20px;">My Marks</h6>
       <!-- <div class="bg-white shadow-md rounded-lg px-8 py-6 pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 overflow-x-auto"> -->
         <div class="table-responsive" style="margin-left: 30px;">
           <table class="table-auto w-full border-collapse">
@@ -53,7 +53,7 @@
 </body>
 
 
-<script>
+<script >
   function filterTable() {
   // Get user's search query
   var query = document.getElementById("search").value.toLowerCase();
