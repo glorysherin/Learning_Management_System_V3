@@ -827,7 +827,8 @@ def student_int_test_marks(request, roll_no):
         'roll_no': roll_no,
         'queryset': queryset
     }
-    return render(request, 'class_room/internal_test_mark_by_user.html', student_detials(request, 'Internal Marks', context))
+
+    return render(request, 'class_room/internal_test_mark_by_user.html', student_detials(request, 'Internal Test Mark', context))
 
 
 def view_attendees_by_roolno(request, roll_no):
@@ -837,7 +838,7 @@ def view_attendees_by_roolno(request, roll_no):
         'roll_no': roll_no,
         'attendees': attendees,
     }
-    return render(request, 'class_room/view_attendeesbyroolno.html', context)
+    return render(request, 'class_room/view_attendeesbyroolno.html', student_detials(request, 'View Attendence', context))
 
 
 def search_view(request):
@@ -851,4 +852,3 @@ def search_view(request):
                 results.append(url)
             return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
     return render(request, 'class_room/search_results.html')
-
