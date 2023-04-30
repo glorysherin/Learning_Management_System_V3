@@ -1,6 +1,6 @@
 import openai
 from django.shortcuts import get_object_or_404
-from ...models import Faculty_details, Student, Users
+from ...models import Faculty_details, Student, Users, Teacher
 from django.contrib.auth.models import User
 from bs4 import BeautifulSoup
 import requests
@@ -101,9 +101,11 @@ def staff_detials(request, page, dict_inp={}):
     usr_obj = User.objects.get(id=usr_id)
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Faculty_details.objects.get(user_name=name.user_name)
+    teacher_role=Teacher.objects.get(user=usr_obj).role
     dict_ = {
         'stusr': faculty_details,
         'page': page,
-        'staff_name': faculty_details.name
+        'staff_name': faculty_details.name,
+        'role': teacher_role
     }
     return {**dict_, **dict_inp}

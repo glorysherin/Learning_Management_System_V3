@@ -851,3 +851,4 @@ def search_view(request):
                 results.append(url)
             return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
     return render(request, 'class_room/search_results.html')
+
