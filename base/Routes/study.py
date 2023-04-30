@@ -158,6 +158,7 @@ def home_classroom(request):
                 dep.append(i.department)
     if is_student(request.user):
         classes = []
+        classes_img = []
         try:
             enroll_classes = class_enrolled.objects.filter(
                 mail_id=get_user_mail(request))
@@ -167,22 +168,65 @@ def home_classroom(request):
             enroll_classes = class_enrolled.objects.filter(
                 mail_id=request.user.username)
 
+        def get_emails_for_class(class_id):
+            # get all instances of the class_enrolled model with the given class_id
+            class_enrollments = class_enrolled.objects.filter(
+                class_id=class_id)
+            # create a list to hold the email IDs
+            emails = []
+            # iterate over the class_enrollments and add each mail_id to the emails list
+            for enrollment in class_enrollments:
+                emails.append(enrollment.mail_id)
+            # return the list of email IDs
+            return emails
+
         for i in enroll_classes:
             classrooms = ClassRooms.objects.filter(subject_code=i.subject_code)
-            print(i.class_id)
-            print(classrooms)
             for i in classrooms:
-                print(i.id, i.class_name)
                 classes.append(i)
                 if i.department not in dep:
                     dep.append(i.department)
-        print("student is on ...")
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> get images >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        class_es = []
+        for i in classes:
+            class_enrollments = class_enrolled.objects.get(
+                class_id=i.id)
+            class_es.append(class_enrollments)
+
+        img = []
+        peoples = []
+        temp = []
+        for j, i in enumerate(class_es):
+            peoples.append(temp)
+            temp = []
+            print("sub : ", i.subject_code)
+            people = class_enrolled.objects.filter(
+                subject_code=i.subject_code)
+            print('people : ', peoples)
+            for i in people:
+                person_obj = User.objects.get(id=i.user_id)
+                try:
+                    obj = Student.objects.get(user=person_obj)
+                    temp.append(obj)
+                except Exception as e:
+                    print(e)
+        peoples.append(temp)
+        peoples.pop(0)
+        temp_people = []
+        # ------------------------------------------ to manage the 4 peoples -----------------------------
+        for i, j in enumerate(peoples):
+            if len(j) >= 4:
+                temp_people.append(j)
+            else:
+                temp_people.append(j[0:4])
+        peoples = temp_people
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         obj = User.objects.get(id=request.user.id)
         student_data = Student.objects.get(user=obj)
         try:
-            return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+            return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
         except:
-            return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+            return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
 
     elif is_teacher(request.user):
         obj = User.objects.get(id=request.user.id)
@@ -783,7 +827,7 @@ def student_int_test_marks(request, roll_no):
         'roll_no': roll_no,
         'queryset': queryset
     }
-    return render(request, 'class_room/internal_test_mark_by_user.html', context)
+    return render(request, 'class_room/internal_test_mark_by_user.html', student_detials(request, 'Internal Marks', context))
 
 
 def view_attendees_by_roolno(request, roll_no):
