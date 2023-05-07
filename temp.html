@@ -111,36 +111,6 @@
 <canvas id="attendeesChart"></canvas>
 
 <script>
-        // Get the start date and end date input elements
-        const startDateInput = document.getElementById('startDate');
-        const endDateInput = document.getElementById('endDate');
-    
-        // Get the attendees table element
-        const attendeesTable = document.getElementById('attendeesTable');
-    
-        // Add an event listener to the start date and end date inputs
-        startDateInput.addEventListener('change', filterAttendeesByDate);
-        endDateInput.addEventListener('change', filterAttendeesByDate);
-    
-        function filterAttendeesByDate() {
-            // Get the selected start date and end date from the input elements
-            const startDate = new Date(startDateInput.value);
-            const endDate = new Date(endDateInput.value);
-    
-            // Loop through the rows of the attendees table
-            for (let i = 1; i < attendeesTable.rows.length; i++) {
-                const row = attendeesTable.rows[i];
-                const dateCell = row.cells[0];
-                const date = new Date(dateCell.innerText);
-    
-                // If the date is between the selected start date and end date, show the row; otherwise, hide it
-                if (date >= startDate && date <= endDate) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            }
-        }
     const attendees = JSON.parse('{{ attendeesj|safe }}');
 
     const dates = attendees.map(a => new Date(a.Date));
@@ -193,3 +163,9 @@
     );
 </script>
 {% endblock content %}
+
+
+
+
+
+
