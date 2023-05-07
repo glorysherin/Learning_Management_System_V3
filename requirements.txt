@@ -28,3 +28,4 @@ xlwt
 htmlmin
 xhtml2pdf
 pdfkit
+docx2pdf
