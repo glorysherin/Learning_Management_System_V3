@@ -91,79 +91,78 @@ For questions, feedback, or support, please contact [Nagi Pragalathan](mailto:na
 
 # Structure of the Project
 Learning_Management_System_V3
-├── app
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── templates
-│   │   ├── app
-│   │   │   ├── admin_home.html
-│   │   │   ├── all_users.html
-│   │   │   ├── edit_user.html
-│   │   │   ├── home.html
-│   │   │   ├── profile.html
-│   │   │   ├── register.html
-│   │   │   ├── reset_password.html
-│   │   │   ├── view_attendance.html
-│   │   │   ├── view_course.html
-│   │   │   ├── view_notice.html
-│   │   │   ├── view_result.html
-│   │   │   └── view_schedule.html
-│   │   ├── base.html
-│   │   ├── error.html
-│   │   ├── not_found.html
-│   │   └── registration
-│   │       └── register_base.html
-│   ├── tests.py
-│   ├── urls.py
-│   └── views.py
-├── lms_v3
-│   ├── __init__.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── media
-├── static
-│   ├── css
-│   │   ├── login.css
-│   │   ├── main.css
-│   │   └── register.css
-│   ├── images
-│   │   └── logo.png
-│   └── js
-│       ├── jquery.min.js
-│       ├── login.js
-│       └── register.js
-├── templates
-│   ├── 403.html
-│   ├── 404.html
-│   ├── 500.html
-│   ├── base.html
-│   ├── base_body.html
-│   ├── home.html
-│   ├── login.html
-│   ├── password_reset.html
-│   ├── registration
-│   │   ├── register_base.html
-│   │   ├── register_student.html
-│   │   └── register_teacher.html
-│   ├── reset_password.html
-│   └── verify.html
-├── users
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── forms.py
-│   ├── models.py
-│   ├── signals.py
-│   ├── tests.py
-│   ├── urls.py
-│   └── views.py
-├── db.sqlite3
-├── LICENSE
-├── README.md
-├── manage.py
-└── requirements.txt
-
+<br>├── app
+<br>│   ├── __init__.py
+<br>│   ├── admin.py
+<br>│   ├── apps.py
+<br>│   ├── models.py
+<br>│   ├── templates
+<br>│   │   ├── app
+<br>│   │   │   ├── admin_home.html
+<br>│   │   │   ├── all_users.html
+<br>│   │   │   ├── edit_user.html
+<br>│   │   │   ├── home.html
+<br>│   │   │   ├── profile.html
+<br>│   │   │   ├── register.html
+<br>│   │   │   ├── reset_password.html
+<br>│   │   │   ├── view_attendance.html
+<br>│   │   │   ├── view_course.html
+<br>│   │   │   ├── view_notice.html
+<br>│   │   │   ├── view_result.html
+<br>│   │   │   └── view_schedule.html
+<br>│   │   ├── base.html
+<br>│   │   ├── error.html
+<br>│   │   ├── not_found.html
+<br>│   │   └── registration
+<br>│   │       └── register_base.html
+<br>│   ├── tests.py
+<br>│   ├── urls.py
+<br>│   └── views.py
+<br>├── lms_v3
+<br>│   ├── __init__.py
+<br>│   ├── asgi.py
+<br>│   ├── settings.py
+<br>│   ├── urls.py
+<br>│   └── wsgi.py
+<br>├── media
+<br>├── static
+<br>│   ├── css
+<br>│   │   ├── login.css
+<br>│   │   ├── main.css
+<br>│   │   └── register.css
+<br>│   ├── images
+<br>│   │   └── logo.png
+<br>│   └── js
+<br>│       ├── jquery.min.js
+<br>│       ├── login.js
+<br>│       └── register.js
+<br>├── templates
+<br>│   ├── 403.html
+<br>│   ├── 404.html
+<br>│   ├── 500.html
+<br>│   ├── base.html
+<br>│   ├── base_body.html
+<br>│   ├── home.html
+<br>│   ├── login.html
+<br>│   ├── password_reset.html
+<br>│   ├── registration
+<br>│   │   ├── register_base.html
+<br>│   │   ├── register_student.html
+<br>│   │   └── register_teacher.html
+<br>│   ├── reset_password.html
+<br>│   └── verify.html
+<br>├── users
+<br>│   ├── __init__.py
+<br>│   ├── admin.py
+<br>│   ├── apps.py
+<br>│   ├── forms.py
+<br>│   ├── models.py
+<br>│   ├── signals.py
+<br>│   ├── tests.py
+<br>│   ├── urls.py
+<br>│   └── views.py
+<br>├── db.sqlite3
+<br>├── LICENSE
+<br>├── README.md
+<br>├── manage.py
+<br>└── requirements.txt
