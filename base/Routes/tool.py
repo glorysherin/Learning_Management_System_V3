@@ -21,8 +21,12 @@ from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from PIL import Image
 import tempfile
+import requests
 from docx import Document
+from django.http import JsonResponse
 from docx.shared import Inches
+from googlesearch import search
+from bs4 import BeautifulSoup
 from .Tool.Code_scriping_Tool import get_image_url
 from .Tool.Tools import student_detials, staff_detials
 
@@ -340,10 +344,9 @@ def get_grade_points(grade):
 def get_subject(request):
     if request.method == 'POST':
         num = request.POST.get('number')
-        print(type(int(num)))
-        return render(request, 'tools/gpa_calculator.html', {'num_sub': [i for i in range(1, int(num)+1)]})
+        return render(request, 'tools/gpa_calculator.html', student_detials(request,'Select the Subjects to Calculet',{'num_sub': [i for i in range(1, int(num)+1)]}))
 
-    return render(request, 'tools/num_of_sub.html')
+    return render(request, 'tools/num_of_sub.html',student_detials(request,'Select the Subjects to Calculet'))
 
 
 def gpa_calculator(request):
@@ -384,7 +387,7 @@ def gpa_calculator(request):
         gpa = total_grade_points / total_credits
     except:
         gpa = 0.0
-    context = {'gpa': round(gpa, 2)}
+    context = {'gpa': round(gpa, 2)}    
     return render(request, 'tools/gpa_calculator.html', student_detials(request, 'Gpa Calculator', context))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -479,3 +482,57 @@ def common_meeting(request, room_id):
 
 def Common_tool(request):
     return render(request, "tools/Common_tool.html")
+
+def get_stackoverflow_link(question, site='stackoverflow.com'):
+
+    num_results = 50
+
+    stackoverflow_link = ""
+    # Search Google for the question and get the top search results
+    search_results = search(question, num_results=num_results)
+
+    # Loop through the search results and find the Stack Overflow link
+    for result in search_results:
+        if site in result:
+            stackoverflow_link = result
+            break
+
+    return stackoverflow_link
+
+def get_example_code_gfg(url):
+    code = ""
+    # Send a GET request to the URL
+    response = requests.get(url)
+
+    # Parse the HTML content of the page using BeautifulSoup
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    # Find the div element containing the example code
+    example_code_div = soup.find_all('div', {'class': 'container'})
+    print("for lop")
+    for i in example_code_div:
+        code = code + str(i)
+    # Get the text content of the example code div
+    # example_code = example_code_div.get_text()
+    # Return the example code
+    return code
+
+def chatbot_res(request):
+    if request.method == "GET":
+        message = request.GET.get("message")
+        print(message)
+        link = get_stackoverflow_link(message)
+        code = get_answer_from_given_link(link)
+        # process the user input and generate a response
+        print("\n\n\n\n\n\n\n\n\n\n\n",code)
+        if code:
+            response = code
+        else:
+            wikipedia.set_lang("en")
+            # Get the summary of a page
+            page = wikipedia.page(message)
+            summary = page.summary
+            response = summary
+        return JsonResponse({"response": response})
+    else:
+        return JsonResponse({"error": "Invalid request method"})

@@ -13,7 +13,7 @@ langdetect
 fpdf
 django-widget-tweaks
 pdf2docx
-pytesseract 
+pytesseract
 docx 
 python-docx 
 Pillow

@@ -471,7 +471,12 @@ NoCodeMaker = [
     path('ResumeBuilder', ResumeBuilder, name='ResumeBuilder'),
 ]
 
-urlpatterns.extend(Make_Join([tools, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+chatbot = [
+    path('chatbot_res', chatbot_res,name="chatbot_res"),
+    path('student/chatbot_res', chatbot_res,name="chatbot_res"),
+]
+
+urlpatterns.extend(Make_Join([tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

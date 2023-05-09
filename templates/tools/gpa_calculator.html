@@ -1,6 +1,6 @@
 {% extends 'student/studentbase.html' %}
 
-{% block Componet %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 
@@ -47,6 +47,8 @@
 	</form>
 	{% if gpa %}
 	<p>Your GPA is {{ gpa }}</p>
+	{% else %}
+	 Something went worng
 	{% endif %}
 </body>
 
