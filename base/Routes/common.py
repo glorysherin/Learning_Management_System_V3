@@ -45,7 +45,7 @@ def staff_home(request):
         'user_name': usr_obj.username, 'detials': faculty_details,
         'name_s': faculty_details.name.split(' ')
     }
-    return render(request, "home/staff.html", context)
+    return render(request, "home/staff.html", staff_detials(request,'Home',context))
 
 
 # Video Chat.....

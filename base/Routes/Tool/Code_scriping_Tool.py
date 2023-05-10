@@ -85,7 +85,11 @@ def get_stackoverflow_link(question, site='stackoverflow.com'):
 
     stackoverflow_link = ""
     # Search Google for the question and get the top search results
-    search_results = search(question, num_results=num_results)
+    if "write a" in question.lower():
+        url = 'https://www.google.com/search?q={}&num={}&hl=en&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiB4ZG4-d3wAhXB4zgGHUaXDbUQsAQIYw'.format(question + " site:stackoverflow.com", 5)
+        search_results = search(url, num_results=20)
+    else:
+        search_results = search(question, num_results=num_results)
     common=[]
     # Loop through the search results and find the Stack Overflow link
     for result in search_results:

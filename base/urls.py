@@ -69,7 +69,7 @@ tools = [
 alternative_url = [path('student/video_meeting', meeting),
                    path('student/class_room', home_classroom),
                    path('student/chat_lobby', lobby),
-                   path('student/list_blog', student_list_blog),
+                   path('student/list_blog', student_list_blog,name='list_blog'),
                    path('student/chat_home/', chat_home, name='chat_home'),
                    path('student/note/notes_list',
                         notes_list, name='notes_list'),
@@ -474,7 +474,7 @@ NoCodeMaker = [
 
 chatbot = [
     path('chatbot_res', chatbot_res,name="chatbot_res"),
-    path('student/chatbot_res', chatbot_res,name="chatbot_res"),
+    path('student/chatbot_res', chatbot_res),
 ]
 
 urlpatterns.extend(Make_Join([tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
