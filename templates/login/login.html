@@ -43,7 +43,7 @@
             </div>
 
 
-            <form method="post">
+            <form method="post" id="error-message" onsubmit="return showToast()">
               {% csrf_token %}
               <div class="form-group first">
                 <label for="username">Username</label>
@@ -52,8 +52,10 @@
 
               </div>
               <div class="form-group last mb-4">
-                <label for="password">Password</label>
-                {% render_field form.password type="text" class="form-control" placeholder="Password" %}
+                <label for="password"  >Password</label>
+                <div  style="display: none; color: red;"></div>
+
+                {% render_field form.password type="password"  class="form-control" placeholder="Password" %}
 
                 <!-- <input type="password" name="password" class="form-control" id="password"> -->
                 
@@ -67,7 +69,7 @@
                 <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
               </div>
 
-              <input type="submit" value="Log In" class="btn btn-block btn-primary">
+              <input onclick="showToast(message,success)" type="submit" value="Log In" class="btn btn-block btn-primary">
 
               </div>
             </form>
@@ -79,11 +81,34 @@
       </div>
     </div>
   </div>
-
+  
   
     <script src=" {% static 'login/js/jquery-3.3.1.min.js' %} "></script>
     <script src=" {% static 'login/js/popper.min.js' %} "></script>
     <script src=" {% static 'login/js/bootstrap.min.js' %} "></script>
     <script src=" {% static 'login/js/main.js' %} "></script>
+   
+    <script>
+     
+     function showToast(message, success) {
+  // Get the value of the password input field
+  var password = document.getElementById("id_password").value;
+
+  // Check if the password is correct
+  if (password != "correct_password") {
+    // If the password is incorrect, show an error message
+    var errorElement = document.getElementById("error-message");
+    errorElement.innerHTML = "Invalid username or password.";
+    errorElement.style.display = "block";
+    return false;
+  }
+
+  // If the password is correct, submit the form
+  return true;
+}
+
+</script>
+
+    
   </body>
 </html>
