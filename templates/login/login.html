@@ -9,15 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href=" {% static 'login/fonts/icomoon/style.css' %} ">
-
-    <link rel="stylesheet" href=" {% static 'login/css/owl.carousel.min.css' %} ">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href=" {% static 'login/css/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="{% static 'login/fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
     
-    <!-- Style -->
-    <link rel="stylesheet" href=" {% static 'login/css/style.css' %} ">
     <link rel=" icon" href="https://jec.ac.in/wp-content/themes/Jayacollege_2017/images/logo_fav.png" type="image/x-icon">
 
     <title>Login</title>
@@ -52,6 +48,10 @@
 
               </div>
               <div class="form-group last mb-4">
+                <div style="display: none; color: red;" id="error-message">
+                  Invalid username or password. Please try again.
+                  <button type="button" class="close" onclick="hideErrorMessage()">×</button>
+                </div>
                 <label for="password"  >Password</label>
                 <div  style="display: none; color: red;"></div>
 
@@ -70,7 +70,7 @@
               </div>
 
               <input onclick="showToast(message,success)" type="submit" value="Log In" class="btn btn-block btn-primary">
-
+              
               </div>
             </form>
             </div>
@@ -107,6 +107,12 @@
         var errorElement = document.getElementById("error-message");
         errorElement.innerHTML = "Invalid username or password. Please try again.";
         errorElement.style.display = "block";
+        
+        // Hide the error message after 2 seconds
+        setTimeout(function() {
+          errorElement.style.display = "none";
+        }, 5000);
+        
         return false;
       }
     })
@@ -115,10 +121,19 @@
       var errorElement = document.getElementById("error-message");
       errorElement.innerHTML = "Invalid Username or password";
       errorElement.style.display = "block";
+      
+      // Hide the error message after 2 seconds
+      setTimeout(function() {
+  errorElement.style.display = "none";
+}, 5000);
+
       return false;
     });
 }
 
+function hideErrorMessage() {
+  document.getElementById("error-message").style.display = "none";
+}
 
 
 </script>
@@ -126,3 +141,6 @@
     
   </body>
 </html>
+
+
+
