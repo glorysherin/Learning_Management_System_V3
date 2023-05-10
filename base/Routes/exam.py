@@ -36,6 +36,7 @@ def afterlogin_view(request):
     elif is_teacher(request.user):
         accountapproval = TMODEL.Teacher.objects.all().filter(
             user_id=request.user.id, status=True)
+        print("runned....in the teacher")
         if accountapproval:
             # return redirect('teacher/teacher-dashboard')
             return redirect(staff_home)
