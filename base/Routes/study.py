@@ -21,6 +21,11 @@ from .Tool.Tools import student_detials, staff_detials
 def is_teacher(user):
     return user.groups.filter(name='TEACHER').exists()
 
+def is_admin(user):
+    obj = User.objects.get(id=user.id)
+    get_role = Users.objects.get(user_name=obj.username)
+    if get_role.role == 1:
+        return True
 
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
@@ -81,7 +86,7 @@ def nave_home_classroom(request, pk, class_id):
                 # print(obj.role)
         detials = ClassRooms.objects.get(subject_code=class_id)
         # print("users", [str(i.username) for i in peoples])
-        return render(request, 'class_room/attendes.html', {'people': [[j, i] for i, j in enumerate(peoples)], "ids": [str(i.id) for i in peoples], "detail": detials, "date": datetime.datetime.now().date()})
+        return render(request, 'class_room/attendes.html', staff_detials(request,'Attendes',{'people': [[j, i] for i, j in enumerate(peoples)], "ids": [str(i.id) for i in peoples], "detail": detials, "date": datetime.now().date()}))
     else:
         peoples = []
         people = class_enrolled.objects.filter(subject_code=class_id)
@@ -231,7 +236,6 @@ def home_classroom(request):
             return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
         except:
             return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
-
     elif is_teacher(request.user):
         obj = User.objects.get(id=request.user.id)
         teacher_data = Teacher.objects.get(user=obj)
@@ -319,7 +323,7 @@ def edit_classroom(request, classroom_id):
 
 
 def attendes(request):
-    return render(request, 'class_room/attendes.html')
+    return render(request, 'class_room/attendes.html',staff_detials(request,'Update Attendes'))
 
 
 def update_attendes(request):
@@ -377,7 +381,7 @@ def edit_attendes(request):
     attendees = Attendees.objects.filter(class_id=class_id, Date=date)
     context = {'attendees': [[i, j] for i, j in enumerate(attendees)]}
     print(context)
-    return render(request, 'class_room/edit_attendes.html', context)
+    return render(request, 'class_room/edit_attendes.html',staff_detials(request,'Edit Attendes',context))
 
 
 def view_attendes(request):
@@ -441,7 +445,7 @@ def mark(request, class_id):
             pass
     detials = ClassRooms.objects.get(subject_code=class_id)
     courses = NoteCourse.objects.all()
-    return render(request, "class_room/add_mark.html", {'courses': courses, 'people': [[j, i] for i, j in enumerate(peoples)], "ids": [str(i.id) for i in peoples], "detail": detials, "date": datetime.datetime.now().date()})
+    return render(request, "class_room/add_mark.html", staff_detials(request,'Update Daily Test',{'courses': courses, 'people': [[j, i] for i, j in enumerate(peoples)], "ids": [str(i.id) for i in peoples], "detail": detials, "date": datetime.now().date()}))
 
 
 def update_mark(request):
@@ -462,7 +466,7 @@ def update_mark(request):
                     '#course')
             )
             obj.save()
-    return render(request, 'class_room/attendes.html')
+    return render(request, 'class_room/attendes.html',staff_detials(request,'Update mark'))
 
 
 def edit_mark_home(request):
@@ -611,18 +615,17 @@ def user_marks(request, user_name):
 
 def show_actions(request, class_id):
     cls_obj = ClassRooms.objects.get(subject_code=class_id)
-
-    return render(request, "class_room/action_options.html", {'class_obj': cls_obj})
+    return render(request, "class_room/action_options.html", staff_detials(request,'Mark Actions',{'class_obj': cls_obj}))
 
 
 def mark_option(request, class_id):
     cls_obj = ClassRooms.objects.get(subject_code=class_id)
-    return render(request, "class_room/mark_option.html", {'class_obj': cls_obj})
+    return render(request, "class_room/mark_option.html", staff_detials(request,'Mark Actions',{'class_obj': cls_obj}))
 
 
 def attendes_option(request, class_id):
     cls_obj = ClassRooms.objects.get(subject_code=class_id)
-    return render(request, "class_room/attendes_actions.html", {'class_obj': cls_obj})
+    return render(request, "class_room/attendes_actions.html", staff_detials(request,'Attendes Options',{'class_obj': cls_obj}))
 
 
 def Dailytest_marksby_date(request, user_name):
@@ -654,7 +657,7 @@ def Dailytest_marksby_date(request, user_name):
 
     context = {'marks_table': table}
     # return render(request, 'user_marks.html', context)
-    return render(request, 'class_room/Dailytest_marksby_date.html', context)
+    return render(request, 'class_room/Dailytest_marksby_date.html', student_detials(request,"Student Test Mark", context))
 
 
 def list_user_for_mark(request, class_id):
@@ -672,7 +675,7 @@ def list_user_for_mark(request, class_id):
             peoples.append(obj)
         except:
             pass
-    return render(request, 'class_room/list_user_for_mark.html', {'people': peoples})
+    return render(request, 'class_room/list_user_for_mark.html', staff_detials(request,'View students Mark',{'people': peoples}))
 
 
 def user_mark_view(request, class_id):
@@ -702,7 +705,7 @@ def user_mark_view(request, class_id):
                 user_name=user_name, Date=date, subject=department)
         context = {'marks': marks}
         return render(request, 'class_room/user_marks.html', context)
-    return render(request, 'class_room/user_mark_form.html', {'people': peoples})
+    return render(request, 'class_room/user_mark_form.html', staff_detials(request,'View Daily Test',{'people': peoples}))
 
 
 def get_internal_test_marks(request):

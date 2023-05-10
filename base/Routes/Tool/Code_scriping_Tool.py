@@ -33,7 +33,7 @@ def get_image_url(keyword):
         img_url = img.get('src')
         if img_url:
             image_urls.add(img_url)
-    return list(image_urls)[0]
+    return list(image_urls)
 
 
 def get_answer_from_given_link(question_url):

@@ -70,7 +70,7 @@ def Code_scriping(request):
 
 
 def calculator(request):
-    return render(request, 'tools/calculator.html')
+    return render(request, 'tools/calculator.html',student_detials(request, 'Calculator'))
 
 
 def translate_(request):
@@ -118,7 +118,7 @@ def wikipedia_summary(request):
         try:
             summary = wikipedia.summary(keyword, sentences=sentence)
             if request.POST.get('action') == 'view':
-                return render(request, 'tools/wikipedia_summary.html', {"summary": summary})
+                return render(request, 'tools/wikipedia_summary.html', student_detials(request, 'keyword to para',{"summary": summary}))
             elif request.POST.get('action') == 'download':
                 response = HttpResponse(summary, content_type='text/plain')
                 response['Content-Disposition'] = f'attachment; filename="{keyword}.txt"'
@@ -222,7 +222,7 @@ def convert_excel_to_pdf(request):
 
         return response
 
-    return render(request, 'tools/convert_excel_to_pdf.html')
+    return render(request, 'tools/convert_excel_to_pdf.html',student_detials(request, 'Excel to Pdf'))
 
 
 def convert_images_to_pdf(images):
@@ -263,7 +263,7 @@ def convert_jpg_to_pdf(request):
         # Delete temporary files
         shutil.rmtree(temp_dir)
 
-    return render(request, 'tools/convert_jpg_to_pdf.html')
+    return render(request, 'tools/convert_jpg_to_pdf.html',student_detials(request,'convert jpg to pdf'))
 
 
 def convert_jpg_to_word(request):
@@ -297,7 +297,7 @@ def convert_jpg_to_word(request):
                 filename)
             return response
 
-    return render(request, 'tools/convert_jpg_to_word.html')
+    return render(request, 'tools/convert_jpg_to_word.html',student_detials(request,'convert jpg to word'))
 
 
 def cgpa_calculator(request):
@@ -417,9 +417,10 @@ def handwriting_converter(request):
 def keyword_to_image(request):
     if request.method == 'POST':
         keyword = request.POST.get('keyword')
+        print(keyword,'keyword')
         urls = get_image_url(keyword)
         print(keyword, urls)
-        return render(request, 'tools/keyword_to_image.html', {'image_urls': urls})
+        return render(request, 'tools/keyword_to_image.html', student_detials(request, 'keyword to image',{'image_urls': urls}))
     return render(request, 'tools/keyword_to_image.html', student_detials(request, 'keyword to image'))
 
 # views.py
