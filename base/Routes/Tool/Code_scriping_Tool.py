@@ -42,17 +42,20 @@ def get_answer_from_given_link(question_url):
 
     soup = BeautifulSoup(response.content, 'html.parser')
     # responsive-tabs
-    question_title = soup.find('a', class_='question-hyperlink').get_text()
-    print('Question:', question_title)
+    try:
+        question_title = soup.find('a', class_='question-hyperlink').get_text()
+        print('Question:', question_title)
 
-    print('run next....')
-    # Find the code blocks in the question and print them
-    code_blocks = soup.find_all('pre')
-    print(code_blocks)
-    for i, code_block in enumerate(code_blocks):
-        print(f'\nExample code {i+1}:')
-        print(code_block.get_text())
-        code = code+str(code_block)
+        print('run next....')
+        # Find the code blocks in the question and print them
+        code_blocks = soup.find_all('pre')
+        print(code_blocks)
+        for i, code_block in enumerate(code_blocks):
+            print(f'\nExample code {i+1}:')
+            print(code_block.get_text())
+            code = code+str(code_block)
+    except:
+        code = soup.get_text()
     return code
 
 
@@ -69,6 +72,7 @@ def get_example_code_gfg(url):
     print("for lop")
     for i in example_code_div:
         code = code + str(i)
+        code=code[0:5]
     # Get the text content of the example code div
     # example_code = example_code_div.get_text()
     # Return the example code
@@ -77,19 +81,25 @@ def get_example_code_gfg(url):
 
 def get_stackoverflow_link(question, site='stackoverflow.com'):
 
-    num_results = 50
+    num_results = 30
 
     stackoverflow_link = ""
     # Search Google for the question and get the top search results
     search_results = search(question, num_results=num_results)
-
+    common=[]
     # Loop through the search results and find the Stack Overflow link
     for result in search_results:
+        print("result,result",result)
+        common.append(result)
         if site in result:
             stackoverflow_link = result
             break
+    if stackoverflow_link != "":
+        return stackoverflow_link
+    else:
+        return common[0]
+        
 
-    return stackoverflow_link
 
 
 # print('answer', get_example_code_gfg(
