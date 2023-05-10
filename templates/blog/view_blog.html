@@ -86,8 +86,8 @@
                                                 <!--/.dropdown-menu -->
                                             </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown" href="{% url 'about' %}"data-bs-toggle="dropdown">About</a>
-                                    <ul class="dropdown-menu mega-menu mega-menu-dark mega-menu-img">
+                                    <a class="nav-link dropdown" href="{% url 'about' %}">About</a>
+                                    
                                         <!-- <li class="mega-menu-content mega-menu-scroll"> -->
                                             <ul class="row row-cols-1 row-cols-lg-6 gx-0 gx-lg-4 gy-lg-2 list-unstyled">
                                                
@@ -163,7 +163,7 @@
                             <li class="nav-item"><a class="nav-link" data-bs-toggle="offcanvas"
                                     data-bs-target="#offcanvas-search"></a></li>
                             <li class="nav-item d-none d-md-block">
-                                <a style="color: black;" href=" {% static 'contact.html' %} "
+                                <a style="color: black;" href=" {% url 'logout' %} "
                                     class="btn btn-sm btn-white rounded-pill">Logout</a>
                             </li>
                             <li class="nav-item d-lg-none">
@@ -355,7 +355,7 @@
                     <h4 class="widget-title mb-3">Categories</h4>
                     <ul class="unordered-list bullet-primary text-reset">
                         {% for i in item %}
-                        <li><a href="list_blog">{{ i.0.categories }} ({{ i|length }})</a></li>
+                        <li><a href="{%url  'list_blog' %}">{{ i.0.categories }} ({{ i|length }})</a></li>
                         {% endfor %}
                     </ul>
                 </div>
