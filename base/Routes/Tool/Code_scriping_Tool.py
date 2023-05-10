@@ -103,6 +103,21 @@ def get_stackoverflow_link(question, site='stackoverflow.com'):
     else:
         return common[0]
         
+def get_stackoverflow_link_1(question, site='stackoverflow.com'):
+
+    num_results = 50
+
+    stackoverflow_link = ""
+    # Search Google for the question and get the top search results
+    search_results = search(question, num_results=num_results)
+
+    # Loop through the search results and find the Stack Overflow link
+    for result in search_results:
+        if site in result:
+            stackoverflow_link = result
+            break
+
+    return stackoverflow_link
 
 
 

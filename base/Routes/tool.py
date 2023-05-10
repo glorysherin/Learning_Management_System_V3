@@ -31,7 +31,7 @@ from bs4 import BeautifulSoup
 from .Tool.Code_scriping_Tool import get_image_url
 from .Tool.Tools import student_detials, staff_detials
 
-from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gfg, get_answer_from_given_link
+from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_stackoverflow_link_1, get_example_code_gfg, get_answer_from_given_link
 
 
 def toolHome(request):
@@ -44,8 +44,8 @@ def Code_scriping(request):
         question = request.POST.get('question')
         if question:
             # Get the Stack Overflow link for the question
-            link = get_stackoverflow_link(question)
-            link_gfg = get_stackoverflow_link(question, 'geeksforgeeks.org')
+            link = get_stackoverflow_link_1(question)
+            link_gfg = get_stackoverflow_link_1(question, 'geeksforgeeks.org')
             if link:
                 # Get the example code from the link
                 code = get_answer_from_given_link(link)
@@ -63,7 +63,7 @@ def Code_scriping(request):
                     context['link_gfg'] = link
                     context['code_gfg'] = code_gfg
             else:
-                context['error'] = 'No Stack Overflow link found for the given question'
+                context['error'] = 'No result Found'
         else:
             context['error'] = 'Please enter a question'
     return render(request,  'tools/CodeScriping.html', student_detials(request, 'Code Scrapping', context))
