@@ -90,22 +90,36 @@
    
     <script>
      
-     function showToast(message, success) {
-  // Get the value of the password input field
+     function showToast() {
+  // Get the value of the username and password input fields
+  var username = document.getElementById("id_username").value;
   var password = document.getElementById("id_password").value;
 
-  // Check if the password is correct
-  if (password != "correct_password") {
-    // If the password is incorrect, show an error message
-    var errorElement = document.getElementById("error-message");
-    errorElement.innerHTML = "Invalid username or password.";
-    errorElement.style.display = "block";
-    return false;
-  }
-
-  // If the password is correct, submit the form
-  return true;
+  // Send a request to your backend system to check the credentials
+  // For example, using jQuery:
+  $.post("/login", {"username": username, "password": password})
+    .done(function(response) {
+      // If the credentials are correct, submit the form
+      if (response === "success") {
+        return true;
+      } else {
+        // If the credentials are incorrect, show an error message
+        var errorElement = document.getElementById("error-message");
+        errorElement.innerHTML = "Invalid username or password. Please try again.";
+        errorElement.style.display = "block";
+        return false;
+      }
+    })
+    .fail(function() {
+      // If there was an error in the request, show an error message
+      var errorElement = document.getElementById("error-message");
+      errorElement.innerHTML = "Invalid Username or password";
+      errorElement.style.display = "block";
+      return false;
+    });
 }
+
+
 
 </script>
 
