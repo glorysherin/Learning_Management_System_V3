@@ -39,7 +39,7 @@
             </div>
 
 
-            <form method="post" id="error-message" onsubmit="return showToast()">
+            <form method="post">
               {% csrf_token %}
               <div class="form-group first">
                 <label for="username">Username</label>
@@ -48,6 +48,7 @@
 
               </div>
               <div class="form-group last mb-4">
+<<<<<<< HEAD
                 <div style="display: none; color: red;" id="error-message">
                   Invalid username or password. Please try again.
                   <button type="button" class="close" onclick="hideErrorMessage()">×</button>
@@ -56,6 +57,10 @@
                 <div  style="display: none; color: red;"></div>
 
                 {% render_field form.password type="password"  class="form-control" placeholder="Password" %}
+=======
+                <label for="password">Password</label>
+                {% render_field form.password type="text" class="form-control" placeholder="Password" %}
+>>>>>>> 81a93deafe4fb7cf72007ec6a7eb79b6ad275a16
 
                 <!-- <input type="password" name="password" class="form-control" id="password"> -->
                 
@@ -69,8 +74,13 @@
                 <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
               </div>
 
+<<<<<<< HEAD
               <input onclick="showToast(message,success)" type="submit" value="Log In" class="btn btn-block btn-primary">
               
+=======
+              <input type="submit" value="Log In" class="btn btn-block btn-primary">
+
+>>>>>>> 81a93deafe4fb7cf72007ec6a7eb79b6ad275a16
               </div>
             </form>
             </div>
@@ -81,12 +91,13 @@
       </div>
     </div>
   </div>
-  
+
   
     <script src=" {% static 'login/js/jquery-3.3.1.min.js' %} "></script>
     <script src=" {% static 'login/js/popper.min.js' %} "></script>
     <script src=" {% static 'login/js/bootstrap.min.js' %} "></script>
     <script src=" {% static 'login/js/main.js' %} "></script>
+<<<<<<< HEAD
    
     <script>
      
@@ -139,6 +150,8 @@ function hideErrorMessage() {
 </script>
 
     
+=======
+>>>>>>> 81a93deafe4fb7cf72007ec6a7eb79b6ad275a16
   </body>
 </html>
 

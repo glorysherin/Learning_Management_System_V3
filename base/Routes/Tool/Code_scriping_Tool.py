@@ -33,7 +33,7 @@ def get_image_url(keyword):
         img_url = img.get('src')
         if img_url:
             image_urls.add(img_url)
-    return list(image_urls)[0]
+    return list(image_urls)
 
 
 def get_answer_from_given_link(question_url):
@@ -103,6 +103,21 @@ def get_stackoverflow_link(question, site='stackoverflow.com'):
     else:
         return common[0]
         
+def get_stackoverflow_link_1(question, site='stackoverflow.com'):
+
+    num_results = 50
+
+    stackoverflow_link = ""
+    # Search Google for the question and get the top search results
+    search_results = search(question, num_results=num_results)
+
+    # Loop through the search results and find the Stack Overflow link
+    for result in search_results:
+        if site in result:
+            stackoverflow_link = result
+            break
+
+    return stackoverflow_link
 
 
 

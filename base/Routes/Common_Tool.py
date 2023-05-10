@@ -26,7 +26,7 @@ from docx.shared import Inches
 from .Tool.Code_scriping_Tool import get_image_url
 
 from django.shortcuts import render
-from .Tool.Code_scriping_Tool import get_stackoverflow_link, get_example_code_gfg, get_answer_from_given_link
+from .Tool.Code_scriping_Tool import get_stackoverflow_link,get_stackoverflow_link_1, get_example_code_gfg, get_answer_from_given_link
 
 
 def Common_toolHome(request):
@@ -43,8 +43,8 @@ def Common_Code_scriping(request):
         question = request.POST.get('question')
         if question:
             # Get the Stack Overflow link for the question
-            link = get_stackoverflow_link(question)
-            link_gfg = get_stackoverflow_link(question, 'geeksforgeeks.org')
+            link = get_stackoverflow_link_1(question)
+            link_gfg = get_stackoverflow_link_1(question, 'geeksforgeeks.org')
             if link:
                 # Get the example code from the link
                 code = get_answer_from_given_link(link)
