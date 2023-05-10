@@ -17,3 +17,6 @@ def services(request):
 
 def about(request):
     return render(request, 'pre_home/about.html')
+
+def parentsession(request):
+    return render(request, 'pre_home/parentsession.html')

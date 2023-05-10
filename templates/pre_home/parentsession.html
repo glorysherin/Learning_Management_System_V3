@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Contact us </title>
+  <title>Jaya Engineering college</title>
   <link rel=" icon" href="https://jec.ac.in/wp-content/themes/Jayacollege_2017/images/logo_fav.png" type="image/x-icon">
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -31,7 +31,8 @@
 
   <!-- Template Main CSS File -->
   <link href=" {% static 'assets/css/main.css' %} " rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
   <!-- =======================================================
   * Template Name: UpConstruction
   * Updated: Mar 10 2023 with Bootstrap v5.2.3
@@ -47,7 +48,7 @@
   <header id="header" class="header d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href=" {% static 'index.html' %} " class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src=" {% static 'assets/img/logo.png' %} " alt=""> -->
         <h1><img style="color: aliceblue;"
@@ -59,15 +60,14 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="pre_home">Home</a></li>
+          <li><a href="pre_home" class="active">Home</a></li>
           <li><a href="about">About</a></li>
           <li><a href="services">Services</a></li>
-          <li><a href="contactus" class="active">Contact us</a></li>
+          <li><a href="contactus">Contact us</a></li>
           <li><a href="gallery">Gallery</a></li>
           <li><a href="Common_toolHome">Tools</a></li>
          
-          <li><a href="parentsession">PARENTS SESSION</a></li>
-
+          <li><a href="gallery">PARENTS SESSION</a></li>
 
         </ul>
       </nav><!-- .navbar -->
@@ -75,163 +75,94 @@
     </div>
   </header><!-- End Header -->
 
-  <main id="main">
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center"
-      style="background-image: url('https://jec.ac.in/wp-content/uploads/2017/04/infrastructure16.jpg');">
-      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+    <div class="info d-flex align-items-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2 data-aos="fade-down">JAYA ENGINEERING COLLEGE</h2>
+            <h4 style="color: white;">Learning Management System</h4><br><br>
+            <a href="adminlogin"> <button
+                style="background-color:rgb(206, 179, 30) ;color: rgb(0, 0, 0);font-weight: bold; padding: 5px;border-radius: 10px;margin-bottom: 50px;">Get
+                Started</button></a>
 
-        <h2>Contact Us</h2>
-        <ol>
-          <li><a href=" pre_home">Home</a></li>
-          <li>Contact Us</li>
-        </ol>
-
-      </div>
-    </div><!-- End Breadcrumbs -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-header">
-          <h2>Contact Us</h2>
-          <p>Do you have questions on a different topic? Start a chat with us or email us at info@jec.ac.in</p>
+            <p data-aos="fade-up">Approved by AICTE, New Delhi, Affilliated to Anna University, Chennai
+              A Telugu Minority Institute</p>
+            <!-- <a data-aos="fade-up" data-aos-delay="200" href=" {% static '#get-started' %} " class="btn-get-started">Get Started</a> -->
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="row gy-4">
+    <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item  position-relative">
-              <div class="icon">
-                <i class="bi bi-geo-alt"></i>
-              </div>
-              <h3>College Address</h3>
-              <p>CTH Road, Prakash Nagar,
+      <div class="carousel-item active"
+        style="background-image: url(https://jec.ac.in/wp-content/uploads/2017/04/infrastructure10.jpg)"></div>
+      <div class="carousel-item"
+        style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/16/Jaya_Engineering_college.JPG)">
+      </div>
+      <div class="carousel-item"
+        style="background-image: url(https://jec.ac.in/wp-content/uploads/2017/06/Kalam-Innovation-Awards-2017-3-600x400-960x600.jpg)">
+      </div>
+      <div class="carousel-item" style="background-image: url(https://www.jcetech.ac.in/images/live-demo/slider/2.jpg)">
+      </div>
+      <div class="carousel-item"
+        style="background-image: url(https://www.careerindia.com/college-photos/520x380/5876/library1_1627567426.jpg)">
+      </div>
 
-                Thiruninravur, Chennai, Tamil Nadu 602024
+      <!-- <div class="carousel-item" style="background-image: url( {% static 'assets/img/hero-carousel/hero-carousel-4.jpg' %} )"></div>
+      <div class="carousel-item" style="background-image: url( {% static 'assets/img/hero-carousel/hero-carousel-5.jpg' %} )"></div> -->
 
-                Phone : 044-26300982, 26341264, 26390041.
+      <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
 
-                Whatsapp : +91-85310 77777
+      <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
 
-                Email : admission@jec.ac.in, info@jec.ac.in</p>
-            </div>
-          </div><!-- End Service Item -->
+    </div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-regular fa-address-card"></i>
-              </div>
-              <h3>Administrators</h3>
-              <p>Director : 9788833336</p>
+  </section><!-- End Hero Section -->
 
-              <p> Vice Principal : 9551329915</p>
+  <main id="main">
+   <b> <h1 style="color:rgb(8, 8, 8)(17, 16, 16);display: flex;align-items: center;flex-wrap: nowrap;
+    flex-direction: column;font-size: 30px; margin-top: 10px;">Candidate Details</h1></b>
+    <!-- ======= Get Started Section ======= -->
+    <div class="container mx-auto mt-8">
+      <div class="card bg-white p-6 rounded-lg shadow-lg">
+        
+        <form>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="name">
+Register.No            </label>
+<input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="number" placeholder="Enter Candidate Reg.no" maxlength="12">
 
-              <p> Placement Director : +91 9361194459</p>
-
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-handshake"></i>
-              </div>
-              <h3>Corporate Office</h3>
-              <p># 108, Pondy Bazar,</p>
-
-              <p> Rajalakshmi Mahal, III rd floor,</p>
-
-              <p> T.Nagar, Chennai 600 017.</p>
-
-              <p> Tamil Nadu, India.</p>
-
-              <p>Telephone : +91-44-2815 5531</p>
-
-              <p>Fax : +91-44-5212 3995</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fas fa-building-columns"></i>
-              </div>
-              <h3>Jaya Group of institution</h3>
-              <p>CTH Road, Thiruninravur,</p>
-
-              <p>Chennai – 602 024.Tamilnadu, India.</p>
-
-              <p>Phone +91 44 26390982</p>
-
-              <p>+91 44 26390682</p>
-
-              <p> +91 44 26300707</p>
-
-              <p> Email ID vc@jec.ac.in</p>
-
-              <p> Website www.jayagc.org</p>
-            </div>
-          </div><!-- End Service Item -->
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-sharp fa-solid fa-people-roof"></i>
-              </div>
-              <h3>HOD Contact</h3>
-              <p>aerohod@jec.ac.in</p>
-
-              <p>civilhod@jec.ac.in</p>
-
-              <p>csehod@jec.ac.in</p>
-
-              <p>ecehod@jec.ac.in</p>
-
-              <p>eeehod@jec.ac.in</p>
-
-              <p>eihod@jec.ac.in</p>
-
-              <p>ithod@jec.ac.in</p>
-              <p>mechhod@jec.ac.in</p>
-              <p>texhod@jec.ac.in</p>
-              <p>mbahod@jec.ac.in</p>
-
-              <p> mcahod@jec.ac.in</p>
-
-
-
-            </div>
-          </div><!-- End Service Item -->
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-handshake"></i>
-              </div>
-              <h3>Developers Team</h3>
-
-              <p>nagipragalathan@gmail.com</p>
-              <p>jkokila2810@gmail.com</p>
-              <p>glorysherin22@gmail.com</p>
-
-              <p>m.mohankumar2626@gmail.com</p>
-
-              <p> </p>
-
-
-
-
-            </div>
-          </div><!-- End Service Item -->
-
-
-
-          <!-- ======= Alt Services Section ======= -->
-
-          <!-- End Recent Blog Posts Section -->
-
+          </div>
+          <div class="text-center">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+    <br>
+    
+    <script>
+      // Handle form submission
+      const form = document.querySelector('form')
+      form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const name = document.querySelector('#name').value
+        alert(`Hello, ${name}!`)
+      })
+    </script>
+    
+    
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -259,8 +190,11 @@
                   class="d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
                 <a href="https://www.instagram.com/jayagroupofcolleges/"
                   class="d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
-                <a href="http://jec.ac.in/infrastructure/" class="d-flex align-items-center justify-content-center"><i
+                <a href="http://jec.ac.in/infrastructure/#" class="d-flex align-items-center justify-content-center"><i
                     class="bi bi-linkedin"></i></a>
+                <a href="https://www.youtube.com/user/JayaGroups/featured"
+                  class="d-flex align-items-center justify-content-center"><i class="fa fa-youtube-play"
+                    aria-hidden="true"></i></a>
 
               </div>
             </div>
