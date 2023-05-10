@@ -69,7 +69,7 @@ tools = [
 alternative_url = [path('student/video_meeting', meeting),
                    path('student/class_room', home_classroom),
                    path('student/chat_lobby', lobby),
-                   path('student/list_blog', student_list_blog),
+                   path('student/list_blog', student_list_blog,name='list_blog'),
                    path('student/chat_home/', chat_home, name='chat_home'),
                    path('student/note/notes_list',
                         notes_list, name='notes_list'),
