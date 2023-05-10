@@ -126,6 +126,7 @@ common = [
     path('contactus', contactus),
     path('services', services),
     path('about', about, name='about'),
+    path('parentsession', parentsession, name='parentsession'),
     path('personal_detials', Personal_detials, name='personal_detials'),
 ]
 
