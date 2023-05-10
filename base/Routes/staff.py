@@ -44,6 +44,14 @@ def teacher_signup_view(request):
                 Fac_del = Faculty_details(user_name=user.username, mail=user.username,
                                           role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
                 Fac_del.save()
+            if teacher.role == 'admin':
+                add_user = Users(user_name=user.username,
+                                 mail_id=user.username, password=user.password, role='1')
+                add_user.save()
+                current_user = Users.objects.get(mail_id=user.username)
+                Fac_del = Faculty_details(user_name=user.username, mail=user.username,
+                                          role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
+                Fac_del.save()
             elif teacher.role == 'staff':
                 add_user = Users(user_name=user.username,
                                  mail_id=user.username, password=user.password, role='3')

@@ -87,7 +87,8 @@ def nave_home_classroom(request, pk, class_id):
         people = class_enrolled.objects.filter(subject_code=class_id)
         test = class_enrolled.objects.all()
         detials = ClassRooms.objects.get(subject_code=class_id)
-
+        obj = User.objects.get(id=request.user.id)
+        get_role = Users.objects.get(user_name=obj.username)
         for i in test:
             print(i.class_id, i.mail_id, i.subject_code)
         for i in people:
@@ -122,6 +123,8 @@ def nave_home_classroom(request, pk, class_id):
                     return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
             else:
                 return render(request, 'teacher/teacher_wait_for_approval.html')
+        if get_role.role == 1:
+            return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
         else:
             if Room.objects.filter(name=class_id).exists():
                 return render(request, 'class_room/student_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
@@ -157,6 +160,7 @@ def home_classroom(request):
             if i.department not in dep:
                 dep.append(i.department)
     if is_student(request.user):
+        print("It's Student Login......")
         classes = []
         classes_img = []
         try:
@@ -246,6 +250,8 @@ def home_classroom(request):
                     return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
                 if get_role.role == 3:
                     return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                if get_role.role == 1:
+                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
             except:
                 if get_role.role == 2:
                     return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
@@ -254,11 +260,8 @@ def home_classroom(request):
         else:
             return render(request, 'teacher/teacher_wait_for_approval.html')
     else:
-        pass
-        # try:
-        #     return render(request, 'class_room/class_room_home.html', {'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
-        # except:
-        #     return render(request, 'class_room/class_room_home.html', {'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+       if get_role.role == 1:
+            return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
 
 
 def add_class(request):

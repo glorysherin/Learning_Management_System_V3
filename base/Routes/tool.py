@@ -22,6 +22,7 @@ from django.http import HttpResponse
 from PIL import Image
 import tempfile
 import requests
+from random import choice
 from docx import Document
 from django.http import JsonResponse
 from docx.shared import Inches
@@ -516,15 +517,16 @@ def Common_tool(request):
 #     # example_code = example_code_div.get_text()
 #     # Return the example code
 #     return code
-
+conversation = {"hello":["hello","hey, hello how can i help you"]}
 def chatbot_res(request):
     if request.method == "GET":
         message = request.GET.get("message")
         print(message)
-        link = get_stackoverflow_link(message)
-        code = get_answer_from_given_link(link)
-        # process the user input and generate a response
-        print("\n\n\n\n\n\n\n\n\n\n\n",code)
+        if message in conversation.keys():
+            code = choice(conversation.get(message))
+        else:
+            link = get_stackoverflow_link(message)
+            code = get_answer_from_given_link(link)
         if code:
             response = code
         else:
