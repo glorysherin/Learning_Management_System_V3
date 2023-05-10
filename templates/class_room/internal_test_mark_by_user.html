@@ -5,11 +5,14 @@
 
 <head>
     <title>Internal Test Marks</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <h1>Internal Test Marks for Roll No. {{ roll_no }}</h1>
 
+    <canvas id="myChart"></canvas>
+    <canvas id="myChart1"></canvas>
     <form method="get">
         <label for="year">Filter by year:</label>
         <input type="text" name="year" id="year" placeholder="YYYY">
@@ -37,6 +40,79 @@
         </tbody>
     </table>
 </body>
+<script>
+    // Retrieve data from the table
+    var marksByDate = {};
+    {% for data in queryset %}
+        var date = "{{ data.Date }}";
+        var mark = "{{ data.mark }}";
+
+        if (marksByDate[date] === undefined) {
+            marksByDate[date] = [mark];
+        } else {
+            marksByDate[date].push(mark);
+        }
+    {% endfor %}
+
+    // Create chart using Chart.js
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Object.keys(marksByDate),
+            datasets: [{
+                label: 'Marks',
+                data: Object.values(marksByDate),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    // Retrieve data from the table
+    var labels = [];
+    var marks = [];
+    {% for data in queryset %}
+        labels.push("{{ data.subject }}");
+        marks.push("{{ data.mark }}");
+    {% endfor %}
+
+    // Create chart using Chart.js
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Marks',
+                data: marks,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 
 </html>
 {% endblock content %}

@@ -13,7 +13,7 @@ langdetect
 fpdf
 django-widget-tweaks
 pdf2docx
-pytesseract 
+pytesseract
 docx 
 python-docx 
 Pillow
@@ -28,3 +28,4 @@ xlwt
 htmlmin
 xhtml2pdf
 pdfkit
+docx2pdf

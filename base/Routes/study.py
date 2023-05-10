@@ -831,12 +831,34 @@ def student_int_test_marks(request, roll_no):
     return render(request, 'class_room/internal_test_mark_by_user.html', student_detials(request, 'Internal Test Mark', context))
 
 
+import json
+from datetime import date
+
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, date):
+            return obj.isoformat()
+        return super().default(obj)
+
+
+import json
+from datetime import date
+
 def view_attendees_by_roolno(request, roll_no):
     attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
 
+    attendees_list = []
+    for attendee in attendees:
+        attendee_dict = {
+            'Date': attendee.Date,
+            'subject_states': attendee.subject_states
+        }
+        attendees_list.append(attendee_dict)
+
     context = {
         'roll_no': roll_no,
-        'attendees': attendees,
+        'attendees':attendees,
+        'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
     return render(request, 'class_room/view_attendeesbyroolno.html', student_detials(request, 'View Attendence', context))
 
