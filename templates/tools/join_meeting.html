@@ -12,7 +12,11 @@
               rel="stylesheet">
 </head>
 <body>
-    <div style="margin: 50px;" class="bg-white rounded-lg shadow-lg p-6 w-full lg:w-3/4 mx-auto">
+    <a href="{% url 'toolHome' %}">
+        <button style="margin-top: 20px;margin-left: 140px;margin-bottom: 20px; border-radius: 5px;border-style: none; background-color: #007bff; color: #fff;" class="absolute  left-0 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">Back</button>
+    </a>&nbsp;
+    
+    <div style="margin: 50px;margin-top: 70px;" class="bg-white rounded-lg shadow-lg p-6 w-full lg:w-3/4 mx-auto"><br>
         <form method="post">
             {% csrf_token %}
             <div  class="form-group">

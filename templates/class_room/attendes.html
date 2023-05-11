@@ -155,12 +155,14 @@
     contentType: false,
     mimeType: "multipart/form-data",
     data: data,
-    success: function (data) {
-      if (data.status == "Upload Done") {
-        console.log("Uploading Done successfully")
-      }
-      else {
-        console.log('error')
+    success: function (data_val) {
+      let data = JSON.parse(data_val)
+      console.log(data)
+      console.log(data.redirect)
+      if (data.redirect == 1) {
+        console.log(data.redirect)
+        console.log("data.redirect")
+        window.location.href = "{% url 'attendes_error' %}"
       }
     }
   })

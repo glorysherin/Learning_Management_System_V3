@@ -97,8 +97,7 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                        <div id="val{{i.0}}">{{ i.1.user_name }}~~{{ i.1.class_id }}~~{{ i.1.roll_no }}
-                                        </div>
+                                        <div id="val{{i.0}}">{{ i.1.user_name }}~~{{ i.1.class_id }}~~{{ i.1.roll_no }}</div>
                                         <select name="cars" id="cars{{ i.0 }}" name="{{ i.1.user_name }}"
                                             value="{{ i.1.subject_states }}">
                                             {% if i.1.subject_states == 'Present' %}
@@ -165,24 +164,20 @@
             data.append(datas[i], $(datas[i]).val() + "~~" + ids[i])
         }
         data.append("length", {{ attendees| length}})
-    console.log(data)
-    $.ajax({
-        method: "POST",
-        url: url,
-        processData: false,
-        contentType: false,
-        mimeType: "multipart/form-data",
-        data: data,
-        success: function (data) {
-            if (data.status == "Upload Done") {
-                console.log("Uploading Done successfully")
+        data.append("date","{{ date }}")
+        console.log(data)
+        $.ajax({
+            method: "POST",
+            url: url,
+            processData: false,
+            contentType: false,
+            mimeType: "multipart/form-data",
+            data: data,
+            success: function (data) {
+                window.location.href = "{% url 'message_possitive' %}";
             }
-            else {
-                console.log('error')
-            }
-        }
-    })
-              }
+        })
+    }
 </script>
 
 {% endblock content%}
