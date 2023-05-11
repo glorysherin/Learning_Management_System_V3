@@ -102,10 +102,11 @@
                         <textarea class="form-control h-24 rounded-md border-gray-400 py-2 px-3" type="text"
                             name="message" id="message" placeholder="Type your message here"></textarea>
                     </div>
-                    <div class="flex justify-end">
+                    <div class="flex justify-center" style="margin-bottom: 5%;">
                         <input type="submit" value="Send"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                     </div>
+                    
                 </form>
             </div>
         </div>
@@ -184,11 +185,11 @@
     }
 
     $(document).ready(function () {
-        setInterval(function () {
-            $.ajax({
-                type: "GET",
-                url: "/getMessages/{{room}}/",
-                success: function (response) {
+          setInterval(function () {
+              $.ajax({
+                  type: "GET",
+                  url: "/getMessages/{{room}}/",
+                  success: function (response) {
                     console.log(response);
                     $("#display").empty();
                     dup = users_.slice(0, 4)
@@ -242,12 +243,15 @@
                 },
                 error: function (response) {
                     // alert('An error occurred')
-                },
-            });
-        }, 1000);
-    });
-
+                 // Scroll to the bottom after new messages are added
+                      scrollToBottom();
+                  },
+              });
+          }, 5000);
+      });
+      
 </script>
+
 
 </html>
 {% endblock content %}
