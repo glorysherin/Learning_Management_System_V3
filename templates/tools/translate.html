@@ -1,8 +1,12 @@
 {% extends 'student/studentbase.html' %}
 {% block content %}
+<a href="{% url 'toolHome' %}"> <button  style="margin-top: 60px;margin-left: 90px;border-radius: 5px;border-style: none; background-color: #007bff; color: #fff;" class="absolute  left-0 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">Back </button></a> 
+
 <div style="max-width: 400px; margin: 0 auto; ">
   <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
+
     <h1 style="text-align: center;">Google Translate</h1>
+
     <form style="background-color: white; padding: 20px;" method="post" action="trans">
       {% csrf_token %}
       <label for="text">Enter text:</label>

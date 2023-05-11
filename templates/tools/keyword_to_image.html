@@ -9,6 +9,8 @@
     align-content: center;
     flex-direction: column;
     margin-bottom: 61px;">
+        <a href="{% url 'toolHome' %}"> <button  style="margin-top: 30px;margin-left: 40px;border-radius: 5px;border-style: none; background-color: #007bff; color: #fff;" class="absolute  left-0 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">Back </button></a> 
+
   <form method="post" class="w-full max-w-sm">
     {% csrf_token %}
 
@@ -17,7 +19,7 @@
             margin-top: 32px;">Search any types of image here</h1>
 
     <div class="flex items-center border-b border-teal-500 py-2">
-      <input type="text" name="keyword" placeholder="enter the number of subjects"
+      <input type="text" name="keyword" placeholder="Enter a Keyword"
         class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
         type="text" placeholder="Jane Doe" aria-label="Full name">
       <button type="submit" value="submit"
