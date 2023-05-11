@@ -214,4 +214,4 @@ def teacher_edit(request, teacher_id):
 
         return redirect('teacher_list')
 
-    return render(request, 'admin_actions/teacher_edit.html', {'teacher': teacher})
+    return render(request, 'admin_actions/teacher_edit.html', staff_detials(request,"Edit profile",{'teacher': teacher}))
