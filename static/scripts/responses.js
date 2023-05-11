@@ -1,7 +1,7 @@
 function getBotResponse(input) {
     $.ajax({
       type: "GET",
-      url: "chatbot_res",
+      url: "{% url 'chatbot_res' %}",
       data: {
         message: input,
       },

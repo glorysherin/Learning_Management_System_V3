@@ -12,8 +12,7 @@ from base import models as TMODEL
 from django.utils import timezone
 from googlesearch import search
 import urllib.parse
-
-from bs4 import BeautifulSoup
+from django.http import JsonResponse
 
 from .Tool.Tools import student_detials, staff_detials
 
@@ -325,6 +324,8 @@ def edit_classroom(request, classroom_id):
 def attendes(request):
     return render(request, 'class_room/attendes.html',staff_detials(request,'Update Attendes'))
 
+def attendes_error(request):
+    return render(request,'attandees/message.html')
 
 def update_attendes(request):
     my_date_time = timezone.now()
@@ -338,18 +339,24 @@ def update_attendes(request):
         print(i.split('~~'), i)
         if Attendees.objects.filter(class_id=splited[2], roll_no=splited[3], Date=my_date_time).exists():
             print("Data Already Exists....")
-        else:
+            return JsonResponse({"redirect": 1})
+            # return render(request,'attandees/message.html',{'message':'Data Already Exists..!','url':[" {% url 'teacher-dashboard' %}","{% url 'class_room' %}"],'btn':['Dashboard','ClassRoom Dashboard']})
+        else :
             obj = Attendees(
                 class_id=splited[2], user_name=splited[1], subject_states=splited[0], roll_no=splited[3]
             )
             obj.save()
         for i in Attendees.objects.all():
             print(i.user_name, i.subject_states)
-    return render(request, 'class_room/attendes.html')
+    return render(request, 'class_room/attendes.html',staff_detials(request,'Update Attendees'))
 
 
 def update_edited_attendes(request):
     print("running..... update data")
+    date = request.POST.get('date')
+    print(request.POST.get('date'))
+    my_date=datetime.strptime(date, '%Y-%m-%d').date()
+    print("my date : ",my_date)
     data: str = []
     print("length is : ", request.POST.get('length'))
     for i in range(int(request.POST.get('length'))):
@@ -359,15 +366,19 @@ def update_edited_attendes(request):
         splited = i.split('~~')
         print(i.split('~~'), i)
         obj = Attendees.objects.get(
-            class_id=splited[2], roll_no=splited[3], user_name=splited[1])
+            class_id=splited[2], roll_no=splited[3], Date=my_date)
+        print('obj',obj)
+       
         obj.subject_states = splited[0]
         obj.save()
         print(obj.class_id, obj.subject_states)
         print("updated....")
         print(
             f"states : states-{splited[0]}, classid = {splited[2]},roll_no:{splited[3]}")
-    return render(request, 'class_room/attendes.html')
+    return render(request, 'attandees/attendes_alert.html',{'message':'Attendees are updated sucessfully...!'})
 
+def message_possitive(request):
+    return render(request,'attandees/attendes_alert.html',{'message':'Attendees are updated sucessfully...!'})
 
 def edit_attendes_home(request):
     return render(request, 'class_room/edit_attendes_home.html')
@@ -376,10 +387,11 @@ def edit_attendes_home(request):
 def edit_attendes(request):
     class_id = request.GET.get('class_id')
     date = request.GET.get('date')
+    print(class_id,date)
     for i in Attendees.objects.all():
         print(i.class_id, f"[{i.Date}]", i.user_name)
     attendees = Attendees.objects.filter(class_id=class_id, Date=date)
-    context = {'attendees': [[i, j] for i, j in enumerate(attendees)]}
+    context = {'attendees': [[i, j] for i, j in enumerate(attendees)],'date':date}
     print(context)
     return render(request, 'class_room/edit_attendes.html',staff_detials(request,'Edit Attendes',context))
 

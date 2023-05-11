@@ -22,6 +22,53 @@
 
     <title>Login</title>
   </head>
+  <style>
+    #snackbar {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+    }
+    
+    #snackbar.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+    
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+    }
+    
+    #snackbar .underline {
+      height: 3px;
+      background-color: #fff;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      animation: reduceWidth 5s linear forwards;
+    }
+    
+    @keyframes reduceWidth {
+      0% {width: 100%;}
+      100% {width: 0;}
+    }
+    
+  </style>
   <body>
   
     <div style="margin-top: 50px;">
@@ -41,6 +88,14 @@
               <div class="mb-4">
               <h3>Sign In</h3>
             </div>
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    {% for error in form.non_field_errors %}
+                        <p style="color:black">{{ error }}</p>
+                    {% endfor %}
+                  </div>
+            {% endif %}
 
 
             <form method="post">
@@ -79,7 +134,13 @@
       </div>
     </div>
   </div>
-
+  <script>
+    function showToast() {
+      var x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+  </script>
   
     <script src=" {% static 'login/js/jquery-3.3.1.min.js' %} "></script>
     <script src=" {% static 'login/js/popper.min.js' %} "></script>
