@@ -41,8 +41,8 @@
     justify-content: center;
     align-content: center;
     flex-direction: row;
-    flex-wrap: wrap;" href=" {% static ' https://demos.creative-tim.com/soft-ui-admin/pages/dashboard.html ' %} "
-        target="_blank">
+    flex-wrap: wrap;" href=" {% url 'student_home' %} "
+        >
         <img src="https://jec.ac.in/wp-content/themes/Jayacollege_2017/images/logo_fav.png"
           class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Jaya Engineering College</span>
@@ -835,7 +835,7 @@
             <p class="set_date">Thursday 28 May</p>
             <p class="set_time">8:00 AM</p>
             <a href="{% url 'todolist' %}">
-              <button
+              <button style="color: black;"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 ToDo List
               </button>
