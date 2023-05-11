@@ -6,6 +6,7 @@ import xlwt
 from .Tool.Tools import student_detials, staff_detials
 
 
+
 def add_faculty(request):
     facultys = Faculty_details.objects.all()
     for i in facultys:

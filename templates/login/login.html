@@ -9,19 +9,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href=" {% static 'login/fonts/icomoon/style.css' %} ">
-
-    <link rel="stylesheet" href=" {% static 'login/css/owl.carousel.min.css' %} ">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href=" {% static 'login/css/bootstrap.min.css' %} ">
+    <link rel="stylesheet" href="{% static 'login/fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
     
-    <!-- Style -->
-    <link rel="stylesheet" href=" {% static 'login/css/style.css' %} ">
     <link rel=" icon" href="https://jec.ac.in/wp-content/themes/Jayacollege_2017/images/logo_fav.png" type="image/x-icon">
 
     <title>Login</title>
   </head>
+  <style>
+    #snackbar {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+    }
+    
+    #snackbar.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+    
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+    }
+    
+    #snackbar .underline {
+      height: 3px;
+      background-color: #fff;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      animation: reduceWidth 5s linear forwards;
+    }
+    
+    @keyframes reduceWidth {
+      0% {width: 100%;}
+      100% {width: 0;}
+    }
+    
+  </style>
   <body>
   
     <div style="margin-top: 50px;">
@@ -41,6 +84,14 @@
               <div class="mb-4">
               <h3>Sign In</h3>
             </div>
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    {% for error in form.non_field_errors %}
+                        <p style="color:black">{{ error }}</p>
+                    {% endfor %}
+                  </div>
+            {% endif %}
 
 
             <form method="post">
@@ -52,8 +103,14 @@
 
               </div>
               <div class="form-group last mb-4">
-                <label for="password">Password</label>
-                {% render_field form.password type="text" class="form-control" placeholder="Password" %}
+                <div style="display: none; color: red;" id="error-message">
+                  Invalid username or password. Please try again.
+                  <button type="button" class="close" onclick="hideErrorMessage()">×</button>
+                </div>
+                <label for="password"  >Password</label>
+                <div  style="display: none; color: red;"></div>
+
+                {% render_field form.password type="password"  class="form-control" placeholder="Password" %}
 
                 <!-- <input type="password" name="password" class="form-control" id="password"> -->
                 
@@ -67,8 +124,8 @@
                 <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
               </div>
 
-              <input type="submit" value="Log In" class="btn btn-block btn-primary">
-
+              <input onclick="showToast(message,success)" type="submit" value="Log In" class="btn btn-block btn-primary">
+              
               </div>
             </form>
             </div>
@@ -79,11 +136,72 @@
       </div>
     </div>
   </div>
-
+  <script>
+    function showToast() {
+      var x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+  </script>
   
     <script src=" {% static 'login/js/jquery-3.3.1.min.js' %} "></script>
     <script src=" {% static 'login/js/popper.min.js' %} "></script>
     <script src=" {% static 'login/js/bootstrap.min.js' %} "></script>
     <script src=" {% static 'login/js/main.js' %} "></script>
+   
+    <script>
+     
+     function showToast() {
+  // Get the value of the username and password input fields
+  var username = document.getElementById("id_username").value;
+  var password = document.getElementById("id_password").value;
+
+  // Send a request to your backend system to check the credentials
+  // For example, using jQuery:
+  $.post("/login", {"username": username, "password": password})
+    .done(function(response) {
+      // If the credentials are correct, submit the form
+      if (response === "success") {
+        return true;
+      } else {
+        // If the credentials are incorrect, show an error message
+        var errorElement = document.getElementById("error-message");
+        errorElement.innerHTML = "Invalid username or password. Please try again.";
+        errorElement.style.display = "block";
+        
+        // Hide the error message after 2 seconds
+        setTimeout(function() {
+          errorElement.style.display = "none";
+        }, 5000);
+        
+        return false;
+      }
+    })
+    .fail(function() {
+      // If there was an error in the request, show an error message
+      var errorElement = document.getElementById("error-message");
+      errorElement.innerHTML = "Invalid Username or password";
+      errorElement.style.display = "block";
+      
+      // Hide the error message after 2 seconds
+      setTimeout(function() {
+  errorElement.style.display = "none";
+}, 5000);
+
+      return false;
+    });
+}
+
+function hideErrorMessage() {
+  document.getElementById("error-message").style.display = "none";
+}
+
+
+</script>
+
+    
   </body>
 </html>
+
+
+
