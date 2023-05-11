@@ -9,9 +9,9 @@
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
     <style type="text/css">
       a:link {
         text-decoration: none;
@@ -76,19 +76,19 @@
         <a href="admin-view-teacher" style="text-decoration: none;color:white;">
         <div class="card bg-c-blue order-card">
           <div class="card-block">
-            <h6 class="m-b-20"> Total Approved Teacher </h6>
-            <h2 class="text-right"><i class="fas fa-chalkboard-teacher f-left"></i><span>{{total_teacher}}</span></h2>
+            <h6 class="m-b-20" style="text-decoration: none;color:white;"> Total Approved Teacher </h6>
+            <h2 class="text-right"><i class="fas fa-chalkboard-teacher f-left"style="color:white;"></i><span style="margin-left: 50%;color: white;">{{total_teacher}}</span></h2>
           </div>
         </div>
       </a>
       </div>
   
       <div class="col-md-4 col-xl-4">
-        <a href="admin-view-pending-teacher" style="text-decoration: none;color:white;">
+        <a href="admin-view-pending-teacher" style="color:white;">
         <div class="card bg-c-yellow order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Total Pending Teacher </h6>
-            <h2 class="text-right"><i class="fas fa-sync-alt f-left"></i><span>{{pending_teacher}}</span></h2>
+            <h6 class="m-b-20"style="text-decoration: none;color:white;">Total Pending Teacher </h6>
+            <h2 class="text-right"><i class="fas fa-sync-alt f-left"style="color:white;"></i><span  style="margin-left: 50%;color: white;">{{pending_teacher}}</span></h2>
           </div>
         </div>
       </a>
@@ -98,8 +98,8 @@
         <a href="admin-view-teacher-salary" style="text-decoration: none;color:white;">
         <div class="card bg-c-green order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Total Teacher Salary</h6>
-            <h2 class="text-right"><i class="fas fa-dollar-sign f-left"></i><span>${{salary}}</span></h2>
+            <h6 class="m-b-20"style="text-decoration: none;color:white;">Total Teacher Salary</h6>
+            <h2 class="text-right"><i class="fas fa-dollar-sign f-left" style="color:white;"></i><span style="margin-left: 50%;color: white;">{{salary}}</span></h2>
           </div>
         </div>
       </a>
