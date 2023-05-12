@@ -316,7 +316,7 @@ def edit_classroom(request, classroom_id):
         classroom.save()
 
         # Redirect to the detail view of the updated classroom
-        return render(request, 'class_room/edit_class.html', {'classroom': classroom})
+        return render(request, 'class_room/edit_class.html', staff_detials(request,'Edit Classroom',{'classroom': classroom}))
 
     # If the request method is not POST, render the edit form with the current data
     # return render(request, 'class_room/edit_class.html', {'classroom': classroom})
@@ -419,7 +419,7 @@ def add_class_notes(request, pk):
             return redirect('course_list')
     else:
         form = EbookClassForm()
-    return render(request, 'class_room/notes/add_notes.html', {'form': form, 'class_id': pk})
+    return render(request, 'class_room/notes/add_notes.html', staff_detials(request,'Add Notes',{'form': form, 'class_id': pk}))
 
 
 def class_ebook_edit(request, pk):
