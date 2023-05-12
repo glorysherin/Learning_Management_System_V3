@@ -1,40 +1,77 @@
-<form method="post">
-    {% csrf_token %}
-    <input type="text" name="num_rows" value="{{ comp|length }}">
-    <table>
-        <thead>
-            <tr>
-                <th>Class ID</th>
-                <th>Roll No</th>
-                <th>Subject</th>
-                <th>Mark</th>
-                <th>Assement_No</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in comp %}
-            <tr>
-                <td><input type="text" name="class_id_{{ i.0 }}" value="{{ class_id }}" readonly></td>
-                <td><input type="text" name="roll_no_{{ i.0 }}" value="{{ i.1.role_no }}" readonly></td>
-                <td>
-                    <select name="subject_{{ i.0 }}" id="subject_{{ i.0 }}" onchange="replicateValues('{{i.0}}')">
-                        {% for subject in subjects %}
-                        <option value="{{ subject }}">{{ subject }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-                <td><input type="number" name="mark_{{ i.0 }}" id="mark_{{ i.0 }}" min="0" max="100" required></td>
-                <td><input type="number" name="ass_no_{{ i.0 }}" id="ass_no_{{ i.0 }}"
-                        onchange="replicateValues('{{i.0}}')" required></td>
-                <td><input type="date" name="date_{{ i.0 }}" id="date_{{ i.0 }}" value="{{ i.1.get_name }}"
-                        onchange="replicateDateValues('{{i.0}}')" required></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <input type="submit" value="Submit">
-</form>
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<div class="card"style=" margin-top: 10px;margin-bottom:10px">
+    <div >
+    <form method="post">
+        {% csrf_token %}
+        <label for="length"style="font-weight:500px">Subject Length:</label>
+        <input type="text" id="length" name="num_rows" value="{{ comp|length }}" readonly>
+        <div class="table-responsive">
+            <table class="table table-bordered" style="background-color: rgb(253, 253, 253);">
+                <thead>
+                    <tr>
+                        <th>Class ID</th>
+                        <th>Roll No</th>
+                        <th>Subject</th>
+                        <th>Mark</th>
+                        <th>Assement_No</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in comp %}
+                    <tr>
+                        <td><input type="text" name="class_id_{{ i.0 }}" value="{{ class_id }}" readonly></td>
+                        <td><input type="text" name="roll_no_{{ i.0 }}" value="{{ i.1.role_no }}" readonly></td>
+                        <td>
+                            <select name="subject_{{ i.0 }}" id="subject_{{ i.0 }}" onchange="replicateValues('{{i.0}}')">
+                                {% for subject in subjects %}
+                                <option value="{{ subject }}">{{ subject }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><input type="number" name="mark_{{ i.0 }}" id="mark_{{ i.0 }}" min="0" max="100" required></td>
+                        <td><input type="number" name="ass_no_{{ i.0 }}" id="ass_no_{{ i.0 }}"
+                                onchange="replicateValues('{{i.0}}')" required></td>
+                        <td><input type="date" name="date_{{ i.0 }}" id="date_{{ i.0 }}" value="{{ i.1.get_name }}"
+                                onchange="replicateDateValues('{{i.0}}')" required></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+</div>
+</div>
+
+<style>
+    .card {
+        border: 1px solid #9a9999;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 1300px;
+        background-color: rgb(255, 255, 255);
+       
+
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    th {
+
+        font-weight: bold;
+    }
+
+    input[readonly] {
+        border: #9a9999;
+        background-color: #fff;
+    }
+</style>
 
 <script>
     function replicateValues(rowNumber) {
@@ -52,3 +89,4 @@
         {% endfor %}
     }
 </script>
+{% endblock content %}

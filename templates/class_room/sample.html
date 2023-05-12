@@ -1,46 +1,111 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Attendees</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            margin-left: 20%;
+            margin-top: 10px;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-submit {
+            padding: 8px 16px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .no-attendees {
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
-    <form method="get">
-        <label for="class_id">Class ID:</label>
-        <input type="text" id="class_id" name="class_id" value="{{ request.GET.class_id }}">
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" value="{{ request.GET.date }}">
-        <button type="submit">Filter</button>
-    </form>
+    <div class="container">
+        <form method="get">
+            <label for="class_id" class="form-label"><b>Class ID:</b></label><br>
+            <input type="text" id="class_id" name="class_id" class="form-input" value="{{ request.GET.class_id }}"><br>
+            <label for="date" class="form-label"><b>Date:</b></label><br>
+            <input type="date" id="date" name="date" class="form-input" value="{{ request.GET.date }}"><br>
+            <button type="submit" class="form-submit">Filter</button><br>
+        </form>
 
-    {% if attendees %}
-    <h1>Attendees</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Class ID</th>
-                <th>User Name</th>
-                <th>Subject States</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for attendee in attendees %}
-            <tr>
-                <td>{{ attendee.id }}</td>
-                <td>{{ attendee.class_id }}</td>
-                <td>{{ attendee.user_name }}</td>
-                <td>{{ attendee.subject_states }}</td>
-                <td>{{ attendee.Date }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>No attendees found.</p>
-    {% endif %}
+        {% if attendees %}
+        <h1>Attendees</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Class ID</th>
+                    <th>User Name</th>
+                    <th>Subject States</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for attendee in attendees %}
+                <tr>
+                    <td>{{ attendee.id }}</td>
+                    <td>{{ attendee.class_id }}</td>
+                    <td>{{ attendee.user_name }}</td>
+                    <td>{{ attendee.subject_states }}</td>
+                    <td>{{ attendee.Date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-attendees">No attendees found.</p>
+        {% endif %}
+    </div>
 </body>
 
 </html>
+{% endblock content %}
