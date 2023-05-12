@@ -1,0 +1,7 @@
+<h1>Delete "{{ department.name }}"?</h1>
+<p>Are you sure you want to delete this department?</p>
+<form action="{% url 'department_delete' pk=department.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+    <a href="{% url 'department_detail' pk=department.pk %}">Cancel</a>
+</form>

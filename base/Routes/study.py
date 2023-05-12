@@ -1,7 +1,7 @@
 import requests
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Users, Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
+from ..models import Users,Department, Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
 from django.contrib.auth.models import User
 from .Tool.Tools import get_user_mail, get_user_name, get_user_role, get_user_obj
 import datetime
@@ -239,40 +239,47 @@ def home_classroom(request):
     elif is_teacher(request.user):
         obj = User.objects.get(id=request.user.id)
         teacher_data = Teacher.objects.get(user=obj)
+        
         teacher_data_1 = Faculty_details.objects.get(user_name=obj.username)
+        
         get_role = Users.objects.get(user_name=obj.username)
         accountapproval = TMODEL.Teacher.objects.all().filter(
             user_id=request.user.id, status=True)
+        
         if accountapproval:
-            print(teacher_data.department)
-            classrooms = ClassRooms.objects.filter(
-                department=teacher_data.department)
+            print('department',teacher_data.department)
+            
+            classrooms = ClassRooms.objects.filter(department=teacher_data.department)
+            
             all_classroom = ClassRooms.objects.all()
+            for i in classrooms:
+                print("Class_Rooms",i.subject_code)
             print(classrooms)
+            
             print(get_role.role, type(get_role.role))
             try:
                 if get_role.role == 2:
-                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': teacher_data.department, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
                 if get_role.role == 3:
-                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
                 if get_role.role == 1:
-                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
             except:
                 if get_role.role == 2:
-                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data,'teacher_obj':teacher_data , 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': teacher_data.department, "user_name": request.user.username})
                 if get_role.role == 3:
-                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data,'teacher_obj':teacher_data , 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
                 if get_role.role == 1:
-                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data,'teacher_obj':teacher_data , 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
         else:
             return render(request, 'teacher/teacher_wait_for_approval.html')
     else:
        if get_role.role == 1:
-            return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+            return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
 
 
 def add_class(request):
-    courses = NoteCourse.objects.all()
+    courses = Department.objects.all()
     return render(request, 'class_room/new_add.html',staff_detials(request, 'Add New Class',{"course":courses}))
 
 

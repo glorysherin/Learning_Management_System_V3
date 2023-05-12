@@ -1,0 +1,9 @@
+<h1>{{ department.name }}</h1>
+<p>{{ department.description }}</p>
+<p>{{ department.short_name }}</p>
+<a href="{% url 'department_edit' pk=department.pk %}">Edit</a>
+<form action="{% url 'department_delete' pk=department.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
+

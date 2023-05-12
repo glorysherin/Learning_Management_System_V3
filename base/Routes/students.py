@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from base import models
 from .Forms import student_forms
-from ..models import Users, Student, Faculty_details, Sec_Daily_test_mark
+from ..models import Users, Student, Faculty_details, Sec_Daily_test_mark, Department
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -75,6 +75,7 @@ def student_delete(request, student_id):
 
 def student_edit(request, pk):
     student = get_object_or_404(Student, pk=pk)
+    department = Department.objects.all()
     if request.method == 'POST':
         student.user.first_name = request.POST['first_name']
         student.user.last_name = request.POST['last_name']
@@ -89,7 +90,7 @@ def student_edit(request, pk):
         student.save()
         return redirect('students_list')
     else:
-        context = {'student': student}
+        context = {'student': student,'department':department}
         return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
 
 
