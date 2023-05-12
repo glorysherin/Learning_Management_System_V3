@@ -404,7 +404,7 @@ def view_attendes(request):
         print(i.class_id, f"[{i.Date}]", i.user_name, i.subject_states)
     attendees = Attendees.objects.filter(class_id=class_id, Date=date)
     context = {'attendees': attendees}
-    return render(request, 'class_room/sample.html', context)
+    return render(request, 'class_room/sample.html',staff_detials(request,'View Attendes', context))
 
 
 def add_class_notes(request, pk):
