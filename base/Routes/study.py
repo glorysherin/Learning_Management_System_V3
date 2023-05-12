@@ -318,7 +318,8 @@ def edit_classroom(request, classroom_id):
         return render(request, 'class_room/edit_class.html', {'classroom': classroom})
 
     # If the request method is not POST, render the edit form with the current data
-    return render(request, 'class_room/edit_class.html', {'classroom': classroom})
+    # return render(request, 'class_room/edit_class.html', {'classroom': classroom})
+    return render(request,'class_room/edit_class.html',staff_detials(request,'Edit Classroom'))
 
 
 def attendes(request):
@@ -381,7 +382,7 @@ def message_possitive(request):
     return render(request,'attandees/attendes_alert.html',{'message':'Attendees are updated sucessfully...!'})
 
 def edit_attendes_home(request):
-    return render(request, 'class_room/edit_attendes_home.html')
+    return render(request, 'class_room/edit_attendes_home.html',staff_detials(request,'Edit Attendes'))
 
 
 def edit_attendes(request):
