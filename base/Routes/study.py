@@ -272,7 +272,8 @@ def home_classroom(request):
 
 
 def add_class(request):
-    return render(request, 'class_room/new_add.html',staff_detials(request, 'Add New Class'))
+    courses = NoteCourse.objects.all()
+    return render(request, 'class_room/new_add.html',staff_detials(request, 'Add New Class',{"course":courses}))
 
 
 def delete_class(request, room):

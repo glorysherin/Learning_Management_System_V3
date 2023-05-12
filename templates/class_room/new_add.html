@@ -41,7 +41,11 @@
               </div>
               <div class="form-group">
                 <label for="department">Department:</label>
-                <input class="form-control" name="department" type="text" placeholder="Enter department">
+                <select class="form-control" name="department">
+                  {% for i in course %}
+                    <option value="{{ i.name }}">{{ i.name }}</option>
+                  {% endfor %}
+                </select>
               </div>
               <div class="form-group">
                 <label for="semester">Semester:</label>
