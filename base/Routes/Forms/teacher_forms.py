@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from base import models
+from base.models import Department
 
 
 class TeacherUserForm(forms.ModelForm):
@@ -16,13 +17,6 @@ class TeacherForm(forms.ModelForm):
     class Meta:
         model = models.Teacher
         fields = ['address', 'mobile', 'profile_pic', 'role', 'department']
-    DEPARTMENT_CHOICES = (
-        ('none', 'Selected Staff'),
-        ('CSE', 'Computer Science and Engineering'),
-        ('EEE', 'Electrical and Electronics Engineering'),
-        ('ME', 'Mechanical Engineering'),
-        # Add more choices here as needed
-    )
 
     ROLE_CHOICES = (
         ('student', 'Student'),
@@ -30,5 +24,16 @@ class TeacherForm(forms.ModelForm):
         ('hod', 'Hod'),
         ('admin', 'Admin'),
     )
-    department = forms.ChoiceField(choices=DEPARTMENT_CHOICES)
+    department = forms.ModelChoiceField(queryset=models.Department.objects.all(),
+                                        empty_label='Select department',
+                                        to_field_name='short_name',
+                                        label='Department')
     role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect)
+
+
+
+class DepartmentForm(forms.ModelForm):
+
+    class Meta:
+        model = Department
+        fields = ('name', 'description', 'short_name')

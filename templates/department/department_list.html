@@ -1,0 +1,9 @@
+<h1>Departments</h1>
+<ul>
+{% for department in departments %}
+    <li><a href="{% url 'department_detail' pk=department.pk %}">{{ department.name }}</a></li>
+{% empty %}
+    <li>No departments yet.</li>
+{% endfor %}
+</ul>
+<a href="{% url 'department_create' %}">Create new department</a>

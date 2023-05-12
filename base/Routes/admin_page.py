@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees, Note
+from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees, Note, Department
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import xlwt
@@ -200,19 +200,26 @@ def teacher_delete(request, teacher_id):
 
 def teacher_edit(request, teacher_id):
     teacher = Teacher.objects.get(id=teacher_id)
-
+    department = Department.objects.all()
     if request.method == 'POST':
+        print(request.POST.get('department'))
         teacher.user.first_name = request.POST.get('first_name')
         teacher.user.last_name = request.POST.get('last_name')
         teacher.address = request.POST.get('address')
         teacher.mobile = request.POST.get('mobile')
         teacher.role = request.POST.get('role')
-        teacher.status = request.POST.get('status') == 'on'
+        teacher.status = request.POST.get('status') == 'on' 
         teacher.department = request.POST.get('department')
         teacher.salary = request.POST.get('salary')
         teacher.Annauni_num = request.POST.get('Annauni_num')
         teacher.save()
+        print("datas are updated....")
+        teacher = Teacher.objects.get(id=teacher_id)
+        print(teacher.department)
 
-        return redirect('teacher_list')
+        return render(request, 'attandees/teacher_edit_message.html',{'id':teacher_id})
 
-    return render(request, 'admin_actions/teacher_edit.html', staff_detials(request,"Edit profile",{'teacher': teacher}))
+    return render(request, 'admin_actions/teacher_edit.html', staff_detials(request,"Edit profile",{'teacher': teacher,'dep':department}))
+
+# def teacher_edit_msg(request):
+#     return render(request, 'attandees/teacher_edit_message.html')

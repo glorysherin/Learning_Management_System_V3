@@ -67,11 +67,14 @@
             <label for="joinned_year">Joined Year:</label>
             <input type="date" name="joinned_year" id="joinned_year"><br>
             <label for="role_no">Role No:</label>
-            <input type="text" name="role_no" value="{{ student.role_no }}"><br>
+            <input type="text" name="role_no" value="{{ student.role_no }}" readonly><br>
             <label for="file_">Profile photo:</label>
             <input type="file" name="file_"><br>
-            <label for="department">Department:</label>
-            <input type="text" name="department" value="{{ student.department }}"><br>
+            <select class="form-control" name="department">
+                {% for i in department %}
+                  <option value="{{ i.short_name }}">{{ i.name }}</option>
+                {% endfor %}
+            </select><br>
             <input type="submit" value="Save">
         </form>
         <script>

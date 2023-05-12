@@ -13,17 +13,14 @@ class StudentUserForm(forms.ModelForm):
 
 
 class StudentForm(forms.ModelForm):
-    DEPARTMENT_CHOICES = (
-        ('CSE', 'Computer Science and Engineering'),
-        ('EEE', 'Electrical and Electronics Engineering'),
-        ('ME', 'Mechanical Engineering'),
-        # Add more choices here as needed
-    )
 
     joinned_year = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}))
     role_no = forms.IntegerField()
-    department = forms.ChoiceField(choices=DEPARTMENT_CHOICES)
+    department = forms.ModelChoiceField(queryset=models.Department.objects.all(),
+                                        empty_label='Select department',
+                                        to_field_name='short_name',
+                                        label='Department')
 
     class Meta:
         model = models.Student

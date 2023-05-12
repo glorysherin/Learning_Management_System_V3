@@ -1,18 +1,76 @@
-{% extends 'teacher/teacherbase.html' %} {% block content %}
+{% extends 'teacher/teacherbase.html' %}
 
-<form method="post">
-    {% csrf_token %}
-    <label for="cars">User Name:</label>
-    <select name="user_name" id="user_name">
-        {% for i in people %}
-        <option value="{{ i.get_name }}">{{ i.get_name }}</option>
-        {% endfor %}
-    </select>
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+    }
 
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date"><br><br>
-    <label for="department">subject:</label>
-    <input type="text" id="department" name="department"><br><br>
-    <input type="submit" value="Submit">
-</form>
-{% endblock content%}
+    .card {
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .card h1 {
+        font-size: 24px;
+        margin: 0 0 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-group input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="card">
+    <h1>Create New User</h1>
+
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        <label for="user_name">User Name:</label>
+        <select name="user_name" id="user_name">
+            {% for i in people %}
+            <option value="{{ i.get_name }}">{{ i.get_name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date"><br><br>
+        
+        <label for="department">Subject:</label>
+        <input type="text" id="department" name="department"><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock content %}

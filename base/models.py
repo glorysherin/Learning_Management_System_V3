@@ -441,3 +441,12 @@ class Pages(models.Model):
     html = models.TextField()
     css = models.TextField()
     preview_link = models.TextField()
+
+
+class Department(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    short_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name

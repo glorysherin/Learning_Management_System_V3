@@ -7,6 +7,7 @@ from .Routes.common import *
 from .Routes.Common_Tool import *
 from .Routes.tool import *
 from .Routes.staff import *
+from .Routes.department import *
 from .Routes.students import *
 from .Routes.study import *
 from .Routes.notes import *
@@ -479,7 +480,15 @@ chatbot = [
     path('student/chatbot_res', chatbot_res),
 ]
 
-urlpatterns.extend(Make_Join([tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+department=[
+    path('department_list', department_list, name='department_list'),
+    path('department/<int:pk>/', department_detail, name='department_detail'),
+    path('department/new/', department_create, name='department_create'),
+    path('department/<int:pk>/edit/', department_edit, name='department_edit'),
+    path('department/<int:pk>/delete/', department_delete, name='department_delete'),
+]
+
+urlpatterns.extend(Make_Join([department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

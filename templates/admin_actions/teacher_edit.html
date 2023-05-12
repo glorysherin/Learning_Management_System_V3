@@ -39,11 +39,16 @@
         <input type="checkbox" id="status" name="status" {% if teacher.status %}checked{% endif %}
             class="form-check-input">
     </div>
+
     <div class="form-group">
         <label for="department">Department:</label>
-        <input type="text" id="department" name="department" value="{{ teacher.department }}" class="form-control"
-            required>
+        <select class="form-control" name="department">
+          {% for i in dep %}
+            <option value="{{ i.short_name }}">{{ i.name }}</option>
+          {% endfor %}
+        </select>
     </div>
+
     <div class="form-group">
         <label for="salary">Salary:</label>
         <input type="number" id="salary" name="salary" value="{{ teacher.salary }}" class="form-control">
