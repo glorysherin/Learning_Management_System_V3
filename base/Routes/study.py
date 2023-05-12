@@ -13,6 +13,7 @@ from django.utils import timezone
 from googlesearch import search
 import urllib.parse
 from django.http import JsonResponse
+from random import choice
 
 from .Tool.Tools import student_detials, staff_detials
 
@@ -271,7 +272,7 @@ def home_classroom(request):
 
 
 def add_class(request):
-    return render(request, 'class_room/new_add.html')
+    return render(request, 'class_room/new_add.html',staff_detials(request, 'Add New Class'))
 
 
 def delete_class(request, room):
@@ -287,7 +288,7 @@ def save_add_class(request):
     semester = request.POST.get('semester')
     discription = request.POST.get('discription')
 
-    class_room = ClassRooms(class_image=get_image_url(class_name+" logos"), class_name=class_name, subject_code=subject_code,
+    class_room = ClassRooms(class_image=choice(get_image_url(class_name+" logos")), class_name=class_name, subject_code=subject_code,
                             department=department, semester=semester, discription=discription, owner=Faculty_details.objects.get(mail=get_user_mail(request)))
     class_room.save()
     class_id = ClassRooms.objects.get(subject_code=subject_code)
@@ -295,7 +296,7 @@ def save_add_class(request):
         user_id=request.user.id, mail_id=request.user.username, subject_code=subject_code, class_id=class_id.id)
     enroll_class.save()
 
-    return render(request, 'class_room/new_add.html')
+    return render(request, 'class_room/new_add.html',staff_detials(request,'Class added'))
 
 
 def edit_classroom(request, classroom_id):
@@ -315,11 +316,11 @@ def edit_classroom(request, classroom_id):
         classroom.save()
 
         # Redirect to the detail view of the updated classroom
-        return render(request, 'class_room/edit_class.html', {'classroom': classroom})
+        return render(request, 'class_room/edit_class.html', staff_detials(request,'Edit Classroom',{'classroom': classroom}))
 
     # If the request method is not POST, render the edit form with the current data
     # return render(request, 'class_room/edit_class.html', {'classroom': classroom})
-    return render(request,'class_room/edit_class.html',staff_detials(request,'Edit Classroom'))
+    return render(request,'class_room/edit_class.html',staff_detials(request,'Edit Classroom',{'classroom': classroom}))
 
 
 def attendes(request):
@@ -418,7 +419,7 @@ def add_class_notes(request, pk):
             return redirect('course_list')
     else:
         form = EbookClassForm()
-    return render(request, 'class_room/notes/add_notes.html', {'form': form, 'class_id': pk})
+    return render(request, 'class_room/notes/add_notes.html', staff_detials(request,'Add Notes',{'form': form, 'class_id': pk}))
 
 
 def class_ebook_edit(request, pk):
@@ -497,7 +498,7 @@ def edit_mark(request):
     context = {'attendees': [[i, j]
                              for i, j in enumerate(attendees)], 'courses': courses, 'date': date}
     print(context)
-    return render(request, 'class_room/edit_mark.html', context)
+    return render(request, 'class_room/edit_mark.html', staff_detials(request,'Edit Daily Test Mark',context))
 
 
 def update_edited_mark(request):
@@ -739,7 +740,7 @@ def get_internal_test_marks(request):
 
             if date_str:
                 # Parse the date string to get the year
-                date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
+                date = datetime.strptime(date_str, '%Y-%m-%d').date()
                 year = date.year
 
                 # Filter marks based on year

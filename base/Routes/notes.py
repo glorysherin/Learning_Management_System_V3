@@ -1,16 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ..models import NoteCourse, Ebook
 from .Forms.Notes_form import EbookForm, CourseForm
+from .Tool.Tools import student_detials, staff_detials
 
 def course_list(request):
     courses = NoteCourse.objects.all()
-    for i in courses:
-        print(i.name)
-    return render(request, 'notes/course_list.html', {'courses': courses})
+    return render(request, 'notes/course_list.html', staff_detials(request,'Course List',{'courses': courses}))
 
 def course_detail(request, pk):
     course = get_object_or_404(NoteCourse, pk=pk)
-    return render(request, 'notes/course_detail.html', {'course': course})
+    return render(request, 'notes/course_detail.html', staff_detials(request,'Course Detail',{'course': course}))
 
 def course_add(request):
     if request.method == 'POST':
@@ -21,7 +20,7 @@ def course_add(request):
     else:
         form = CourseForm()
     context = {'form': form}
-    return render(request, 'notes/course_add.html', context)
+    return render(request, 'notes/course_add.html',staff_detials(request,'Add Course',context))
 
 def course_edit(request, pk):
     course = NoteCourse.objects.get(id=pk)
@@ -47,7 +46,7 @@ def ebook_add(request):
             return redirect('course_list')
     else:
         form = EbookForm()
-    return render(request, 'notes/ebook_add.html', {'form': form})
+    return render(request, 'notes/ebook_add.html', staff_detials(request,'Add E-Book',{'form': form}))
 
 def ebook_edit(request, pk):
     ebook = get_object_or_404(Ebook, pk=pk)
