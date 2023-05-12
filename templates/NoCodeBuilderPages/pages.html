@@ -23,10 +23,14 @@
       <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
         <div class="flex justify-between">
             <h2 class="text-2xl font-extrabold text-gray-900">My Pages</h2>
-            <a href="/add" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <a href="/add" style="margin-left: 70%;" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <!-- Heroicon name: solid/check -->
                 Add new
             </a>
+            <a href="{% url 'student-dashboard' %}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <!-- Heroicon name: solid/check -->
+              Back
+          </a>
         </div>
         <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
         
