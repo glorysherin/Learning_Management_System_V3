@@ -1,4 +1,6 @@
 {% extends 'teacher/teacherbase.html' %} {% block content %}
+<a href="{% url 'show_actions' class_id=class_obj.subject_code %}" class="btn btn-secondary ml-2" onclick="window.history.back();">Back</a>
+
 <section style="background-color: #eee;">
     <div class="container py-5">
         <div class="row">

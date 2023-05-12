@@ -1,6 +1,9 @@
 {% extends 'teacher/teacherbase.html' %}
 
 {% block content %}
+<br>
+<a href="{% url 'show_actions' class_id=class_id %}"  class="btn btn-secondary ml-2" onclick="window.history.back();">Back</a>
+
 <div class="card" style="margin-top: 10px;margin-bottom: 10px;">
     <h2>Test Marks for {{ class_id }}</h2>
     <div class="table-responsive">
