@@ -1,18 +1,67 @@
-<!DOCTYPE html>
-<html>
+{% extends 'teacher/teacherbase.html' %}
 
-<head>
-    <title>Mark</title>
-</head>
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+    }
 
-<body>
-    <form method="get" action="edit_mark">
+    .card {
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .card h1 {
+        font-size: 24px;
+        margin: 0 0 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .form-group button[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="card">
+    <h1>Mark Filter</h1>
+
+    <form method="get" action="edit_mark" class="form-group">
         <label for="class_id">Class ID:</label>
         <input type="text" id="class_id" name="class_id" value="{{ request.GET.class_id }}">
+
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" value="{{ request.GET.date }}">
-        <button type="submit">Filter</button>
-    </form>
-</body>
 
-</html>
+        <button type="submit" style="margin-top: 10px;">Filter</button>
+    </form>
+</div>
+{% endblock content %}

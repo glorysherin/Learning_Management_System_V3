@@ -1,10 +1,67 @@
 {% extends 'teacher/teacherbase.html' %}
 
 {% block content %}
-<form method="post">
+<head>
+    <link rel="stylesheet" href="responsive-table.css">
+
+  
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  thead {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  @media screen and (max-width: 600px) {
+    /* Make the table responsive on smaller screens */
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+  
+    /* Hide table headers */
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  
+    td {
+      border: none;
+      position: relative;
+      padding-left: 50%;
+    }
+  
+    td::before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+      font-weight: bold;
+    }
+  }
+  </style>
+    </head>
+<form method="post" style="margin-top: 20px;margin-left: 5%;">
     {% csrf_token %}
-    <input type="text" name="num_rows" value="{{ comp|length }}">
-    <h6>the old selected subject is : {{ comp.0.1.subject }} you should set the subject manaluy for security purpos</h6>
+    <label for="rolllength">RollNo Length:</label>
+    <input type="text" name="num_rows"id="rolllength" value="{{ comp|length }}" readonly>
+    <h6>The oldest selected subject is :<i> {{ comp.0.1.subject }}</i> you should set the subject manaully for security purpose.</h6>
     <table>
         <thead>
             <tr>
@@ -40,7 +97,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" style="margin-top: 10px;margin-left: 3%;">
 </form>
 
 <script>
