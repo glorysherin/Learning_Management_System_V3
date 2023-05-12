@@ -535,7 +535,7 @@ def add_test_marks(request, class_id):
             daily_test.save()
         print(class_id)
         return redirect('test_marks', class_id=request.POST.get('class_id_'+str(0)))
-
+   
     peoples = []
     people = class_enrolled.objects.filter(subject_code=class_id)
     test = class_enrolled.objects.all()
@@ -552,9 +552,9 @@ def add_test_marks(request, class_id):
             pass
     sub = Course.objects.all()
     print("sub", sub)
-    return render(request, 'class_room/add_test_marks.html', {'class_id': class_id, 'subjects': sub, 'comp': [[i, j] for i, j in enumerate(peoples)]})
-
-
+    context ={'class_id': class_id, 'subjects': sub, 'comp': [[i, j] for i, j in enumerate(peoples)]}
+    return render(request, 'class_room/add_test_marks.html', staff_detials(request,'Update mark',context))
+  
 def test_marks(request, class_id):
     if request.method == 'POST':
         pass
@@ -568,7 +568,8 @@ def test_marks(request, class_id):
         except:
             pass
     test_marks = Internal_test_mark.objects.filter(class_id=class_id)
-    return render(request, 'class_room/test_marks.html', {'class_id': class_id, 'test_marks': [[i, j, Student.objects.filter(role_no=j.roll_no)[0].get_name] for i, j in enumerate(test_marks)], 'students': peoples})
+   
+    return render(request, 'class_room/test_marks.html',staff_detials(request,'Add test Mark', {'class_id': class_id, 'test_marks': [[i, j, Student.objects.filter(role_no=j.roll_no)[0].get_name] for i, j in enumerate(test_marks)], 'students': peoples}))
 
 
 def edit_test_marks(request, class_id, sub, ass_no):
@@ -596,7 +597,7 @@ def edit_test_marks(request, class_id, sub, ass_no):
         class_id=class_id, subject=sub, assesment_no=ass_no)
     sub = Course.objects.all()
 
-    return render(request, 'class_room/edit_test_mark.html', {'subjects': sub, 'class_id': class_id, 'comp': [[i, j] for i, j in enumerate(test)]})
+    return render(request, 'class_room/edit_test_mark.html',staff_detials(request,'Edit Test Mark', {'subjects': sub, 'class_id': class_id, 'comp': [[i, j] for i, j in enumerate(test)]}))
 
 
 def marks_by_class(request, class_id):

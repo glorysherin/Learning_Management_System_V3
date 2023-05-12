@@ -1,3 +1,6 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
 <form method="post">
     {% csrf_token %}
     <input type="text" name="num_rows" value="{{ comp|length }}">
@@ -69,3 +72,4 @@
         {% endfor %}
     }
 </script>
+{% endblock content %}
