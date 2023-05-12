@@ -460,13 +460,14 @@ Staff_tool = [
 ]
 
 NoCodeMaker = [
-    path('view_pages', index, name='home'),
+    path('view_pages', index, name='view_pages'),
 
     path('add', addPage, name="addpage"),
     path('edit/<id>', editPage, name="editpage"),
     path('page/create', savePage, name="create_page"),
     path('editPage/<id>', editPageContent, name="editPageContent"),
     path('preview/<id>', previewPage, name='previewPage'),
+    path('delete/<id>', deletePage, name='deletePage'),
     path('Own_Gpt', Own_Gpt, name='Own_Gpt'),
     path('savePage_download', savePage_download, name='savePage_download'),
     path('url', url, name='url'),

@@ -46,6 +46,7 @@
                     <p class="text-base font-semibold text-gray-900">{{ page.decsription }}</p>
                   </div>
                   <a href="/preview/{{page.id}}">Preview</a>
+                  <a href="{% url 'deletePage' id=page.id %}">Delete</a>
                 </div>
                 {% endfor %}
             {% endif %}
