@@ -1,4 +1,6 @@
 {% extends 'teacher/teacherbase.html' %} {% block content %}
+<a href="{% url 'show_actions' class_id=class_obj.subject_code %}" class="btn btn-secondary ml-2" onclick="window.history.back();">Back</a>
+
 <section style="background-color: #eee;">
     <div class="container py-5">
         <div class="row">
@@ -108,7 +110,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
-                <div class="card" style="    height: 100%;">
+                <div class="card" style="    height: 100%;margin-top: 20px;">
                     <div class="d-flex justify-content-between p-3">
                         <p class="lead mb-0">View The DailyMark All of the student at a time</p>
                         <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
@@ -145,7 +147,7 @@
             </div>
 
             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
-                <div class="card" style="    height: 100%;">
+                <div class="card" style="    height: 100%; margin-top: 20px">
                     <div class="d-flex justify-content-between p-3">
                         <p class="lead mb-0">View Internal Test Mark by filtering</p>
                         <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"

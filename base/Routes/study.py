@@ -638,7 +638,7 @@ def user_marks(request, user_name):
 
 def show_actions(request, class_id):
     cls_obj = ClassRooms.objects.get(subject_code=class_id)
-    return render(request, "class_room/action_options.html", staff_detials(request,'Mark Actions',{'class_obj': cls_obj}))
+    return render(request, "class_room/action_options.html", staff_detials(request,'Mark Actions',{'class_obj': cls_obj,'class_id':class_id}))
 
 
 def mark_option(request, class_id):
