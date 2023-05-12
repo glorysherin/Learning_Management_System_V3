@@ -485,7 +485,7 @@ def update_mark(request):
 
 
 def edit_mark_home(request):
-    return render(request, 'class_room/edit_mark_home.html')
+    return render(request, 'class_room/edit_mark_home.html',staff_detials(request,'Edit Mark Home'))
 
 
 def edit_mark(request):
@@ -618,7 +618,7 @@ def marks_by_class(request, class_id):
 
     # pass the data to the template
     context = {'class_id': class_id, 'class_data': class_data}
-    return render(request, 'class_room/daily_mark.html', context)
+    return render(request, 'class_room/daily_mark.html',staff_detials(request,'Marks By Class',context))
 
 
 def user_marks(request, user_name):
@@ -754,7 +754,7 @@ def get_internal_test_marks(request):
         'date': date_str,
     }
 
-    return render(request, 'class_room/internal_test_marks.html', context)
+    return render(request, 'class_room/internal_test_marks.html',staff_detials(request,'Get Internal Test Mark',context))
 
 
 def Dailystudenttest_marksby_date(request, user_name):
