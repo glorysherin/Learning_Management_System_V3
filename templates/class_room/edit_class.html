@@ -1,20 +1,91 @@
-{% block content %}
-<h1>Edit Classroom</h1>
-<form method="post">
-    {% csrf_token %}
-    <label for="class_name">Class Name:</label>
-    <input type="text" name="class_name" value="{{ classroom.class_name }}"><br>
-    <label for="subject_code">Subject Code:</label>
-    <input type="text" name="subject_code" value="{{ classroom.subject_code }}"><br>
-    <label for="semester">Semester:</label>
-    <input type="text" name="semester" value="{{ classroom.semester }}"><br>
-    <label for="department">Department:</label>
-    <input type="text" name="department" value="{{ classroom.department }}"><br>
-    <label for="discription">Description:</label>
-    <input type="text" name="image_url" value="{{ classroom.class_image }}"><br>
-    <label for="discription">Description:</label>
-    <input type="text" name="discription" value="{{ classroom.discription }}"><br>
-    <input type="submit" value="Save Changes">
-</form>
+{% extends 'teacher/teacherbase.html' %}
 
-{% endblock %}
+{% block content %}
+
+
+<style>
+.card-container {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: border-color 0.2s ease-in-out;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #0062cc;
+}
+</style>
+<div class="card-container">
+    <h1>Edit Classroom</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="class_name">Class Name:</label>
+        <input type="text" name="class_name" value="{{ classroom.class_name }}">
+      </div>
+      <div class="form-group">
+        <label for="subject_code">Subject Code:</label>
+        <input type="text" name="subject_code" value="{{ classroom.subject_code }}">
+      </div>
+      <div class="form-group">
+        <label for="semester">Semester:</label>
+        <input type="text" name="semester" value="{{ classroom.semester }}">
+      </div>
+      <div class="form-group">
+        <label for="department">Department:</label>
+        <input type="text" name="department" value="{{ classroom.department }}">
+      </div>
+      <div class="form-group">
+        <label for="image_url">Image URL:</label>
+        <input type="text" name="image_url" value="{{ classroom.class_image }}">
+      </div>
+      <div class="form-group">
+        <label for="discription">Description:</label>
+        <textarea name="discription">{{ classroom.description }}</textarea>
+      </div>
+      <button type="submit" class="btn-primary">Save Changes</button>
+    </form>
+  </div>
+  </html>
+{% endblock content%}
