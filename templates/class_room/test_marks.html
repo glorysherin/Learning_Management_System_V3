@@ -1,31 +1,70 @@
-<h2>Test Marks for {{ class_id }}</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Roll No</th>
-            <th scope="col">Name</th>
-            <th scope="col">Assessment No</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Mark</th>
-            <th scope="col">Date</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for i, mark, name in test_marks %}
-        <tr>
-            <th scope="row">{{ i }}</th>
-            <td>{{ mark.roll_no }}</td>
-            <td>{{ name }}</td>
-            <td>{{ mark.assesment_no }}</td>
-            <td>{{ mark.subject }}</td>
-            <td>{{ mark.mark }}</td>
-            <td>{{ mark.Date }}</td>
-            <td><a
-                    href="{% url 'edit_test_marks' class_id=mark.class_id sub=mark.subject ass_no=mark.assesment_no %}">Edit</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<div class="card" style="margin-top: 10px;margin-bottom: 10px;">
+    <h2>Test Marks for {{ class_id }}</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Roll No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Assessment No</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Mark</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i, mark, name in test_marks %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td>{{ mark.roll_no }}</td>
+                    <td>{{ name }}</td>
+                    <td>{{ mark.assesment_no }}</td>
+                    <td>{{ mark.subject }}</td>
+                    <td>{{ mark.mark }}</td>
+                    <td>{{ mark.Date }}</td>
+                    <td><a href="{% url 'edit_test_marks' class_id=mark.class_id sub=mark.subject ass_no=mark.assesment_no %}">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 0 auto;
+       
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+{% endblock content %}
