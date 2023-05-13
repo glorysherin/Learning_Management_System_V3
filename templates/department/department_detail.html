@@ -1,3 +1,5 @@
+{% extends 'student/adminbase.html' %}
+{% block content %}
 <h1>{{ department.name }}</h1>
 <p>{{ department.description }}</p>
 <p>{{ department.short_name }}</p>
@@ -6,4 +8,4 @@
     {% csrf_token %}
     <input type="submit" value="Delete">
 </form>
-
+{% endblock %}
