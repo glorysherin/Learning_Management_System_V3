@@ -1,24 +1,217 @@
 <div class="mt-32">
     <div class="px-4 sm:px-8 max-w-5xl m-auto">
-<h1 class="text-center font-semibold text-sm">Search Results for "{{ query }}"</h1>
-{% if not results %}
-<p>No results found.</p>
-{% else %}
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    {% for result in results %}
-    <div class="bg-white rounded-lg shadow-md p-4">
-        <ul class="border border-gray-200 rounded overflow-hidden shadow-md">
-        <h3 class="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out"><a href="{{ result.title }}" target="_blank">{{ result.title }}</a></h3>
-        <p class="text-gray-700 mb-4">{{ result.description }}</p>
-        <div class="flex justify-between">
-            <p class="text-gray-500">{{ result.date }}</p>
-            <p class="text-gray-500">{{ result.author }}</p>
+        <h1 class="text-center font-semibold text-sm">Search Results for "{{ query }}"</h1>
+        <div class="search-container">
+            <input type="text" placeholder="Search URL" id="search-box">
+            <button type="button" id="search-btn"><i class="fa fa-search">Search</i></button>
         </div>
+
+        {% if not results %}
+        <p>No results found.</p>
+        {% else %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="search-results">
+            {% for result in results %}
+            <div class="bg-white rounded-lg shadow-md">
+                <div class="p-4">
+                    <h5 class="text-lg font-medium mb-2">
+                        <a href="{{ result.title }}" target="_blank">{{ result.title }}</a>
+                    </h5>
+                    <p class="text-gray-700 mb-4">{{ result.description }}</p>
+                    <div class="flex justify-between text-gray-500">
+                        <p>{{ result.date }}</p>
+                        <p>{{ result.author }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% endif %}
     </div>
-    {% endfor %}
 </div>
-{% endif %}
 
-<!-- component -->
+<style>
+    .mt-32 {
+        margin-top: 32px;
+    }
 
-       
+    .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .sm\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .max-w-5xl {
+        max-width: 80rem;
+    }
+
+    .m-auto {
+        margin: auto;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .font-semibold {
+        font-weight: 600;
+    }
+
+    .text-sm {
+        font-size: 0.875rem;
+    }
+
+    .search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-left: 40%;
+    }
+
+    #search-box {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+        width: 200px;
+    }
+
+    #search-btn {
+        background-color: #428bca;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #search-btn:hover {
+        background-color: #428bca;
+    }
+
+    .grid {
+        display: grid;
+    }
+
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .gap-4 {
+        gap: 1rem;
+    }
+
+    .bg-white {
+        background-color: #fff;
+    }
+
+    .rounded-lg {
+        border-radius: 0.5rem;
+    }
+
+    .shadow-md {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .p-4 {
+        padding: 1rem;
+    }
+
+    .border {
+        border-width: 1px;
+    }
+
+    .border-gray-200 {
+        border-color: #edf2f7;
+    }
+
+    .overflow-hidden {
+        overflow: hidden;
+    }
+
+    .text-gray-700 {
+        color: #4a5568;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .justify-between {
+        justify-content: space-between;
+    }
+
+    .text-gray-500 {
+        color: #718096;
+    }
+
+    .hover\:bg-sky-100:hover {
+        background-color: #e2f4fd;
+    }
+
+    .hover\:text-sky-900:hover {
+        color: #1e40af;
+    }
+
+    .border-b {
+        border-bottom-width: 1px;
+    }
+
+    .last\:border-none:last-child {
+        border-bottom: none;
+    }
+
+    .transition-all {
+        transition-property: all;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+    }
+
+    .duration-300 {
+        transition-duration: 0.3s;
+    }
+
+    .ease-in-out {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+</style>
+
+<script>
+    const searchBtn = document.querySelector('#search-btn');
+    const searchBox = document.querySelector('#search-box');
+    const searchResults = document.querySelector('#search-results').children;
+
+    searchBtn.addEventListener('click', () => {
+        const searchTerm = searchBox.value.toLowerCase();
+        Array.from(searchResults).forEach(result => {
+            const resultTitle = result.querySelector('a').textContent.toLowerCase();
+            if (resultTitle.includes(searchTerm)) {
+                result.style.display = 'block';
+            } else {
+                result.style.display = 'none';
+            }
+        });
+    });
+</script>
+

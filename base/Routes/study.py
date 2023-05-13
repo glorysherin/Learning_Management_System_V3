@@ -925,7 +925,7 @@ def search_view(request):
                 # process the search results
                 results.append(url)
             return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
-    return render(request, 'class_room/search_results.html')
+    return render(request, 'class_room/search_results.html',staff_detials(request,'Search Results',))
 
 
 def mark_list(request, roll_no):
@@ -945,5 +945,5 @@ def mark_list(request, roll_no):
         mark_dict[query_date] = {'marks': marks, 'total_marks': total_marks}
 
     context = {'roll_no': roll_no, 'mark_dict': mark_dict}
-    return render(request, 'class_room/mark_list.html', context)
+    return render(request, 'class_room/mark_list.html',student_detials(request,'Mark List', context))
 

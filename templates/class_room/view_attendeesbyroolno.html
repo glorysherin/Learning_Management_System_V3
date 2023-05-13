@@ -7,25 +7,19 @@
         <h1 style="margin-left: 25%;">Attendees for roll no {{ roll_no }}</h1>
     </div>
     <div class="chart-container">
-        <canvas id="attendeesChart"></canvas>
-    </div>
- <div class="chart-container">
         <canvas id="chart_1"></canvas>
     </div>
-<div class="card-body">
+    <div class="card-body">
         <div class="date-filter">
             <label for="startDate" style="margin-left: 15%;">Start Date:</label>
             <input type="date" style="margin-left: .9%;" id="startDate">
             <label for="endDate" style="margin-left: 20%;">End Date:</label>
             <input type="date" style="margin-left: .9%;" id="endDate">
         </div>
-    <div class="card-body">
-        <div class="date-filter">
-            <label for="startDate"style="margin-left: 15%;">Start Date:</label>
-            <input type="date"style="margin-left: .9%;" id="startDate">
-            <label for="endDate" style="margin-left: 20%;">End Date:</label>
-            <input type="date"style="margin-left: .9%;" id="endDate">
-        </div>
+        <div style="display: flex;margin-top: 10px;">
+            <button type="submit"id="bttn"  style="width: fit-content;margin-bottom: 10px;">View Graph</button>
+             <button type="submit"id="bttn"style="width: fit-content;margin-left:10px;height:36px" >Percentage</button></div>
+    
         <div class="table-responsive">
             <table id="attendeesTable" class="table">
                 <thead>
@@ -56,7 +50,6 @@
     }
 
     .card-header {
-       
         color: #fff;
         padding: 20px;
     }
@@ -86,8 +79,19 @@
 
     .table th {
         font-weight: bold;
-        background-color: #f5f5f5;
+        
+        background-color: #428bca;
+            color: white;
     }
+    tr:nth-child(even) {background-color: #f2f2f2}
+    #bttn {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #428bca; 
+            color: white;
+            cursor: pointer;
+        }
 
     .table-responsive {
         overflow-x: auto;
@@ -118,41 +122,55 @@
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<canvas id="attendeesChart"></canvas>
+<canvas id="chart_1"></canvas>
 
 <script>
-        // Get the start date and end date input elements
-        const startDateInput = document.getElementById('startDate');
-        const endDateInput = document.getElementById('endDate');
-    
-        // Get the attendees table element
-        const attendeesTable = document.getElementById('attendeesTable');
-    
-        // Add an event listener to the start date and end date inputs
-        startDateInput.addEventListener('change', filterAttendeesByDate);
-        endDateInput.addEventListener('change', filterAttendeesByDate);
-    
-        function filterAttendeesByDate() {
-            // Get the selected start date and end date from the input elements
-            const startDate = new Date(startDateInput.value);
-            const endDate = new Date(endDateInput.value);
-    
-            // Loop through the rows of the attendees table
-            for (let i = 1; i < attendeesTable.rows.length; i++) {
-                const row = attendeesTable.rows[i];
-                const dateCell = row.cells[0];
-                const date = new Date(dateCell.innerText);
-    
-                // If the date is between the selected start date and end date, show the row; otherwise, hide it
-                if (date >= startDate && date <= endDate) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            }
-        }
     const attendees = JSON.parse('{{ attendeesj|safe }}');
 
+    // Function to update the chart based on the filtered dates
+    function updateChart() {
+        // Get the start date and end date input values
+        const startDateInput = document.getElementById('startDate').value;
+        const endDateInput = document.getElementById('endDate').value;
+
+        // Convert the input values to Date objects
+        const startDate = new Date(startDateInput);
+        const endDate = new Date(endDateInput);
+
+        // Filter the attendees based on the selected dates
+        const filteredAttendees = attendees.filter(attendee => {
+            const date = new Date(attendee.Date);
+            return date >= startDate && date <= endDate;
+        });
+
+        // Extract the dates and attendance counts for the filtered attendees
+        const dates = filteredAttendees.map(attendee => new Date(attendee.Date));
+        const present = filteredAttendees.map(attendee => attendee.subject_states === 'Present' ? 1 : 0);
+        const absent = filteredAttendees.map(attendee => attendee.subject_states === 'Absent' ? 1 : 0);
+        const onduty = filteredAttendees.map(attendee => attendee.subject_states === 'On Duty' ? 1 : 0);
+
+        // Update the chart data
+        chart.data.labels = dates.map(date => date.toDateString());
+        chart.data.datasets[0].data = present;
+        chart.data.datasets[1].data = absent;
+        chart.data.datasets[2].data = onduty;
+
+        // Update the chart
+        chart.update();
+    }
+
+    // Get the start date and end date input elements
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+
+    // Get the attendees table element
+    const attendeesTable = document.getElementById('attendeesTable');
+
+    // Add an event listener to the start date and end date inputs
+    startDateInput.addEventListener('change', updateChart);
+    endDateInput.addEventListener('change', updateChart);
+
+    // Initial chart setup
     const dates = attendees.map(a => new Date(a.Date));
     const present = attendees.map(a => a.subject_states === 'Present' ? 1 : 0);
     const absent = attendees.map(a => a.subject_states === 'Absent' ? 1 : 0);
@@ -198,13 +216,9 @@
     };
 
     const chart = new Chart(
-        document.getElementById('attendeesChart'),
+        document.getElementById('chart_1'),
         config
     );
-
-
-
-
-
 </script>
 {% endblock content %}
+

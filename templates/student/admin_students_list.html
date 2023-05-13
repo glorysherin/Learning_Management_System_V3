@@ -45,7 +45,7 @@
         a {
             margin-right: 5px;
             text-decoration: none;
-            color: #007bff;
+            color: #428bca;
         }
 
         a:hover {
@@ -55,7 +55,8 @@
 </head>
 
 <body>
-    <center><input type="text" id="search" placeholder="Search..." oninput="filterTable()"></center>
+    <div style="margin-bottom: 7%;">
+    <center><input style="margin-top: 10px;" type="text" id="search" placeholder="Search..." oninput="filterTable()"></center>
 
     <div class="card-container">
         <h2>{{ dept }}</h2>
@@ -128,6 +129,7 @@
 }
 
 </script>
+</div>
 </html>
 
 {% endfor %}
