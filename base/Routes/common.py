@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from agora_token_builder import RtcTokenBuilder
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from ..models import Faculty_details, Users, Room, Message, RoomMember, Gallery, Student
+from ..models import Faculty_details, Users, Room, Message, RoomMember, Gallery, Student, Department
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -23,11 +23,13 @@ def student_home(request):
     std_data = Student.objects.get(user=usr_obj)
     usr = Users.objects.get(user_name=usr_obj.username)
     print(std_data)
+    department = Department.objects.all()
     context = {
         'total_student': SMODEL.Student.objects.all().count(),
         'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
         'total_course': models.Course.objects.all().count(),
-        'user_name': usr_obj.username, 'detials': std_data, 'User': usr, 'std': std_data
+        'user_name': usr_obj.username, 'detials': std_data, 'User': usr, 'std': std_data,
+        'department':department
     }
     return render(request, "home/index.html", student_detials(request, 'Student home', context))
 
@@ -38,13 +40,15 @@ def staff_home(request):
     usr_obj = User.objects.get(id=usr_id)
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Faculty_details.objects.get(user_name=name.user_name)
+    department = Department.objects.all()
     context = {
         'total_student': SMODEL.Student.objects.all().count(),
         'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
         'total_course': models.Course.objects.all().count(),
         'user_name': usr_obj.username, 'detials': faculty_details,
         'name_s': faculty_details.name.split(' '),
-        'rolenum':name.role
+        'rolenum':name.role,
+        'department':department
     }
     print(name.role)
     return render(request, "home/staff.html", staff_detials(request,'Home',context))

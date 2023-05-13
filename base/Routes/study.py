@@ -259,14 +259,14 @@ def home_classroom(request):
             print(get_role.role, type(get_role.role))
             try:
                 if get_role.role == 2:
-                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': teacher_data.department, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': [teacher_data.department], "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
                 if get_role.role == 3:
-                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
                 if get_role.role == 1:
-                    return render(request, 'class_room/staff_classroom.html', {'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
             except:
                 if get_role.role == 2:
-                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data,'teacher_obj':teacher_data , 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': teacher_data.department, "user_name": request.user.username})
+                    return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data,'teacher_obj':teacher_data , 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': [teacher_data.department], "user_name": request.user.username})
                 if get_role.role == 3:
                     return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data,'teacher_obj':teacher_data , 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
                 if get_role.role == 1:
@@ -638,7 +638,7 @@ def user_marks(request, user_name):
 
 def show_actions(request, class_id):
     cls_obj = ClassRooms.objects.get(subject_code=class_id)
-    return render(request, "class_room/action_options.html", staff_detials(request,'Mark Actions',{'class_obj': cls_obj}))
+    return render(request, "class_room/action_options.html", staff_detials(request,'Mark Actions',{'class_obj': cls_obj,'class_id':class_id}))
 
 
 def mark_option(request, class_id):

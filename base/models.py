@@ -435,6 +435,8 @@ class SocialMediaLinks(models.Model):
 #         return self.title
 
 class Pages(models.Model):
+    id=models.IntegerField(primary_key=True)
+    usr_id = models.IntegerField()
     name = models.CharField(max_length=50)
     image = models.CharField(max_length=100)
     description = models.CharField(max_length=100)

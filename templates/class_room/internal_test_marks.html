@@ -1,56 +1,53 @@
 {% extends 'teacher/teacherbase.html' %}
 
-{% block content %} 
-<!DOCTYPE html>
-<html>
+{% block content %}
+<a href="#" style="margin-top: 3%;" class="btn btn-secondary ml-2" onclick="window.history.back();">Back</a>
 
-<head>
-    <meta charset="utf-8">
-    <title>Internal Test Marks</title>
-</head>
-
-<body>
-    <div style="margin-top: 10px;margin-left: 8%;">
-    <h1>Internal Test Marks</h1>
-    <br>
-
-    <form method="GET">
-        <label for="class_id">Class ID:</label>
-        <input type="text" id="class_id" name="class_id" value="{{ class_id }}"><br><br>
-
-        <label for="assesment_no">Assessment Number:</label>
-        <input type="number" id="assesment_no" name="assesment_no" value="{{ assesment_no }}"><br><br>
-
-        <label for="date">Date (optional):</label>
-        <input type="date" id="date" name="date" value="{{ date }}"><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
+<div class="container mx-auto my-3 px-4 md:px-5 lg:px-24 xl:px-32">
+    <h1 class="text-3xl font-bold leading-tight mb-5">Internal Test Marks</h1>
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <form method="GET">
+            <div class="mb-4">
+                <label for="class_id" class="block text-gray-700 font-bold mb-2">Class ID:</label>
+                <input type="text" id="class_id" name="class_id" value="{{ class_id }}" class="w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+                <label for="assessment_no" class="block text-gray-700 font-bold mb-2">Assessment Number:</label>
+                <input type="number" id="assessment_no" name="assessment_no" value="{{ assessment_no }}" class="w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="mb-4">
+                <label for="date" class="block text-gray-700 font-bold mb-2">Date (optional):</label>
+                <input type="date" id="date" name="date" value="{{ date }}" class="w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+            <div class="flex justify-end">
+                <input style="color: white;background-color: #FE3F40;border: none;" type="submit" value="Submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600">
+            </div>
+        </form>
+    </div>
 
     {% if marks %}
-    <h2>Marks:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Class ID</th>
-                <th>Roll No</th>
-                <th>Subject</th>
-                <th>Mark</th>
-                <th>Assessment No</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for mark in marks %}
-            <tr>
-                <td>{{ mark.id }}</td>
-                <td>{{ mark.class_id }}</td>
-                <td>{{ mark.roll_no }}</td>
-                <td>{{ mark.subject }}</td>
-                <td>{{ mark.mark }}</td>
-                <td>{{ mark.assesment_no }}</td>
-                <td>{{ mark.Date }}</td>
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <h2 class="text-2xl font-bold leading-tight mb-8">Marks:</h2>
+        <table class="w-full table-auto">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">Class ID</th>
+                    <th class="px-4 py-2">Roll No</th>
+                    <th class="px-4 py-2">Subject</th>
+                    <th class="px-4 py-2">Mark</th>
+                    <th class="px-4 py-2">Assessment No</th>
+                    <th class="px-4 py-2">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mark in marks %}
+                <tr>
+                    <td class="border px-4 py-2">{{ mark.id }}</td>
+                    <td class="border px-4 py-2">{{ mark.class_id }}</td>
+                    <td class="border px-4 py-2">{{ mark.roll_no }}</td>
+                    <td class="border px-4 py-2">{{ mark.subject }}</td>
+                    <td class="border px-4 py-2">{{ mark.Date }}</td>
             </tr>
             {% endfor %}
         </tbody>

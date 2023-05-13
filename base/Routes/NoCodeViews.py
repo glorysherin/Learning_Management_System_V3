@@ -4,7 +4,7 @@ from io import BytesIO
 from bs4 import BeautifulSoup
 import htmlmin
 import requests
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
 from ..models import Pages
 from django.core.serializers import serialize
@@ -18,7 +18,7 @@ from django.http import FileResponse
 
 
 def index(request):
-    pages = Pages.objects.all()
+    pages = Pages.objects.filter(usr_id=request.user.id)
     return render(request, 'NoCodeBuilderPages/pages.html', {"pages": pages})
 
 
@@ -26,13 +26,14 @@ def addPage(request):
     return render(request, 'NoCodeBuilderPages/index.html')
 
 
+
 def savePage(request):
     if (request.method == 'POST'):
         html = request.POST['html']
         css = request.POST['css']
         Project_name = request.POST['Project_name']
-        page = Pages.objects.create(
-            name=Project_name, html=html, css=css, image=random_image())
+        print("template added sucessfully.........")
+        page = Pages(usr_id=request.user.id, name=Project_name, html=html, css=css, image=random_image())
         page.save()
     return JsonResponse({"result": (json.loads(serialize('json', [page])))[0]})
 
@@ -69,12 +70,19 @@ def editPage(request, id):
     page = Pages.objects.get(pk=id)
     return render(request, 'NoCodeBuilderPages/index.html', {"page": page})
 
+def deletePage(request, id):
+    page = Pages.objects.get(pk=id)
+    page.delete()
+    pages = Pages.objects.filter(usr_id=request.user.id)
+    return redirect('view_pages')
+
+
 
 def editPageContent(request, id):
     if (request.method == 'POST'):
         html = request.POST['html']
         css = request.POST['css']
-        page = Pages.objects.get(pk=id)
+        page = Pages.objects.get(user=request.user.id,pk=id)
         page.html = html
         page.css = css
         page.save()
