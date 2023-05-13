@@ -233,6 +233,7 @@ classroom = [
          edit_classroom, name='edit_classroom'),
     path("attendes", attendes),
     path("update_attendes", update_attendes, name='update_attendes'),
+    path("mark_list/<str:roll_no>", mark_list, name='mark_list'),
     path("update_edited_attendes", update_edited_attendes),
     path("message_possitive", message_possitive,name="message_possitive"),
     path("edit_attendes_home", edit_attendes_home, name='edit_attendes_home'),
@@ -461,7 +462,6 @@ Staff_tool = [
 
 NoCodeMaker = [
     path('view_pages', index, name='view_pages'),
-
     path('add', addPage, name="addpage"),
     path('edit/<id>', editPage, name="editpage"),
     path('page/create', savePage, name="create_page"),

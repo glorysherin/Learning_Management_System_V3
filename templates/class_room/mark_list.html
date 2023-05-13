@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mark List</title>
+</head>
+<body>
+	<h1>Mark List for Roll No. {{ roll_no }}</h1>
+	{% for date, mark_data in mark_dict.items %}
+	<h2>{{ date }}</h2>
+	<p>Total Marks: {{ mark_data.total_marks }}</p>
+	<table>
+		<tr>
+			<th>Subject</th>
+			<th>Mark</th>
+		</tr>
+		{% for mark in mark_data.marks %}
+		<tr>
+			<td>{{ mark.subject }}</td>
+			<td>{{ mark.mark }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% empty %}
+	<p>No marks found for this roll number.</p>
+	{% endfor %}
+</body>
+</html>
