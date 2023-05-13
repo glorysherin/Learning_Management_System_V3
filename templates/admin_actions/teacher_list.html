@@ -1,5 +1,6 @@
 {% extends 'student/adminbase.html' %}
 {% block content %}
+<div style="margin-bottom: 7%;">
 <center><input type="text" style="margin-top: 20px;" id="search" placeholder="Search..." oninput="filterTable()"></center>
 <div class="table-responsive" style="margin-top: 40px;">
   
@@ -75,5 +76,5 @@ for (var i = 0; i < rows.length; i++) {
 }
 
 </script>
-
+</div>
 {% endblock %}
