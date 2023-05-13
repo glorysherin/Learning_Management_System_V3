@@ -1075,11 +1075,7 @@ JEC-Class room  </title>
                 href=" {% url 'staff_home' %} ">Home</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Classroom</li>
           </ol>
-          <h6 class="text-white font-weight-bolder ms-2">{% if detail.role.role == 2 %}
-            HOD
-            {% else %}
-            Staff
-            {% endif %}</h6>
+          <h6 class="text-white font-weight-bolder ms-2">{{ role }}
         </nav>
         <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -1209,7 +1205,7 @@ JEC-Class room  </title>
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src=" {{ detail.image.url }} " alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              <img src=" {{ stusr.image.url }} " alt="profile_image" class="w-100 border-radius-lg shadow-sm">
             </div>
           </div>
           <div class="col-auto my-auto">

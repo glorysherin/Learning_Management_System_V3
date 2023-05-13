@@ -117,11 +117,14 @@ def nave_home_classroom(request, pk, class_id):
                 return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
 
         elif is_teacher(request.user):
+            print("Teacher are worrking...")
             accountapproval = TMODEL.Teacher.objects.all().filter(
                 user_id=request.user.id, status=True)
             if accountapproval:
+                print('accountapproval are working...')
                 if Room.objects.filter(name=class_id).exists():
-                    return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
+                    print("now working...")
+                    return render(request, 'class_room/staff_class_room.html', staff_detials(request,'classRoom',{'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]}))
                 else:
                     new_room = Room.objects.create(name=class_id)
                     new_room.save()
@@ -129,6 +132,8 @@ def nave_home_classroom(request, pk, class_id):
             else:
                 return render(request, 'teacher/teacher_wait_for_approval.html')
         if get_role.role == 1:
+            return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
+        if get_role.role == 3:
             return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4]})
         else:
             if Room.objects.filter(name=class_id).exists():
@@ -812,7 +817,7 @@ def student_mark_option(request, class_id):
 def student_get_mark(request, user_name):
     # Retrieve all marks for the given user
     user_marks = Sec_Daily_test_mark.objects.filter(
-        user_name=user_name).order_by('Date')
+        roll_no=user_name).order_by('Date')
 
     # Get all unique dates for the retrieved marks
     dates = user_marks.values_list('Date', flat=True).distinct()
@@ -829,7 +834,7 @@ def student_get_mark(request, user_name):
         table += f'<tr><td>{subject}</td>'
         for date in dates:
             try:
-                mark = user_marks.get(subject=subject, Date=date).mark
+                mark = user_marks.filter(subject=subject, Date=date).mark
                 table += f'<td>{mark}</td>'
             except Sec_Daily_test_mark.DoesNotExist:
                 table += '<td></td>'

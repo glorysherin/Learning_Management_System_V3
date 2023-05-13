@@ -461,7 +461,6 @@ Staff_tool = [
 
 NoCodeMaker = [
     path('view_pages', index, name='view_pages'),
-
     path('add', addPage, name="addpage"),
     path('edit/<id>', editPage, name="editpage"),
     path('page/create', savePage, name="create_page"),
