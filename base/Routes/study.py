@@ -258,9 +258,6 @@ def home_classroom(request):
             classrooms = ClassRooms.objects.filter(department=teacher_data.department)
             
             all_classroom = ClassRooms.objects.all()
-            for i in classrooms:
-                print("Class_Rooms",i.subject_code)
-            print(classrooms)
             
             print(get_role.role, type(get_role.role))
             try:
@@ -269,6 +266,23 @@ def home_classroom(request):
                 if get_role.role == 3:
                     return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
                 if get_role.role == 1:
+                    for i in people:
+                            person_obj = User.objects.get(id=i.user_id)
+                            try:
+                                obj = Student.objects.get(user=person_obj)
+                                temp.append(obj)
+                            except Exception as e:
+                                print(e)
+                    peoples.append(temp)
+                    peoples.pop(0)
+                    temp_people = []
+                    # ------------------------------------------ to manage the 4 peoples -----------------------------
+                    for i, j in enumerate(peoples):
+                        if len(j) >= 4:
+                            temp_people.append(j)
+                        else:
+                            temp_people.append(j[0:4])
+                    peoples = temp_people
                     return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
             except:
                 if get_role.role == 2:
