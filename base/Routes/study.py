@@ -12,7 +12,7 @@ from base import models as TMODEL
 from django.utils import timezone
 from googlesearch import search
 import urllib.parse
-from django.db.models import Sum
+from django.db.models import Sum, Max
 from django.http import JsonResponse
 from random import choice
 
@@ -918,7 +918,7 @@ def mark_list(request, roll_no):
     # retrieve all the unique dates for the specified roll number
     dates = Sec_Daily_test_mark.objects.filter(
         roll_no=roll_no
-    ).order_by('-Date').distinct('Date').values_list('Date', flat=True)
+    ).values('Date').annotate(max_id=Max('id')).order_by('-Date').values_list('Date', flat=True)
 
     # create a dictionary to hold the marks for each date
     mark_dict = {}
