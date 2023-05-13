@@ -9,6 +9,16 @@
     <div class="chart-container">
         <canvas id="attendeesChart"></canvas>
     </div>
+ <div class="chart-container">
+        <canvas id="chart_1"></canvas>
+    </div>
+<div class="card-body">
+        <div class="date-filter">
+            <label for="startDate" style="margin-left: 15%;">Start Date:</label>
+            <input type="date" style="margin-left: .9%;" id="startDate">
+            <label for="endDate" style="margin-left: 20%;">End Date:</label>
+            <input type="date" style="margin-left: .9%;" id="endDate">
+        </div>
     <div class="card-body">
         <div class="date-filter">
             <label for="startDate"style="margin-left: 15%;">Start Date:</label>
@@ -191,5 +201,10 @@
         document.getElementById('attendeesChart'),
         config
     );
+
+
+
+
+
 </script>
 {% endblock content %}
