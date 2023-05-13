@@ -12,6 +12,7 @@ from base import models as TMODEL
 from django.utils import timezone
 from googlesearch import search
 import urllib.parse
+from django.db.models import Sum
 from django.http import JsonResponse
 from random import choice
 
@@ -911,3 +912,24 @@ def search_view(request):
                 results.append(url)
             return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
     return render(request, 'class_room/search_results.html')
+
+
+def mark_list(request, roll_no):
+    # retrieve all the unique dates for the specified roll number
+    dates = Sec_Daily_test_mark.objects.filter(
+        roll_no=roll_no
+    ).order_by('-Date').distinct('Date').values_list('Date', flat=True)
+
+    # create a dictionary to hold the marks for each date
+    mark_dict = {}
+    for query_date in dates:
+        marks = Sec_Daily_test_mark.objects.filter(
+            roll_no=roll_no,
+            Date=query_date
+        ).values('subject', 'mark')
+        total_marks = marks.aggregate(Sum('mark'))['mark__sum']
+        mark_dict[query_date] = {'marks': marks, 'total_marks': total_marks}
+
+    context = {'roll_no': roll_no, 'mark_dict': mark_dict}
+    return render(request, 'class_room/mark_list.html', context)
+
