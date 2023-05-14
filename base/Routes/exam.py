@@ -12,7 +12,16 @@ from .Forms import teacher_forms as TFORM
 from .Forms import student_forms as SFORM
 from django.contrib.auth.models import User
 from .common import staff_home, student_home
+from ..models import Users
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+def is_admin(user):
+    obj = User.objects.get(id=user.id)
+    get_role = Users.objects.get(user_name=obj.username)
+    if get_role.role == 1:
+        return True
+    else:
+        return False
 
 def home_view(request):
     if request.user.is_authenticated:
@@ -38,7 +47,6 @@ def afterlogin_view(request):
             user_id=request.user.id, status=True)
         print("runned....in the teacher")
         if accountapproval:
-            # return redirect('teacher/teacher-dashboard')
             return redirect(staff_home)
         else:
             return render(request, 'teacher/teacher_wait_for_approval.html')
@@ -53,6 +61,7 @@ def adminclick_view(request):
 
 
 @login_required(login_url='adminlogin')
+@user_passes_test(is_admin)
 def admin_dashboard_view(request):
     dict = {
         'total_student': SMODEL.Student.objects.all().count(),

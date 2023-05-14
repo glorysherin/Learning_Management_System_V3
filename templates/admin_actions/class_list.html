@@ -39,20 +39,22 @@
       </div>
       <div class="card-body">
         {% for department, classrooms in department_dict.items %}
-        <h6>{{ department }}</h6>
-        <div class="table-responsive">
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>Class Name</th>
-                <th>Subject Code</th>
-                <th>Owner</th>
-                <th>Description</th>
-                <th>View</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
+          {% if classrooms|length != 0 %}
+            <h6>{{ department }}</h6>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Class Name</th>
+                    <th>Subject Code</th>
+                    <th>Owner</th>
+                    <th>Description</th>
+                    <th>View</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+              {% endif %}
               {% for classroom in classrooms %}
               <tr>
                 <td><a href="class_listout/{{ classroom.subject_code }}">{{ classroom.class_name }}</a></td>
