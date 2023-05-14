@@ -933,3 +933,18 @@ def mark_list(request, roll_no):
     context = {'roll_no': roll_no, 'mark_dict': mark_dict}
     return render(request, 'class_room/mark_list.html', context)
 
+def fournotfourerror(request):
+    return render(request,'error/404.html')
+
+
+def fivehundrederror(request):
+    return render(request,'error/500.html')
+
+def studenterror(request):
+    return render(request,'error/studenterror.html')
+
+def stafferror(request):
+    return render(request,'error/stafferror.html')
+
+def adminerror(request):
+    return render(request,'error/adminerror.html')
