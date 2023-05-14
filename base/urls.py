@@ -492,6 +492,9 @@ department=[
 
 parent = [
      path('parent_home', parent_home, name='parent_home'),
+     path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
+     path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
+     path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
 ]
 
 urlpatterns.extend(Make_Join([parent, department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
@@ -499,3 +502,4 @@ urlpatterns.extend(Make_Join([parent, department,tools, chatbot, NoCodeMaker, co
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+ 

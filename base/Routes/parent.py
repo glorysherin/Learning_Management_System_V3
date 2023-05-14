@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from ..models import Attendees, Sec_Daily_test_mark,Internal_test_mark
+from ..models import Attendees, Sec_Daily_test_mark,Internal_test_mark, Student
 from .Tool.Tools import student_detials, staff_detials
 from datetime import datetime
 from django.db.models import Sum, Max
 from datetime import date
 import json
+
+
 
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -31,7 +33,7 @@ def parent_student_int_test_marks(request, roll_no):
         'queryset': queryset
     }
 
-    return render(request, 'parent/internal_test_mark_by_user.html', student_detials(request, 'Internal Test Mark', context))
+    return render(request, 'parent/internal_test_mark_by_user.html', context)
 
 
 def parentmark_list(request, roll_no):
@@ -70,9 +72,14 @@ def parentview_attendees_by_roolno(request, roll_no):
         'attendees':attendees,
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
-    return render(request, 'parent/view_attendeesbyroolno.html', student_detials(request, 'View Attendence', context))
+    return render(request, 'parent/view_attendeesbyroolno.html',context)
 
 
 def parent_home(request):
-    return render(request,'parent/parent_home.html')
+    if request.method == 'POST':
+        role_no = request.POST.get("role_no")
+        
+        return render(request,'parent/parent_home.html',{'role_no':role_no})
+    return render(request,'pre_home/parentsession.html')
+
 

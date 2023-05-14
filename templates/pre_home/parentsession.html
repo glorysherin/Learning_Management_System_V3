@@ -134,33 +134,20 @@
     <div class="container mx-auto mt-8">
       <div class="card bg-white p-6 rounded-lg shadow-lg">
         
-        <form>
+        <form method="post" action="parent_home">
+          {% csrf_token %}
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="name">
-Register.No            </label>
-<input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="number" placeholder="Enter Candidate Reg.no" maxlength="12">
-
+          <label class="block text-gray-700 font-bold mb-2" for="name">Register.No</label>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="role_no" name="role_no" type="number" placeholder="Enter Candidate Reg.no" maxlength="12">
           </div>
           <div class="text-center">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-              Submit
-            </button>
+            <input type="submit" value="Submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
           </div>
         </form>
         
       </div>
     </div>
     <br>
-    
-    <script>
-      // Handle form submission
-      const form = document.querySelector('form')
-      form.addEventListener('submit', (event) => {
-        event.preventDefault()
-        const name = document.querySelector('#name').value
-        alert(`Hello, ${name}!`)
-      })
-    </script>
     
     
   </main><!-- End #main -->
