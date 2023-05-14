@@ -1,11 +1,26 @@
 {% extends 'student/adminbase.html' %}
 {% block content %}
-<h1>{{ department.name }}</h1>
-<p>{{ department.description }}</p>
-<p>{{ department.short_name }}</p>
-<a href="{% url 'department_edit' pk=department.pk %}">Edit</a>
-<form action="{% url 'department_delete' pk=department.pk %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Delete">
-</form>
+<div class="bg-white rounded-lg shadow-lg p-6">
+    <h1 class="text-2xl font-bold mb-2">{{ department.name }}</h1>
+    <p class="text-gray-700 text-base mb-4">Description: {{ department.description }}</p>
+    <p class="text-gray-500 text-sm mb-2">Short Form: {{ department.short_name }}</p>
+    <div style="    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-around;
+    align-items: center;">
+   <a style="background-color: #3182ce;margin-top:30%;margin-top: 15px;" href="{% url 'department_edit' pk=department.pk %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        Edit
+      </a>
+          <form action="{% url 'department_delete' pk=department.pk %}" method="post" class="mt-4">
+      {% csrf_token %}
+    <button style="background-color: #3182ce;
+      border: none;" type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+        Delete
+      </button>
+    </div>
+    </form>
+  </div>
+  
 {% endblock %}

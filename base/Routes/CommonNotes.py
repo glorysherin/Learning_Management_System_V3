@@ -79,7 +79,11 @@ def create_note(request):
                     subcode=subcode, description=description, file=file, cover_image=cover_image)
         note.save()
         return redirect('notes_list')
+<<<<<<< HEAD
     return render(request, 'commonNotes/note_form.html',staff_detials(request,'UPload Notes'))
+=======
+    return render(request, 'commonNotes/note_form.html',staff_detials(request,'Upload Notes'))
+>>>>>>> bf52537f07850b134ef50dcc5a996b1d74ff41c2
 
 
 def update_note(request, note_id):
