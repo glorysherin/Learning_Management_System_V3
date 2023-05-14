@@ -73,12 +73,14 @@ alternative_url = [path('student/video_meeting', meeting),
                    path('student/chat_lobby', lobby),
                    path('student/list_blog', student_list_blog,name='list_blog'),
                    path('student/chat_home/', chat_home, name='chat_home'),
+                   
                    path('student/note/notes_list',
                         notes_list, name='notes_list'),
                    path('student/note/std/notes_list',
                         student_notes_list, name='student_notes_list'),
                    path('staff/note/std/notes_list',
                         staff_notes_list, name='staff_notes_list'),
+                   
                    path('student/toolHome', toolHome, name='toolHome'),
                    path('student/logout', LogoutView.as_view)
 
