@@ -1,0 +1,180 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{%load static%}<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Internal Test Marks</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Card styling */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            /* max-width: 800px; */
+            margin:0 auto;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Table styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #428bca;
+            color: white;
+        }
+
+        tr:nth-child(even) {background-color: #f2f2f2}
+
+        /* Form styling */
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #bttn {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #428bca; 
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="margin-bottom: 7%;">
+    <div class="card" style="margin-top: 10px;">
+        <h3>Internal Test Marks for Roll No. {{ roll_no }}</h3>
+
+        <canvas id="myChart"></canvas>
+        <br>
+        <canvas id="myChart1" style="margin-top: 30px;"></canvas>
+        <form method="get">
+            <label for="year">Filter by year:</label>
+            <input type="text" name="year" id="year" placeholder="YYYY">
+            <button type="submit"id="bttn" >Filter</button>
+           
+        </form>
+        <div style="display: flex;margin-top: 10px;">
+        <button type="submit"id="bttn"  style="width: fit-content;margin-bottom: 10px;">View Graph</button>
+         <button type="submit"id="bttn"style="width: fit-content;margin-left:10px;height:36px" >Percentage</button></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Assessment No.</th>
+                    <th>Date</th>
+                    <th>Subject</th>
+                    <th>Mark</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in queryset %}
+                <tr>
+                    <td>{{ data.assesment_no }}</td>
+                    <td>{{ data.Date }}</td>
+                    <td>{{ data.subject }}</td>
+                    <td>{{ data.mark }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    // Retrieve data from the table
+    var marksByDate = {};
+    {% for data in queryset %}
+        var date = "{{ data.Date }}";
+        var mark = "{{ data.mark }}";
+
+        if (marksByDate[date] === undefined) {
+            marksByDate[date] = [mark];
+        } else {
+            marksByDate[date].push(mark);
+        }
+    {% endfor %}
+
+    // Create chart using Chart.js
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Object.keys(marksByDate),
+            datasets: [{
+                label: 'Marks',
+                data: Object.values(marksByDate),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    // Retrieve data from the table
+    var labels = [];
+    var marks = [];
+    {% for data in queryset %}
+        labels.push("{{ data.subject }}");
+        marks.push("{{ data.mark }}");
+    {% endfor %}
+
+    // Create chart using Chart.js
+    var ctx2 = document.getElementById('myChart1').getContext('2d');
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Marks',
+                data: marks,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+</div>
+</html>
+{% endblock content %}

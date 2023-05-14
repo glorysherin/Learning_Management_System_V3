@@ -1,0 +1,156 @@
+{% extends 'student/studentbase.html' %}
+
+{% block content %}
+{% load static %}
+<div style="margin-bottom: 7%;">
+<div class="search-container">
+	<input type="text" placeholder="Search by month" id="search-box">
+	<button type="submit" id="search-btn"><i class="fa fa-search"></i></button>
+  </div>
+  
+<div class="card">
+    <div class="card-header">
+        <h3>Mark List for Roll No. {{ roll_no }}</h1>
+    </div>
+    <div class="card-body">
+        {% for date, mark_data in mark_dict.items %}
+        <div class="mark-section">
+            <h5>{{ date }}</h2>
+            <p>Total Marks: {{ mark_data.total_marks }}</p>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Mark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mark in mark_data.marks %}
+                        <tr>
+                            <td>{{ mark.subject }}</td>
+                            <td>{{ mark.mark }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% empty %}
+        <p>No marks found for this roll number.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px;
+    }
+
+    .card-header {
+        background-color: #f5f5f5;
+        padding: 20px;
+		
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .mark-section {
+        margin-bottom: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .table th {
+        font-weight: bold;
+        background-color: #f5f5f5;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .card-header {
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px 8px;
+        }
+    }
+	.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin: 0 auto;
+  margin-left: 33%;
+}
+
+#search-box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 200px;
+}
+
+#search-btn {
+  background-color: #428bca; 
+;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#search-btn:hover {
+	background-color: #428bca; 
+
+}
+
+</style>
+<script>
+    const searchBtn = document.querySelector('#search-btn');
+    const searchBox = document.querySelector('#search-box');
+    const markSections = document.querySelectorAll('.mark-section');
+
+    searchBtn.addEventListener('click', () => {
+        const searchTerm = searchBox.value.toLowerCase();
+        markSections.forEach(section => {
+            const sectionDate = section.querySelector('h5').textContent.toLowerCase();
+            if (sectionDate.includes(searchTerm)) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+    });
+</script>
+</div>
+
+{% endblock content %}

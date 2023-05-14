@@ -6,6 +6,7 @@ from django.contrib.auth.views import LogoutView, LoginView
 from .Routes.common import *
 from .Routes.Common_Tool import *
 from .Routes.tool import *
+from .Routes.parent import *
 from .Routes.staff import *
 from .Routes.department import *
 from .Routes.students import *
@@ -489,7 +490,11 @@ department=[
     path('department/<int:pk>/delete/', department_delete, name='department_delete'),
 ]
 
-urlpatterns.extend(Make_Join([department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+parent = [
+     path('parent_home', parent_home, name='parent_home'),
+]
+
+urlpatterns.extend(Make_Join([parent, department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
