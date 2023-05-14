@@ -78,8 +78,9 @@ def parentview_attendees_by_roolno(request, roll_no):
 def parent_home(request):
     if request.method == 'POST':
         role_no = request.POST.get("role_no")
-        
-        return render(request,'parent/parent_home.html',{'role_no':role_no})
+        print(role_no)
+        obj = Student.objects.get(role_no=role_no)
+        return render(request,'parent/parent_home.html',{'role_no':role_no,'std':obj})
     return render(request,'pre_home/parentsession.html')
 
 

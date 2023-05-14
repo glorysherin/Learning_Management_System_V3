@@ -38,6 +38,7 @@ def students_list_by_dep(request):
     usr_obj = User.objects.get(id=usr_id)
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Teacher.objects.get(user=usr_obj)
+    print(faculty_details.department)
     students = Student.objects.filter(department=faculty_details.department)
     departments = set([student.department for student in students])
     context = {
@@ -101,7 +102,7 @@ def student_edit(request, pk):
         student.profile_pic = request.FILES['file_']
         student.user.save()
         student.save()
-        return redirect('students_list')
+        return redirect('student_edit',pk=pk)
     else:
         context = {'student': student,'department':department}
         return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
