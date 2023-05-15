@@ -292,7 +292,33 @@ def home_classroom(request):
                     
                     return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': [[i, j] for i, j in zip(classrooms, peoples)], 'img': img, 'sem_': sem, 'dep': [teacher_data.department], "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
                 if get_role.role == 3:
-                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
+                    peoples = []
+                    temp = []
+                    for j, i in enumerate(classes):
+                        peoples.append(temp)
+                        temp = []
+                        print("sub : ", i.subject_code)
+                        people = class_enrolled.objects.filter(
+                            subject_code=i.subject_code)
+                        print('people : ', peoples)
+                        for i in people:
+                            person_obj = User.objects.get(id=i.user_id)
+                            try:
+                                obj = Student.objects.get(user=person_obj)
+                                temp.append(obj)
+                            except Exception as e:
+                                print(e)
+                    peoples.append(temp)
+                    peoples.pop(0)
+                    temp_people = []
+                    # ------------------------------------------ to manage the 4 peoples -----------------------------
+                    for i, j in enumerate(peoples):
+                        if len(j) >= 4:
+                            temp_people.append(j)
+                        else:
+                            temp_people.append(j[0:4])
+                    peoples = temp_people
+                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes':  [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
                 if get_role.role == 1:
                     peoples = []
                     temp = []
@@ -369,7 +395,7 @@ def save_add_class(request):
 def edit_classroom(request, classroom_id):
     # Retrieve the classroom object from the database
     classroom = get_object_or_404(ClassRooms, subject_code=classroom_id)
-
+    obj = Department.objects.all()
     if request.method == 'POST':
         # Retrieve the updated data from the HTML form
         classroom.class_name = request.POST.get('class_name')
@@ -387,7 +413,7 @@ def edit_classroom(request, classroom_id):
 
     # If the request method is not POST, render the edit form with the current data
     # return render(request, 'class_room/edit_class.html', {'classroom': classroom})
-    return render(request,'class_room/edit_class.html',staff_detials(request,'Edit Classroom',{'classroom': classroom}))
+    return render(request,'class_room/edit_class.html',staff_detials(request,'Edit Classroom',{'classroom': classroom,'dep':obj}))
 
 
 def attendes(request):
@@ -481,7 +507,7 @@ def add_class_notes(request, pk):
         if form.is_valid():
             ebook = form.save(commit=False)
             ebook.Class_id = pk
-            ebook.cover_image = get_image_url(str(ebook.title)+" cover image")
+            ebook.cover_image = choice(get_image_url(str(ebook.title)+" cover image"))
             ebook.save()
             return redirect('course_list')
     else:
@@ -984,7 +1010,25 @@ def mark_list(request, roll_no):
     context = {'roll_no': roll_no, 'mark_dict': mark_dict}
     return render(request, 'class_room/mark_list.html',student_detials(request,'Mark List', context))
 
+<<<<<<< HEAD
 
 
 def parent_session(request):
     return render(request,"")
+=======
+def fournotfourerror(request):
+    return render(request,'error/404.html')
+
+
+def fivehundrederror(request):
+    return render(request,'error/500.html')
+
+def studenterror(request):
+    return render(request,'error/studenterror.html')
+
+def stafferror(request):
+    return render(request,'error/stafferror.html')
+
+def adminerror(request):
+    return render(request,'error/adminerror.html')
+>>>>>>> ea99c2e69648a1dc6136e92d24bbe16afe8228cd

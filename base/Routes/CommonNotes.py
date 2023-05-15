@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from ..models import Note, EbookForClass
+from ..models import Note, EbookForClass, Department
 from .Tool.Tools import student_detials, staff_detials
 
 
@@ -27,7 +27,7 @@ def note_by_class_staff(request, class_id):
 
 def notes_list(request):
     notes = Note.objects.all()
-    dep = {}
+    dep = set()
     note_lis = []
     for i in notes:
         dep.update(i.department)
@@ -35,8 +35,8 @@ def notes_list(request):
     for j in list(dep):
         obj = Note.objects.filter(department=j)
         note_lis.append(obj)
-    return render(request, 'commonNotes/notes_list.html', {'notes': notes, 'note_lis': note_lis})
-
+    return render(request, 'commonNotes/notes_list.html', staff_detials(request,'Notes List',{'notes': notes, 'note_lis': note_lis}))
+    
 
 def student_notes_list(request):
     notes = Note.objects.all()
@@ -79,8 +79,12 @@ def create_note(request):
                     subcode=subcode, description=description, file=file, cover_image=cover_image)
         note.save()
         return redirect('notes_list')
+<<<<<<< HEAD
     return render(request, 'commonNotes/note_form.html',staff_detials(request,'UPload Notes'))
 
+=======
+    return render(request, 'commonNotes/note_form.html',staff_detials(request,'Upload Notes',{'dep':Department.objects.all()}))
+>>>>>>> 22c1e284a73a789d8c938d7fd9c7d4c7f5b702f0
 
 def update_note(request, note_id):
     note = get_object_or_404(Note, id=note_id)

@@ -33,11 +33,13 @@
                 <input  type="text" name="cover_image" id="cover_image" value="{{ note.cover_image }}" required placeholder="cover_image url"
                     class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
             </div>
-
             <div class="mb-3">
-                <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Department:</label>
-                <input  type="text" name="department" id="department" value="{{ note.department }}" required placeholder="Department"
-                    class="mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none border-gray-200">
+                <label for="department">Department:</label>
+                <select class="form-control" name="department" id="department" value="{{ note.department }}">
+                  {% for i in dep %}
+                    <option value="{{ i.name }}">{{ i.name }}</option>
+                  {% endfor %}
+                </select>
             </div>
             <div class="mb-3">
                 <label for="email" class="text-sm text-navy-700 dark:text-white font-bold">Semester:</label>

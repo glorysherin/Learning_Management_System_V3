@@ -67,7 +67,7 @@
           <li><a href="gallery">Gallery</a></li>
           <li><a href="Common_toolHome">Tools</a></li>
          
-          <li><a href="gallery">PARENTS SESSION</a></li>
+          <li><a href="parentsession">PARENTS SESSION</a></li>
 
         </ul>
       </nav><!-- .navbar -->
@@ -84,9 +84,9 @@
           <div class="col-lg-6 text-center">
             <h2 data-aos="fade-down">JAYA ENGINEERING COLLEGE</h2>
             <h4 style="color: white;">Learning Management System</h4><br><br>
-            <a href="adminlogin"> <button
-                style="background-color:rgb(206, 179, 30) ;color: rgb(0, 0, 0);font-weight: bold; padding: 5px;border-radius: 10px;margin-bottom: 50px;">Get
-                Started</button></a>
+            <a href="#main"> <button
+                style="background-color:rgb(206, 179, 30) ;color: rgb(0, 0, 0);font-weight: bold; padding: 5px;border-radius: 10px;margin-bottom: 50px;">Parent Session
+                </button></a>
 
             <p data-aos="fade-up">Approved by AICTE, New Delhi, Affilliated to Anna University, Chennai
               A Telugu Minority Institute</p>
@@ -134,33 +134,20 @@
     <div class="container mx-auto mt-8">
       <div class="card bg-white p-6 rounded-lg shadow-lg">
         
-        <form>
+        <form method="post" action="parent_home">
+          {% csrf_token %}
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="name">
-Register.No            </label>
-<input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="number" placeholder="Enter Candidate Reg.no" maxlength="12">
-
+          <label class="block text-gray-700 font-bold mb-2" for="name">Register.No</label>
+            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="role_no" name="role_no" type="number" placeholder="Enter Candidate Reg.no" maxlength="12">
           </div>
           <div class="text-center">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-              Submit
-            </button>
+            <input type="submit" value="Submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
           </div>
         </form>
         
       </div>
     </div>
     <br>
-    
-    <script>
-      // Handle form submission
-      const form = document.querySelector('form')
-      form.addEventListener('submit', (event) => {
-        event.preventDefault()
-        const name = document.querySelector('#name').value
-        alert(`Hello, ${name}!`)
-      })
-    </script>
     
     
   </main><!-- End #main -->

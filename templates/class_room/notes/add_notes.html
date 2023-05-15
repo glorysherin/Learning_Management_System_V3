@@ -2,10 +2,13 @@
 
 
 {% block content %}
-<h2>Add Ebook</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Add" class="btn btn-primary">
-</form>
+<div class="bg-white shadow-md rounded-md p-4" style="border-radius: 20px;margin: 40px;">
+    <h2 class="text-xl font-medium mb-4">Add Ebook</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Add" class="btn btn-primary">
+    </form>
+  </div>
+  
 {% endblock %}
