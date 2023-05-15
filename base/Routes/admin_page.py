@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 import xlwt
 from .Tool.Tools import student_detials, staff_detials
-
+from .study import is_admin
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def add_faculty(request):
@@ -62,7 +63,7 @@ def teacher_profile(request, staff_id):
 
 # classes
 
-
+@user_passes_test(is_admin)
 def class_list(request):
     if request.method == 'POST':
         class_id = request.POST.get('class_id')
