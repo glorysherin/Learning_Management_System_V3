@@ -40,16 +40,8 @@
             <input type="checkbox" id="status" name="status" {% if teacher.status %}checked{% endif %}
                 class="form-check-input">
         </div>
-        <div class="mb-4">
-            <label for="department" class="block text-gray-700 font-bold mb-2">Department:</label>
-            <select class="form-control border rounded px-4 py-2 w-full" name="department">
-              {% for i in dep %}
-                <option value="{{ i.short_name }}">{{ i.name }}</option>
-              {% endfor %}
-            </select>
-        </div>
+        
 
-<<<<<<< HEAD
     <div class="form-group">
         <label for="department">Department:</label>
         <select class="form-control" name="department">
@@ -58,8 +50,6 @@
           {% endfor %}
         </select>
     </div>
-=======
->>>>>>> ea99c2e69648a1dc6136e92d24bbe16afe8228cd
 
     <div class="form-group" hidden>
         <label for="salary">Salary:</label>

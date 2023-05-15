@@ -286,7 +286,7 @@ teacher = [
     path('staff/chat_lobby', staff_lobby, name='staff_chat_lobby'),
     path('admin/chat_lobby', admin_lobby, name='admin_chat_lobby'),
     path('teacher/teacherlogin',
-         LoginView.as_view(template_name='teacher/teacherlogin.html'), name='teacherlogin'),
+         LoginView.as_view(template_name='login/login.html'), name='teacherlogin'),
     path('teacher/addstudentlogin',
          LoginView.as_view(template_name='student/studentadded.html'), name='addstudentlogin'),
     path('teacher/addstudentsignup', add_student_signup_view,
@@ -492,8 +492,15 @@ department=[
     path('department/<int:pk>/edit/', department_edit, name='department_edit'),
     path('department/<int:pk>/delete/', department_delete, name='department_delete'),
 ]
-
-<<<<<<< HEAD
+error=[
+        path('fournotfourerror', fournotfourerror, name='fournotfourerror'),
+        path('fivehundrederror',fivehundrederror,name='fivehundrederror'),
+        path('studenterror',studenterror,name='studenterror'),
+        path('stafferror',stafferror,name='stafferror'),
+        path('adminerror',adminerror,name='adminerror'),
+        path('fournotthree',fournotthree,name='fournotthree'),
+        path('fourhundred',fourhundred,name='fourhundred'),
+]
 parent = [
      path('parent_home', parent_home, name='parent_home'),
      path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
@@ -501,25 +508,9 @@ parent = [
      path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
 ]
 
-urlpatterns.extend(Make_Join([parent, department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
- 
-=======
-error=[
-        path('fournotfourerror', fournotfourerror, name='fournotfourerror'),
-        path('fivehundrederror',fivehundrederror,name='fivehundrederror'),
-        path('studenterror',studenterror,name='studenterror'),
-        path('stafferror',stafferror,name='stafferror'),
-        path('adminerror',adminerror,name='adminerror'),
-]
 
-urlpatterns.extend(Make_Join([department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
-
->>>>>>> ea99c2e69648a1dc6136e92d24bbe16afe8228cd
