@@ -493,6 +493,7 @@ department=[
     path('department/<int:pk>/delete/', department_delete, name='department_delete'),
 ]
 
+<<<<<<< HEAD
 parent = [
      path('parent_home', parent_home, name='parent_home'),
      path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
@@ -506,3 +507,19 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
  
+=======
+error=[
+        path('fournotfourerror', fournotfourerror, name='fournotfourerror'),
+        path('fivehundrederror',fivehundrederror,name='fivehundrederror'),
+        path('studenterror',studenterror,name='studenterror'),
+        path('stafferror',stafferror,name='stafferror'),
+        path('adminerror',adminerror,name='adminerror'),
+]
+
+urlpatterns.extend(Make_Join([department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+
+>>>>>>> ea99c2e69648a1dc6136e92d24bbe16afe8228cd

@@ -1010,7 +1010,25 @@ def mark_list(request, roll_no):
     context = {'roll_no': roll_no, 'mark_dict': mark_dict}
     return render(request, 'class_room/mark_list.html',student_detials(request,'Mark List', context))
 
+<<<<<<< HEAD
 
 
 def parent_session(request):
     return render(request,"")
+=======
+def fournotfourerror(request):
+    return render(request,'error/404.html')
+
+
+def fivehundrederror(request):
+    return render(request,'error/500.html')
+
+def studenterror(request):
+    return render(request,'error/studenterror.html')
+
+def stafferror(request):
+    return render(request,'error/stafferror.html')
+
+def adminerror(request):
+    return render(request,'error/adminerror.html')
+>>>>>>> ea99c2e69648a1dc6136e92d24bbe16afe8228cd
