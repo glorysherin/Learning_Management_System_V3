@@ -19,7 +19,6 @@ class TeacherForm(forms.ModelForm):
         fields = ['address', 'mobile', 'profile_pic', 'role', 'department']
 
     ROLE_CHOICES = (
-        ('student', 'Student'),
         ('staff', 'Staff'),
         ('hod', 'Hod'),
         ('admin', 'Admin'),

@@ -15,6 +15,8 @@ from .Tool.Tools import student_detials, staff_detials
 from base import models as TMODEL
 from base import models as SMODEL
 from base import models
+from .study import is_admin
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def student_home(request):
@@ -275,7 +277,7 @@ def delete_image(request):
     return render(request, "about_us/team.html")
 # ..............................................................
 
-
+@user_passes_test(is_admin)
 def image_upload_page_gallery(request):
     item = get_images()
     return render(request, "Gallery/upload_image.html", {"categories": item[0], "images": item[1]})

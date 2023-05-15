@@ -2,9 +2,6 @@ import random
 import nltk
 from nltk.corpus import wordnet
 
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
 conversation = {"hello": ["hello", "hey, hello how can i help you"]}
 
 # Define synonyms for common question words

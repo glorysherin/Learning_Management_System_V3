@@ -46,7 +46,7 @@
     }
 
     .card-header {
-       
+        background-color: #007bff;
         color: #fff;
         padding: 20px;
     }
@@ -111,85 +111,86 @@
 <canvas id="attendeesChart"></canvas>
 
 <script>
-        // Get the start date and end date input elements
-        const startDateInput = document.getElementById('startDate');
-        const endDateInput = document.getElementById('endDate');
-    
-        // Get the attendees table element
-        const attendeesTable = document.getElementById('attendeesTable');
-    
-        // Add an event listener to the start date and end date inputs
-        startDateInput.addEventListener('change', filterAttendeesByDate);
-        endDateInput.addEventListener('change', filterAttendeesByDate);
-    
-        function filterAttendeesByDate() {
-            // Get the selected start date and end date from the input elements
-            const startDate = new Date(startDateInput.value);
-            const endDate = new Date(endDateInput.value);
-    
-            // Loop through the rows of the attendees table
-            for (let i = 1; i < attendeesTable.rows.length; i++) {
-                const row = attendeesTable.rows[i];
-                const dateCell = row.cells[0];
-                const date = new Date(dateCell.innerText);
-    
-                // If the date is between the selected start date and end date, show the row; otherwise, hide it
-                if (date >= startDate && date <= endDate) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            }
-        }
+    // Get the start date and end date input elements
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+
+    // Get the attendees table element
+    const attendeesTable = document.getElementById('attendeesTable');
+
+    // Add an event listener to the start date and end date inputs
+       // Add an event listener to the start date and end date inputs
+       startDateInput.addEventListener('change', updateChart);
+    endDateInput.addEventListener('change', updateChart);
+
+    // Function to update the chart based on the filtered dates
+    function updateChart() {
+        // Get the selected start date and end date from the input elements
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+        // Filter the attendees based on the selected dates
+        const filteredAttendees = attendees.filter(attendee => {
+            const date = new Date(attendee.Date);
+            return date >= startDate && date <= endDate;
+        });
+
+        // Calculate the attendance percentage for each status
+        const presentCount = filteredAttendees.filter(attendee => attendee.subject_states === 'Present').length;
+        const absentCount = filteredAttendees.filter(attendee => attendee.subject_states === 'Absent').length;
+        const onDutyCount = filteredAttendees.filter(attendee => attendee.subject_states === 'On Duty').length;
+        const totalCount = filteredAttendees.length;
+
+        const presentPercentage = (presentCount / totalCount) * 100;
+        const absentPercentage = (absentCount / totalCount) * 100;
+        const onDutyPercentage = (onDutyCount / totalCount) * 100;
+
+        // Update the chart data
+        chart.data.labels = ['Present', 'Absent', 'On Duty'];
+        chart.data.datasets[0].data = [presentPercentage, absentPercentage, onDutyPercentage];
+
+        // Update the chart
+        chart.update();
+    }
+
     const attendees = JSON.parse('{{ attendeesj|safe }}');
 
-    const dates = attendees.map(a => new Date(a.Date));
-    const present = attendees.map(a => a.subject_states === 'Present' ? 1 : 0);
-    const absent = attendees.map(a => a.subject_states === 'Absent' ? 1 : 0);
-    const onduty = attendees.map(a => a.subject_states === 'On Duty' ? 1 : 0);
-
+    // Initial chart setup
     const data = {
-        labels: dates.map(d => d.toDateString()),
+        labels: ['Present', 'Absent', 'On Duty'],
         datasets: [
             {
-                label: 'Present',
-                data: present,
-                borderColor: 'green',
-                backgroundColor: 'rgba(0, 128, 0, 0.2)',
-            },
-            {
-                label: 'Absent',
-                data: absent,
-                borderColor: 'red',
-                backgroundColor: 'rgba(255, 0, 0, 0.2)',
-            },
-            {
-                label: 'On Duty',
-                data: onduty,
-                borderColor: 'orange',
-                backgroundColor: 'rgba(255, 165, 0, 0.2)',
-            },
+                label: 'Attendance Percentage',
+                data: [0, 0, 0],
+                backgroundColor: [
+                    'rgba(0, 128, 0, 0.5)',
+                    'rgba(255, 0, 0, 0.5)',
+                    'rgba(255, 165, 0, 0.5)'
+                ]
+            }
         ]
     };
 
     const config = {
-        type: 'line',
+        type: 'bar',
         data: data,
         options: {
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: {
-                        stepSize: 1,
-                    },
-                },
-            },
-        },
+                    max: 100
+                }
+            }
+        }
     };
 
     const chart = new Chart(
         document.getElementById('attendeesChart'),
         config
     );
+
+    // Initial chart update
+    updateChart();
 </script>
 {% endblock content %}
+

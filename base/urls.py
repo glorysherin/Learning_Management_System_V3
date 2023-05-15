@@ -22,7 +22,6 @@ from .Routes.admin_page import *
 from .Routes.staff_tools import *
 from .Routes.NoCodeViews import *
 
-
 # Initilizes........................
 
 urlpatterns = []
@@ -198,6 +197,10 @@ classroom = [
     path('search_view', search_view, name='search_view'),
     path('view_attendees_by_roolno/<int:roll_no>',
          view_attendees_by_roolno, name='view_attendees_by_roolno'),
+    path('view_attendees_by_roolno_percentage/<int:roll_no>',
+         view_attendees_by_roolno_percentage, name='view_attendees_by_roolno_percentage'),
+    path('view_attendees_by_roolno_graph/<int:roll_no>',
+         view_attendees_by_roolno_graph, name='view_attendees_by_roolno_graph'),
     path('student_int_test_marks/<int:roll_no>',
          student_int_test_marks, name='student_int_test_marks'),
     path('student_mark_option/<str:class_id>',
@@ -504,7 +507,10 @@ parent = [
      path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
      path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
      path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
+     path('pview_attendees_by_roolno_graph/<int:roll_no>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
+     path('pview_attendees_by_roolno_percentage/<int:roll_no>', pview_attendees_by_roolno_percentage, name='pview_attendees_by_roolno_percentage'),
 ]
+
 
 
 urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,

@@ -10,7 +10,8 @@ from django.contrib.auth.models import User
 # for showing signup/login button for student
 from .Tool.Tools import student_detials, staff_detials
 from django.views.decorators.csrf import csrf_exempt
-
+from .study import is_admin
+from django.contrib.auth.decorators import login_required, user_passes_test
 # views.py
 
 
@@ -23,7 +24,7 @@ def students_list(request):
     }
     return render(request, 'student/students_list.html', context)
 
-
+@user_passes_test(is_admin)
 def admin_students_list(request):
     students = Student.objects.all()
     departments = set([student.department for student in students])

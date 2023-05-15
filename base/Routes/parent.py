@@ -84,3 +84,39 @@ def parent_home(request):
     return render(request,'pre_home/parentsession.html')
 
 
+
+def pview_attendees_by_roolno_graph(request, roll_no):
+    attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
+
+    attendees_list = []
+    for attendee in attendees:
+        attendee_dict = {
+            'Date': attendee.Date,
+            'subject_states': attendee.subject_states
+        }
+        attendees_list.append(attendee_dict)
+
+    context = {
+        'roll_no': roll_no,
+        'attendees':attendees,
+        'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
+    }
+    return render(request, 'parent/graph_attendees.html', student_detials(request, 'View Attendence', context))
+
+def pview_attendees_by_roolno_percentage(request, roll_no):
+    attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
+
+    attendees_list = []
+    for attendee in attendees:
+        attendee_dict = {
+            'Date': attendee.Date,
+            'subject_states': attendee.subject_states
+        }
+        attendees_list.append(attendee_dict)
+
+    context = {
+        'roll_no': roll_no,
+        'attendees':attendees,
+        'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
+    }
+    return render(request, 'parent/percentage_attendees.html', student_detials(request, 'View Attendence', context))
