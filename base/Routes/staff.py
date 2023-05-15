@@ -35,8 +35,8 @@ def teacher_signup_view(request):
             user.save()
             teacher = teacherForm.save(commit=False)
             teacher.user = user
-            teacher.save()
             if teacher.role == 'hod':
+                teacher.save()
                 add_user = Users(user_name=user.username,
                                  mail_id=user.username, password=user.password, role='2')
                 add_user.save()
@@ -45,6 +45,8 @@ def teacher_signup_view(request):
                                           role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
                 Fac_del.save()
             if teacher.role == 'admin':
+                teacher.status = True
+                teacher.save()
                 add_user = Users(user_name=user.username,
                                  mail_id=user.username, password=user.password, role='1')
                 add_user.save()
@@ -53,6 +55,7 @@ def teacher_signup_view(request):
                                           role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
                 Fac_del.save()
             elif teacher.role == 'staff':
+                teacher.save()
                 add_user = Users(user_name=user.username,
                                  mail_id=user.username, password=user.password, role='3')
                 add_user.save()
@@ -151,7 +154,7 @@ def teacher_view_question_view(request):
 @user_passes_test(is_teacher)
 def see_question_view(request, pk):
     questions = QMODEL.Question.objects.all().filter(course_id=pk)
-    return render(request, 'teacher/see_question.html', {'questions': questions})
+    return render(request, 'teacher/see_question.html', staff_detials(request,'See Questions',{'questions': questions})) 
 
 
 @login_required(login_url='teacherlogin')

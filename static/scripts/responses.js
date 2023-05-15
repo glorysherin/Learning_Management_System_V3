@@ -1,5 +1,5 @@
 function getBotResponse(input) {
-  const chatbotResUrl = "{% url 'chatbot_res' %}";
+  const chatbotResUrl = "chatbot_res";
     $.ajax({
       type: "GET",
       url: chatbotResUrl,

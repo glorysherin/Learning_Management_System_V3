@@ -6,13 +6,14 @@
 <html>
 
 <head>
+  <div style="margin-bottom: 7%;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Include Bootstrap CSS -->
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
   <!-- Custom CSS -->
   <style>
     .card-header {
-      background-color: #007bff;
+      background-color: #428bca;
       color: #fff;
     }
 
@@ -35,24 +36,26 @@
     {% for semester, department_dict in class_dict.items %}
     <div class="card mt-3">
       <div class="card-header">
-        <h6 class="card-title mb-0">{{ semester }} Semester</h6>
+        <h6 class="card-title mb-0" style="color: white;" >{{ semester }} Semester</h6>
       </div>
       <div class="card-body">
         {% for department, classrooms in department_dict.items %}
-        <h6>{{ department }}</h6>
-        <div class="table-responsive">
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>Class Name</th>
-                <th>Subject Code</th>
-                <th>Owner</th>
-                <th>Description</th>
-                <th>View</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
+          {% if classrooms|length != 0 %}
+            <h6>{{ department }}</h6>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Class Name</th>
+                    <th>Subject Code</th>
+                    <th>Owner</th>
+                    <th>Description</th>
+                    <th>View</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+              {% endif %}
               {% for classroom in classrooms %}
               <tr>
                 <td><a href="class_listout/{{ classroom.subject_code }}">{{ classroom.class_name }}</a></td>
@@ -79,6 +82,6 @@
   </div>
 
 </body>
-
+</div>
 </html>
 {% endblock content %}

@@ -12,7 +12,7 @@ from base import models as TMODEL
 from django.utils import timezone
 from googlesearch import search
 import urllib.parse
-from django.db.models import Sum
+from django.db.models import Sum, Max
 from django.http import JsonResponse
 from random import choice
 
@@ -258,18 +258,97 @@ def home_classroom(request):
             classrooms = ClassRooms.objects.filter(department=teacher_data.department)
             
             all_classroom = ClassRooms.objects.all()
-            for i in classrooms:
-                print("Class_Rooms",i.subject_code)
-            print(classrooms)
             
             print(get_role.role, type(get_role.role))
             try:
                 if get_role.role == 2:
-                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': [teacher_data.department], "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
+                    peoples = []
+                    temp = []
+                    for j, i in enumerate(classrooms):
+                        peoples.append(temp)
+                        temp = []
+                        print("sub : ", i.subject_code)
+                        people = class_enrolled.objects.filter(
+                            subject_code=i.subject_code)
+                        print('people : ', peoples)
+                        for i in people:
+                            person_obj = User.objects.get(id=i.user_id)
+                            try:
+                                obj = Student.objects.get(user=person_obj)
+                                temp.append(obj)
+                            except Exception as e:
+                                print(e)
+                    peoples.append(temp)
+                    peoples.pop(0)
+                    temp_people = []
+                    # ------------------------------------------ to manage the 4 peoples -----------------------------
+                    for i, j in enumerate(peoples):
+                        if len(j) >= 4:
+                            temp_people.append(j)
+                        else:
+                            temp_people.append(j[0:4])
+                    peoples = temp_people
+                    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                    
+                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': [[i, j] for i, j in zip(classrooms, peoples)], 'img': img, 'sem_': sem, 'dep': [teacher_data.department], "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
                 if get_role.role == 3:
-                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': classes, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
+                    peoples = []
+                    temp = []
+                    for j, i in enumerate(classes):
+                        peoples.append(temp)
+                        temp = []
+                        print("sub : ", i.subject_code)
+                        people = class_enrolled.objects.filter(
+                            subject_code=i.subject_code)
+                        print('people : ', peoples)
+                        for i in people:
+                            person_obj = User.objects.get(id=i.user_id)
+                            try:
+                                obj = Student.objects.get(user=person_obj)
+                                temp.append(obj)
+                            except Exception as e:
+                                print(e)
+                    peoples.append(temp)
+                    peoples.pop(0)
+                    temp_people = []
+                    # ------------------------------------------ to manage the 4 peoples -----------------------------
+                    for i, j in enumerate(peoples):
+                        if len(j) >= 4:
+                            temp_people.append(j)
+                        else:
+                            temp_people.append(j[0:4])
+                    peoples = temp_people
+                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes':  [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
                 if get_role.role == 1:
-                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
+                    peoples = []
+                    temp = []
+                    for j, i in enumerate(all_classroom):
+                        peoples.append(temp)
+                        temp = []
+                        print("sub : ", i.subject_code)
+                        people = class_enrolled.objects.filter(
+                            subject_code=i.subject_code)
+                        print('people : ', peoples)
+                        for i in people:
+                            person_obj = User.objects.get(id=i.user_id)
+                            try:
+                                obj = Student.objects.get(user=person_obj)
+                                temp.append(obj)
+                            except Exception as e:
+                                print(e)
+                    peoples.append(temp)
+                    peoples.pop(0)
+                    temp_people = []
+                    # ------------------------------------------ to manage the 4 peoples -----------------------------
+                    for i, j in enumerate(peoples):
+                        if len(j) >= 4:
+                            temp_people.append(j)
+                        else:
+                            temp_people.append(j[0:4])
+                    peoples = temp_people
+                    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                    
+                    return render(request, 'class_room/staff_classroom.html', staff_detials(request,'ClassRoom',{'detail': teacher_data_1, 'teacher_obj':teacher_data , 'teacher_data': teacher_data, 'classes': [[i, j] for i, j in zip(all_classroom, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)}))
             except:
                 if get_role.role == 2:
                     return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data,'teacher_obj':teacher_data , 'classes': classrooms, 'img': img, 'sem_': sem, 'dep': [teacher_data.department], "user_name": request.user.username})
@@ -316,7 +395,7 @@ def save_add_class(request):
 def edit_classroom(request, classroom_id):
     # Retrieve the classroom object from the database
     classroom = get_object_or_404(ClassRooms, subject_code=classroom_id)
-
+    obj = Department.objects.all()
     if request.method == 'POST':
         # Retrieve the updated data from the HTML form
         classroom.class_name = request.POST.get('class_name')
@@ -334,7 +413,7 @@ def edit_classroom(request, classroom_id):
 
     # If the request method is not POST, render the edit form with the current data
     # return render(request, 'class_room/edit_class.html', {'classroom': classroom})
-    return render(request,'class_room/edit_class.html',staff_detials(request,'Edit Classroom',{'classroom': classroom}))
+    return render(request,'class_room/edit_class.html',staff_detials(request,'Edit Classroom',{'classroom': classroom,'dep':obj}))
 
 
 def attendes(request):
@@ -428,7 +507,7 @@ def add_class_notes(request, pk):
         if form.is_valid():
             ebook = form.save(commit=False)
             ebook.Class_id = pk
-            ebook.cover_image = get_image_url(str(ebook.title)+" cover image")
+            ebook.cover_image = choice(get_image_url(str(ebook.title)+" cover image"))
             ebook.save()
             return redirect('course_list')
     else:
@@ -869,6 +948,7 @@ def student_int_test_marks(request, roll_no):
     return render(request, 'class_room/internal_test_mark_by_user.html', student_detials(request, 'Internal Test Mark', context))
 
 
+
 import json
 from datetime import date
 
@@ -878,9 +958,6 @@ class CustomJSONEncoder(json.JSONEncoder):
             return obj.isoformat()
         return super().default(obj)
 
-
-import json
-from datetime import date
 
 def view_attendees_by_roolno(request, roll_no):
     attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
@@ -911,14 +988,14 @@ def search_view(request):
                 # process the search results
                 results.append(url)
             return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
-    return render(request, 'class_room/search_results.html')
+    return render(request, 'class_room/search_results.html',staff_detials(request,'Search Results',))
 
 
 def mark_list(request, roll_no):
     # retrieve all the unique dates for the specified roll number
     dates = Sec_Daily_test_mark.objects.filter(
         roll_no=roll_no
-    ).order_by('-Date').distinct('Date').values_list('Date', flat=True)
+    ).values('Date').annotate(max_id=Max('id')).order_by('-Date').values_list('Date', flat=True)
 
     # create a dictionary to hold the marks for each date
     mark_dict = {}
@@ -931,8 +1008,14 @@ def mark_list(request, roll_no):
         mark_dict[query_date] = {'marks': marks, 'total_marks': total_marks}
 
     context = {'roll_no': roll_no, 'mark_dict': mark_dict}
-    return render(request, 'class_room/mark_list.html', context)
+    return render(request, 'class_room/mark_list.html',student_detials(request,'Mark List', context))
 
+<<<<<<< HEAD
+
+
+def parent_session(request):
+    return render(request,"")
+=======
 def fournotfourerror(request):
     return render(request,'error/404.html')
 
@@ -948,3 +1031,4 @@ def stafferror(request):
 
 def adminerror(request):
     return render(request,'error/adminerror.html')
+>>>>>>> ea99c2e69648a1dc6136e92d24bbe16afe8228cd

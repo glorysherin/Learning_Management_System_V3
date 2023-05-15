@@ -43,7 +43,7 @@
                 <label for="department">Department:</label>
                 <select class="form-control" name="department">
                   {% for i in course %}
-                    <option value="{{ i.short_name }}">{{ i.name }}</option>
+                    <option value="{{ i.name }}">{{ i.name }}</option>
                   {% endfor %}
                 </select>
               </div>

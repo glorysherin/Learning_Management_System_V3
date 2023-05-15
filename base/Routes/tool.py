@@ -519,11 +519,13 @@ def Common_tool(request):
 #     # Return the example code
 #     return code
 conversation = {"hello":["hello","hey, hello how can i help you"]}
+
+
 def chatbot_res(request):
     if request.method == "GET":
         message = request.GET.get("message")
         print(message)
-        if message in conversation.keys():
+        if message.lower() in conversation.keys():
             code = choice(conversation.get(message))
         else:
             link = get_stackoverflow_link(message)

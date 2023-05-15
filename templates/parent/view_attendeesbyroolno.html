@@ -1,0 +1,221 @@
+
+{% load static %}
+<div class="card">
+    <div class="card-header">
+        <h1 style="margin-left: 25%;">Attendees for roll no {{ roll_no }}</h1>
+    </div>
+    <div class="chart-container">
+        <canvas id="chart_1"></canvas>
+    </div>
+    <div class="card-body">
+        <div class="date-filter">
+            <label for="startDate" style="margin-left: 15%;">Start Date:</label>
+            <input type="date" style="margin-left: .9%;" id="startDate">
+            <label for="endDate" style="margin-left: 20%;">End Date:</label>
+            <input type="date" style="margin-left: .9%;" id="endDate">
+        </div>
+        <div style="display: flex;margin-top: 10px;">
+            <button type="submit"id="bttn"  style="width: fit-content;margin-bottom: 10px;">View Graph</button>
+             <button type="submit"id="bttn"style="width: fit-content;margin-left:10px;height:36px" >Percentage</button></div>
+    
+        <div class="table-responsive">
+            <table id="attendeesTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Subject/State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attendee in attendees %}
+                    <tr>
+                        <td>{{ attendee.Date }}</td>
+                        <td>{{ attendee.subject_states }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 20px;
+    }
+
+    .card-header {
+        color: #fff;
+        padding: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .date-filter {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .table th {
+        font-weight: bold;
+        
+        background-color: #428bca;
+            color: white;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2}
+    #bttn {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #428bca; 
+            color: white;
+            cursor: pointer;
+        }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .chart-container {
+        width: 100%;
+        height: 400px;
+        margin-top: 30px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .card-header {
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .table th,
+        .table td {
+            padding: 10px 8px;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="chart_1"></canvas>
+
+<script>
+    const attendees = JSON.parse('{{ attendeesj|safe }}');
+
+    // Function to update the chart based on the filtered dates
+    function updateChart() {
+        // Get the start date and end date input values
+        const startDateInput = document.getElementById('startDate').value;
+        const endDateInput = document.getElementById('endDate').value;
+
+        // Convert the input values to Date objects
+        const startDate = new Date(startDateInput);
+        const endDate = new Date(endDateInput);
+
+        // Filter the attendees based on the selected dates
+        const filteredAttendees = attendees.filter(attendee => {
+            const date = new Date(attendee.Date);
+            return date >= startDate && date <= endDate;
+        });
+
+        // Extract the dates and attendance counts for the filtered attendees
+        const dates = filteredAttendees.map(attendee => new Date(attendee.Date));
+        const present = filteredAttendees.map(attendee => attendee.subject_states === 'Present' ? 1 : 0);
+        const absent = filteredAttendees.map(attendee => attendee.subject_states === 'Absent' ? 1 : 0);
+        const onduty = filteredAttendees.map(attendee => attendee.subject_states === 'On Duty' ? 1 : 0);
+
+        // Update the chart data
+        chart.data.labels = dates.map(date => date.toDateString());
+        chart.data.datasets[0].data = present;
+        chart.data.datasets[1].data = absent;
+        chart.data.datasets[2].data = onduty;
+
+        // Update the chart
+        chart.update();
+    }
+
+    // Get the start date and end date input elements
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+
+    // Get the attendees table element
+    const attendeesTable = document.getElementById('attendeesTable');
+
+    // Add an event listener to the start date and end date inputs
+    startDateInput.addEventListener('change', updateChart);
+    endDateInput.addEventListener('change', updateChart);
+
+    // Initial chart setup
+    const dates = attendees.map(a => new Date(a.Date));
+    const present = attendees.map(a => a.subject_states === 'Present' ? 1 : 0);
+    const absent = attendees.map(a => a.subject_states === 'Absent' ? 1 : 0);
+    const onduty = attendees.map(a => a.subject_states === 'On Duty' ? 1 : 0);
+
+    const data = {
+        labels: dates.map(d => d.toDateString()),
+        datasets: [
+            {
+                label: 'Present',
+                data: present,
+                borderColor: 'green',
+                backgroundColor: 'rgba(0, 128, 0, 0.2)',
+            },
+            {
+                label: 'Absent',
+                data: absent,
+                borderColor: 'red',
+                backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            },
+            {
+                label: 'On Duty',
+                data: onduty,
+                borderColor: 'orange',
+                backgroundColor: 'rgba(255, 165, 0, 0.2)',
+            },
+        ]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                    },
+                },
+            },
+        },
+    };
+
+    const chart = new Chart(
+        document.getElementById('chart_1'),
+        config
+    );
+</script>
+

@@ -6,12 +6,14 @@ class EbookClassForm(forms.ModelForm):
     class Meta:
         model = EbookForClass
         fields = ['title', 'subject', 'course', 'file']
+        labels = {'subject': 'Description'}
 
 
 class EbookForm(forms.ModelForm):
     class Meta:
         model = Ebook
         fields = ['title', 'subject', 'course', 'file']
+        labels = {'subject': 'Description'}
 
 
 class CourseForm(forms.ModelForm):

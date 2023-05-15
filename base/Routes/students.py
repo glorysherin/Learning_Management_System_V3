@@ -9,6 +9,7 @@ from base import models as QMODEL
 from django.contrib.auth.models import User
 # for showing signup/login button for student
 from .Tool.Tools import student_detials, staff_detials
+from django.views.decorators.csrf import csrf_exempt
 
 # views.py
 
@@ -38,6 +39,7 @@ def students_list_by_dep(request):
     usr_obj = User.objects.get(id=usr_id)
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Teacher.objects.get(user=usr_obj)
+    print(faculty_details.department)
     students = Student.objects.filter(department=faculty_details.department)
     departments = set([student.department for student in students])
     context = {
@@ -101,7 +103,7 @@ def student_edit(request, pk):
         student.profile_pic = request.FILES['file_']
         student.user.save()
         student.save()
-        return redirect('students_list')
+        return redirect('student_edit',pk=pk)
     else:
         context = {'student': student,'department':department}
         return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
@@ -220,6 +222,7 @@ def start_exam_view(request, pk):
 
 @login_required(login_url='studentlogin')
 @user_passes_test(is_student)
+@csrf_exempt
 def calculate_marks_view(request):
     if request.COOKIES.get('course_id') is not None:
         course_id = request.COOKIES.get('course_id')
@@ -247,7 +250,7 @@ def calculate_marks_view(request):
 @user_passes_test(is_student)
 def view_result_view(request):
     courses = QMODEL.Course.objects.all()
-    return render(request, 'student/view_result.html', {'courses': courses})
+    return render(request, 'student/view_result.html', student_detials(request,'View Result',{'courses': courses}))
 
 
 @login_required(login_url='studentlogin')
@@ -257,7 +260,7 @@ def check_marks_view(request, pk):
     student = models.Student.objects.get(user_id=request.user.id)
     results = QMODEL.Result.objects.all().filter(
         exam=course).filter(student=student)
-    return render(request, 'student/check_marks.html', {'results': results})
+    return render(request, 'student/check_marks.html', student_detials(request,"Check Mark",{'results': results}))
 
 
 @login_required(login_url='studentlogin')
