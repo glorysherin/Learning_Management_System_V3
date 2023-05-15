@@ -49,18 +49,17 @@ def students_list_by_dep(request):
     }
     return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Students',context))
 
-# def staff_list_by_dep(request):
-#     usr_id = request.user.id
-#     usr_obj = User.objects.get(id=usr_id)
-#     name = Users.objects.get(user_name=usr_obj.username)
-#     faculty_details = Teacher.objects.get(user=usr_obj)
-#     students = Teacher.objects.filter(department=faculty_details.department,role=)
-#     departments = set([student.department for student in students])
-#     context = {
-#         'students': students,
-#         'departments': departments,
-#     }
-#     return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Students',context))
+def staff_list_by_dep(request):
+    usr_id = request.user.id
+    usr_obj = User.objects.get(id=usr_id)
+    faculty_details = Teacher.objects.get(user=usr_obj)
+    students = Teacher.objects.filter(department=faculty_details.department,role=faculty_details.role)
+    departments = set([student.department for student in students])
+    context = {
+        'students': students,
+        'departments': departments,
+    }
+    return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Students',context))
 
 
 def student_profile(request, student_id):
@@ -68,12 +67,12 @@ def student_profile(request, student_id):
     usr_id = request.user.id
     usr_obj = User.objects.get(id=usr_id)
     std_data = Student.objects.get(user=student_id) # it's modifyed for admin acces if you have any problem change it usr_obj
-    dict = {
+    dict_data = {
         'usr': std_data,
         'page': 'Student Profile',
         'student': student
     }
-    return render(request, 'student/student_profile.html', dict)
+    return render(request, 'student/student_profile.html', student_detials(request, 'Student Profile' ,dict_data))
 
 
 def student_delete(request, student_id):
