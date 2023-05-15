@@ -511,4 +511,8 @@ urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, com
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
+<<<<<<< HEAD
                           document_root=settings.MEDIA_ROOT)
+=======
+                          document_root=settings.MEDIA_ROOT)
+>>>>>>> 7edf3a8d02a3642f0a6605f1131bb2430108a3e5

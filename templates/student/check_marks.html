@@ -1,31 +1,10 @@
 {% extends 'student/studentbase.html' %}
 {% block content %}
 {%load static%}
-
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
-<br><br>
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 class="panel-title">My Marks</h6>
+      <h6 style=" text-align: center;margin-top: 20px;" class="panel-title">My Marks</h6>
     </div>
     <table class="table table-hover table-bordered" id="dev-table">
       <thead>
@@ -52,5 +31,4 @@
   </div>
 </div>
 
-<br><br><br><br><br><br>
 {% endblock content %}

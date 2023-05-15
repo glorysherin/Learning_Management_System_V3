@@ -1012,6 +1012,12 @@ def mark_list(request, roll_no):
 
 def parent_session(request):
     return render(request,"")
+<<<<<<< HEAD
+
+def fournotfourerror(request):
+    return render(request,'error/404.html')
+=======
+>>>>>>> 7edf3a8d02a3642f0a6605f1131bb2430108a3e5
 
 def fournotfourerror(request, exception):
     return render(request, 'error/404.html', status=404)
@@ -1026,4 +1032,8 @@ def stafferror(request):
     return render(request,'error/stafferror.html')
 
 def adminerror(request):
+<<<<<<< HEAD
     return render(request,'error/adminerror.html')
+=======
+    return render(request,'error/adminerror.html')
+>>>>>>> 7edf3a8d02a3642f0a6605f1131bb2430108a3e5
