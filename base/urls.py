@@ -287,6 +287,7 @@ studet = [
 teacher = [
     path('teacher/teacherclick', teacherclick_view),
     path('staff/chat_lobby', staff_lobby, name='staff_chat_lobby'),
+    path('staff_list_by_dep', staff_list_by_dep, name='staff_list_by_dep'),
     path('admin/chat_lobby', admin_lobby, name='admin_chat_lobby'),
     path('teacher/teacherlogin',
          LoginView.as_view(template_name='login/login.html'), name='teacherlogin'),

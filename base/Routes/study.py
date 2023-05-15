@@ -1016,10 +1016,6 @@ def parent_session(request):
 def fournotfourerror(request):
     return render(request,'error/404.html')
 
-# def fournotfourerror(request,exception):
-#     return render(request,'error/404.html',status=404)
-
-
 def fivehundrederror(request):
     return render(request,'error/500.html')
 
@@ -1031,6 +1027,11 @@ def stafferror(request):
 
 def adminerror(request):
     return render(request,'error/adminerror.html')
+def fournotthree(request):
+    return render(request,'error/403.html')
+
+def fourhundred(request):
+    return render(request,'error/400.html')
 
 def view_attendees_by_roolno_graph(request, roll_no):
     attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
