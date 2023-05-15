@@ -79,7 +79,12 @@ def create_note(request):
                     subcode=subcode, description=description, file=file, cover_image=cover_image)
         note.save()
         return redirect('notes_list')
+<<<<<<< HEAD
+    return render(request, 'commonNotes/note_form.html',staff_detials(request,'UPload Notes'))
+
+=======
     return render(request, 'commonNotes/note_form.html',staff_detials(request,'Upload Notes',{'dep':Department.objects.all()}))
+>>>>>>> 22c1e284a73a789d8c938d7fd9c7d4c7f5b702f0
 
 def update_note(request, note_id):
     note = get_object_or_404(Note, id=note_id)
