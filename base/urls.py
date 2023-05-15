@@ -510,6 +510,9 @@ parent = [
      path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
      path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
      path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
+     
+     path('pview_attendees_by_roolno_percentage/<int:roll_no>', pview_attendees_by_roolno_percentage, name='pview_attendees_by_roolno_percentage'),
+     path('pview_attendees_by_roolno_graph/<int:roll_no>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
 ]
 
 
