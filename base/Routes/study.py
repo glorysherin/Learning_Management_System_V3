@@ -1012,10 +1012,15 @@ def mark_list(request, roll_no):
 
 def parent_session(request):
     return render(request,"")
+<<<<<<< HEAD
 
 def fournotfourerror(request):
     return render(request,'error/404.html')
+=======
+>>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
 
+def fournotfourerror(request, exception):
+    return render(request, 'error/404.html', status=404)
 
 def fivehundrederror(request):
     return render(request,'error/500.html')
@@ -1029,8 +1034,47 @@ def stafferror(request):
 def adminerror(request):
     return render(request,'error/adminerror.html')
 
+<<<<<<< HEAD
 def fournotthree(request):
     return render(request,'error/403.html')
 
 def fourhundred(request):
     return render(request,'error/400.html')
+=======
+
+def view_attendees_by_roolno_graph(request, roll_no):
+    attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
+
+    attendees_list = []
+    for attendee in attendees:
+        attendee_dict = {
+            'Date': attendee.Date,
+            'subject_states': attendee.subject_states
+        }
+        attendees_list.append(attendee_dict)
+
+    context = {
+        'roll_no': roll_no,
+        'attendees':attendees,
+        'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
+    }
+    return render(request, 'class_room/graph_attendees.html', student_detials(request, 'View Attendence', context))
+
+def view_attendees_by_roolno_percentage(request, roll_no):
+    attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
+
+    attendees_list = []
+    for attendee in attendees:
+        attendee_dict = {
+            'Date': attendee.Date,
+            'subject_states': attendee.subject_states
+        }
+        attendees_list.append(attendee_dict)
+
+    context = {
+        'roll_no': roll_no,
+        'attendees':attendees,
+        'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
+    }
+    return render(request, 'class_room/percentage_attendees.html', student_detials(request, 'View Attendence', context))
+>>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5

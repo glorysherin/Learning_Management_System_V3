@@ -92,16 +92,26 @@ def gpt(queary):
 def student_detials(request, page, dict_inp={}):
     usr_id = request.user.id
     usr_obj = User.objects.get(id=usr_id)
+    print("working..... role : ",get_current_user_role(request))
     if get_current_user_role(request) == 1:
         dict_={
             'usr': usr_obj,
-            'page':page
+            'page':page,
+            'usr_role':get_current_user_role(request)
+        }
+    elif get_current_user_role(request) == 2 or get_current_user_role(request) == 3:
+        dict_={
+            'usr': usr_obj,
+            'page':page,
+            'usr_role':get_current_user_role(request) 
         }
     else:
+        print("student")
         std_data = Student.objects.get(user=usr_obj)
         dict_ = {
             'usr': std_data,
             'page': page,
+            'usr_role':4
         }
     return {**dict_, **dict_inp}
 
@@ -124,3 +134,4 @@ def get_current_user_role(request):
     obj = User.objects.get(id=request.user.id)
     get_role = Users.objects.get(user_name=obj.username).role
     return get_role
+
