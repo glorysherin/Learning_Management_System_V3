@@ -524,6 +524,7 @@ def Common_tool(request):
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
+
 conversation = {"hello":["hello","hey, hello how can i help you"],"who are you":["i am lms chatbot"," am a chatbot"],"how are you":["I'm great, thank you! How can I assist you today?" ,"I'm great, thank you!"],"what's the weather like today":["The weather is sunny and warm today. It's a perfect day to go outside!"],"How can I reset my password?":["To reset your password, you can go to the login page and click on the 'Forgot Password'."],"what are the tools available":['''<ul>
   <li>User Management</li>
   <li>Course Management</li>
@@ -601,9 +602,6 @@ def respond_to_input(user_input):
         response = summary
     return response
 
-
-
-
 def chatbot_res(request):
     if request.method == "GET":
         message = request.GET.get("message")
@@ -611,3 +609,4 @@ def chatbot_res(request):
         return JsonResponse({"response": response})
     else:
         return JsonResponse({"error": "Invalid request method"})
+    
