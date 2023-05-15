@@ -18,6 +18,10 @@ from random import choice
 
 from .Tool.Tools import student_detials, staff_detials
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
 
 def is_teacher(user):
     return user.groups.filter(name='TEACHER').exists()
@@ -1019,8 +1023,22 @@ def fournotfourerror(request):
 =======
 >>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
 
+<<<<<<< HEAD
+def fournotfourerror(request):
+    return render(request,'error/404.html')
+
+# def fournotfourerror(request,exception):
+#     return render(request,'error/404.html',status=404)
+
+def fournotfourerror(request, *args, **argv):
+    response = render_to_response('error/404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+=======
 def fournotfourerror(request, exception):
     return render(request, 'error/404.html', status=404)
+>>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
 
 def fivehundrederror(request):
     return render(request,'error/500.html')
@@ -1033,6 +1051,8 @@ def stafferror(request):
 
 def adminerror(request):
     return render(request,'error/adminerror.html')
+<<<<<<< HEAD
+=======
 
 <<<<<<< HEAD
 def fournotthree(request):
