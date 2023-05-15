@@ -492,22 +492,6 @@ department=[
     path('department/<int:pk>/edit/', department_edit, name='department_edit'),
     path('department/<int:pk>/delete/', department_delete, name='department_delete'),
 ]
-
-<<<<<<< HEAD
-parent = [
-     path('parent_home', parent_home, name='parent_home'),
-     path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
-     path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
-     path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
-]
-
-urlpatterns.extend(Make_Join([parent, department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
-                   admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool]))
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
- 
-=======
 error=[
         path('fournotfourerror', fournotfourerror, name='fournotfourerror'),
         path('fivehundrederror',fivehundrederror,name='fivehundrederror'),
@@ -515,11 +499,16 @@ error=[
         path('stafferror',stafferror,name='stafferror'),
         path('adminerror',adminerror,name='adminerror'),
 ]
+parent = [
+     path('parent_home', parent_home, name='parent_home'),
+     path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
+     path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
+     path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
+]
 
-urlpatterns.extend(Make_Join([department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+
+urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
-
->>>>>>> ea99c2e69648a1dc6136e92d24bbe16afe8228cd
