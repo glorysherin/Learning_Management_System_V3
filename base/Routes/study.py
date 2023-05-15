@@ -18,9 +18,6 @@ from random import choice
 
 from .Tool.Tools import student_detials, staff_detials
 
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-
 
 def is_teacher(user):
     return user.groups.filter(name='TEACHER').exists()
@@ -1016,14 +1013,8 @@ def mark_list(request, roll_no):
 def parent_session(request):
     return render(request,"")
 
-# def fournotfourerror(request,exception):
-#     return render(request,'error/404.html',status=404)
-
-def fournotfourerror(request, *args, **argv):
-    response = render_to_response('error/404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
+def fournotfourerror(request, exception):
+    return render(request, 'error/404.html', status=404)
 
 def fivehundrederror(request):
     return render(request,'error/500.html')

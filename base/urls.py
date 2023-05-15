@@ -22,7 +22,6 @@ from .Routes.admin_page import *
 from .Routes.staff_tools import *
 from .Routes.NoCodeViews import *
 
-
 # Initilizes........................
 
 urlpatterns = []
@@ -505,6 +504,7 @@ parent = [
      path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
      path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
 ]
+
 
 
 urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
