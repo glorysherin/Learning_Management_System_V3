@@ -17,11 +17,7 @@
         </div>
         <div class="mb-4" hidden>
             <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
-<<<<<<< HEAD
-            <input type="email" id="email" name="email" value="{{ teacher.user.email }}" class="form-control border rounded px-4 py-2 w-full">
-=======
             <input type="email" id="email" name="email" value="{{ teacher.user.email }}" class="form-control border rounded px-4 py-2 w-full" >
->>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
         </div>
         <div class="mb-4">
             <label for="profile_pic" class="block text-gray-700 font-bold mb-2">Profile Picture:</label>
@@ -44,22 +40,8 @@
             <input type="checkbox" id="status" name="status" {% if teacher.status %}checked{% endif %}
                 class="form-check-input">
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <div class="mb-4">
-            <label for="department" class="block text-gray-700 font-bold mb-2">Department:</label>
-            <select class="form-control border rounded px-4 py-2 w-full" name="department">
-              {% for i in dep %}
-                <option value="{{ i.short_name }}">{{ i.name }}</option>
-              {% endfor %}
-            </select>
-        </div>
-=======
         
->>>>>>> 2c4da5abf8215a8f4ccf4bf2ee6f3aa6b7a829b0
 
-=======
->>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
     <div class="form-group">
         <label for="department">Department:</label>
         <select class="form-control" name="department">
@@ -68,10 +50,7 @@
           {% endfor %}
         </select>
     </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
     <div class="form-group" hidden>
         <label for="salary">Salary:</label>
         <input type="number" id="salary" name="salary" value="{{ teacher.salary }}" class="form-control">

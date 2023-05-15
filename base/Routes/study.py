@@ -1011,13 +1011,20 @@ def mark_list(request, roll_no):
 
 def parent_session(request):
     return render(request,"")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9f2de2e6a1ac123d9b5fc03917c2b54c99b18286
 
 def fournotfourerror(request):
     return render(request,'error/404.html')
 
+<<<<<<< HEAD
 # def fournotfourerror(request,exception):
 #     return render(request,'error/404.html',status=404)
 
+=======
+>>>>>>> 9f2de2e6a1ac123d9b5fc03917c2b54c99b18286
 def fivehundrederror(request):
     return render(request,'error/500.html')
 
@@ -1029,13 +1036,19 @@ def stafferror(request):
 
 def adminerror(request):
     return render(request,'error/adminerror.html')
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9f2de2e6a1ac123d9b5fc03917c2b54c99b18286
 def fournotthree(request):
     return render(request,'error/403.html')
 
 def fourhundred(request):
     return render(request,'error/400.html')
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9f2de2e6a1ac123d9b5fc03917c2b54c99b18286
 
 def view_attendees_by_roolno_graph(request, roll_no):
     attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
@@ -1071,5 +1084,9 @@ def view_attendees_by_roolno_percentage(request, roll_no):
         'attendees':attendees,
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
+<<<<<<< HEAD
     return render(request, 'class_room/percentage_attendees.html', student_detials(request, 'View Attendence', context))
 
+=======
+    return render(request, 'class_room/percentage_attendees.html', student_detials(request, 'View Attendence', context))
+>>>>>>> 9f2de2e6a1ac123d9b5fc03917c2b54c99b18286
