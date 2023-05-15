@@ -1012,12 +1012,6 @@ def mark_list(request, roll_no):
 
 def parent_session(request):
     return render(request,"")
-<<<<<<< HEAD
-
-def fournotfourerror(request):
-    return render(request,'error/404.html')
-=======
->>>>>>> 7edf3a8d02a3642f0a6605f1131bb2430108a3e5
 
 def fournotfourerror(request, exception):
     return render(request, 'error/404.html', status=404)
@@ -1032,8 +1026,41 @@ def stafferror(request):
     return render(request,'error/stafferror.html')
 
 def adminerror(request):
-<<<<<<< HEAD
     return render(request,'error/adminerror.html')
-=======
-    return render(request,'error/adminerror.html')
->>>>>>> 7edf3a8d02a3642f0a6605f1131bb2430108a3e5
+
+
+def view_attendees_by_roolno_graph(request, roll_no):
+    attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
+
+    attendees_list = []
+    for attendee in attendees:
+        attendee_dict = {
+            'Date': attendee.Date,
+            'subject_states': attendee.subject_states
+        }
+        attendees_list.append(attendee_dict)
+
+    context = {
+        'roll_no': roll_no,
+        'attendees':attendees,
+        'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
+    }
+    return render(request, 'class_room/graph_attendees.html', student_detials(request, 'View Attendence', context))
+
+def view_attendees_by_roolno_percentage(request, roll_no):
+    attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
+
+    attendees_list = []
+    for attendee in attendees:
+        attendee_dict = {
+            'Date': attendee.Date,
+            'subject_states': attendee.subject_states
+        }
+        attendees_list.append(attendee_dict)
+
+    context = {
+        'roll_no': roll_no,
+        'attendees':attendees,
+        'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
+    }
+    return render(request, 'class_room/percentage_attendees.html', student_detials(request, 'View Attendence', context))

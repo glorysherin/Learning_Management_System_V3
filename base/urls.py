@@ -197,6 +197,10 @@ classroom = [
     path('search_view', search_view, name='search_view'),
     path('view_attendees_by_roolno/<int:roll_no>',
          view_attendees_by_roolno, name='view_attendees_by_roolno'),
+    path('view_attendees_by_roolno_percentage/<int:roll_no>',
+         view_attendees_by_roolno_percentage, name='view_attendees_by_roolno_percentage'),
+    path('view_attendees_by_roolno_graph/<int:roll_no>',
+         view_attendees_by_roolno_graph, name='view_attendees_by_roolno_graph'),
     path('student_int_test_marks/<int:roll_no>',
          student_int_test_marks, name='student_int_test_marks'),
     path('student_mark_option/<str:class_id>',
@@ -503,6 +507,8 @@ parent = [
      path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
      path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
      path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
+     path('pview_attendees_by_roolno_graph/<int:roll_no>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
+     path('pview_attendees_by_roolno_percentage/<int:roll_no>', pview_attendees_by_roolno_percentage, name='pview_attendees_by_roolno_percentage'),
 ]
 
 
@@ -511,8 +517,4 @@ urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, com
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
-<<<<<<< HEAD
                           document_root=settings.MEDIA_ROOT)
-=======
-                          document_root=settings.MEDIA_ROOT)
->>>>>>> 7edf3a8d02a3642f0a6605f1131bb2430108a3e5

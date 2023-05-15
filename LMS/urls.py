@@ -12,6 +12,6 @@ urlpatterns = [
     path('', include('base.urls'))
     
 ]
+
 handler404 = 'base.Routes.study.fournotfourerror'
-handler400 = 'base.Routes.study.fournotfourerror'
 handler500 = 'base.Routes.study.fivehundrederror'
