@@ -501,35 +501,19 @@ error=[
         path('studenterror',studenterror,name='studenterror'),
         path('stafferror',stafferror,name='stafferror'),
         path('adminerror',adminerror,name='adminerror'),
-<<<<<<< HEAD
         path('fournotthree',fournotthree,name='fournotthree'),
         path('fourhundred',fourhundred,name='fourhundred'),
-=======
->>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
 ]
 parent = [
      path('parent_home', parent_home, name='parent_home'),
      path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
      path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
      path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
-<<<<<<< HEAD
 ]
 
 
-=======
-     path('pview_attendees_by_roolno_graph/<int:roll_no>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
-     path('pview_attendees_by_roolno_percentage/<int:roll_no>', pview_attendees_by_roolno_percentage, name='pview_attendees_by_roolno_percentage'),
-]
-
-
-
->>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
 urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
-<<<<<<< HEAD
                           document_root=settings.MEDIA_ROOT)
-=======
-                          document_root=settings.MEDIA_ROOT)
->>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
