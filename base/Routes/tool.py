@@ -602,9 +602,6 @@ def respond_to_input(user_input):
         response = summary
     return response
 
-
-
-
 def chatbot_res(request):
     if request.method == "GET":
         message = request.GET.get("message")
@@ -612,3 +609,4 @@ def chatbot_res(request):
         return JsonResponse({"response": response})
     else:
         return JsonResponse({"error": "Invalid request method"})
+    
