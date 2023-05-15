@@ -1016,6 +1016,12 @@ def mark_list(request, roll_no):
 
 def parent_session(request):
     return render(request,"")
+<<<<<<< HEAD
+
+def fournotfourerror(request):
+    return render(request,'error/404.html')
+=======
+>>>>>>> 095bd373aec9579fcb4c9956b424dd26bd6659b5
 
 <<<<<<< HEAD
 def fournotfourerror(request):
@@ -1048,6 +1054,13 @@ def adminerror(request):
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+def fournotthree(request):
+    return render(request,'error/403.html')
+
+def fourhundred(request):
+    return render(request,'error/400.html')
+=======
 
 def view_attendees_by_roolno_graph(request, roll_no):
     attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')

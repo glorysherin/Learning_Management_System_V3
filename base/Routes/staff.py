@@ -67,7 +67,7 @@ def teacher_signup_view(request):
             my_teacher_group = Group.objects.get_or_create(name='TEACHER')
             my_teacher_group[0].user_set.add(user)
         return HttpResponseRedirect('teacherlogin')
-    return render(request, 'teacher/teachersignup.html', context=mydict)
+    return render(request, 'teacher/teachersignup.html',staff_detials(request, 'Add Marks',mydict))
 
 
 def is_teacher(user):

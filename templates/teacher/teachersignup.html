@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+{% extends 'teacher/teacherbase.html' %}
 {% load widget_tweaks %}
+{% block content %}
 <html lang="en" dir="ltr">
 
 <head>
@@ -27,7 +29,7 @@
 </head>
 
 <body>
-  {% include "exam/navbar.html" %}
+  
 
 
 
@@ -93,7 +95,7 @@
 
 
   <br><br>
-  {% include "exam/footer.html" %}
 </body>
 
 </html>
+{% endblock content %}
