@@ -1012,7 +1012,6 @@ def mark_list(request, roll_no):
 def parent_session(request):
     return render(request,"")
 
-
 def fournotfourerror(request):
     return render(request,'error/404.html')
 
