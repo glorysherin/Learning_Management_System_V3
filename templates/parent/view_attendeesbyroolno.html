@@ -15,8 +15,8 @@
             <input type="date" style="margin-left: .9%;" id="endDate">
         </div>
         <div style="display: flex;margin-top: 10px;">
-            <button type="submit"id="bttn"  style="width: fit-content;margin-bottom: 10px;">View Graph</button>
-             <button type="submit"id="bttn"style="width: fit-content;margin-left:10px;height:36px" >Percentage</button></div>
+            <button type="submit"id="bttn"  style="width: fit-content;margin-bottom: 10px;"><a href="{% url 'pview_attendees_by_roolno_graph' roll_no=roll_no %}">View Graph</a></button>
+             <button type="submit"id="bttn"style="width: fit-content;margin-left:10px;height:36px" ><a href="{% url 'pview_attendees_by_roolno_percentage' roll_no=roll_no %}">Percentage</a></button></div>
     <br>
         <div class="table-responsive">
             <table id="attendeesTable" class="table">
