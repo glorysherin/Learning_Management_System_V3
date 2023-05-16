@@ -118,7 +118,7 @@
           {% for i in images %}
           <div class="project item col-md-6 col-xl-4 drinks {{ i.categories }}">
             <figure class="overlay overlay-1 rounded">
-              <a href="https://img.freepik.com/free-vector/college-students-concept-illustration_114360-10205.jpg?size=626&ext=jpg"
+              <a href="{{ i.image.url }}"
                 data-glightbox data-gallery="shots-group">
                 <img src=" {{ i.image.url }}" alt="" /></a>
             </figure>
