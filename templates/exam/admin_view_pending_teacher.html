@@ -1,59 +1,116 @@
-{% extends 'student/adminbase.html' %}
-{% block content %}
+
 {%load static%}
-
+<!DOCTYPE html>
+<html>
 <head>
-  <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <!-- <style media="screen">
-    a:link {
-      text-decoration: none;
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
     }
 
-    h6 {
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .panel-heading {
+      background-color: #428bca;
+      color: #fff;
+      padding: 10px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .panel-title {
       text-align: center;
+      margin: 0;
     }
 
-    .row {
-      margin: 100px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
     }
-  </style> -->
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f9f9f9;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    td img {
+      height: 40px;
+      width: 40px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 3px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-success {
+      background-color: #5cb85c;
+    }
+
+    .btn-success:hover {
+      background-color: #449d44;
+    }
+
+    .btn-danger {
+      background-color: #d9534f;
+    }
+
+    .btn-danger:hover {
+      background-color: #c9302c;
+    }
+  </style>
 </head>
-<br><br>
-<div class="container">
-  <div class="panel panel-primary">
+<body>
+  <div class="container">
     <div class="panel-heading">
-      <h6 style="margin-bottom: 20px; margin-left: 40%;"class="panel-title"><B> Pending Teachers</B></h6>
+      <h6 class="panel-title">Pending Teachers</h6>
     </div>
-    <table class="table table-hover table-bordered" id="dev-table">
+    <table>
       <thead>
         <tr>
-
           <th>Name</th>
-          <th>Photo</th>
           <th>Contact</th>
           <th>Address</th>
-         
           <th>Actions</th>
         </tr>
       </thead>
-      {% for t in teachers %}
-      <tr>
-
-        <td> {{t.get_name}}</td>
-        <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{t.mobile}}</td>
-        <td>{{t.address}}</td>
-        
-        <td><a class="btn btn-success btn-sm" style="border-radius: 0%;" href="{% url 'approve-teacher' t.id  %}">ACCEPT<span class="glyphicon glyphicon-ok"></span></a>
-        <a class="btn btn-danger btn-sm" style="border-radius: 0%;" href="{% url 'reject-teacher' t.id  %}">DENIED<span class="	glyphicon glyphicon-remove"></span></a></td>
-      </tr>
-      {% endfor %}
+      <tbody>
+        {% for t in teachers %}
+        <tr>
+          <td>{{ t.get_name }}</td>
+          <td>{{ t.mobile }}</td>
+          <td>{{ t.address }}</td>
+          <td>
+            <a style="margin-bottom: 30px;" class="btn btn-success" href="{% url 'approve-teacher' t.id %}">
+              ACCEPT
+            </a>
+            <a style="margin-top: 10px;" class="btn btn-danger" href="{% url 'reject-teacher' t.id %}">
+              DENIED
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </div>
-</div>
-
-<br><br><br><br><br><br>
-{% endblock content %}
+</body>
+</html>
