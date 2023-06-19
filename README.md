@@ -66,7 +66,7 @@ Include screenshots of the user interface and key features.
 
 - Add user profile pages.
 - Implement a notification system.
-- Improve the user interface and user experience.
+- Improve the user interface and user experience .
 
 ## Contributing
 
@@ -83,7 +83,7 @@ Include screenshots of the user interface and key features.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. 
 
 ## Contact
 
