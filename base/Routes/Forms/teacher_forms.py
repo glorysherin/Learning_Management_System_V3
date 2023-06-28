@@ -27,7 +27,7 @@ class TeacherForm(forms.ModelForm):
                                         empty_label='Select department',
                                         to_field_name='short_name',
                                         label='Department')
-    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect)
+    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
 
 
 
