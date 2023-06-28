@@ -100,7 +100,7 @@
               {% csrf_token %}
               <div class="form-group first">
                 <label for="username">Username</label>
-                {% render_field form.username type="text" class="form-control" placeholder="Username" %}
+                {% render_field form.username type="text" class="form-control" placeholder="" %}
                 <!-- <input type="text" name ="usr_name" class="form-control" id="username"> -->
 
               </div>
@@ -115,7 +115,7 @@
                 <!-- {% render_field form.password type="password"  class="form-control" placeholder="Password" %} -->
 
                 <div class="input-group">
-                  {% render_field form.password type="password" class="form-control" placeholder="Password" %}
+                  {% render_field form.password type="password" class="form-control" placeholder="" %}
                   <div class="input-group-append">
                     <span class="input-group-text" style="border: none;background-color: #EDF2F5;">
                       <i class="fas fa-eye" id="password-toggle"></i>
