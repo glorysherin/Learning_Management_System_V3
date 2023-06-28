@@ -1012,13 +1012,8 @@ def mark_list(request, roll_no):
 def parent_session(request):
     return render(request,"")
 
-<<<<<<< HEAD
-def fournotfourerror(request, exception):
-    return render(request, 'error/404.html', status=404)
-=======
 def fournotfourerror(request):
     return render(request,'error/404.html')
->>>>>>> 6e57b548927bf1fc8dec049909eb12097ca34844
 
 def fivehundrederror(request):
     return render(request,'error/500.html')
@@ -1072,7 +1067,3 @@ def view_attendees_by_roolno_percentage(request, roll_no):
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
     return render(request, 'class_room/percentage_attendees.html', student_detials(request, 'View Attendence', context))
-<<<<<<< HEAD
-
-=======
->>>>>>> 6e57b548927bf1fc8dec049909eb12097ca34844
