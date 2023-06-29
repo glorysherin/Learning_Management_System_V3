@@ -82,7 +82,7 @@
 <body>
   <div class="container">
     <div class="panel-heading">
-      <h6 class="panel-title">Pending Teachers</h6>
+      <h6 class="panel-title" style="font-size: medium;">Pending Teachers</h6>
     </div>
     <table>
       <thead>
@@ -103,6 +103,7 @@
             <a style="margin-bottom: 30px;" class="btn btn-success" href="{% url 'approve-teacher' t.id %}">
               ACCEPT
             </a>
+            <br><br>
             <a style="margin-top: 10px;" class="btn btn-danger" href="{% url 'reject-teacher' t.id %}">
               DENIED
             </a>
