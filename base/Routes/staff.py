@@ -121,6 +121,9 @@ def add_admin(request):
             my_teacher_group[0].user_set.add(user)
         else:
             print("not valied")
+            print("Form data is not valid")
+            print(userForm.errors)
+            print(teacherForm.errors)
         return HttpResponseRedirect('teacherlogin')
     return render(request, 'teacher/addadmin.html',mydict)
 

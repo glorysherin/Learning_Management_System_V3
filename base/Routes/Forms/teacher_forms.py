@@ -12,7 +12,6 @@ class TeacherUserForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
 
-
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = models.Teacher
@@ -23,11 +22,23 @@ class TeacherForm(forms.ModelForm):
         ('hod', 'Hod'),
         ('admin', 'Admin'),
     )
-    department = forms.ModelChoiceField(queryset=models.Department.objects.all(),
+    
+    try:
+        admin_role_department = Department.objects.get(name="Admin Role")
+        department = forms.ModelChoiceField(queryset=models.Department.objects.all(),
                                         empty_label='Select department',
                                         to_field_name='short_name',
                                         label='Department')
+    except Department.DoesNotExist:
+        print("Admin Doesn't exist...!")
+        DEPARTMENT_CHOICES = (
+            ('', 'Select department'),
+            ('admin', 'Admin'),
+        )
+        department = forms.ChoiceField(choices=DEPARTMENT_CHOICES,
+                                    label='Department')
     role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
+
 
 
 
