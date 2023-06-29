@@ -30,6 +30,12 @@
     element.style {
       display: flex;
     }
+    div ul li a:hover{
+        background-color: rgb(212, 212, 212);
+  }
+  div ul li a:active{
+     background-color: rgb(212, 212, 212);
+  }
   </style>
 </head>
 
@@ -1261,9 +1267,9 @@
               <a class="btn btn-outline-white btn-sm mb-0 me-3" target="_blank" href="https://jec.ac.in/"> JEC</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a href="/logout" class="nav-link text-white font-weight-bold px-0">
+              <a href="/logout" class="nav-link text-white font-weight-bold px-0" onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign Out</span>
+                <span class="d-sm-inline d-none" >Sign Out</span>
               </a>
             </li>
             <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">
@@ -1278,13 +1284,13 @@
               </a>
             </li>
             <li class="nav-item px-3 d-flex align-items-center">
-              <a class="nav-link text-white p-0">
+              <a class="nav-link text-white p-0" onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false" onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end px-2 py-3 ms-n4" aria-labelledby="dropdownMenuButton">
