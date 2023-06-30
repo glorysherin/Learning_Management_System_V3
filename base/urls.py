@@ -296,7 +296,9 @@ teacher = [
     path('teacher/addstudentsignup', add_student_signup_view,
          name='add_student_signup_view'),
     path('teacher/teachersignup', teacher_signup_view, name='teachersignup'),
+    path('teacher/teachersignup1', teacher_signup_view1, name='teachersignup1'),
     path('teacher/addadmin', add_admin, name='addadmin'),
+    path('teacher/add_admin1', add_admin1, name='add_admin1'),
     path('teacher/teacher-dashboard',
          teacher_dashboard_view, name='teacher-dashboard'),
     path('teacher/teacher-exam', teacher_exam_view, name='teacher-exam'),
@@ -497,6 +499,7 @@ department=[
     path('department/<int:pk>/edit/', department_edit, name='department_edit'),
     path('department/<int:pk>/delete/', department_delete, name='department_delete'),
 ]
+
 error=[
         path('fournotfourerror', fournotfourerror, name='fournotfourerror'),
         path('fivehundrederror',fivehundrederror,name='fivehundrederror'),
