@@ -1,141 +1,165 @@
 {% extends 'student/adminbase.html' %}
 
 {% block content %}
-{% for dept in departments %}
-<!DOCTYPE html>
-<html lang="en">
+{% if departments %}
+  {% for dept in departments %}
+  {% endfor %}
+{% else %}
+  <div class="empty-message" style="display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  align-content: center;
+  flex-direction: column;
+  margin-top: 68px;
+  height: 100%;">
+    <p>Department and students are not registered.</p>
+  </div>
+{% endif %}
+{% if students %}
+  {% for dept in departments %}
+  <!DOCTYPE html>
+  <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .card-container {
-            max-width: 100%;
-            overflow-x: auto;
-            padding: 20px;
-        }
+      .card-container {
+        max-width: 100%;
+        overflow-x: auto;
+        padding: 20px;
+      }
 
-        .table-container {
-            overflow-x: auto;
-        }
+      .table-container {
+        overflow-x: auto;
+      }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
 
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
 
-        th {
-            background-color: #f8f8f8;
-            font-weight: bold;
-        }
+      th {
+        background-color: #f8f8f8;
+        font-weight: bold;
+      }
 
-        td {
-            font-size: 14px;
-        }
+      td {
+        font-size: 14px;
+      }
 
-        a {
-            margin-right: 5px;
-            text-decoration: none;
-            color: #428bca;
-        }
+      a {
+        margin-right: 5px;
+        text-decoration: none;
+        color: #428bca;
+      }
 
-        a:hover {
-            text-decoration: underline;
-        }
+      a:hover {
+        text-decoration: underline;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div style="margin-bottom: 7%;">
-    <center><input style="margin-top: 10px;" type="text" id="search" placeholder="Search..." oninput="filterTable()"></center>
-    
+      <center><input style="margin-top: 10px;" type="text" id="search" placeholder="Search..." oninput="filterTable()"></center>
 
+      <h1>{{ students|length }}</h1>
+      <h1>hello</h1>
 
-        <h1>{{ students|length }}</h1>
-        <h1>hello</h1>
-
-    <div class="card-container">
+      <div class="card-container">
+        <h1>{{ students }}</h1>
         <h2>{{ dept }}</h2>
         <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Joined Year</th>
-                        <th>Role No</th>
-                        <th>Mobile</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for student in students %}
-                    {% if student.department == dept %}
-                    <tr>
-                        <td>{{ student.get_name }}</td>
-                        <td>{{ student.joinned_year|date:"Y" }}</td>
-                        <td>{{ student.role_no }}</td>
-                        <td>{{ student.mobile }}</td>
-                        <td>
-                            <a class="btn btn-light btn-xs" href="students/{{ student.id}}">View</a>
-                            <a class="btn btn-success btn-xs" href="student/{{ student.id }}/edit">Edit</a>
-                            <a  class="btn btn-danger btn-xs"href="students_delete/{{ student.id }}/delete">Delete</a>
-                        </td>
-                    </tr>
-                    {% endif %}
-                    {% endfor %}
-                </tbody>
-            </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Joined Year</th>
+                <th>Role No</th>
+                <th>Mobile</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for student in students %}
+              {% if student.department == dept %}
+              <tr>
+                <td>{{ student.get_name }}</td>
+                <td>{{ student.joinned_year|date:"Y" }}</td>
+                <td>{{ student.role_no }}</td>
+                <td>{{ student.mobile }}</td>
+                <td>
+                  <a class="btn btn-light btn-xs" href="students/{{ student.id}}">View</a>
+                  <a class="btn btn-success btn-xs" href="student/{{ student.id }}/edit">Edit</a>
+                  <a class="btn btn-danger btn-xs" href="students_delete/{{ student.id }}/delete">Delete</a>
+                </td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     function filterTable() {
-  // Get user's search query
-  var query = document.getElementById("search").value.toLowerCase();
-  
-  // Get all the rows in the table
-  var rows = document.getElementsByTagName("tr");
+      // Get user's search query
+      var query = document.getElementById("search").value.toLowerCase();
 
-  // Loop through all the rows
-  for (var i = 0; i < rows.length; i++) {
-    var row = rows[i];
+      // Get all the rows in the table
+      var rows = document.getElementsByTagName("tr");
 
-    // Get the cells in the row
-    var cells = row.getElementsByTagName("td");
+      // Loop through all the rows
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
 
-    // Loop through all the cells in the row
-    var match = false;
-    for (var j = 0; j < cells.length; j++) {
-      var cell = cells[j];
+        // Get the cells in the row
+        var cells = row.getElementsByTagName("td");
 
-      // If the cell contains the search query, show the row
-      if (cell.innerHTML.toLowerCase().indexOf(query) > -1) {
-        match = true;
-        break;
+        // Loop through all the cells in the row
+        var match = false;
+        for (var j = 0; j < cells.length; j++) {
+          var cell = cells[j];
+
+          // If the cell contains the search query, show the row
+          if (cell.innerHTML.toLowerCase().indexOf(query) > -1) {
+            match = true;
+            break;
+          }
+        }
+
+        // Hide or show the row based on the search query
+        if (match) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
       }
     }
-
-    // Hide or show the row based on the search query
-    if (match) {
-      row.style.display = "";
-    } else {
-      row.style.display = "none";
-    }
-  }
-}
-
-</script>
-</div>
-</html>
-
-{% endfor %}
+  </script>
+  </html>
+  {% endfor %}
+{% else %}
+  <div class="empty-message" style="display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  align-content: center;
+  flex-direction: column;
+  height: 100%;">
+    <p>No students found.</p>
+  </div>
+{% endif %}
 {% endblock %}

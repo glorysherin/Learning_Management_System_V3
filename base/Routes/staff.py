@@ -22,6 +22,9 @@ def teacherclick_view(request):
     return render(request, 'teacher/teacherclick.html')
 
 
+def user_added_message(request):
+    return render(request,'attandees/add_staff_message.html')
+
 def teacher_signup_view(request):
     userForm = teacher_forms.TeacherUserForm()
     teacherForm = teacher_forms.TeacherForm()
@@ -68,8 +71,8 @@ def teacher_signup_view(request):
             my_teacher_group = Group.objects.get_or_create(name='TEACHER')
             my_teacher_group[0].user_set.add(user)
         else:
-            print("not valied....1")
-        return HttpResponseRedirect('teacherlogin')
+            print("not valied....at staff/teacher_signup_view")
+        return HttpResponseRedirect('user_added_message')
     
     return render(request, 'teacher/teachersignup.html',staff_detials(request, 'Add Marks',mydict))
 

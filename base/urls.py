@@ -296,6 +296,7 @@ teacher = [
     path('teacher/addstudentsignup', add_student_signup_view,
          name='add_student_signup_view'),
     path('teacher/teachersignup', teacher_signup_view, name='teachersignup'),
+    path('teacher/user_added_message', user_added_message, name='user_added_message'),
     path('teacher/teachersignup1', teacher_signup_view1, name='teachersignup1'),
     path('teacher/admin_added', admin_added, name='admin_added'),
     path('teacher/adminsignup', adminsignup, name='adminsignup'),
