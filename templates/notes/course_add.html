@@ -1,13 +1,19 @@
 {% extends 'teacher/teacherbase.html' %}
 
 {% block content %}
-  <div class="container">
-    <h1>Add Course</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Save</button>
-      <a href="{% url 'course_list' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+  <div class="container" style="margin-top: 20px;">
+    <div class="w-full lg:w-1/2 mx-auto" style="border-radius: 20%;margin-bottom: 60px;width: 90%;">
+      <div class="bg-white shadow-lg rounded-lg px-6 py-4">
+        <h1 class="text-2xl font-bold mb-4">Add Course</h1>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="flex justify-end mt-6">
+            <button  type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded mr-2" style="background-color: #ff695f;border: none;margin-bottom: 20px;">Save</button>
+            <a href="{% url 'course_list' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded" style="margin-left: 0px;">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 {% endblock %}
