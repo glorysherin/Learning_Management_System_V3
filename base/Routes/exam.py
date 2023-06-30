@@ -56,7 +56,7 @@ def afterlogin_view(request):
     if is_admin(request.user):
             return redirect('admin-dashboard')
     else:
-            return redirect('addadmin')
+            return redirect('add_admin1')
 
 
 def adminclick_view(request):
