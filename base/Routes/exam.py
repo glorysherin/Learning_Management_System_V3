@@ -16,8 +16,11 @@ from ..models import Users
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 def is_admin(user):
-    obj = User.objects.get(id=user.id)
-    get_role = Users.objects.get(user_name=obj.username)
+    try:
+        obj = User.objects.get(id=user.id)
+        get_role = Users.objects.get(user_name=obj.username)
+    except:
+        return False
     if get_role.role == 1:
         return True
     else:
@@ -50,8 +53,10 @@ def afterlogin_view(request):
             return redirect(staff_home)
         else:
             return render(request, 'teacher/teacher_wait_for_approval.html')
+    if is_admin(request.user):
+            return redirect('admin-dashboard')
     else:
-        return redirect('admin-dashboard')
+            return redirect('addadmin')
 
 
 def adminclick_view(request):

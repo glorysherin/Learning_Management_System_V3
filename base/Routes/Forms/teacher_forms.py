@@ -12,7 +12,6 @@ class TeacherUserForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
 
-
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = models.Teacher
@@ -29,6 +28,25 @@ class TeacherForm(forms.ModelForm):
                                         label='Department')
     role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
 
+
+class TeacherForm1(forms.ModelForm):
+    class Meta:
+        model = models.Teacher
+        fields = ['address', 'mobile', 'profile_pic', 'role', 'department']
+
+    ROLE_CHOICES = (
+        ('staff', 'Staff'),
+        ('hod', 'Hod'),
+        ('admin', 'Admin'),
+    )
+    
+    DEPARTMENT_CHOICES = (
+        ('', 'Select department'),
+        ('admin', 'Admin'),
+    )
+    department = forms.ChoiceField(choices=DEPARTMENT_CHOICES,
+                                    label='Department')
+    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
 
 
 class DepartmentForm(forms.ModelForm):

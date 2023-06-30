@@ -27,6 +27,16 @@
   <link rel="stylesheet" href=" {% static 'css/home.css' %} ">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% comment %} =============================================================================================================================== {% endcomment %}
+<style>
+ div ul li a:hover{
+        background-color: rgb(212, 212, 212);
+  }
+  div ul li a:hover:not(#test){
+    background-color: rgb(212, 212, 212);      }
+  a.active{
+    
+  }
+</style>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -70,7 +80,7 @@
               </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
+            <span id="aa" class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
         
@@ -489,7 +499,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="/admin-teacher">
+          <a class="nav-link  " href="{% url 'teachersignup' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="640" height="512" viewBox="0 0 640 512">
@@ -513,7 +523,7 @@
               </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Add Teacher </span>
+            <span class="nav-link-text ms-1">Add Staff </span>
           </a>
         </li>
         <li class="nav-item">
@@ -808,7 +818,7 @@
           <div class="docs-info">
             <h6 class="text-white up mb-0">JEC Official Page!</h6>
             <p class="text-xs font-weight-bold"><br><br></p>
-            <a href="https://jec.ac.in/" target="_blank"
+            <a href="https://jec.ac.in/" target="_blank" class="exclude-link"
               class="btn btn-white btn-sm w-100 mb-0">Visit</a>
           </div>
         </div>
@@ -821,7 +831,7 @@
       <div class="container-fluid py-1" style="    margin-top: 24px;">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 ps-2 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="text-white opacity-5"
+            <li class="breadcrumb-item text-sm"><a  class="text-white opacity-5"
                 href=" {% url 'admin-dashboard' %} ">Home</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">{{ page }}</li>
           </ol>
@@ -843,13 +853,14 @@
               <a class="btn btn-outline-white btn-sm mb-0 me-3" target="_blank" href="https://jec.ac.in/">JEC</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a href="logout" class="nav-link text-white font-weight-bold px-0">
+              <a href="logout" onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''" class="nav-link text-white font-weight-bold px-0 test1">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign Out</span>
+                <span id="test" class="d-sm-inline d-none" style="pointer-events: none;">Sign Out</span>
               </a>
+              
             </li>
             <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">
-              <a href="#" class="nav-link text-white p-0">
+              <a href="#"  class="nav-link text-white p-0">
                 <a href="#" class="nav-link text-body p-0" id="iconNavbarSidenav">
                   <div class="sidenav-toggler-inner">
                     <i class="sidenav-toggler-line bg-white"></i>
@@ -860,12 +871,12 @@
               </a>
             </li>
             <li class="nav-item px-3 d-flex align-items-center">
-              <a href=" {% static 'javascript:;' %} " class="nav-link text-white p-0">
+              <a onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''" href=" {% static 'javascript:;' %} " class="nav-link text-white p-0">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href=" {% static 'javascript:;' %} " class="nav-link text-white p-0" id="dropdownMenuButton"
+              <a onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''" href=" {% static 'javascript:;' %} " class="nav-link text-white p-0" id="dropdownMenuButton"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
@@ -1252,6 +1263,9 @@
           }
         });
       }
+    </script>
+    <script>
+      document.getElementById("test").style.display = "none";
     </script>
     <!-- jquary -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

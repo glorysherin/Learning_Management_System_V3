@@ -1,9 +1,223 @@
+{%load static%}
+
 <!DOCTYPE html>
 {% load widget_tweaks %}
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" />
+  <meta name="keywords" />
+  <meta name="author" content="elemis" />
+  <title>Admin_creation</title>
+  <link rel=" icon" href="https://jec.ac.in/wp-content/themes/Jayacollege_2017/images/logo_fav.png" type="image/x-icon">
+
+  <link rel="shortcut icon" href=" {% static 'icon-dummy.png' %} " />
+  <link rel="stylesheet" href=" {% static 'assets/plugins.css' %} " />
+  
+  <link rel="stylesheet" href=" {% static 'assets/style.css' %} " />
+  <link rel="stylesheet"
+          href=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity=
+"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+ 
+    <!-- jQuery library -->
+    <script src=
+"https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity=
+"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous">
+    </script>
+ 
+    <!-- JavaScript library -->
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity=
+"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous">
+    </script>
+ 
+    <!-- Latest compiled JavaScript library -->
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity=
+"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous">
+    </script>
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+	font-family: 'Roboto', sans-serif;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+i {
+	margin-right: 10px;
+}
+/----------bootstrap-navbar-css------------/
+.navbar-logo{
+	padding: 15px;
+	color: #fff;
+}
+.navbar-mainbg{
+	background-color: #5161ce;
+	padding: 0px;
+}
+#navbarSupportedContent{
+	overflow: hidden;
+	position: relative;
+}
+#navbarSupportedContent ul{
+	padding: 0px;
+	margin: 0px;
+}
+#navbarSupportedContent ul li a i{
+	margin-right: 10px;
+}
+#navbarSupportedContent li {
+	list-style-type: none;
+	float: left;
+}
+#navbarSupportedContent ul li a{
+	color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+    padding: 20px 20px;
+    transition-duration:0.6s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+#navbarSupportedContent>ul>li.active>a{
+	color: #5161ce;
+	background-color: transparent;
+	transition: all 0.7s;
+}
+#navbarSupportedContent a:not(:only-child):after {
+	content: "\f105";
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	font-size: 14px;
+	font-family: "Font Awesome 5 Free";
+	display: inline-block;
+	padding-right: 3px;
+	vertical-align: middle;
+	font-weight: 900;
+	transition: 0.5s;
+}
+#navbarSupportedContent .active>a:not(:only-child):after {
+	transform: rotate(90deg);
+}
+.hori-selector{
+	display:inline-block;
+	position:absolute;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	transition-duration:0.6s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	background-color: #fff;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	margin-top: 10px;
+}
+.hori-selector .right,
+.hori-selector .left{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: #fff;
+	bottom: 10px;
+}
+.hori-selector .right{
+	right: -25px;
+}
+.hori-selector .left{
+	left: -25px;
+}
+.hori-selector .right:before,
+.hori-selector .left:before{
+	content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #5161ce;
+}
+.hori-selector .right:before{
+	bottom: 0;
+    right: -25px;
+}
+.hori-selector .left:before{
+	bottom: 0;
+    left: -25px;
+}
+
+
+@media(min-width: 992px){
+	.navbar-expand-custom {
+	    -ms-flex-flow: row nowrap;
+	    flex-flow: row nowrap;
+	    -ms-flex-pack: start;
+	    justify-content: flex-start;
+	}
+	.navbar-expand-custom .navbar-nav {
+	    -ms-flex-direction: row;
+	    flex-direction: row;
+	}
+	.navbar-expand-custom .navbar-toggler {
+	    display: none;
+	}
+	.navbar-expand-custom .navbar-collapse {
+	    display: -ms-flexbox!important;
+	    display: flex!important;
+	    -ms-flex-preferred-size: auto;
+	    flex-basis: auto;
+	}
+}
+
+
+@media (max-width: 991px){
+	#navbarSupportedContent ul li a{
+		padding: 12px 30px;
+	}
+	.hori-selector{
+		margin-top: 0px;
+		margin-left: 10px;
+		border-radius: 0;
+		border-top-left-radius: 25px;
+		border-bottom-left-radius: 25px;
+	}
+	.hori-selector .left,
+	.hori-selector .right{
+		right: 10px;
+	}
+	.hori-selector .left{
+		top: -25px;
+		left: auto;
+	}
+	.hori-selector .right{
+		bottom: -25px;
+	}
+	.hori-selector .left:before{
+		left: -25px;
+		top: -25px;
+	}
+	.hori-selector .right:before{
+		bottom: -25px;
+		left: -25px;
+	}
+}
+</style>
+  
   <style>
     form {
       margin: 50px;
@@ -29,9 +243,33 @@
 <body>
   
 
+  <nav class="navbar navbar-expand-custom navbar-mainbg">
 
+    <a href="/" class="logo d-flex align-items-center">
+      <!-- Uncomment the line below if you also wish to use an image logo -->
+      <!-- <img src=" {% static 'assets/img/logo.png' %} " alt=""> -->
+      <h1><img style="color: aliceblue;"
+          src="https://jec.ac.in/wp-content/uploads/2022/11/jaya_college_logo_update.png" alt="" width="300px"
+          height="40px"><span></span></h1>
+    </a>
+              <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars text-white"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'pre_home' %}"><i class="fas fa-tachometer-alt"></i>Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'adminlogin' %}"><i class="far fa-address-book"></i>Login </a>
+            </li>
+           
+        </ul>
+    </div>
+</nav><br><br><br>
 
-  <br><br><br>
+ 
   <div class="container">
     <h3 style="text-align: center;">Admin Create Form</h3>
     <form method="POST" autocomplete="off" enctype="multipart/form-data">
@@ -93,6 +331,202 @@
 
 
   <br><br>
-</body>
+  <footer id="footer" class="footer" >
 
+    <div
+      style="background-image: url(https://images.unsplash.com/photo-1520531158340-44015069e78e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=972&q=80);padding: 20px;background-size:cover;"
+      class="footer-content position-relative">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-info"  style="color: rgb(124, 122, 122);">
+              <h5 style="color: rgb(5, 5, 5);">Jaya Engineering College</h5>
+              <p>
+                CTH Road, Prakash Nagar, Thiruninravur, Chennai, Tamil Nadu 602024
+                <br><br>
+                <strong>Phone:</strong> 044-26300982, 26341264, 26390041.<br>
+                <strong>Email:</strong> admission@jec.ac.in, info@jec.ac.in<br>
+                <strong>Group Website :</strong> www.jayagc.org<br>
+                <strong> Fax :</strong> +91-44-5212 3995<br>
+              </p>
+              <div class="social-links d-flex mt-3">
+                <a href="https://twitter.com/JayagroupC" class="d-flex align-items-center justify-content-center"><i
+                    class="bi bi-twitter"></i></a>
+                <a href="https://www.facebook.com/Jayagroupofcolleges/"
+                  class="d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/jayagroupofcolleges/"
+                  class="d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
+                <a href="http://jec.ac.in/infrastructure/"
+                  class="d-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
+
+              </div>
+            </div>
+          </div><!-- End footer info column-->
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h5 style="color: rgb(10, 10, 10);">About</h5>
+            <ul style="list-style-type: none;">
+              <li><a  style="color: rgb(124, 122, 122);" href="https://jec.ac.in/about-us/">About JEC</a></li>
+              <li><a  style="color: rgb(124, 122, 122);" href="https://jec.ac.in/mission-vision/">Vission and Mission</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/group-institution/">Group of Institution</a></li>
+
+            </ul>
+          </div><!-- End footer links column-->
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h5>Administration</h5>
+            <ul style="list-style-type: none;">
+
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/admission-procedure//">Admission procedure</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/director-message/">Director</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/principal-message-2/">Principal</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/vice-principal-2/">Vice Principal's message</a></li>
+
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h5>Academics</h5>
+            <ul style="list-style-type: none;color:#0b0b0c ;">
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/academic-calendar-2/">Academic Calendar</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/exam-cell-2/"> Exam Cell</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/academic-excellence-3/">Academic Excellence</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/scholarship-details/">Scholarship Details</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/news-letter/">News letter</a></li>
+
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-3 footer-links" style="color: rgb(124, 122, 122);">
+            <h5 style="color: black;">Useful Links</h5>
+            <ul style="list-style-type: none;">
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/nirf-2017/">NIRF-2017</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/privacy-policy/"> Privacy Policy</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/press-clippings/">Press Clippings</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/mandatory-disclosure/">Mandatory Disclosure</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/wifi-registration/">Wifi Registration</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="https://jec.ac.in/alumni/">Alumini</a></li>
+              <li><a style="color: rgb(124, 122, 122);" href="http://jec.ac.in/wp-content/uploads/2016/04/Jec-awards-20162.pdf">JEC Awards</a></li>
+
+            </ul>
+          </div>
+
+
+
+          <div class="footer-legal text-center position-relative">
+            <div class="container">
+              <div style="color: rgb(231, 224, 224);;" class="copyright">Copyright ©2023 - All Rights Reserved - Jaya Engineering College
+
+              </div>
+
+            </div>
+          </div>
+
+  </footer>
+</div>
+<!-- /.container -->
+
+<!--/.card -->
+</div>
+<!-- /.container -->
+</section>
+<!-- <div class="progress-wrap">
+  <svg
+    class="progress-circle svg-content"
+    width="100%"
+    height="100%"
+    viewBox="-1 -1 102 102"
+  >
+    <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+  </svg>
+</div> -->
+<script>
+  // ---------Responsive-navbar-active-animation-----------
+function test(){
+var tabsNewAnim = $('#navbarSupportedContent');
+var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+var activeItemNewAnim = tabsNewAnim.find('.active');
+var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+var itemPosNewAnimTop = activeItemNewAnim.position();
+var itemPosNewAnimLeft = activeItemNewAnim.position();
+$(".hori-selector").css({
+"top":itemPosNewAnimTop.top + "px", 
+"left":itemPosNewAnimLeft.left + "px",
+"height": activeWidthNewAnimHeight + "px",
+"width": activeWidthNewAnimWidth + "px"
+});
+$("#navbarSupportedContent").on("click","li",function(e){
+$('#navbarSupportedContent ul li').removeClass("active");
+$(this).addClass('active');
+var activeWidthNewAnimHeight = $(this).innerHeight();
+var activeWidthNewAnimWidth = $(this).innerWidth();
+var itemPosNewAnimTop = $(this).position();
+var itemPosNewAnimLeft = $(this).position();
+$(".hori-selector").css({
+"top":itemPosNewAnimTop.top + "px", 
+"left":itemPosNewAnimLeft.left + "px",
+"height": activeWidthNewAnimHeight + "px",
+"width": activeWidthNewAnimWidth + "px"
+});
+});
+}
+$(document).ready(function(){
+setTimeout(function(){ test(); });
+});
+$(window).on('resize', function(){
+setTimeout(function(){ test(); }, 500);
+});
+$(".navbar-toggler").click(function(){
+$(".navbar-collapse").slideToggle(300);
+setTimeout(function(){ test(); });
+});
+
+
+
+// --------------add active class-on another-page move----------
+jQuery(document).ready(function($){
+// Get current path and find target link
+var path = window.location.pathname.split("/").pop();
+
+// Account for home page with empty path
+if ( path == '' ) {
+path = 'index.html';
+}
+
+var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
+// Add active class to target link
+target.parent().addClass('active');
+});
+
+
+
+
+// Add active class on another page linked
+// ==========================================
+// $(window).on('load',function () {
+//     var current = location.pathname;
+//     console.log(current);
+//     $('#navbarSupportedContent ul li a').each(function(){
+//         var $this = $(this);
+//         // if the current path is like this link, make it active
+//         if($this.attr('href').indexOf(current) !== -1){
+//             $this.parent().addClass('active');
+//             $this.parents('.menu-submenu').addClass('show-dropdown');
+//             $this.parents('.menu-submenu').parent().addClass('active');
+//         }else{
+//             $this.parent().removeClass('active');
+//         }
+//     })
+// });
+</script>
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<script data-cfasync="false"
+src=" {% static 'cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %} "></script>
+<script src=" {% static 'assets/js/plugins.js' %} "></script>
+<script src=" {% static 'assets/js/theme.js' %} "></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
+
+</body>
 </html>
+
+
