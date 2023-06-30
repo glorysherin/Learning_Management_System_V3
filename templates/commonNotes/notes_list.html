@@ -12,7 +12,8 @@
            flex-direction: row;
            flex-wrap: wrap;
            align-content: center;
-           justify-content: space-between;> <h2 class="text-2xl font-extrabold text-gray-900">Notes</h2>
+           justify-content: space-between;"> 
+           <h2 class= "text-2xl font-extrabold text-gray-900">Notes</h2>
             <a href="{% url 'create_note' %}"  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                 Upload Notes
             </a>
@@ -27,7 +28,7 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;">
-                <article
+                <article style="margin-top: 20px;"
                 class="note-article bg-white group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform duration-200"
                 data-department="{{ note.department }}" data-subcode="{{ note.subcode }}"
                 data-description="{{ note.description }}">
