@@ -6,14 +6,14 @@
 <head>
     <title>Text to Audio Converter</title>
     <style>
-    .card-container {
+    .card-container1 {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-.card {
+.card1 {
     background-color: #f7f7f7;
     border-radius: 10px;
     padding: 20px;
@@ -23,11 +23,11 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.label {
+.label1 {
     font-size: 15px;
 }
 
-.input {
+.input1 {
     width: 100%;
     padding: 5px;
     margin-top: 5px;
@@ -38,7 +38,7 @@
     resize: none;
 }
 
-.btn {
+.btn1 {
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
@@ -53,13 +53,13 @@
     </style>
 </head>
 <body>
-    <div class="card-container">
-        <div class="card">
+    <div class="card-container1">
+        <div class="card1">
             <h2>Text to Audio Converter</h2>
             <form method="post">
                 {% csrf_token %}
-                <label for="text" class="label">Text:</label>
-                <textarea name="text" id="text" rows="5" cols="50" class="input"></textarea>
+                <label for="text" class="label1">Text:</label>
+                <textarea name="text" id="text" rows="5" cols="50" class="input1"></textarea>
                 <br>
                 <label for="language" class="label">Language:</label>
                 <select name="language" id="language" class="input">
@@ -68,7 +68,7 @@
                     <!-- add more language options as needed -->
                 </select>
                 <br>
-                <button type="submit" class="btn">Convert and Download</button>
+                <button type="submit" class="btn1">Convert and Download</button>
             </form>
         </div>
     </div>
