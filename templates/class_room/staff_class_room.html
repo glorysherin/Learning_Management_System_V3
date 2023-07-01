@@ -1372,14 +1372,10 @@ JEC-Class room  </title>
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                {{ detail.name }}
+                {{ stusr.name }}
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                {% if detail.role.role == 2 %}
-                HOD of {{ detail.department }}
-                {% else %}
-                Staff of {{ detail.department }}
-                {% endif %}
+                {{ stusr.department }}
               </p>
             </div>
           </div>
