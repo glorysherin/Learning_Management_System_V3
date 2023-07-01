@@ -1,14 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from base.models import Department
 from .Forms.teacher_forms import DepartmentForm
+from .Tool.Tools import student_detials, staff_detials
+
 
 def department_list(request):
     departments = Department.objects.all()
-    return render(request, 'department/department_list.html', {'departments': departments})
+    return render(request, 'department/department_list.html', staff_detials(request,'Department Details',{'departments': departments}))
 
 def department_detail(request, pk):
     department = get_object_or_404(Department, pk=pk)
-    return render(request, 'department/department_detail.html', {'department': department})
+    return render(request, 'department/department_detail.html', staff_detials(request,'Department Detail',{'department': department}))
 
 def department_create(request):
     if request.method == 'POST':
@@ -18,7 +20,8 @@ def department_create(request):
             return redirect('department_detail', pk=department.pk)
     else:
         form = DepartmentForm()
-    return render(request, 'department/department_form.html', {'form': form})
+    return render(request, 'department/department_form.html', staff_detials(request,'Create department',{'form': form}))
+
 
 def department_edit(request, pk):
     department = get_object_or_404(Department, pk=pk)
@@ -29,7 +32,7 @@ def department_edit(request, pk):
             return redirect('department_detail', pk=department.pk)
     else:
         form = DepartmentForm(instance=department)
-    return render(request, 'department/department_form.html', {'form': form})
+    return render(request, 'department/department_form.html', staff_detials(request,'Create Edit',{'form': form}))
 
 def department_delete(request, pk):
     department = get_object_or_404(Department, pk=pk)

@@ -15,7 +15,7 @@ def staff_create_blog(request):
 
 
 def admin_create_blog(request):
-    return render(request, "blog/admin_blog_create.html", {'page': 'Create Blog'})
+    return render(request, "blog/admin_blog_create.html", staff_detials(request,'Create Blog',{'page': 'Create Blog'}))
 
 
 def save_blog(request):
@@ -70,12 +70,12 @@ def staff_list_blog(request):
 
 def admin_list_blog(request):
     items = get_blog()
-    return render(request, "blog/adminblog.html", {'page': 'Blog', 'blogs': items})
+    return render(request, "blog/adminblog.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
 
 
 def admin_list_blog_course(request):
     items = get_course()
-    return render(request, "blog/adminblog.html", {'page': 'Blog', 'blogs': items})
+    return render(request, "blog/adminblog.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
 
 
 def student_list_blog_course(request):

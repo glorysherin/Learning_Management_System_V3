@@ -25,7 +25,7 @@
 <div class="container">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h6 style="margin-bottom: 20px; margin-left: 40%;" class="panel-title"><b>Teachers</b> </h6>
+      <h6 style="margin-bottom: 20px; margin-left: 40%;" class="panel-title"><b>Staff's Details</b> </h6>
     </div>
     <table class="table table-hover table-bordered" id="dev-table">
       <thead>
@@ -43,7 +43,7 @@
       <tr>
 
         <td> {{t.get_name}}</td>
-        <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td> <img src="{{ t.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" /></td>
         <td>{{t.mobile}}</td>
         <td>{{t.address}}</td>
         

@@ -137,18 +137,18 @@ def staff_chat_home(request):
 
 
 def admin_chat_home(request):
-    return render(request, 'chat_room/admin_home.html')
+    return render(request, 'chat_room/admin_home.html', staff_detials(request,'Chat Room'))
 
 
 def admin_chat_room(request, room):
     username = request.GET.get('username')
     room_details = Room.objects.get(name=room)
-    return render(request, 'chat_room/admin_room.html', {
+    return render(request, 'chat_room/admin_room.html', staff_detials(request,'Chat Room',{
         'page': 'Chat - '+str(room),
         'username': username,
         'room': room,
         'room_details': room_details,
-    })
+    }))
 
 
 def staff_chat_room(request, room):
@@ -280,4 +280,4 @@ def delete_image(request):
 @user_passes_test(is_admin)
 def image_upload_page_gallery(request):
     item = get_images()
-    return render(request, "Gallery/upload_image.html", {"categories": item[0], "images": item[1]})
+    return render(request, "Gallery/upload_image.html", staff_detials(request,'Manage Gallery',{"categories": item[0], "images": item[1]}))

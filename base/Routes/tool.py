@@ -447,7 +447,7 @@ def admin_join_meeting(request):
     if request.method == 'POST':
         room_id = request.POST.get('room_id')
         return redirect('admin_meeting', room_id=room_id)
-    return render(request, 'tools/admin_join_meeting.html')
+    return render(request, 'tools/admin_join_meeting.html',staff_detials(request,'Join Meeting'))
 
 
 def meeting(request, room_id):
