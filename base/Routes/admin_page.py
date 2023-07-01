@@ -189,7 +189,9 @@ def listout_notes(request):
 
 
 def teacher_list(request):
-    teachers = Teacher.objects.all()
+    teachers = Teacher.objects.exclude(role='admin')
+    for i in teachers:
+        print(i.role)
     return render(request, 'admin_actions/teacher_list.html', {'teachers': teachers})
 
 
