@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete YouTube Link</title>
+</head>
+<body>
+    <h1>Delete YouTube Link</h1>
+    <p>Are you sure you want to delete the following YouTube link?</p>
+    <p>Title: {{ link.title }}</p>
+    <p>Link: {{ link.link }}</p>
+    <form method="POST" action="{% url 'delete_youtube_link' link.pk %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+        <a href="{% url 'list_youtube_links' %}">Cancel</a>
+    </form>
+</body>
+</html>

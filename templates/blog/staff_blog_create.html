@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="flex p-1">
-                            <select class="border-2 border-gray-300 border-r p-2" name="action">
+                            <select class="border-2 border-gray-300 border-r p-2" id="action" name="action">
                                 <option>Save and Publish</option>
                                 <option>Save Draft</option>
                             </select>
@@ -91,45 +91,54 @@
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script>
 
-    var changesCount = 0;
-    var editor2 = CKEDITOR.replace('editor2', {
-        removePlugins: 'sourcearea',
-        removeButtons: 'PasteFromWord'
+var changesCount = 0;
+var editor2 = CKEDITOR.replace('editor2', {
+  removePlugins: 'sourcearea',
+  removeButtons: 'PasteFromWord'
+});
 
-    });
-    editor2.on('change', function (ev) {
-        changesCount++;
-        document.getElementById('content2').style.display = '';
-        document.getElementById('changes').innerHTML = changesCount.toString();
-        document.getElementById('editorcontent2').innerHTML = editor2.getData();
-    });
+editor2.on('change', function(ev) {
+  changesCount++;
+  document.getElementById('content2').style.display = '';
+  document.getElementById('changes').innerHTML = changesCount.toString();
+  document.getElementById('editorcontent2').innerHTML = editor2.getData();
+});
 
-    function img_upload(url, con, datas) {
+function img_upload(url, con, datas) {
+  event.preventDefault();
+  console.log(datas, url);
+  var data = new FormData();
+  data.append(con, editor2.getData());
+  data.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
+  for (let i = 0; i < datas.length; i++) {
+    data.append(datas[i], $(datas[i]).val());
+  }
 
-        console.log(datas, url)
-        var data = new FormData();
-        data.append(con, editor2.getData())
-        data.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
-        for (let i = 0; i < datas.length; i++) {
-            data.append(datas[i], $(datas[i]).val())
+  $.ajax({
+    method: "POST",
+    url: url,
+    processData: false,
+    contentType: false,
+    mimeType: "multipart/form-data",
+    data: data,
+    success: function(response) {
+        console.log(response.status )
+      if (response.status == "success") {
+        console.log("Uploading Done successfully");
+        if (response.message == "Blog published successfully") {
+          // Redirect to the published blog page
+          window.location.href = '/published_blog';
+        } else if (response.message == "Blog draft saved successfully") {
+          // Redirect to the draft blog page
+          window.location.href = '/draft_blog';
         }
-        $.ajax({
-            method: "POST",
-            url: url,
-            processData: false,
-            contentType: false,
-            mimeType: "multipart/form-data",
-            data: data,
-            success: function (data) {
-                if (data.status == "Upload Done") {
-                    console.log("Uploading Done successfully")
-                }
-                else {
-                    console.log('error')
-                }
-            }
-        })
+      } else {
+        console.log('error');
+      }
     }
+  });
+}
+
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

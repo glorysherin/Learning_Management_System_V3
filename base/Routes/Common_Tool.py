@@ -21,6 +21,7 @@ from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from PIL import Image
 import tempfile
+from pdf2docx import Converter
 from docx import Document
 from docx.shared import Inches
 from .Tool.Code_scriping_Tool import get_image_url
@@ -160,22 +161,28 @@ def Common_convert_pdf_to_docx(request):
         pdf_file = request.FILES['pdf_file']
         filename = default_storage.save('tmp/' + pdf_file.name, pdf_file)
 
-        # convert the pdf file to docx format
+        # Convert the PDF file to DOCX format
         docx_file = io.BytesIO()
-        parse(os.path.join('media', filename), docx_file)
-        docx_file.seek(0)
+        pdf_path = default_storage.path(filename)
+        docx_path = default_storage.path(filename + '.docx')
+        cv = Converter(pdf_path)
+        cv.convert(docx_path, start=0, end=None)
+        cv.close()
 
-        response = HttpResponse(docx_file.read(
-        ), content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-        response['Content-Disposition'] = 'attachment; filename=' + \
-            pdf_file.name.split('.')[0] + '.docx'
+        # Read the converted DOCX file
+        with default_storage.open(docx_path, 'rb') as f:
+            docx_data = f.read()
 
+        response = HttpResponse(docx_data, content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+        response['Content-Disposition'] = 'attachment; filename=' + pdf_file.name.split('.')[0] + '.docx'
+
+        # Clean up the temporary files
         default_storage.delete(filename)
+        default_storage.delete(docx_path)
 
         return response
 
     return render(request, 'Common_Page_Tools/convert_pdf_to_docx.html')
-
 
 def Common_convert_pdf_to_excel(request):
     if request.method == 'POST' and request.FILES['pdf_file']:

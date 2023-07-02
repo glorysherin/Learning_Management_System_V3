@@ -240,6 +240,7 @@ def send(request):
     new_message = Message.objects.create(
         value=message, user=username, room=room_id)
     new_message.save()
+    return JsonResponse({'msg':'sucess'})
 
 
 def getMessages(request,  room):

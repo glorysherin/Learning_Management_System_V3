@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add YouTube Link</title>
+</head>
+<body>
+    <h1>Add YouTube Link</h1>
+    <form method="POST" action="{% url 'save_youtube_link' %}">
+        {% csrf_token %}
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div>
+            <label for="link">Link:</label>
+            <input type="text" id="link" name="link" required>
+        </div>
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="new">Create New Category</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <input type="checkbox" id="new_category_checkbox" name="new_category_checkbox">
+            <label for="new_category_checkbox">Edit New Category:</label>
+            <input type="text" id="new_category" name="new_category" disabled>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    
+    <script>
+        document.getElementById('category').addEventListener('change', function() {
+            var newCategoryCheckbox = document.getElementById('new_category_checkbox');
+            var newCategoryField = document.getElementById('new_category');
+            
+            if (this.value === 'new') {
+                newCategoryCheckbox.checked = false;
+                newCategoryField.disabled = true;
+            } else {
+                newCategoryField.value = '';
+                newCategoryField.disabled = false;
+            }
+        });
+        
+        document.getElementById('new_category_checkbox').addEventListener('change', function() {
+            var newCategoryField = document.getElementById('new_category');
+            
+            if (this.checked) {
+                newCategoryField.disabled = false;
+                document.getElementById('category').selectedIndex = 0;
+            } else {
+                newCategoryField.disabled = true;
+                newCategoryField.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
