@@ -121,13 +121,15 @@ def staff_detials(request, page, dict_inp={}):
     usr_obj = User.objects.get(id=usr_id)
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Faculty_details.objects.get(user_name=name.user_name)
-    teacher_role=Teacher.objects.get(user=usr_obj).role
+    teacher_role=Teacher.objects.get(user=usr_obj)
+    role = teacher_role.role
     print(teacher_role)
     dict_ = {
         'stusr': faculty_details,
         'page': page,
         'staff_name': faculty_details.name,
-        'role': teacher_role
+        'role': role,
+        'pro_id':teacher_role
     }
     return {**dict_, **dict_inp}
 

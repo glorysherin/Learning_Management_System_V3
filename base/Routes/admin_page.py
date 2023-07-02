@@ -62,7 +62,7 @@ def teacher_profile(request, staff_id):
     return render(request, 'admin_actions/teacher_profile.html', staff_detials(request, teacher.role+' Profile', {'teacher': teacher}))
 
 # classes
-
+ 
 @user_passes_test(is_admin)
 def class_list(request):
     if request.method == 'POST':

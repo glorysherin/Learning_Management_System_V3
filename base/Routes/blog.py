@@ -20,6 +20,7 @@ def admin_create_blog(request):
 
 def save_blog(request):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
+    
     title = request.POST.get(ids[0])
     description = request.POST.get(ids[1])
     content = request.POST.get(ids[2])
