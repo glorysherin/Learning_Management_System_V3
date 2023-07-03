@@ -1,9 +1,9 @@
-from base.models import blog
+from base.models import blog, Draft_blog
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .Tool.blogTool import get_blog, get_course, get_blog_by_cat
 from .Tool.Tools import student_detials, staff_detials
-
+from django.http import JsonResponse
 
 # ...............Blog........................................
 def blog_edit(request):
@@ -15,29 +15,64 @@ def staff_create_blog(request):
 
 
 def admin_create_blog(request):
-    return render(request, "blog/admin_blog_create.html", {'page': 'Create Blog'})
+    return render(request, "blog/admin_blog_create.html", staff_detials(request,'Create Blog',{'page': 'Create Blog'}))
 
-
+ 
 def save_blog(request):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
+    
+    blog_id = request.POST.get('#blog_id')
+    
     title = request.POST.get(ids[0])
     description = request.POST.get(ids[1])
     content = request.POST.get(ids[2])
     Category = request.POST.get(ids[3])
     Thumbnail = request.POST.get(ids[4])
     blog_type = request.POST.get('#type_')
+    action = request.POST.get('#action')
+    print("action : ",action)
+    if action == 'Save and Publish':
+        obj = blog(title=title, blog_type=blog_type, description=description, content=content,
+                categories=Category, blog_profile_img=Thumbnail)
+        obj.save()
+        response_data = {'status': 'success', 'message': 'Blog published successfully'}
+    elif action == 'Save Draft':
+        obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
+                categories=Category, blog_profile_img=Thumbnail)
+        obj.save()
+        response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+    else:
+        response_data = {'status': 'error', 'message': 'Invalid action'}
+    
+    return JsonResponse(response_data)
 
-    obj = blog(title=title, blog_type=blog_type, description=description, content=content,
-               categories=Category, blog_profile_img=Thumbnail)
+def blog_saved(request):
+    return render(request,'attandees/Blog_Saved.html')
+
+def blog_draft_saved(request):
+    return render(request,'attandees/Blog_draft_Saved.html')
+
+def save_edit_blog(request, pk):
+    ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
+    title = request.POST.get(ids[0])
+    description = request.POST.get(ids[1])
+    content = request.POST.get(ids[2])
+    Category = request.POST.get(ids[3])
+    Thumbnail = request.POST.get(ids[4])
+
+    obj = Draft_blog.objects.get(id=pk)
+    obj.content = content
+    obj.title = title
+    obj.description = description
+    obj.categories = Category
+    obj.blog_profile_img = Thumbnail
     obj.save()
-    ob = blog.objects.all()
-    for i in ob:
-        print(i.blog_profile_img, i.title, i.content)
+
+    print("Saved...........")
 
     return render(request, "blog/blog_edit.html")
 
-
-def save_edit_blog(request, pk):
+def draft_save_blog(request, pk):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
     title = request.POST.get(ids[0])
     description = request.POST.get(ids[1])
@@ -57,7 +92,6 @@ def save_edit_blog(request, pk):
 
     return render(request, "blog/blog_edit.html")
 
-
 def student_list_blog(request):
     items = get_blog()
     return render(request, "blog/studentblog.html", student_detials(request, 'Blog', {'blogs': items}))
@@ -70,12 +104,12 @@ def staff_list_blog(request):
 
 def admin_list_blog(request):
     items = get_blog()
-    return render(request, "blog/adminblog.html", {'page': 'Blog', 'blogs': items})
+    return render(request, "blog/adminblog.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
 
 
 def admin_list_blog_course(request):
     items = get_course()
-    return render(request, "blog/adminblog.html", {'page': 'Blog', 'blogs': items})
+    return render(request, "blog/adminblog.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
 
 
 def student_list_blog_course(request):
@@ -114,6 +148,10 @@ def admin_list_edit_blog(request):
 
 
 def edit_blog(request, pk):
+    obj = blog.objects.get(id=pk)
+    return render(request, "blog/blog_re_edit.html", {'obj': obj})
+
+def draft_edit_blog(request, pk):
     obj = blog.objects.get(id=pk)
     return render(request, "blog/blog_re_edit.html", {'obj': obj})
 

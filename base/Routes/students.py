@@ -32,7 +32,7 @@ def admin_students_list(request):
         'students': students,
         'departments': departments,
     }
-    return render(request, 'student/admin_students_list.html', context)
+    return render(request, 'student/admin_students_list.html',staff_detials(request,'Students Details',context))
 
 
 def students_list_by_dep(request):

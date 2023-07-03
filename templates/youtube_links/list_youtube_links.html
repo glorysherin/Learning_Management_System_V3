@@ -1,0 +1,17 @@
+
+<link href=
+"https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+          rel="stylesheet">
+{% for link in links %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ link.title }}</h5>
+      <p class="card-text">{{ link.link }}</p>
+      <p class="card-text">Category: {{ link.category.name }}</p>
+      <a href="{% url 'edit_youtube_link' link.id %}" class="btn btn-primary">Edit</a>
+      <a href="{% url 'delete_youtube_link' link.id %}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+{% empty %}
+  <p>No YouTube links found.</p>
+{% endfor %}

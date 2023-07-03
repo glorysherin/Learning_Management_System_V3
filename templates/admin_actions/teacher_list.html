@@ -4,77 +4,87 @@
 <center><input type="text" style="margin-top: 20px;" id="search" placeholder="Search..." oninput="filterTable()"></center>
 <div class="table-responsive" style="margin-top: 40px;">
   
-  <table class="table table-bordered table-striped">
-    
-    <thead >
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Mobile</th>
-        <th>Role</th>
-        <th>Status</th>
-        <th>Department</th>
-        <th>Salary</th>
-        <th>Annauni Num</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for teacher in teachers %}
-      <tr>
-        <td>{{ teacher.id }}</td>
-        <td>{{ teacher.get_name }}</td>
-        <td>{{ teacher.mobile }}</td>
-        <td>{{ teacher.role }}</td>
-        <td>{{ teacher.status }}</td>
-        <td>{{ teacher.department }}</td>
-        <td>{{ teacher.salary }}</td>
-        <td>{{ teacher.Annauni_num }}</td>
-        <td>
-          <a class="btn btn-success btn-sm"href="{% url 'update-teacher' teacher.id  %}">Edit</a>
-          <a class="btn btn-danger btn-sm" href="{% url 'delete-teacher' teacher.id  %}">Delete</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% if teachers %}
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Annauni Num</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for teacher in teachers %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ teacher.get_name }}</td>
+          <td>{{ teacher.mobile }}</td>
+          <td>{{ teacher.role }}</td>
+          <td>{{ teacher.status }}</td>
+          <td>{{ teacher.department }}</td>
+          <td>{{ teacher.salary }}</td>
+          <td>{{ teacher.Annauni_num }}</td>
+          <td>
+            <a class="btn btn-success btn-sm" href="{% url 'update-teacher' teacher.id %}">Edit</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'delete-teacher' teacher.id %}">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="empty-message" style="display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    margin-top: 10pc;
+    margin-bottom: 10pc;">
+      <p>No teachers found. The staff does not exist.</p>
+    </div>
+  {% endif %}
 </div>
 <script>
   function filterTable() {
-// Get user's search query
-var query = document.getElementById("search").value.toLowerCase();
+    // Get user's search query
+    var query = document.getElementById("search").value.toLowerCase();
 
-// Get all the rows in the table
-var rows = document.getElementsByTagName("tr");
+    // Get all the rows in the table
+    var rows = document.getElementsByTagName("tr");
 
-// Loop through all the rows
-for (var i = 0; i < rows.length; i++) {
-  var row = rows[i];
+    // Loop through all the rows
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
 
-  // Get the cells in the row
-  var cells = row.getElementsByTagName("td");
+      // Get the cells in the row
+      var cells = row.getElementsByTagName("td");
 
-  // Loop through all the cells in the row
-  var match = false;
-  for (var j = 0; j < cells.length; j++) {
-    var cell = cells[j];
+      // Loop through all the cells in the row
+      var match = false;
+      for (var j = 0; j < cells.length; j++) {
+        var cell = cells[j];
 
-    // If the cell contains the search query, show the row
-    if (cell.innerHTML.toLowerCase().indexOf(query) > -1) {
-      match = true;
-      break;
+        // If the cell contains the search query, show the row
+        if (cell.innerHTML.toLowerCase().indexOf(query) > -1) {
+          match = true;
+          break;
+        }
+      }
+
+      // Hide or show the row based on the search query
+      if (match) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
     }
   }
-
-  // Hide or show the row based on the search query
-  if (match) {
-    row.style.display = "";
-  } else {
-    row.style.display = "none";
-  }
-}
-}
-
 </script>
 </div>
 {% endblock %}

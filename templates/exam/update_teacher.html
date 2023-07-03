@@ -37,26 +37,39 @@
 <br><br>
 <h2 style="text-align:center;">Update Teacher</h2>
 <div>
-  <form method="post"  autocomplete="off" enctype="multipart/form-data" style="margin-left:200px;margin-right:200px;">
-      {% csrf_token %}
-        <label for="first_name">First Name</label>
-        {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
-        <label for="last_name">Last Name</label>
-        {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
-          <label for="mobile">Contact</label>
-          {% render_field teacherForm.mobile class="form-control" placeholder="Mobile" %}
-            <label for="address">Address</label>
-          {% render_field teacherForm.address class="form-control" placeholder="Address" %}
-          
-        <label for="username">Username</label>
-        {% render_field userForm.username class="form-control" placeholder="Username" %}
-          <label for="password">Password</label>
-        {% render_field userForm.password class="form-control" placeholder="Password" %} <br><br>
-        <label for="profile_pic">Profile Picture</label>
-          {% render_field teacherForm.profile_pic class="form-control" placeholder="Profile Picture" %}
-<br><br>
-    <input type="submit" value="Update" style="border-radius:0px;">
-  </form>
+  
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label for="id_address">Address:</label>
+  <input type="text" id="id_address" name="address" value="{{ teacher.address }}" required>
+  <br>
+  
+  <label for="id_mobile">Mobile:</label>
+  <input type="text" id="id_mobile" name="mobile" value="{{ teacher.mobile }}" required>
+  <br>
+  
+  <label for="id_role">Role:</label>
+  <select id="id_role" name="role" required>
+    <option value="staff" {% if 'staff' in teacher.role %}selected{% endif %}>Staff</option>
+    <option value="admin" {% if 'admin' in teacher.role %}selected{% endif %}>Admin</option>
+    <option value="hod" {% if 'hod' in teacher.role %}selected{% endif %}>HOD</option>
+  </select>
+  <br>
+  
+  <label for="id_department">Department:</label>
+  <input type="text" id="id_department" name="department" value="{{ teacher.department }}" required>
+  <br>
+  
+  <label for="id_Annauni_num">Annauni Num:</label>
+  <input type="text" id="id_Annauni_num" name="Annauni_num" value="{{ teacher.Annauni_num }}" required>
+  <br>
+  
+  <label for="id_profile_pic">Profile Picture:</label>
+  <input type="file" id="id_profile_pic" name="profile_pic">
+  <br>
+  
+  <button type="submit">Save</button>
+</form>
 </div>
 
 

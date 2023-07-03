@@ -1,0 +1,31 @@
+<link href=
+"https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+          rel="stylesheet">
+
+
+<form method="POST" action="{% url 'edit_youtube_link' link.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" name="title" value="{{ link.title }}" required>
+    </div>
+    <div class="form-group">
+      <label for="link">Link:</label>
+      <input type="url" class="form-control" id="link" name="link" value="{{ link.link }}" required>
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select class="form-control" id="category" name="category" required>
+        {% for category in categories %}
+          <option value="{{ category.id }}" {% if link.category.id == category.id %}selected{% endif %}>{{ category.name }}</option>
+        {% endfor %}
+        <option value="new">Create New Category</option>
+      </select>
+    </div>
+    <div class="form-group new-category" style="display: none;">
+      <label for="new-category">New Category:</label>
+      <input type="text" class="form-control" id="new-category" name="new_category">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+  
