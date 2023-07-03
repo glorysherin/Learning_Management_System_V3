@@ -2,35 +2,40 @@
 <html>
 <head>
     <title>Add YouTube Link</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Add YouTube Link</h1>
-    <form method="POST" action="{% url 'save_youtube_link' %}">
-        {% csrf_token %}
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <div>
-            <label for="link">Link:</label>
-            <input type="text" id="link" name="link" required>
-        </div>
-        <div>
-            <label for="category">Category:</label>
-            <select id="category" name="category">
-                <option value="new">Create New Category</option>
-                {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div>
-            <input type="checkbox" id="new_category_checkbox" name="new_category_checkbox">
-            <label for="new_category_checkbox">Edit New Category:</label>
-            <input type="text" id="new_category" name="new_category" disabled>
-        </div>
-        <button type="submit">Save</button>
-    </form>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold mb-4">Add YouTube Link</h1>
+        <form method="POST" action="{% url 'save_youtube_link' %}" class="max-w-lg mx-auto">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="title" class="block text-gray-700 font-bold mb-2">Title:</label>
+                <input type="text" id="title" name="title" required class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="link" class="block text-gray-700 font-bold mb-2">Link:</label>
+                <input type="text" id="link" name="link" required class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="category" class="block text-gray-700 font-bold mb-2">Category:</label>
+                <select id="category" name="category" class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-blue-500">
+                    <option value="new">Create New Category</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-4">
+                <input type="checkbox" id="new_category_checkbox" name="new_category_checkbox" class="mr-2">
+                <label for="new_category_checkbox" class="text-gray-700 font-bold">Edit New Category:</label>
+                <input type="text" id="new_category" name="new_category" disabled class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:border-blue-500">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.tailwindcss.com/2.2.19/tailwind.min.js"></script>
     
     <script>
         document.getElementById('category').addEventListener('change', function() {
@@ -60,3 +65,4 @@
     </script>
 </body>
 </html>
+
