@@ -1,7 +1,8 @@
 
 {% extends 'student/adminbase.html' %}
 {% block content %}
-<div class="card">
+<div class="card" style="width: 90%;
+margin-left: 30px;">
     <div class="card-header">
       <h2 class="card-title">{% if department %}Edit department{% else %}Create department{% endif %}</h2>
     </div>
@@ -10,7 +11,17 @@
         {% csrf_token %}
         {{ form.as_p }}
         <p>[Note: You must provide a correct Shortform for your Department.]</p>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button style="display: inline-block;
+        font-weight: 600;
+        color: #fff;
+        
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        line-height: 1.25;
+        text-align: center;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        cursor: pointer;" type="submit" class="btn btn-primary">Save</button>
       </form>
     </div>
   </div>
@@ -43,18 +54,9 @@
   padding: 1.5rem;
 }
 
-.btn {
-  display: inline-block;
-  font-weight: 600;
-  color: #fff;
-  background-color: #4299e1;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  line-height: 1.25;
-  text-align: center;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  cursor: pointer;
+textarea{
+  width: 180px;
+  height: 90px;
 }
 
 .btn-primary {
