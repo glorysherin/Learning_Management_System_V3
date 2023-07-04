@@ -28,19 +28,23 @@ def save_blog(request):
     Thumbnail = request.POST.get(ids[4])
     blog_type = request.POST.get('#type_')
     action = request.POST.get('#action')
-    print("action : ",action)
-    if action == 'Save and Publish':
-        obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
-                categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
-        obj.save()
-        response_data = {'status': 'success', 'message': 'Blog published successfully'}
-    elif action == 'Save Draft':
-        obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
-                categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
-        obj.save()
-        response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+    
+    if title and description and content and Category and Thumbnail :
+        print("action : ",action)
+        if action == 'Save and Publish':
+            obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
+                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
+            obj.save()
+            response_data = {'status': 'success', 'message': 'Blog published successfully'}
+        elif action == 'Save Draft':
+            obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
+                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
+            obj.save()
+            response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+        else:
+            response_data = {'status': 'error', 'message': 'Invalid action'}
     else:
-        response_data = {'status': 'error', 'message': 'Invalid action'}
+        response_data = {'status': 'err', 'message': 'Please Provide the all of details'}
     
     return JsonResponse(response_data)
 
@@ -127,6 +131,15 @@ def accept_the_art(request,id):
     obj = Draft_blog.objects.get(id=id)
     return render(request,"attandees/blog_accept.html",{"obj" : obj})
     
+def reject_the_art(request,id):
+    obj = Draft_blog.objects.get(id=id)
+    return render(request,"attandees/reject_the_art.html",{"obj" : obj})
+
+def reject_blog(request,id):
+    obj = Draft_blog.objects.get(id=id)
+    obj.delete()
+    return redirect('review_list_blog')
+
 def accept_the_art_Db(request,id):
     print("worked")
     obj = Draft_blog.objects.get(id=id)
