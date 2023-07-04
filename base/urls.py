@@ -196,7 +196,7 @@ chatroom = [
 classroom = [
    
     path('search_view', search_view, name='search_view'),
-    path('course_material', course_material, name='course_material'),
+    path('course_material/<str:class_id>', course_material, name='course_material'),
     path('view_attendees_by_roolno/<int:roll_no>',
          view_attendees_by_roolno, name='view_attendees_by_roolno'),
     path('view_attendees_by_roolno_percentage/<int:roll_no>',
@@ -256,7 +256,7 @@ classroom = [
     path("update_edited_mark", update_edited_mark),
     path("marks_by_class/<str:class_id>",
          marks_by_class, name='marks_by_class'),
-    path("add_class_notes/<str:pk>", add_class_notes),
+    path("add_class_notes/<str:pk>", add_class_notes,name="add_class_notes"),
     path('class_ebook/book_list', class_book_list, name='class_book_list'),
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
     path('class_ebook/<int:pk>/delete/',
@@ -536,9 +536,9 @@ parent = [
 links_management = [
     path('links/add/<str:class_id>', add_youtube_link, name='add_youtube_link'),
     path('links/save/<str:class_id>', save_youtube_link, name='save_youtube_link'),
-    path('links/list', list_youtube_links, name='list_youtube_links'),
-    path('links/edit/<int:pk>', edit_youtube_link, name='edit_youtube_link'),
-    path('links/delete/<int:pk>', delete_youtube_link, name='delete_youtube_link'),
+    path('links/list/<str:class_id>', list_youtube_links, name='list_youtube_links'),
+    path('links/edit/<int:pk>/<str:class_id>', edit_youtube_link, name='edit_youtube_link'),
+    path('links/delete/<int:pk>/<str:class_id>', delete_youtube_link, name='delete_youtube_link'),
 ]
 
 urlpatterns.extend(Make_Join([links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
