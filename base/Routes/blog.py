@@ -1,5 +1,5 @@
 from base.models import blog, Draft_blog
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .Tool.blogTool import get_blog, get_course, get_blog_by_cat, get_draft_blog, get_course_review, get_draft_blog_by_cat, get_draft_blog_unreview
 from .Tool.Tools import student_detials, staff_detials
@@ -28,19 +28,23 @@ def save_blog(request):
     Thumbnail = request.POST.get(ids[4])
     blog_type = request.POST.get('#type_')
     action = request.POST.get('#action')
-    print("action : ",action)
-    if action == 'Save and Publish':
-        obj = blog(title=title, blog_type=blog_type, description=description, content=content,
-                categories=Category, blog_profile_img=Thumbnail)
-        obj.save()
-        response_data = {'status': 'success', 'message': 'Blog published successfully'}
-    elif action == 'Save Draft':
-        obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
-                categories=Category, blog_profile_img=Thumbnail,reviewed=False)
-        obj.save()
-        response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+    
+    if title and description and content and Category and Thumbnail :
+        print("action : ",action)
+        if action == 'Save and Publish':
+            obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
+                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
+            obj.save()
+            response_data = {'status': 'success', 'message': 'Blog published successfully'}
+        elif action == 'Save Draft':
+            obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
+                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
+            obj.save()
+            response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+        else:
+            response_data = {'status': 'error', 'message': 'Invalid action'}
     else:
-        response_data = {'status': 'error', 'message': 'Invalid action'}
+        response_data = {'status': 'err', 'message': 'Please Provide the all of details'}
     
     return JsonResponse(response_data)
 
@@ -56,7 +60,7 @@ def list_draft_blog(request):
 
 def list_unrevied_draft_blog(request):
     obj =  get_draft_blog_unreview(request)
-    return render(request,"blog/draft_blog.html",{"obj":obj})
+    return render(request,"blog/blog_review.html",{"obj":obj})
 
 def save_edit_blog(request, pk):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
@@ -120,8 +124,31 @@ def admin_list_blog_course(request):
 
 def review_list_blog(request):
     items = get_course_review(request)
+    print(items)
     return render(request, "blog/blog_review.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
 
+def accept_the_art(request,id):
+    obj = Draft_blog.objects.get(id=id)
+    return render(request,"attandees/blog_accept.html",{"obj" : obj})
+    
+def reject_the_art(request,id):
+    obj = Draft_blog.objects.get(id=id)
+    return render(request,"attandees/reject_the_art.html",{"obj" : obj})
+
+def reject_blog(request,id):
+    obj = Draft_blog.objects.get(id=id)
+    obj.delete()
+    return redirect('review_list_blog')
+
+def accept_the_art_Db(request,id):
+    print("worked")
+    obj = Draft_blog.objects.get(id=id)
+    create = blog(title=obj.title, userid=obj.userid, blog_type=obj.blog_type, description=obj.description, content=obj.content,
+                categories=obj.categories, blog_profile_img=obj.blog_profile_img,reviewed_by=request.user.id)
+    create.save()
+    obj.delete()
+    return redirect("admin_list_blog_course")
+    
 
 def student_list_blog_course(request):
     items = get_course()

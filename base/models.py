@@ -201,6 +201,7 @@ class Result(models.Model):
 class blog(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=200, default='UnTitled')
+    userid = models.IntegerField()
     description = models.CharField(
         max_length=200, default="Author not provied any description")
     content = models.CharField(
@@ -210,6 +211,7 @@ class blog(models.Model):
     blog_type = models.CharField(
         max_length=2000, default="Blog")
     categories = models.CharField(max_length=200)
+    reviewed_by = models.IntegerField()
     updated_date = models.DateField(default=timezone.now)
 
 class Draft_blog(models.Model):
@@ -226,6 +228,7 @@ class Draft_blog(models.Model):
         max_length=2000, default="Blog")
     categories = models.CharField(max_length=200)
     reviewed = models.BooleanField()
+    Submitreview = models.BooleanField()
     updated_date = models.DateField(default=timezone.now)
 
 
@@ -488,3 +491,18 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Notifications(models.Model):
+    id = models.AutoField(primary_key=True)
+    from_user = models.IntegerField()
+    to_user = models.IntegerField()
+    title = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    image = models.CharField(max_length=255)
+    redirect_location = models.CharField(max_length=255)
+    date = models.DateTimeField(auto_now_add=True)
+    read_receipt = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title

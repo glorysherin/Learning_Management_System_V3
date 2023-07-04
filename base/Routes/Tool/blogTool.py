@@ -123,7 +123,7 @@ def get_course():
     return items
 
 def get_course_review(request):
-    images = Draft_blog.objects.filter(userid=request.user.id,reviewed=False)
+    images = Draft_blog.objects.filter(userid=request.user.id,Submitreview=True)
     cat = []
     temp = []
     items = []
