@@ -201,6 +201,7 @@ class Result(models.Model):
 class blog(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=200, default='UnTitled')
+    userid = models.IntegerField()
     description = models.CharField(
         max_length=200, default="Author not provied any description")
     content = models.CharField(
@@ -210,6 +211,7 @@ class blog(models.Model):
     blog_type = models.CharField(
         max_length=2000, default="Blog")
     categories = models.CharField(max_length=200)
+    reviewed_by = models.IntegerField()
     updated_date = models.DateField(default=timezone.now)
 
 class Draft_blog(models.Model):
@@ -226,6 +228,7 @@ class Draft_blog(models.Model):
         max_length=2000, default="Blog")
     categories = models.CharField(max_length=200)
     reviewed = models.BooleanField()
+    Submitreview = models.BooleanField()
     updated_date = models.DateField(default=timezone.now)
 
 
