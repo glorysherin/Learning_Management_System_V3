@@ -20,9 +20,7 @@ def admin_create_blog(request):
  
 def save_blog(request):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
-    
-    blog_id = request.POST.get('#blog_id')
-    
+
     title = request.POST.get(ids[0])
     description = request.POST.get(ids[1])
     content = request.POST.get(ids[2])
@@ -52,6 +50,10 @@ def blog_saved(request):
 def blog_draft_saved(request):
     return render(request,'attandees/Blog_draft_Saved.html')
 
+def list_draft_blog(request):
+    obj =  Draft_blog.objects.filter(userid=request.user.id)
+    return render(request,"blog/draft_blog.html",{"obj":obj})
+
 def save_edit_blog(request, pk):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
     title = request.POST.get(ids[0])
@@ -71,6 +73,7 @@ def save_edit_blog(request, pk):
     print("Saved...........")
 
     return render(request, "blog/blog_edit.html")
+
 
 def draft_save_blog(request, pk):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
