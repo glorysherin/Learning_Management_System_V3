@@ -394,7 +394,7 @@ blog_url = [
          name='admin_list_edit_blog'),
     path('view_blog/<str:pk>', view_blog, name='view_blog'),
     path('draft_view_blog/<str:pk>', draft_view_blog, name='draft_view_blog'),
-    path('reviewed_draft_view_blog/<str:pk>', reviewed_draft_view_blog, name='reviewed_draft_view_blog'),
+    path('review_list_blog', review_list_blog, name='review_list_blog'),
     path('edit_blog/<str:pk>', edit_blog),
     path('draft_edit_blog/<str:pk>', draft_edit_blog),
     path('create_blog', blog_edit, name='create_blog'),

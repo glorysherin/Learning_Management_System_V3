@@ -1,7 +1,7 @@
 from base.models import blog, Draft_blog
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .Tool.blogTool import get_blog, get_course, get_blog_by_cat, get_draft_blog, get_draft_blog_by_cat, get_draft_blog_unreview
+from .Tool.blogTool import get_blog, get_course, get_blog_by_cat, get_draft_blog, get_course_review, get_draft_blog_by_cat, get_draft_blog_unreview
 from .Tool.Tools import student_detials, staff_detials
 from django.http import JsonResponse
 
@@ -118,6 +118,10 @@ def admin_list_blog_course(request):
     items = get_course()
     return render(request, "blog/adminblog.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
 
+def review_list_blog(request):
+    items = get_course_review(request)
+    return render(request, "blog/blog_review.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
+
 
 def student_list_blog_course(request):
     items = get_course()
@@ -136,12 +140,6 @@ def view_blog(request, pk):
     return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
 
 def draft_view_blog(request, pk):
-    page = Draft_blog.objects.get(id=pk)
-    items = get_draft_blog_by_cat(page.categories,request).remove(page) if page in get_draft_blog_by_cat(
-        page.categories, request) else get_draft_blog_by_cat(page.categories, request)
-    return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
-
-def reviewed_draft_view_blog(request, pk):
     page = Draft_blog.objects.get(id=pk)
     items = get_draft_blog_by_cat(page.categories,request).remove(page) if page in get_draft_blog_by_cat(
         page.categories, request) else get_draft_blog_by_cat(page.categories, request)
