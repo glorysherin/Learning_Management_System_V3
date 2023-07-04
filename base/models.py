@@ -491,3 +491,18 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Notifications(models.Model):
+    id = models.AutoField(primary_key=True)
+    from_user = models.IntegerField()
+    to_user = models.IntegerField()
+    title = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    image = models.CharField(max_length=255)
+    redirect_location = models.CharField(max_length=255)
+    date = models.DateTimeField(auto_now_add=True)
+    read_receipt = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title

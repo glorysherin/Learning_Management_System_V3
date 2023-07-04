@@ -329,6 +329,9 @@ exam = [
 
     path('logout', LogoutView.as_view(
         template_name='exam/logout.html'), name='logout'),
+    
+    path('department/logout',  LogoutView.as_view(
+        template_name='exam/logout.html'), name='logout'),
     path('contactus',  contactus_view),
     path('afterlogin',  afterlogin_view, name='afterlogin'),
     path('adminclick',  adminclick_view),
@@ -513,7 +516,7 @@ chatbot = [
 department=[
     path('department_list', department_list, name='department_list'),
     path('department/<int:pk>/', department_detail, name='department_detail'),
-    path('department/new/', department_create, name='department_create'),
+    path('department/new', department_create, name='department_create'),
     path('department/<int:pk>/edit/', department_edit, name='department_edit'),
     path('department/<int:pk>/delete/', department_delete, name='department_delete'),
 ]
