@@ -978,8 +978,8 @@ def view_attendees_by_roolno(request, roll_no):
     }
     return render(request, 'class_room/view_attendeesbyroolno.html', student_detials(request, 'View Attendence', context))
 
-def course_material(request):
-    return render(request,'class_room/course_material.html',staff_detials(request,'Course Material',))
+def course_material(request,class_id):
+    return render(request,'class_room/course_material.html',staff_detials(request,'Course Material',{"class_id":class_id}))
 
 def search_view(request):
     if request.method == 'GET':

@@ -3,9 +3,9 @@ from base.models import YouTubeLink, Category
 from .Tool.Tools import student_detials, staff_detials
 
 
-def add_youtube_link(request):
-    categories = Category.objects.all()
-    return render(request, 'youtube_links/add_youtube_link.html',staff_detials(request,'upload link',{'categories': categories}) )
+def add_youtube_link(request,class_id):
+    categories = Category.objects.filter(class_id = class_id)
+    return render(request, 'youtube_links/add_youtube_link.html',staff_detials(request,'upload link',{'categories': categories,'class_id':class_id}) )
 
 def save_youtube_link(request,class_id):
     if request.method == 'POST':
@@ -15,22 +15,22 @@ def save_youtube_link(request,class_id):
         new_category = request.POST.get('new_category')
         
         if category_id == 'new' and new_category:
-            category = Category.objects.create(name=new_category)
+            category = Category.objects.create(name=new_category,class_id=class_id)
         else:
             category = get_object_or_404(Category, pk=category_id)
         
         YouTubeLink.objects.create(title=title, link=link, category=category,class_id=class_id)
         
-        return redirect('list_youtube_links')
+        return redirect('list_youtube_links', args=[class_id])
 
-def list_youtube_links(request):
-    links = YouTubeLink.objects.all()
-    return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links}))
+def list_youtube_links(request,class_id):
+    links = YouTubeLink.objects.filter(class_id=class_id)
+    return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links,'class_id':class_id}))
 
 
-def edit_youtube_link(request, pk):
+def edit_youtube_link(request, pk,class_id):
     link = get_object_or_404(YouTubeLink, pk=pk)
-    categories = Category.objects.all()
+    categories = Category.objects.filter(class_id=class_id)
     
     if request.method == 'POST':
         link.title = request.POST.get('title')
@@ -46,15 +46,15 @@ def edit_youtube_link(request, pk):
         link.category = category
         link.save()
         
-        return redirect('list_youtube_links')
+        return redirect('list_youtube_links', class_id=class_id)
     
-    return render(request, 'youtube_links/edit_youtube_link.html',staff_detials(request,'edit link', {'link': link, 'categories': categories}))
+    return render(request, 'youtube_links/edit_youtube_link.html',staff_detials(request,'edit link', {'class_id':class_id,'link': link, 'categories': categories}))
 
-def delete_youtube_link(request, pk):
+def delete_youtube_link(request, pk,class_id):
     link = get_object_or_404(YouTubeLink, pk=pk)
     
     if request.method == 'POST':
         link.delete()
-        return redirect('list_youtube_links')
+        return redirect('list_youtube_links', class_id=class_id)
     
-    return render(request, 'youtube_links/delete_youtube_link.html',staff_detials(request,'delete link', {'link': link}))
+    return render(request, 'youtube_links/delete_youtube_link.html',staff_detials(request,'delete link', {'link': link, 'class_id':class_id}))
