@@ -396,6 +396,8 @@ blog_url = [
     path('draft_view_blog/<str:pk>', draft_view_blog, name='draft_view_blog'),
     path('review_list_blog', review_list_blog, name='review_list_blog'),
     path('accept_the_art/<int:id>', accept_the_art, name='accept_the_art'),
+    path('reject_the_art/<int:id>', reject_the_art, name='reject_the_art'),
+    path('reject_blog/<int:id>', reject_blog, name='reject_blog'),
     path('accept_the_art_Db/<int:id>', accept_the_art_Db, name='accept_the_art_Db'),
     path('edit_blog/<str:pk>', edit_blog),
     path('draft_edit_blog/<str:pk>', draft_edit_blog),

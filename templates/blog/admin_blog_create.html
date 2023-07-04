@@ -105,45 +105,52 @@ editor2.on('change', function(ev) {
 });
 
 function img_upload(url, con, datas) {
-  event.preventDefault();
-  console.log(datas, url);
-  var data = new FormData();
-  data.append(con, editor2.getData());
-  data.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
-  for (let i = 0; i < datas.length; i++) {
-    data.append(datas[i], $(datas[i]).val());
-  }
-
-  $.ajax({
-  method: "POST",
-  url: url,
-  processData: false,
-  contentType: false,
-  mimeType: "multipart/form-data",
-  data: data,
-  success: function(response) {
-    var parsedResponse = JSON.parse(response);
-    console.log(parsedResponse.status);
-    
-    if (parsedResponse.status === "success") {
-      console.log("Uploading done successfully");
-      
-      if (parsedResponse.message === "Blog published successfully") {
-        // Redirect to the published blog page
-        window.location.href = '/published_blog';
-      } else if (parsedResponse.message === "Blog draft saved successfully") {
-        // Redirect to the draft blog page
-        window.location.href = '/draft_blog';
+  var confirmation = confirm('Are you sure you want to submit the form?');
+  if (confirmation) {
+      event.preventDefault();
+      console.log(datas, url);
+      var data = new FormData();
+      data.append(con, editor2.getData());
+      data.append("csrfmiddlewaretoken", $("input[name=csrfmiddlewaretoken]").val());
+      for (let i = 0; i < datas.length; i++) {
+        data.append(datas[i], $(datas[i]).val());
       }
-    } else {
-      console.log('Error');
-    }
-  },
-  error: function() {
-    console.log('Error occurred during the AJAX request');
-  }
-});
 
+      $.ajax({
+      method: "POST",
+      url: url,
+      processData: false,
+      contentType: false,
+      mimeType: "multipart/form-data",
+      data: data,
+      success: function(response) { 
+        var parsedResponse = JSON.parse(response);
+        console.log(parsedResponse.status);
+        
+        if (parsedResponse.status === "success") {
+          console.log("Uploading done successfully");
+          
+          if (parsedResponse.message === "Blog published successfully") {
+            // Redirect to the published blog page
+            window.location.replace('blog_saved');
+          } else if (parsedResponse.message === "Blog draft saved successfully") {
+            // Redirect to the draft blog page
+            window.location.replace("blog_draft_saved");
+          }
+          } else if (parsedResponse.status === "err") {
+            // Redirect to the draft blog page
+            alert(parsedResponse.message)
+          } else {
+            alert("SomeThing is worng...{-_-}")
+          }
+      },
+      error: function() {
+        console.log('Error occurred during the AJAX request');
+      }
+    });}
+  else{
+    alert("The Changes are not Saved...!")
+  }  
 }
 
 </script>
