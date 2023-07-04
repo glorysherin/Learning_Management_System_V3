@@ -21,6 +21,7 @@ from .Routes.DynamicFunctionality import *
 from .Routes.admin_page import *
 from .Routes.staff_tools import *
 from .Routes.NoCodeViews import *
+from .Routes.manage_links import *
 
 # Initilizes........................
 
@@ -178,7 +179,7 @@ chatroom = [
     path('staffToDoList', staffToDoList, name='staffToDoList'),
     path('chat_home/', chat_home, name='chat_home'),
     path('staff_chat_home/', staff_chat_home, name='staff_chat_home'),
-    path('admin_chat_home/', admin_chat_home, name='admin_chat_home'),
+    path('admin_chat_home', admin_chat_home, name='admin_chat_home'),
     # problem...................
     path('chat/<str:room>/', chat_room, name="chat_room"),
     path('staffchat/<str:room>/', staff_chat_room, name="staff_chat_room"),
@@ -195,6 +196,7 @@ chatroom = [
 classroom = [
    
     path('search_view', search_view, name='search_view'),
+    path('course_material', course_material, name='course_material'),
     path('view_attendees_by_roolno/<int:roll_no>',
          view_attendees_by_roolno, name='view_attendees_by_roolno'),
     path('view_attendees_by_roolno_percentage/<int:roll_no>',
@@ -232,9 +234,10 @@ classroom = [
     path('class_room', home_classroom, name='class_room'),
     path('message/<str:room>/', chatgetMessages, name="message"),
     path('classroom/<str:pk>/<str:class_id>', nave_home_classroom),
-    path('add_class', add_class),
+    path('add_class', add_class,name='add_class'),
     path('delete_class/<str:room>', delete_class),
     path("save_added_class", save_add_class),
+    path("class_added", class_added,name="class_added"),
     path("edit_classroom/<str:classroom_id>",
          edit_classroom, name='edit_classroom'),
     path("attendes", attendes),
@@ -394,8 +397,11 @@ blog_url = [
     path('create_blog', blog_edit, name='create_blog'),
     path('staff_create_blog', staff_create_blog, name='staff_create_blog'),
     path('save_blog', save_blog),
+    path('blog_draft_saved', blog_draft_saved,name="blog_draft_saved"),
+    path('blog_saved', blog_saved,name="blog_saved"),
     path('delete_blog', delete_blog),
     path('edit_blog/save_edit_blog/<int:pk>', save_edit_blog),
+    path('edit_blog/draft_save_blog/<int:pk>', draft_save_blog),
 ]
 
 gallery_ = [
@@ -522,8 +528,15 @@ parent = [
      path('pview_attendees_by_roolno_graph/<int:roll_no>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
 ]
 
+links_management = [
+    path('links/add', add_youtube_link, name='add_youtube_link'),
+    path('links/save', save_youtube_link, name='save_youtube_link'),
+    path('links/list', list_youtube_links, name='list_youtube_links'),
+    path('links/edit/<int:pk>', edit_youtube_link, name='edit_youtube_link'),
+    path('links/delete/<int:pk>', delete_youtube_link, name='delete_youtube_link'),
+]
 
-urlpatterns.extend(Make_Join([parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+urlpatterns.extend(Make_Join([links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

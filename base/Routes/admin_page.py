@@ -62,7 +62,7 @@ def teacher_profile(request, staff_id):
     return render(request, 'admin_actions/teacher_profile.html', staff_detials(request, teacher.role+' Profile', {'teacher': teacher}))
 
 # classes
-
+ 
 @user_passes_test(is_admin)
 def class_list(request):
     if request.method == 'POST':
@@ -85,7 +85,7 @@ def class_list(request):
             class_dict[semester][department] = classes
 
     context = {'class_dict': class_dict}
-    return render(request, 'admin_actions/class_list.html', context)
+    return render(request, 'admin_actions/class_list.html', staff_detials(request,'Class Details',context))
 
 
 def get_class_peoples(request, class_id):
@@ -190,9 +190,7 @@ def listout_notes(request):
 
 def teacher_list(request):
     teachers = Teacher.objects.exclude(role='admin')
-    for i in teachers:
-        print(i.role)
-    return render(request, 'admin_actions/teacher_list.html', {'teachers': teachers})
+    return render(request, 'admin_actions/teacher_list.html',staff_detials(request,'Staff Details',{'teachers': teachers}))
 
 
 def teacher_delete(request, teacher_id):

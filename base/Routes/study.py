@@ -372,6 +372,8 @@ def delete_class(request, room):
     class_room.delete()
     return render(request, 'class_room/new_add.html')
 
+def class_added(request):
+    return render(request,'attandees/class_added.html')
 
 def save_add_class(request):
     class_name = request.POST.get('class_name')
@@ -388,7 +390,7 @@ def save_add_class(request):
         user_id=request.user.id, mail_id=request.user.username, subject_code=subject_code, class_id=class_id.id)
     enroll_class.save()
 
-    return render(request, 'class_room/new_add.html',staff_detials(request,'Class added'))
+    return redirect('class_added')
 
 
 def edit_classroom(request, classroom_id):
@@ -976,6 +978,8 @@ def view_attendees_by_roolno(request, roll_no):
     }
     return render(request, 'class_room/view_attendeesbyroolno.html', student_detials(request, 'View Attendence', context))
 
+def course_material(request):
+    return render(request,'class_room/course_material.html',staff_detials(request,'Course Material',))
 
 def search_view(request):
     if request.method == 'GET':

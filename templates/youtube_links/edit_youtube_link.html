@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit YouTube Link</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="flex items-center justify-center min-h-screen bg-gray-100">
+        <div class="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+            <h1 class="text-2xl font-bold mb-4">Edit YouTube Link</h1>
+            <form method="POST" action="{% url 'edit_youtube_link' link.id %}">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="title" class="block text-gray-700 font-bold mb-2">Title:</label>
+                    <input type="text" class="form-control bg-gray-100 border-2 border-gray-300 rounded py-2 px-4 w-full focus:outline-none focus:border-blue-500" id="title" name="title" value="{{ link.title }}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="link" class="block text-gray-700 font-bold mb-2">Link:</label>
+                    <input type="url" class="form-control bg-gray-100 border-2 border-gray-300 rounded py-2 px-4 w-full focus:outline-none focus:border-blue-500" id="link" name="link" value="{{ link.link }}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="category" class="block text-gray-700 font-bold mb-2">Category:</label>
+                    <select class="form-control bg-gray-100 border-2 border-gray-300 rounded py-2 px-4 w-full focus:outline-none focus:border-blue-500" id="category" name="category" required>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if link.category.id == category.id %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                        <option value="new">Create New Category</option>
+                    </select>
+                </div>
+                <div class="mb-4 new-category" style="display: none;">
+                    <label for="new-category" class="block text-gray-700 font-bold mb-2">New Category:</label>
+                    <input type="text" class="form-control bg-gray-100 border-2 border-gray-300 rounded py-2 px-4 w-full focus:outline-none focus:border-blue-500" id="new-category" name="new_category">
+                </div>
+                <button type="submit" class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -12,8 +12,10 @@ from .Forms import teacher_forms as TFORM
 from .Forms import student_forms as SFORM
 from django.contrib.auth.models import User
 from .common import staff_home, student_home
-from ..models import Users
+from ..models import Users,Teacher
 from django.contrib.auth.decorators import login_required, user_passes_test
+from .Tool.Tools import student_detials, staff_detials
+
 
 def is_admin(user):
     try:
@@ -68,13 +70,13 @@ def adminclick_view(request):
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_dashboard_view(request):
-    dict = {
+    dict_ = {
         'total_student': SMODEL.Student.objects.all().count(),
         'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
         'total_course': models.Course.objects.all().count(),
         'total_question': models.Question.objects.all().count(),
     }
-    return render(request, 'exam/admin_dashboard.html', context=dict)
+    return render(request, 'exam/admin_dashboard.html', staff_detials(request,'Admin Dashboard',dict_))
 
 
 @login_required(login_url='adminlogin')
@@ -89,28 +91,41 @@ def admin_teacher_view(request):
 
 @login_required(login_url='adminlogin')
 def admin_view_teacher_view(request):
-    teachers = TMODEL.Teacher.objects.all().filter(status=True)
-    return render(request, 'exam/admin_view_teacher.html', {'teachers': teachers})
+    teachers = TMODEL.Teacher.objects.all().filter(status=True).exclude(role='admin')
+    return render(request, 'exam/admin_view_teacher.html', staff_detials(request,'Staff Details',{'teachers': teachers}))
 
 
 @login_required(login_url='adminlogin')
 def update_teacher_view(request, pk):
-    teacher = TMODEL.Teacher.objects.get(id=pk)
-    user = TMODEL.User.objects.get(id=teacher.user_id)
-    userForm = TFORM.TeacherUserForm(instance=user)
-    teacherForm = TFORM.TeacherForm(request.FILES, instance=teacher)
-    mydict = {'userForm': userForm, 'teacherForm': teacherForm}
+    teacher = Teacher.objects.get(id=pk)
     if request.method == 'POST':
-        userForm = TFORM.TeacherUserForm(request.POST, instance=user)
-        teacherForm = TFORM.TeacherForm(
-            request.POST, request.FILES, instance=teacher)
-        if userForm.is_valid() and teacherForm.is_valid():
-            user = userForm.save()
-            user.set_password(user.password)
-            user.save()
-            teacherForm.save()
-            return redirect('admin-view-teacher')
-    return render(request, 'exam/update_teacher.html', context=mydict)
+        address = request.POST.get('address')
+        mobile = request.POST.get('mobile')
+        role = request.POST.get('role')
+        status = request.POST.get('status')
+        department = request.POST.get('department')
+        salary = request.POST.get('salary')
+        annauni_num = request.POST.get('Annauni_num')
+
+        # Update the fields with the new values
+        teacher.address = address
+        teacher.mobile = mobile
+        teacher.role = role
+        teacher.department = department
+        teacher.Annauni_num = annauni_num
+
+        # Check if a new profile picture is selected
+        if 'profile_pic' in request.FILES:
+            profile_pic = request.FILES['profile_pic']
+            # Only update the profile_pic field if a new picture is selected
+            if profile_pic:
+                teacher.profile_pic = profile_pic
+
+        teacher.save()
+        return redirect('admin-view-teacher')
+    else:
+        return render(request, 'exam/update_teacher.html', staff_detials(request,'Update User Details',{'teacher': teacher}))
+
 
 
 @login_required(login_url='adminlogin')
@@ -204,7 +219,7 @@ def delete_student_view(request, pk):
 
 @login_required(login_url='adminlogin')
 def admin_course_view(request):
-    return render(request, 'exam/admin_course.html')
+    return render(request, 'exam/admin_course.html',staff_detials(request,'Mcq Courses Details'))
 
 
 @login_required(login_url='adminlogin')
@@ -217,13 +232,13 @@ def admin_add_course_view(request):
         else:
             print("form is invalid")
         return HttpResponseRedirect('/admin-view-course')
-    return render(request, 'exam/admin_add_course.html', {'courseForm': courseForm})
+    return render(request, 'exam/admin_add_course.html',  staff_detials(request,'Add Course',{'courseForm': courseForm}))
 
 
 @login_required(login_url='adminlogin')
 def admin_view_course_view(request):
     courses = models.Course.objects.all()
-    return render(request, 'exam/admin_view_course.html', {'courses': courses})
+    return render(request, 'exam/admin_view_course.html', staff_detials(request,'Course Details',{'courses': courses}))
 
 
 @login_required(login_url='adminlogin')

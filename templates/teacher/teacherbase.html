@@ -49,7 +49,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        align-content: center;
+        align-content: center; 
         flex-direction: row;
         flex-wrap: wrap;" href="{% url 'staff_home' %} "
 >
@@ -217,35 +217,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="/admin-question">
-            <div
-              class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="#67748e"
-                  d="M17 16q-1.25 0-2.125-.875T14 13q0-1.25.875-2.125T17 10q1.25 0 2.125.875T20 13q0 1.25-.875 2.125T17 16Zm-8 4.1v.9H5q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h14q.825 0 1.413.588T21 5v5q-.775-.975-1.75-1.488T17 8q0-.425-.288-.713T16 7H8q-.425 0-.713.288T7 8q0 .425.288.713T8 9h6q-.5.4-.9.9t-.675 1.1H8q-.425 0-.713.288T7 12q0 .425.288.713T8 13h4q0 .525.113 1.025t.312.975H8q-.425 0-.713.288T7 16q0 .425.288.713T8 17h2.45q-.675.575-1.063 1.388T9 20.1Zm3 2.9q-.425 0-.713-.288T11 22v-1.9q0-.525.25-.988t.7-.737q.8-.475 1.35-.663t1.475-.337q.3-.05.6.013t.5.287L17 19l1.1-1.325q.2-.25.5-.3t.6 0q.925.15 1.475.338t1.35.662q.45.275.713.738T23 20.1V22q0 .425-.288.713T22 23H12Z" />
-              </svg>
-              <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                <g transform="translate(1716.000000, 291.000000)">
-                  <g transform="translate(304.000000, 151.000000)">
-                    <polygon class="color-background opacity-6"
-                      points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
-                    </polygon>
-                    <path class="color-background opacity-6"
-                      d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
-                    </path>
-                    <path class="color-background"
-                      d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
-                    </path>
-                  </g>
-                </g>
-              </g>
-              </g>
-              </svg>
-            </div>
-            <span class="nav-link-text ms-1"> Manage Notes</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link  " href="{% url 'admin_list_blog_course' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -275,7 +246,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{% url 'notes_list' %}">
+          <a class="nav-link  " href="{% url 'staff_notes_list' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="38" viewBox="0 0 24 24">
@@ -538,8 +509,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="/admin-teacher">
-            <div
+          <a class="nav-link  " href="{% url 'teachersignup' %}">
+            <div 
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="640" height="512" viewBox="0 0 640 512">
                 <path fill="#67748e"
@@ -730,8 +701,7 @@
           <a class="nav-link  " href="{% url 'Common_toolHome' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#344767" d="m21.71 20.29l-1.42 1.42a1 1 0 0 1-1.41 0L7 9.85A3.81 3.81 0 0 1 6 10a4 4 0 0 1-3.78-5.3l2.54 2.54l.53-.53l1.42-1.42l.53-.53L4.7 2.22A4 4 0 0 1 10 6a3.81 3.81 0 0 1-.15 1l11.86 11.88a1 1 0 0 1 0 1.41M2.29 18.88a1 1 0 0 0 0 1.41l1.42 1.42a1 1 0 0 0 1.41 0l5.47-5.46l-2.83-2.83M20 2l-4 2v2l-2.17 2.17l2 2L18 8h2l2-4Z"/></svg>
                 <title>settings</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -762,8 +732,7 @@
           <a class="nav-link  active" href=" {% static 'admin/pages/profile.html' %} ">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g fill="#344767"><path d="M32 20a8 8 0 1 1-16 0a8 8 0 0 1 16 0Z"/><path fill-rule="evenodd" d="M23.184 43.984C12.517 43.556 4 34.772 4 24C4 12.954 12.954 4 24 4s20 8.954 20 20s-8.954 20-20 20a21.253 21.253 0 0 1-.274 0c-.181 0-.362-.006-.542-.016ZM11.166 36.62a3.028 3.028 0 0 1 2.523-4.005c7.796-.863 12.874-.785 20.632.018a2.99 2.99 0 0 1 2.498 4.002A17.942 17.942 0 0 0 42 24c0-9.941-8.059-18-18-18S6 14.059 6 24c0 4.916 1.971 9.373 5.166 12.621Z" clip-rule="evenodd"/></g></svg>
                 <title>customer-support</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -2149,7 +2118,7 @@
               <h5 class="mb-1">
                 {{ stusr.name }}
               </h5>
-              <p class="mb-0 font-weight-bold text-sm">
+              <p class="mb-0 font-weight-bold text-sm"> 
                 {{ stusr.department }}
               </p>
             </div>
@@ -2183,11 +2152,11 @@
                       </g>
                       </svg>
                       <span class="ms-1">Home</span>
-                  </a>
+                  </a> 
                 </li>
                 <li class="nav-item">
                   <a style="display: flex;" class="nav-link mb-0 px-0 py-1 "
-                    href="{% url 'teacher_profile' staff_id=stusr.id %}" role="tab" aria-selected="false">
+                    href="{% url 'teacher_profile' staff_id=pro_id.id %}" role="tab" aria-selected="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
                       <g fill="#67748e">
                         <path fill-rule="evenodd"
@@ -2362,8 +2331,8 @@
           <div class="mt-3 text-sm text-[#8ea6c8] flex justify-between items-center">
             <p class="set_date">Thursday 28 May</p>
             <p class="set_time">8:00 AM</p>
-            <a href="{% url 'todolist' %}">
-              <button style="color: black;"
+            <a  href="{% url 'todolist' %}">
+              <button style="background-color: #1D0D79;border: none;"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 ToDo List
               </button>

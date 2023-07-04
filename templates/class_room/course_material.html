@@ -1,0 +1,116 @@
+{% extends 'teacher/teacherbase.html' %}
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <style type="text/css">
+      a:link {
+        text-decoration: none;
+      }
+  
+      .order-card {
+        color: rgb(255, 255, 255);
+      }
+  
+      .bg-c-blue {
+        background: #04868f;
+      }
+  
+      .bg-c-green {
+        background:#4C51BF;
+      }
+  
+      .bg-c-yellow {
+        background: #F56565;
+      }
+  
+      .bg-c-pink {
+        background:#3186ca;
+      }
+  
+      .card {
+        position: relative;
+        box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        margin-bottom: 30px;
+        transition: all 0.3s ease-in-out;
+      }
+  
+      .card:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: inherit;
+        opacity: 0.25;
+        z-index: -1;
+        backdrop-filter: blur(8px);
+      }
+  
+      .card .card-block {
+        position: relative;
+        z-index: 1;
+        padding: 25px;
+      }
+  
+      .order-card i {
+        font-size: 26px;
+      }
+  
+      .f-left {
+        float: left;
+      }
+  
+      .f-right {
+        float: right;
+      }
+      
+      header {
+        left: 0px;
+        right: 0px;
+      }
+    </style>
+  </head>
+<br><br>
+
+<div class="container">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <a href="admin-view-student" class="text-white">
+      <div class="bg-pink-500 rounded-md shadow-lg">
+        <div class="p-4">
+          <h6 class="text-black mb-4">Update Links</h6>
+          <h2 class="text-right text-black">
+            <i style="margin-bottom: 30px;" class="fas fa-user-graduate f-right"></i>
+            <span class="ml-auto">{{ total_student }}</span>
+          </h2>
+        </div>
+      </div>
+    </a>
+<br>
+<br>
+    <a href="admin-view-teacher" class="text-white">
+      <div class="bg-green-500 rounded-md shadow-lg">
+        <div class="p-4">
+          <h6 class="text-black mb-4">Update Notes</h6>
+          <h2 class="text-right text-black">
+            <i style="margin-bottom: 20px;" class="fas fa-chalkboard-teacher f-right"></i>
+            <span class="ml-auto">{{ total_teacher }}</span>
+          </h2>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+{% endblock %}
