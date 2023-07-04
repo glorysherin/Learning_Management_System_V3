@@ -225,6 +225,7 @@ class Draft_blog(models.Model):
     blog_type = models.CharField(
         max_length=2000, default="Blog")
     categories = models.CharField(max_length=200)
+    reviewed = models.BooleanField()
     updated_date = models.DateField(default=timezone.now)
 
 
