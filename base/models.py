@@ -473,6 +473,7 @@ class Department(models.Model):
 
 
 class YouTubeLink(models.Model):
+    class_id = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     link = models.URLField()
     category = models.ForeignKey('Category', on_delete=models.CASCADE)

@@ -398,6 +398,7 @@ blog_url = [
     path('staff_create_blog', staff_create_blog, name='staff_create_blog'),
     path('save_blog', save_blog),
     path('blog_draft_saved', blog_draft_saved,name="blog_draft_saved"),
+    path('list_draft_blog', list_draft_blog,name="list_draft_blog"),
     path('blog_saved', blog_saved,name="blog_saved"),
     path('delete_blog', delete_blog),
     path('edit_blog/save_edit_blog/<int:pk>', save_edit_blog),
@@ -529,8 +530,8 @@ parent = [
 ]
 
 links_management = [
-    path('links/add', add_youtube_link, name='add_youtube_link'),
-    path('links/save', save_youtube_link, name='save_youtube_link'),
+    path('links/add/<str:class_id>', add_youtube_link, name='add_youtube_link'),
+    path('links/save/<str:class_id>', save_youtube_link, name='save_youtube_link'),
     path('links/list', list_youtube_links, name='list_youtube_links'),
     path('links/edit/<int:pk>', edit_youtube_link, name='edit_youtube_link'),
     path('links/delete/<int:pk>', delete_youtube_link, name='delete_youtube_link'),
