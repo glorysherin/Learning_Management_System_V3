@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from base.models import YouTubeLink, Category
+from .Tool.Tools import student_detials, staff_detials
+
 
 def add_youtube_link(request):
     categories = Category.objects.all()
-    return render(request, 'youtube_links/add_youtube_link.html', {'categories': categories})
+    return render(request, 'youtube_links/add_youtube_link.html',staff_detials(request,'upload link',{'categories': categories}) )
 
 def save_youtube_link(request):
     if request.method == 'POST':
@@ -23,7 +25,7 @@ def save_youtube_link(request):
 
 def list_youtube_links(request):
     links = YouTubeLink.objects.all()
-    return render(request, 'youtube_links/list_youtube_links.html', {'links': links})
+    return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links}))
 
 def edit_youtube_link(request, pk):
     link = get_object_or_404(YouTubeLink, pk=pk)
@@ -45,7 +47,7 @@ def edit_youtube_link(request, pk):
         
         return redirect('list_youtube_links')
     
-    return render(request, 'youtube_links/edit_youtube_link.html', {'link': link, 'categories': categories})
+    return render(request, 'youtube_links/edit_youtube_link.html',staff_detials(request,'edit link', {'link': link, 'categories': categories}))
 
 def delete_youtube_link(request, pk):
     link = get_object_or_404(YouTubeLink, pk=pk)
@@ -54,4 +56,4 @@ def delete_youtube_link(request, pk):
         link.delete()
         return redirect('list_youtube_links')
     
-    return render(request, 'youtube_links/delete_youtube_link.html', {'link': link})
+    return render(request, 'youtube_links/delete_youtube_link.html',staff_detials(request,'delete link', {'link': link}))
