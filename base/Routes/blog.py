@@ -1,7 +1,7 @@
 from base.models import blog, Draft_blog
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .Tool.blogTool import get_blog, get_course, get_blog_by_cat
+from .Tool.blogTool import get_blog, get_course, get_blog_by_cat, get_draft_blog, get_draft_blog_by_cat, get_draft_blog_unreview
 from .Tool.Tools import student_detials, staff_detials
 from django.http import JsonResponse
 
@@ -36,7 +36,7 @@ def save_blog(request):
         response_data = {'status': 'success', 'message': 'Blog published successfully'}
     elif action == 'Save Draft':
         obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
-                categories=Category, blog_profile_img=Thumbnail)
+                categories=Category, blog_profile_img=Thumbnail,reviewed=False)
         obj.save()
         response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
     else:
@@ -48,10 +48,14 @@ def blog_saved(request):
     return render(request,'attandees/Blog_Saved.html')
 
 def blog_draft_saved(request):
-    return render(request,'attandees/Blog_draft_Saved.html')
+    return render(request,'attandees/Blog_draft_Saved.html',staff_detials(request,"Draft Articals"))
 
 def list_draft_blog(request):
-    obj =  Draft_blog.objects.filter(userid=request.user.id)
+    obj =  get_draft_blog(request)
+    return render(request,"blog/draft_blog.html",{"obj":obj})
+
+def list_unrevied_draft_blog(request):
+    obj =  get_draft_blog_unreview(request)
     return render(request,"blog/draft_blog.html",{"obj":obj})
 
 def save_edit_blog(request, pk):
@@ -131,6 +135,18 @@ def view_blog(request, pk):
         page.categories) else get_blog_by_cat(page.categories)
     return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
 
+def draft_view_blog(request, pk):
+    page = Draft_blog.objects.get(id=pk)
+    items = get_draft_blog_by_cat(page.categories,request).remove(page) if page in get_draft_blog_by_cat(
+        page.categories, request) else get_draft_blog_by_cat(page.categories, request)
+    return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
+
+def reviewed_draft_view_blog(request, pk):
+    page = Draft_blog.objects.get(id=pk)
+    items = get_draft_blog_by_cat(page.categories,request).remove(page) if page in get_draft_blog_by_cat(
+        page.categories, request) else get_draft_blog_by_cat(page.categories, request)
+    return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
+
 
 def delete_blog(request):
     bl_id = request.GET.get("id")
@@ -155,10 +171,15 @@ def edit_blog(request, pk):
     return render(request, "blog/blog_re_edit.html", {'obj': obj})
 
 def draft_edit_blog(request, pk):
-    obj = blog.objects.get(id=pk)
+    obj = Draft_blog.objects.get(id=pk)
     return render(request, "blog/blog_re_edit.html", {'obj': obj})
-
 
 def teacher_list_blog(request):
     items = get_blog()
     return render(request, "blog/teacherblog.html", {'blogs': items})
+
+
+
+
+
+
