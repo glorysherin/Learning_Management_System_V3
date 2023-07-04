@@ -82,7 +82,7 @@
 
 <div class="container">
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <a href="admin-view-student" class="text-white">
+    <a href="{% url 'add_youtube_link' class_id=class_id %}" class="text-white">
       <div class="bg-pink-500 rounded-md shadow-lg">
         <div class="p-4">
           <h6 class="text-black mb-4">Update Links</h6>
@@ -95,7 +95,7 @@
     </a>
 <br>
 <br>
-    <a href="admin-view-teacher" class="text-white">
+    <a href="{% url 'add_class_notes' pk=class_id %}" class="text-white">
       <div class="bg-green-500 rounded-md shadow-lg">
         <div class="p-4">
           <h6 class="text-black mb-4">Update Notes</h6>

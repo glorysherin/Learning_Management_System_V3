@@ -484,6 +484,7 @@ class YouTubeLink(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
+    class_id = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
