@@ -3,15 +3,9 @@ from base.models import YouTubeLink, Category
 from .Tool.Tools import student_detials, staff_detials
 
 
-<<<<<<< HEAD
-def add_youtube_link(request,class_id):
-    categories = Category.objects.filter(class_id=class_id)
-    return render(request, 'youtube_links/add_youtube_link.html', {'categories': categories})
-=======
 def add_youtube_link(request):
     categories = Category.objects.all()
     return render(request, 'youtube_links/add_youtube_link.html',staff_detials(request,'upload link',{'categories': categories}) )
->>>>>>> 63c7c5addcb2ebbe18a675b281634963168f1cb1
 
 def save_youtube_link(request,class_id):
     if request.method == 'POST':
