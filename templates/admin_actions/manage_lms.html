@@ -1,0 +1,297 @@
+{% extends 'student/adminbase.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Common styles */
+
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+
+        .frame {
+            top: 90%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            margin-top: 20%;
+            margin-left: -200px;
+            border-radius: 2px;
+            color: #333;
+            font-family: "Open Sans", Helvetica, sans-serif;
+        }
+
+        .center {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 260px;
+            border-radius: 3px;
+            box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: column;
+        }
+
+        .title {
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid #999;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-weight: 300;
+            color: #666;
+        }
+
+        .dropzone {
+            width: 100px;
+            height: 80px;
+            border: 1px dashed #999;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .upload-icon {
+            margin: 25px 2px 2px 2px;
+        }
+
+        .upload-input {
+            position: relative;
+            top: -62px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .btn1 {
+            display: block;
+            width: 140px;
+            height: 40px;
+            background: darkmagenta;
+            color: #fff;
+            border-radius: 3px;
+            border: 0;
+            box-shadow: 0 3px 0 0 hotpink;
+            transition: all 0.3s ease-in-out;
+            font-size: 14px;
+        }
+
+        .btn1:hover {
+            background: rebeccapurple;
+            box-shadow: 0 3px 0 0 deeppink;
+        }
+
+        /* Media Queries */
+
+        @media (max-width: 768px) {
+            .frame {
+                top: 60%;
+                width: 100%;
+                height: auto;
+                margin-top: 10%;
+                margin-left: 0;
+            }
+
+            .center {
+                position: static;
+                transform: none;
+                width: 100%;
+                height: auto;
+            }
+
+            .title {
+                height: 40px;
+            }
+
+            .dropzone {
+                width: 80px;
+                height: 60px;
+            }
+
+            .upload-icon {
+                margin: 15px 2px 2px 2px;
+            }
+
+            .upload-input {
+                top: -42px;
+            }
+
+            .btn1 {
+                width: 120px;
+                height: 30px;
+                font-size: 12px;
+            }
+            #update{
+                margin-top: -20%;
+            }
+            .py-10 {
+                margin-top: -70%;
+                padding-top: -30%;
+                margin-bottom: -80%;
+            }
+            #inp{
+                height: 200px;
+                width: 200px;
+               margin-left: -130px;
+
+            }
+            .container_mx-auto{
+                margin-right: -80%;
+
+            }
+            #lastup{
+                width: 300px;
+                margin-left: -120px;
+              
+               
+            }
+            #Checkbox{
+                margin-left: 10%;
+            }
+            
+        }
+    
+    </style>
+</head>
+
+<body>
+    <div class="frame">
+        <div class="center">
+            <div class="title">
+                <h1>Drop file to upload</h1>
+            </div>
+    
+            <div class="dropzone">
+                <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+                <input type="file" class="upload-input" />
+            </div>
+    
+            <button type="button" class="btn1" name="uploadbutton">Upload file</button>
+    
+        </div>
+    </div>
+    <!-- original pen: https://codepen.io/roydigerhund/pen/ZQdbeN  -->
+    
+    <!-- NO JS ADDED YET -->
+
+
+<!--image-->
+<!-- component -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<main style="margin-top: -30%;" class="grid min-h-screen w-full place-content-center ">
+    <div x-data="imageSlider" class="relative mx-auto max-w-2xl overflow-hidden rounded-md bg-gray-100 p-2 sm:p-4">
+        <div class="absolute right-5 top-5 z-10 rounded-full bg-gray-600 px-2 text-center text-sm text-white">
+            <span x-text="currentIndex"></span>/<span x-text="images.length"></span>
+        </div>
+
+        <button @click="previous()" class="absolute left-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-gray-100 shadow-md">
+            <i class="fas fa-chevron-left text-2xl font-bold text-gray-500"></i>
+        </button>
+
+        <button @click="forward()" class="absolute right-5 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-gray-100 shadow-md">
+            <i class="fas fa-chevron-right text-2xl font-bold text-gray-500"></i>
+        </button>
+
+        <div class="relative h-80" style="width: 30rem">
+            <template x-for="(image, index) in images">
+                <div x-show="currentIndex == index + 1" x-transition:enter="transition transform duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition transform duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute top-0">
+                    <img :src="image" alt="image" class="rounded-sm" />
+                </div>
+            </template>
+        </div>
+    </div>
+</main>
+
+<script>
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("imageSlider", () => ({
+      currentIndex: 1,
+      images: [
+        "https://unsplash.it/640/425?image=30",
+        "https://unsplash.it/640/425?image=40",
+        "https://unsplash.it/640/425?image=50",
+      ],
+      previous() {
+        if (this.currentIndex > 1) {
+          this.currentIndex = this.currentIndex - 1;
+        }
+      },
+      forward() {
+        if (this.currentIndex < this.images.length) {
+          this.currentIndex = this.currentIndex + 1;
+        }
+      },
+    }));
+  });
+</script>
+
+    <!--last Updated-->
+    <!-- component -->
+<body  class="bg-gray-800 text-white">
+    <div id="update" style="margin-top: -30%;">
+    <header class="py-10">
+      <div class="container mx-auto">
+        <h1 class="text-3xl font-bold">Home</h1>
+        <p class="text-lg font-medium">Search File</p>
+      </div>
+    </header>
+    <main class="py-10" style="margin-top: -35%;margin-right: 5%;">
+      <div class="container mx-auto">
+        <form class="rounded-lg bg-white p-10 shadow-lg">
+          <div class="mb-4 flex items-center">
+            <input id="inp" type="text" class="w-full rounded-lg border border-gray-400 p-2" placeholder="Submit ..." />
+            <button class="ml-2 rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600">Search</button>
+          </div>
+          <p id="lastup"><b>Last Updated Name:</b> jaya Engineeringcollege</p>
+         
+          
+        </form>
+        
+            
+          
+      </div>
+    </main>
+   </div>
+   <!--Checkbox-->
+   <!-- component -->
+<label style="margin-top: -15%;" id="Checkbox" class="flex items-center relative w-max cursor-pointer select-none">
+    <span class="text-lg font-bold mr-3">ChatBot</span>
+    <input type="checkbox" class="appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-blue-500 bg-red-500" />
+    <span class="absolute font-medium text-xs uppercase right-1 text-white"> OFF </span>
+    <span class="absolute font-medium text-xs uppercase right-8 text-white"> ON </span>
+    <span class="w-7 h-7 right-7 absolute rounded-full transform transition-transform bg-gray-200" />
+  </label>
+  
+  <style>
+    body {
+      background-color: #171717; /* bg-true-gray-900 */
+      color: white;
+    }
+  
+    input:checked {
+      background-color: #22c55e; /* bg-green-500 */
+    }
+  
+    input:checked ~ span:last-child {
+      --tw-translate-x: 1.75rem; /* translate-x-7 */
+    }
+  </style>
+  </body>
+</body>
+</html>
+
+{% endblock content %}

@@ -160,6 +160,7 @@ admin = [
          edit_attendee, name='edit_attendee'),
     path('class_dates/<str:class_id>/<str:date>/user_details/',
          user_details, name='user_details'),
+      path('manage_lms', manage_lms, name='manage_lms'),    
 ]
 
 
