@@ -23,6 +23,7 @@ from .Routes.staff_tools import *
 from .Routes.NoCodeViews import *
 from .Routes.manage_links import *
 from .Routes.assignment import *
+from .Routes.Upload_Assignment import *
 
 # Initilizes........................
 
@@ -554,13 +555,19 @@ links_management = [
 
 assignments = [
     path('assignments/list', assignment_list, name='assignment_list'),
-    path('assignments/add', assignment_add, name='assignment_add'),
+    path('assignments/add/<str:class_id>', assignment_add, name='assignment_add'),
     path('assignments/edit/<int:pk>', assignment_edit, name='assignment_edit'),
     path('assignments/delete/<int:pk>', assignment_delete, name='assignment_delete'),
 ]
 
+upload_assignments = [
+    path('upload_assignment/', upload_assignment_list, name='upload_assignment_list'),
+    path('upload_assignment/create/', upload_assignment_create, name='upload_assignment_create'),
+    path('upload_assignment/edit/<int:pk>/', upload_assignment_edit, name='upload_assignment_edit'),
+    path('upload_assignment/delete/<int:pk>/', upload_assignment_delete, name='upload_assignment_delete'),
+]
 
-urlpatterns.extend(Make_Join([assignments, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+urlpatterns.extend(Make_Join([upload_assignments, assignments, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

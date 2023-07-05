@@ -3,8 +3,8 @@
     <h3>{{ assignment.title }}</h3>
     <p>{{ assignment.subject }}</p>
     <p>{{ assignment.details }}</p>
-    <a href="{% url 'assignments:assignment_edit' pk=assignment.pk %}">Edit</a>
-    <a href="{% url 'assignments:assignment_delete' pk=assignment.pk %}">Delete</a>
+    <a href="{% url 'assignment_edit' pk=assignment.pk %}">Edit</a>
+    <a href="{% url 'assignment_delete' pk=assignment.pk %}">Delete</a>
   </div>
 {% endfor %}
-<a href="{% url 'assignments:assignment_add' %}">Add Assignment</a>
+<a href="{% url 'assignment_add' %}">Add Assignment</a>

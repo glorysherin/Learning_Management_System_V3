@@ -1,0 +1,6 @@
+<!-- Delete the selected upload assignment -->
+<p>Are you sure you want to delete "{{ upload_assignment }}"?</p>
+<form method="POST">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>
