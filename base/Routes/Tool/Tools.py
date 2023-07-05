@@ -114,6 +114,7 @@ def student_detials(request, page, dict_inp={}):
         }
     not_obj =  Notifications.objects.filter(to_user=request.user.id)
     dict_ = {**dict_,"notification":not_obj}
+    print(dict_)
     return {**dict_, **dict_inp}
 
 

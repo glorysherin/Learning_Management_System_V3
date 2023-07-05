@@ -1,0 +1,21 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<link href=
+"https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+          rel="stylesheet">
+{% for link in links %}
+  <div class="card mb-3" style="margin: 40px;">
+    <div class="card-body" style="">
+      <center><h5 style="margin-left: 50px;" class="card-title">{{ link.title }}</h5></center>
+      <center><p class="card-text">{{ link.link|safe }}</p></center>
+      <center><p class="card-text">Category: {{ link.category.name }}</p> </center>
+      <center><a href="{% url 'edit_youtube_link' pk=link.id class_id=class_id %}" class="btn btn-primary">Edit</a></center>
+      <center> <a href="{% url 'delete_youtube_link' pk=link.id class_id=class_id %}" class="btn btn-danger">Delete</a></center>
+    </div>
+  </div>
+{% empty %}
+  <p>No YouTube links found.</p>
+{% endfor %}
+{% endblock %}
+
