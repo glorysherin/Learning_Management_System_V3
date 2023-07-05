@@ -1,0 +1,5 @@
+<p>Are you sure you want to delete "{{ assignment.title }}"?</p>
+<form method="POST">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>

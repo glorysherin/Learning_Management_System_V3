@@ -2473,12 +2473,12 @@ JEC-Class room  </title>
          <div class="bg-gray-50 flex-grow p-6"> 
            
             <form
-            action="https://api.web3forms.com/submit"
+            action="{% url 'assignment_add' %}"
             method="POST"
             id="form"
             class="needs-validation"
-            novalidate
-          >
+            
+          > {% csrf_token %}
             <input type="hidden" name="apikey" value="YOUR_ACCESS_KEY_HERE" />
             <input
               type="hidden"
@@ -2487,7 +2487,7 @@ JEC-Class room  </title>
             />
             <input
               type="checkbox"
-              name="botcheck"
+              name="subject"
               id=""
               style="display: none;"
             />
@@ -2501,9 +2501,9 @@ JEC-Class room  </title>
                 >
                 <input
                   type="text"
-                  name="name"
+                  name="subject"
                   id="full_name"
-                  placeholder="Enter  subject"
+                  placeholder="Enter subject"
                   required
                   class="w-full px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -2521,8 +2521,8 @@ JEC-Class room  </title>
                   >Title</label
                 >
                 <input
-                  type="email"
-                  name="email"
+                  type="text"
+                  name="title"
                   id="email"
                   placeholder="Enter question"
                   required
@@ -2546,7 +2546,7 @@ JEC-Class room  </title>
   
               <textarea
                 rows="4"
-                name="message"
+                name="details"
                 id="message"
                 placeholder="Provide description for assignment."
                 class="w-full h-28 px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
@@ -2661,52 +2661,7 @@ JEC-Class room  </title>
     
                     form.querySelectorAll(":invalid")[0].focus();
                   } else {
-                    /*
-                     * Form Submission using fetch()
-                     */
-    
-                    const formData = new FormData(form);
-                    event.preventDefault();
-                    event.stopPropagation();
-                    const object = {};
-                    formData.forEach((value, key) => {
-                      object[key] = value;
-                    });
-                    const json = JSON.stringify(object);
-                    result.innerHTML = "Please wait...";
-    
-                    fetch("https://api.web3forms.com/submit", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json"
-                      },
-                      body: json
-                    })
-                      .then(async (response) => {
-                        let json = await response.json();
-                        if (response.status == 200) {
-                          result.innerHTML = json.message;
-                          result.classList.remove("text-gray-500");
-                          result.classList.add("text-green-500");
-                        } else {
-                          console.log(response);
-                          result.innerHTML = json.message;
-                          result.classList.remove("text-gray-500");
-                          result.classList.add("text-red-500");
-                        }
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                        result.innerHTML = "Something went wrong!";
-                      })
-                      .then(function () {
-                        form.reset();
-                        form.classList.remove("was-validated");
-                        setTimeout(() => {
-                          result.style.display = "none";
-                        }, 5000);
-                      });
+                     
                   }
                   form.classList.add("was-validated");
                 },

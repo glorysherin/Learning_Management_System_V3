@@ -1,0 +1,10 @@
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="number" name="update_by" placeholder="Update By" value="{{ assignment.update_by }}" required><br>
+    <input type="text" name="subject" placeholder="Subject" value="{{ assignment.subject }}" required><br>
+    <input type="text" name="title" placeholder="Title" value="{{ assignment.title }}" required><br>
+    <input type="text" name="details" placeholder="Details" value="{{ assignment.details }}" required><br>
+    <input type="file" name="file"><br>
+    <button type="submit">Save</button>
+  </form>
+  
