@@ -25,9 +25,9 @@ def save_youtube_link(request,class_id):
 
 def list_youtube_links(request,class_id):
     links = YouTubeLink.objects.filter(class_id=class_id)
-    if get_user_role
+    if get_user_role(request) == "Student":
         return render(request, 'youtube_links/st_list_youtube_links.html',student_detials(request,'list link', {'links': links,'class_id':class_id}))
-    else:
+    elif get_user_role(request) == "staff":
         return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links,'class_id':class_id}))
 
 
