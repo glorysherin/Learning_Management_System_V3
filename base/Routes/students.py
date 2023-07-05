@@ -66,7 +66,7 @@ def student_profile(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     usr_id = request.user.id
     usr_obj = User.objects.get(id=usr_id)
-    std_data = Student.objects.get(user=student_id) # it's modifyed for admin acces if you have any problem change it usr_obj
+    std_data = Student.objects.get(user=usr_obj) # it's modifyed for admin acces if you have any problem change it usr_obj
     dict_data = {
         'usr': std_data,
         'page': 'Student Profile',
