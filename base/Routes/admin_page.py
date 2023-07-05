@@ -14,6 +14,9 @@ def add_faculty(request):
         print(i.name)
     return render(request, "admin/Admin_page_to_add_Facuilty.html", {'users': facultys})
 
+def manage_lms(request):
+    return render(request, "admin_actions/manage_lms.html")
+
 
 def add_usr(request):
     usr_name = request.POST.get('user_name')
