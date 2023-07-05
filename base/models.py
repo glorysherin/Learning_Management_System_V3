@@ -127,10 +127,11 @@ class Student(models.Model):
     mail_id = models.CharField(max_length=40, default="sample@gmail.com")
     mobile = models.CharField(max_length=20, null=False)
     joinned_year = models.DateField(default=timezone.now)
-    role_no = models.IntegerField()
+    role_no = models.IntegerField(unique=True)
     department = models.CharField(max_length=40)
 
     @property
+
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name
 
@@ -397,7 +398,7 @@ class Testimonials(models.Model):
 
 class logo(models.Model):
     L_id = models.IntegerField(primary_key=True)
-    Reson = models.CharField(max_length=200)
+    Reson = models.CharField(max_length=200,default='None...!')
     image = models.ImageField(
         upload_to='logo', default='images/user_image.png')
     last_updated_date = models.DateField(default=timezone.now)
@@ -418,10 +419,12 @@ class FooterEditPage(models.Model):
 
 class SocialMediaLinks(models.Model):
     id = models.IntegerField(primary_key=True)
+    website = models.CharField(max_length=200)
     Twitter = models.CharField(max_length=200)
     Facebook = models.CharField(max_length=200)
     Instagram = models.CharField(max_length=200)
     LinkedIn = models.CharField(max_length=200)
+    github = models.CharField(max_length=200)
     last_updated_date = models.DateField(default=timezone.now)
 
 # classRoom ........................

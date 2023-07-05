@@ -238,7 +238,10 @@ def home_classroom(request):
         obj = User.objects.get(id=request.user.id)
         student_data = Student.objects.get(user=obj)
         try:
-            return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+            if len(classes) == 0:
+                return render(request, 'class_room/no_classes.html')
+            else:
+                return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
         except:
             return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
     elif is_teacher(request.user):
@@ -361,6 +364,9 @@ def home_classroom(request):
        if get_role.role == 1:
             return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
 
+
+def Class_msg(request):
+    return render(request, 'class_room/no_classes.html')
 
 def add_class(request):
     courses = Department.objects.all()
