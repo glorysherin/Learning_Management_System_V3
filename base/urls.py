@@ -337,6 +337,8 @@ exam = [
     path('adminclick',  adminclick_view),
     path('adminlogin', LoginView.as_view(
         template_name='login/login.html'), name='adminlogin'),
+    path('department/adminlogin', LoginView.as_view(
+        template_name='login/login.html'), name='adminlogin'),
     path('admin-dashboard',  admin_dashboard_view, name='admin-dashboard'),
     path('admin-teacher',  admin_teacher_view, name='admin-teacher'),
     path('admin-view-teacher',  admin_view_teacher_view, name='admin-view-teacher'),
