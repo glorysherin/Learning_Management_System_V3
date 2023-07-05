@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from base.models import YouTubeLink, Category
-from .Tool.Tools import student_detials, staff_detials
+from .Tool.Tools import student_detials, staff_detials, get_user_role
 
 
 def add_youtube_link(request,class_id):
@@ -25,7 +25,10 @@ def save_youtube_link(request,class_id):
 
 def list_youtube_links(request,class_id):
     links = YouTubeLink.objects.filter(class_id=class_id)
-    return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links,'class_id':class_id}))
+    if get_user_role
+        return render(request, 'youtube_links/st_list_youtube_links.html',student_detials(request,'list link', {'links': links,'class_id':class_id}))
+    else:
+        return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links,'class_id':class_id}))
 
 
 def edit_youtube_link(request, pk,class_id):
