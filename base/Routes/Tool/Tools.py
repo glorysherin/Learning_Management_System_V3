@@ -1,6 +1,6 @@
 import openai
 from django.shortcuts import get_object_or_404
-from ...models import Faculty_details, Student, Users, Teacher
+from ...models import Faculty_details, Student, Users, Teacher, Notifications
 from django.contrib.auth.models import User
 from bs4 import BeautifulSoup
 import requests
@@ -75,7 +75,6 @@ def remove_space(string):
 
 def gpt(queary):
     openai.api_key = "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"
-
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=queary,
@@ -113,6 +112,9 @@ def student_detials(request, page, dict_inp={}):
             'page': page,
             'usr_role':4
         }
+    not_obj =  Notifications.objects.filter(to_user=request.user.id)
+    dict_ = {**dict_,"notification":not_obj}
+    print(dict_)
     return {**dict_, **dict_inp}
 
 
@@ -131,6 +133,8 @@ def staff_detials(request, page, dict_inp={}):
         'role': role,
         'pro_id':teacher_role
     }
+    not_obj =  Notifications.objects.filter(to_user=request.user.id)
+    dict_ = {**dict_,"notification":not_obj}
     return {**dict_, **dict_inp}
 
 def get_current_user_role(request):

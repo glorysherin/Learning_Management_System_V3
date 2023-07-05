@@ -65,11 +65,11 @@ def nave_home_classroom(request, pk, class_id):
         # create new chat room..........
 
         if Room.objects.filter(name=class_id).exists():
-            return render(request, 'class_room/classroom.html', {'people': peoples, "detail": detials})
+            return render(request, 'class_room/class_joinned.html', {'people': peoples, "detail": detials})
         else:
             new_room = Room.objects.create(name=class_id)
             new_room.save()
-            return render(request, 'class_room/classroom.html', {'people': peoples, "detail": detials})
+            return render(request, 'class_room/class_joinned.html', {'people': peoples, "detail": detials})
     elif pk == "attendes":
         peoples = []
         people = class_enrolled.objects.filter(subject_code=class_id)
@@ -238,9 +238,15 @@ def home_classroom(request):
         obj = User.objects.get(id=request.user.id)
         student_data = Student.objects.get(user=obj)
         try:
-            return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
+            if len(classes) == 0:
+                return render(request, 'class_room/no_classes.html')
+            else:
+                return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": get_user_name(request), "User_role": get_user_role(request), "usr_img": get_user_obj(request)})
         except:
-            return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
+            if len(classes) == 0:
+                return render(request, 'class_room/no_classes.html',student_detials(request,"Class Not Enrolled"))
+            else:
+                return render(request, 'class_room/student_classroom.html', {'student_data': student_data, 'classes': [[i, j] for i, j in zip(classes, peoples)], 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
     elif is_teacher(request.user):
         obj = User.objects.get(id=request.user.id)
         teacher_data = Teacher.objects.get(user=obj)
@@ -361,6 +367,9 @@ def home_classroom(request):
        if get_role.role == 1:
             return render(request, 'class_room/staff_classroom.html', {'teacher_data': teacher_data, 'classes': all_classroom, 'img': img, 'sem_': sem, 'dep': dep, "user_name": request.user.username})
 
+
+def Class_msg(request):
+    return render(request, 'class_room/no_classes.html')
 
 def add_class(request):
     courses = Department.objects.all()

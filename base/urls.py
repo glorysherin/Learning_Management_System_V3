@@ -338,6 +338,8 @@ exam = [
     path('adminclick',  adminclick_view),
     path('adminlogin', LoginView.as_view(
         template_name='login/login.html'), name='adminlogin'),
+    path('department/adminlogin', LoginView.as_view(
+        template_name='login/login.html'), name='adminlogin'),
     path('admin-dashboard',  admin_dashboard_view, name='admin-dashboard'),
     path('admin-teacher',  admin_teacher_view, name='admin-teacher'),
     path('admin-view-teacher',  admin_view_teacher_view, name='admin-view-teacher'),
@@ -545,6 +547,7 @@ links_management = [
     path('links/add/<str:class_id>', add_youtube_link, name='add_youtube_link'),
     path('links/save/<str:class_id>', save_youtube_link, name='save_youtube_link'),
     path('links/list/<str:class_id>', list_youtube_links, name='list_youtube_links'),
+    path('stlinks/list/<str:class_id>', student_list_youtube_links, name='list_youtube_links'),
     path('links/edit/<int:pk>/<str:class_id>', edit_youtube_link, name='edit_youtube_link'),
     path('links/delete/<int:pk>/<str:class_id>', delete_youtube_link, name='delete_youtube_link'),
 ]

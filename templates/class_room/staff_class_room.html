@@ -25,6 +25,9 @@ JEC-Class room  </title>
     <link rel="stylesheet" href=" {% static 'css/home.css' %} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   {% comment %} =============================================================================================================================== {% endcomment %}
+  <link href=
+"https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+          rel="stylesheet">
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -223,6 +226,60 @@ JEC-Class room  </title>
               </svg>
             </div>
             <span class="nav-link-text ms-1"> Manage Blog</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  " href="{% url 'staff_list_blog' %}">
+            <div
+              class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="m23.589 22.261l-2.102-2.101a4.978 4.978 0 0 0-3.115-7.594l-.033-.006V8.491a1.01 1.01 0 0 0-.233-.646l.001.002v-.005a.94.94 0 0 0-.06-.066l-.008-.009l-.027-.027L10.572.3a.91.91 0 0 0-.065-.059l-.026-.018a.938.938 0 0 0-.05-.038l-.025-.018l-.054-.034l-.023-.012q-.034-.02-.075-.037l-.032-.013l-.051-.018l-.036-.011l-.058-.015l-.028-.006a.81.81 0 0 0-.086-.013H1.015A1.019 1.019 0 0 0 0 1.02v20.377a1.02 1.02 0 0 0 1.015 1.019h16.31a4.924 4.924 0 0 0 2.74-.827l-.018.011l2.102 2.102a1.019 1.019 0 0 0 1.439-1.44l.001.001zm-3.325-4.827a2.943 2.943 0 1 1-5.887.001a2.943 2.943 0 0 1 5.887-.002zM10.868 3.478l3.993 3.994h-3.993zm-8.83-1.44h6.793v6.453c0 .563.456 1.019 1.019 1.019h6.453v3.05c-2.278.487-3.962 2.483-3.962 4.873c0 1.109.362 2.133.975 2.96l-.01-.013H2.037z"/></svg>
+              <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                <title>settings</title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                      <g transform="translate(304.000000, 151.000000)">
+                        <polygon class="color-background opacity-6"
+                          points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
+                        </polygon>
+                        <path class="color-background opacity-6"
+                          d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
+                        </path>
+                        <path class="color-background"
+                          d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
+                        </path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                </svg>
+            </div>
+            <span class="nav-link-text ms-1">Review Article</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  " href="{% url 'admin_list_blog_course' %}">
+            <div
+              class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M20 2a1 1 0 0 1 1 1v3.757l-8.999 9l-.006 4.238l4.246.006L21 15.242V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16Zm1.778 6.808l1.414 1.414L15.414 18l-1.416-.002l.002-1.412l7.778-7.778ZM12 12H7v2h5v-2Zm3-4H7v2h8V8Z"/></svg>                  <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                <g transform="translate(1716.000000, 291.000000)">
+                  <g transform="translate(304.000000, 151.000000)">
+                    <polygon class="color-background opacity-6"
+                      points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
+                    </polygon>
+                    <path class="color-background opacity-6"
+                      d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
+                    </path>
+                    <path class="color-background"
+                      d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
+                    </path>
+                  </g>
+                </g>
+              </g>
+              </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Drafted Articles</span>
           </a>
         </li>
         <li class="nav-item">
@@ -889,6 +946,60 @@ JEC-Class room  </title>
                   </svg>
               </div>
               <span class="nav-link-text ms-1">Manage Blog</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  " href="{% url 'staff_list_blog' %}">
+              <div
+                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="m23.589 22.261l-2.102-2.101a4.978 4.978 0 0 0-3.115-7.594l-.033-.006V8.491a1.01 1.01 0 0 0-.233-.646l.001.002v-.005a.94.94 0 0 0-.06-.066l-.008-.009l-.027-.027L10.572.3a.91.91 0 0 0-.065-.059l-.026-.018a.938.938 0 0 0-.05-.038l-.025-.018l-.054-.034l-.023-.012q-.034-.02-.075-.037l-.032-.013l-.051-.018l-.036-.011l-.058-.015l-.028-.006a.81.81 0 0 0-.086-.013H1.015A1.019 1.019 0 0 0 0 1.02v20.377a1.02 1.02 0 0 0 1.015 1.019h16.31a4.924 4.924 0 0 0 2.74-.827l-.018.011l2.102 2.102a1.019 1.019 0 0 0 1.439-1.44l.001.001zm-3.325-4.827a2.943 2.943 0 1 1-5.887.001a2.943 2.943 0 0 1 5.887-.002zM10.868 3.478l3.993 3.994h-3.993zm-8.83-1.44h6.793v6.453c0 .563.456 1.019 1.019 1.019h6.453v3.05c-2.278.487-3.962 2.483-3.962 4.873c0 1.109.362 2.133.975 2.96l-.01-.013H2.037z"/></svg>
+                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                  <title>settings</title>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                      <g transform="translate(1716.000000, 291.000000)">
+                        <g transform="translate(304.000000, 151.000000)">
+                          <polygon class="color-background opacity-6"
+                            points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
+                          </polygon>
+                          <path class="color-background opacity-6"
+                            d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
+                          </path>
+                          <path class="color-background"
+                            d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
+                          </path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                  </svg>
+              </div>
+              <span class="nav-link-text ms-1">Review Article</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  " href="{% url 'admin_list_blog_course' %}">
+              <div
+                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M20 2a1 1 0 0 1 1 1v3.757l-8.999 9l-.006 4.238l4.246.006L21 15.242V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16Zm1.778 6.808l1.414 1.414L15.414 18l-1.416-.002l.002-1.412l7.778-7.778ZM12 12H7v2h5v-2Zm3-4H7v2h8V8Z"/></svg>                  <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                  <g transform="translate(1716.000000, 291.000000)">
+                    <g transform="translate(304.000000, 151.000000)">
+                      <polygon class="color-background opacity-6"
+                        points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
+                      </polygon>
+                      <path class="color-background opacity-6"
+                        d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
+                      </path>
+                      <path class="color-background"
+                        d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+                </g>
+                </svg>
+              </div>
+              <span class="nav-link-text ms-1">Drafted Articles</span>
             </a>
           </li>
           <li class="nav-item">
@@ -1621,6 +1732,60 @@ JEC-Class room  </title>
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link  " href="{% url 'staff_list_blog' %}">
+          <div
+            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="m23.589 22.261l-2.102-2.101a4.978 4.978 0 0 0-3.115-7.594l-.033-.006V8.491a1.01 1.01 0 0 0-.233-.646l.001.002v-.005a.94.94 0 0 0-.06-.066l-.008-.009l-.027-.027L10.572.3a.91.91 0 0 0-.065-.059l-.026-.018a.938.938 0 0 0-.05-.038l-.025-.018l-.054-.034l-.023-.012q-.034-.02-.075-.037l-.032-.013l-.051-.018l-.036-.011l-.058-.015l-.028-.006a.81.81 0 0 0-.086-.013H1.015A1.019 1.019 0 0 0 0 1.02v20.377a1.02 1.02 0 0 0 1.015 1.019h16.31a4.924 4.924 0 0 0 2.74-.827l-.018.011l2.102 2.102a1.019 1.019 0 0 0 1.439-1.44l.001.001zm-3.325-4.827a2.943 2.943 0 1 1-5.887.001a2.943 2.943 0 0 1 5.887-.002zM10.868 3.478l3.993 3.994h-3.993zm-8.83-1.44h6.793v6.453c0 .563.456 1.019 1.019 1.019h6.453v3.05c-2.278.487-3.962 2.483-3.962 4.873c0 1.109.362 2.133.975 2.96l-.01-.013H2.037z"/></svg>
+            <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+              <title>settings</title>
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                  <g transform="translate(1716.000000, 291.000000)">
+                    <g transform="translate(304.000000, 151.000000)">
+                      <polygon class="color-background opacity-6"
+                        points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
+                      </polygon>
+                      <path class="color-background opacity-6"
+                        d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
+                      </path>
+                      <path class="color-background"
+                        d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+              </svg>
+          </div>
+          <span class="nav-link-text ms-1">Review Article</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link  " href="{% url 'admin_list_blog_course' %}">
+          <div
+            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M20 2a1 1 0 0 1 1 1v3.757l-8.999 9l-.006 4.238l4.246.006L21 15.242V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16Zm1.778 6.808l1.414 1.414L15.414 18l-1.416-.002l.002-1.412l7.778-7.778ZM12 12H7v2h5v-2Zm3-4H7v2h8V8Z"/></svg>                  <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+              <g transform="translate(1716.000000, 291.000000)">
+                <g transform="translate(304.000000, 151.000000)">
+                  <polygon class="color-background opacity-6"
+                    points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
+                  </polygon>
+                  <path class="color-background opacity-6"
+                    d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z">
+                  </path>
+                  <path class="color-background"
+                    d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
+                  </path>
+                </g>
+              </g>
+            </g>
+            </g>
+            </svg>
+          </div>
+          <span class="nav-link-text ms-1">Drafted Articles</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link  " href="{% url 'notes_list' %}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -2240,7 +2405,7 @@ JEC-Class room  </title>
         <div class="col-12 col-xl-4">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
-              <h6 class="mb-0">Assignments</h6>
+              <h6 class="mb-0">Notes</h6>
             </div>
             <div class="card-body p-3">
               <h6 class="text-uppercase text-body text-xs font-weight-bolder">Notes list</h6>
@@ -2273,9 +2438,308 @@ JEC-Class room  </title>
                 <li>No books yet.</li>
                 {% endfor %}
                 <a href="{% url 'note_by_class_staff' class_id=detail.subject_code %}">view More</a>
+          
             </div>
           </div>
         </div>
+        <!-- component -->
+<!-- 
+    =======================================================================
+
+    This is a working contact form. To receive email, 
+    Replace YOUR_ACCESS_KEY_HERE with your actual Access Key.
+
+    Create Access Key here ? https://web3forms.com/
+
+    Surjith S M (@surjithctly)
+    =======================================================================
+ -->
+
+ 
+    <!-- Web3Forms Popup Widget Starts here -->
+    <div  id="web3forms__widget" x-data="{ open: true }"  x-init="() => setTimeout(() => open = false, 2000)"> 
+      <!-- x-init is only for demo purpose. you may remove it.  -->
+        <div
+          id="w3f__widget--content"
+          x-show="open"
+          x-transition:enter-start="opacity-0 translate-y-5"
+          x-transition:enter="transition duration-200 transform ease"
+          x-transition:leave="transition duration-200 transform ease"
+          x-transition:leave-end="opacity-0 translate-y-5"
+          @click.away="open = false"
+          class="fixed flex flex-col z-50 bottom-[100px] top-0 right-0 h-auto left-0 sm:top-auto sm:right-5 sm:left-auto h-[calc(100%-95px)] w-full sm:w-[350px] overflow-auto min-h-[250px] sm:h-[600px] border border-gray-300 bg-white shadow-2xl rounded-md"
+        >
+        <div class="flex p-5 flex-col justify-center items-center h-32 bg-indigo-600">
+          <h3 class="text-lg text-white">How can we help?</h3>
+          <p class="text-white opacity-50">We usually respond in a few hours</p>
+        </div>
+         <div class="bg-gray-50 flex-grow p-6"> 
+           
+            <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            id="form"
+            class="needs-validation"
+            novalidate
+          >
+            <input type="hidden" name="apikey" value="YOUR_ACCESS_KEY_HERE" />
+            <input
+              type="hidden"
+              name="subject"
+              value="New Submission from Web3Forms"
+            />
+            <input
+              type="checkbox"
+              name="botcheck"
+              id=""
+              style="display: none;"
+            />
+  
+             
+              <div class="mb-4">
+                <label
+                  for="full_name"
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  name="name"
+                  id="full_name"
+                  placeholder="John Doe"
+                  required
+                  class="w-full px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
+                />
+                <div
+                  class="empty-feedback invalid-feedback text-red-400 text-sm mt-1"
+                >
+                  Please provide your full name.
+                </div>
+              </div>
+              
+            
+  
+          
+              <div class="mb-4">
+                <label
+                  for="email"
+                  class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="you@company.com"
+                  required
+                  class="w-full px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
+                />
+                <div class="empty-feedback text-red-400 text-sm mt-1">
+                  Please provide your email address.
+                </div>
+                <div class="invalid-feedback text-red-400 text-sm mt-1">
+                  Please provide a valid email address.
+                </div>
+              </div>
+   
+             
+            <div class="mb-4">
+              <label
+                for="message"
+                class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                >Your Message</label
+              >
+  
+              <textarea
+                rows="4"
+                name="message"
+                id="message"
+                placeholder="Your Message"
+                class="w-full h-28 px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
+                required
+              ></textarea>
+              <div
+                class="empty-feedback invalid-feedback text-red-400 text-sm mt-1"
+              >
+                Please enter your message.
+              </div>
+            </div>
+            <div class="mb-3">
+              <button
+                type="submit"
+                class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
+              >
+                Send Message
+              </button>
+            </div>
+            <p class="text-xs text-center text-gray-400" id="result">
+              <span>Powered by <a href="https://Web3Forms.com" class="text-gray-600" target="_blank" rel="noopener noreferrer">Web3Forms</a></span>
+            </p>
+          </form>
+  
+  
+         </div>
+        </div>
+        <button
+          id="w3f__widget--btn"
+          @click="open = !open"
+          class="fixed z-40 right-5 bottom-5 shadow-lg flex justify-center items-center w-14 h-14 bg-indigo-500 rounded-full focus:outline-none hover:bg-indigo-600 focus:bg-indigo-600 transition duration-300 ease"
+        >
+          <svg
+            class="w-6 h-6 text-white absolute"
+            x-show="!open"
+            x-transition:enter-start="opacity-0 -rotate-45 scale-75"
+            x-transition:enter="transition duration-200 transform ease"
+            x-transition:leave="transition duration-100 transform ease"
+            x-transition:leave-end="opacity-0 -rotate-45"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            ></path>
+          </svg>
+  
+          <svg
+            class="w-6 h-6 text-white absolute"
+            x-show="open"
+            x-transition:enter-start="opacity-0 rotate-45 scale-75"
+            x-transition:enter="transition duration-200 transform ease"
+            x-transition:leave="transition duration-100 transform ease"
+            x-transition:leave-end="opacity-0 rotate-45"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      
+    </div>
+  
+    <style>
+        .invalid-feedback,
+        .empty-feedback {
+          display: none;
+        }
+  
+        .was-validated :placeholder-shown:invalid ~ .empty-feedback {
+          display: block;
+        }
+  
+        .was-validated :not(:placeholder-shown):invalid ~ .invalid-feedback {
+          display: block;
+        }
+  
+        .is-invalid,
+        .was-validated :invalid {
+          border-color: #dc3545;
+        }
+  
+        .is-invalid,
+        .was-validated :invalid:focus {
+      --tw-ring-color: rgba(220, 53, 69, 0.2);
+  }
+      </style>
+  
+      <!-- Web3Forms Popup Widget End here -->
+
+  
+       <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+      <script
+        src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+        defer
+      ></script>
+  
+      <script>
+          (function () {
+            "use strict";
+            /*
+             * Form Validation
+             */
+    
+            // Fetch all the forms we want to apply custom validation styles to
+            const forms = document.querySelectorAll(".needs-validation");
+            const result = document.getElementById("result");
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms).forEach(function (form) {
+              form.addEventListener(
+                "submit",
+                function (event) {
+                  if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+    
+                    form.querySelectorAll(":invalid")[0].focus();
+                  } else {
+                    /*
+                     * Form Submission using fetch()
+                     */
+    
+                    const formData = new FormData(form);
+                    event.preventDefault();
+                    event.stopPropagation();
+                    const object = {};
+                    formData.forEach((value, key) => {
+                      object[key] = value;
+                    });
+                    const json = JSON.stringify(object);
+                    result.innerHTML = "Please wait...";
+    
+                    fetch("https://api.web3forms.com/submit", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json"
+                      },
+                      body: json
+                    })
+                      .then(async (response) => {
+                        let json = await response.json();
+                        if (response.status == 200) {
+                          result.innerHTML = json.message;
+                          result.classList.remove("text-gray-500");
+                          result.classList.add("text-green-500");
+                        } else {
+                          console.log(response);
+                          result.innerHTML = json.message;
+                          result.classList.remove("text-gray-500");
+                          result.classList.add("text-red-500");
+                        }
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                        result.innerHTML = "Something went wrong!";
+                      })
+                      .then(function () {
+                        form.reset();
+                        form.classList.remove("was-validated");
+                        setTimeout(() => {
+                          result.style.display = "none";
+                        }, 5000);
+                      });
+                  }
+                  form.classList.add("was-validated");
+                },
+                false
+              );
+            });
+          })();
+        </script>
         <div class="col-12 col-xl-4">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
