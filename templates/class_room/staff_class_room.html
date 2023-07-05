@@ -2440,9 +2440,7 @@ JEC-Class room  </title>
                 <a href="{% url 'note_by_class_staff' class_id=detail.subject_code %}">view More</a>
           
             </div>
-          </div>
-        </div>
-        <!-- component -->
+                    <!-- component -->
 <!-- 
     =======================================================================
 
@@ -2470,8 +2468,7 @@ JEC-Class room  </title>
           class="fixed flex flex-col z-50 bottom-[100px] top-0 right-0 h-auto left-0 sm:top-auto sm:right-5 sm:left-auto h-[calc(100%-95px)] w-full sm:w-[350px] overflow-auto min-h-[250px] sm:h-[600px] border border-gray-300 bg-white shadow-2xl rounded-md"
         >
         <div class="flex p-5 flex-col justify-center items-center h-32 bg-indigo-600">
-          <h3 class="text-lg text-white">How can we help?</h3>
-          <p class="text-white opacity-50">We usually respond in a few hours</p>
+          <h3 class="text-lg text-white">Upload Assignments</h3>
         </div>
          <div class="bg-gray-50 flex-grow p-6"> 
            
@@ -2500,45 +2497,42 @@ JEC-Class room  </title>
                 <label
                   for="full_name"
                   class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                  >Full Name</label
+                  >Subject</label
                 >
                 <input
                   type="text"
                   name="name"
                   id="full_name"
-                  placeholder="John Doe"
+                  placeholder="Enter  subject"
                   required
                   class="w-full px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
                 <div
                   class="empty-feedback invalid-feedback text-red-400 text-sm mt-1"
                 >
-                  Please provide your full name.
+                  Please provide Subject name or Subject code.
                 </div>
               </div>
-              
-            
-  
           
               <div class="mb-4">
                 <label
                   for="email"
                   class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                  >Email Address</label
+                  >Title</label
                 >
                 <input
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="you@company.com"
+                  placeholder="Enter question"
                   required
                   class="w-full px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
                 <div class="empty-feedback text-red-400 text-sm mt-1">
-                  Please provide your email address.
+                  Please provide question.
                 </div>
                 <div class="invalid-feedback text-red-400 text-sm mt-1">
-                  Please provide a valid email address.
+                
                 </div>
               </div>
    
@@ -2547,21 +2541,21 @@ JEC-Class room  </title>
               <label
                 for="message"
                 class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
-                >Your Message</label
+                >Details</label
               >
   
               <textarea
                 rows="4"
                 name="message"
                 id="message"
-                placeholder="Your Message"
+                placeholder="Provide description for assignment."
                 class="w-full h-28 px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 required
               ></textarea>
               <div
                 class="empty-feedback invalid-feedback text-red-400 text-sm mt-1"
               >
-                Please enter your message.
+                Please fill the details
               </div>
             </div>
             <div class="mb-3">
@@ -2569,40 +2563,21 @@ JEC-Class room  </title>
                 type="submit"
                 class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
               >
-                Send Message
+                Upload
               </button>
             </div>
-            <p class="text-xs text-center text-gray-400" id="result">
-              <span>Powered by <a href="https://Web3Forms.com" class="text-gray-600" target="_blank" rel="noopener noreferrer">Web3Forms</a></span>
-            </p>
+           
           </form>
   
   
          </div>
         </div>
-        <button
+        <button style="margin-right: 5px;margin-bottom: 70px;"
           id="w3f__widget--btn"
           @click="open = !open"
           class="fixed z-40 right-5 bottom-5 shadow-lg flex justify-center items-center w-14 h-14 bg-indigo-500 rounded-full focus:outline-none hover:bg-indigo-600 focus:bg-indigo-600 transition duration-300 ease"
         >
-          <svg
-            class="w-6 h-6 text-white absolute"
-            x-show="!open"
-            x-transition:enter-start="opacity-0 -rotate-45 scale-75"
-            x-transition:enter="transition duration-200 transform ease"
-            x-transition:leave="transition duration-100 transform ease"
-            x-transition:leave-end="opacity-0 -rotate-45"
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" fill-rule="evenodd" d="M10.738 16.627a1.492 1.492 0 0 1-1.487-1.362a37.117 37.117 0 0 1-.107-4.845a35.68 35.68 0 0 1-.253-.018l-1.49-.108a1.26 1.26 0 0 1-.97-1.935c1.097-1.716 3.106-3.636 4.76-4.824a1.388 1.388 0 0 1 1.619 0c1.653 1.188 3.662 3.108 4.758 4.824a1.26 1.26 0 0 1-.97 1.935l-1.49.108l-.252.018c.07 1.616.034 3.234-.107 4.845a1.492 1.492 0 0 1-1.487 1.362h-2.524Zm-.056-6.865a35.624 35.624 0 0 0 .063 5.365h2.51c.156-1.784.177-3.577.064-5.365a.75.75 0 0 1 .711-.796c.324-.016.647-.036.97-.06l1.081-.078a14.556 14.556 0 0 0-3.55-3.646L12 4.801l-.531.381a14.555 14.555 0 0 0-3.55 3.646L9 8.907c.323.023.647.043.97.059a.75.75 0 0 1 .711.796Z" clip-rule="evenodd"/><path fill="white" d="M5.75 17a.75.75 0 0 0-1.5 0v2c0 .966.784 1.75 1.75 1.75h12A1.75 1.75 0 0 0 19.75 19v-2a.75.75 0 0 0-1.5 0v2a.25.25 0 0 1-.25.25H6a.25.25 0 0 1-.25-.25v-2Z"/></svg>            <path
               d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
             ></path>
           </svg>
@@ -2740,6 +2715,9 @@ JEC-Class room  </title>
             });
           })();
         </script>
+          </div>
+        </div>
+
         <div class="col-12 col-xl-4">
           <div class="card h-100">
             <div class="card-header pb-0 p-3">

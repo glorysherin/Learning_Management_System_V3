@@ -547,7 +547,6 @@ links_management = [
     path('links/add/<str:class_id>', add_youtube_link, name='add_youtube_link'),
     path('links/save/<str:class_id>', save_youtube_link, name='save_youtube_link'),
     path('links/list/<str:class_id>', list_youtube_links, name='list_youtube_links'),
-    path('stlinks/list/<str:class_id>', student_list_youtube_links, name='list_youtube_links'),
     path('links/edit/<int:pk>/<str:class_id>', edit_youtube_link, name='edit_youtube_link'),
     path('links/delete/<int:pk>/<str:class_id>', delete_youtube_link, name='delete_youtube_link'),
 ]
