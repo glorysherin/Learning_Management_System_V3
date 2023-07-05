@@ -2473,12 +2473,12 @@ JEC-Class room  </title>
          <div class="bg-gray-50 flex-grow p-6"> 
            
             <form
-            action="https://api.web3forms.com/submit"
+            action="{% url 'assignment_add' %}"
             method="POST"
             id="form"
             class="needs-validation"
-            novalidate
-          >
+            
+          > {% csrf_token %}
             <input type="hidden" name="apikey" value="YOUR_ACCESS_KEY_HERE" />
             <input
               type="hidden"
@@ -2487,7 +2487,7 @@ JEC-Class room  </title>
             />
             <input
               type="checkbox"
-              name="botcheck"
+              name="subject"
               id=""
               style="display: none;"
             />
@@ -2501,9 +2501,9 @@ JEC-Class room  </title>
                 >
                 <input
                   type="text"
-                  name="name"
+                  name="subject"
                   id="full_name"
-                  placeholder="Enter  subject"
+                  placeholder="Enter subject"
                   required
                   class="w-full px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -2521,8 +2521,8 @@ JEC-Class room  </title>
                   >Title</label
                 >
                 <input
-                  type="email"
-                  name="email"
+                  type="text"
+                  name="title"
                   id="email"
                   placeholder="Enter question"
                   required
@@ -2546,7 +2546,7 @@ JEC-Class room  </title>
   
               <textarea
                 rows="4"
-                name="message"
+                name="details"
                 id="message"
                 placeholder="Provide description for assignment."
                 class="w-full h-28 px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
@@ -2652,66 +2652,7 @@ JEC-Class room  </title>
             const result = document.getElementById("result");
             // Loop over them and prevent submission
             Array.prototype.slice.call(forms).forEach(function (form) {
-              form.addEventListener(
-                "submit",
-                function (event) {
-                  if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-    
-                    form.querySelectorAll(":invalid")[0].focus();
-                  } else {
-                    /*
-                     * Form Submission using fetch()
-                     */
-    
-                    const formData = new FormData(form);
-                    event.preventDefault();
-                    event.stopPropagation();
-                    const object = {};
-                    formData.forEach((value, key) => {
-                      object[key] = value;
-                    });
-                    const json = JSON.stringify(object);
-                    result.innerHTML = "Please wait...";
-    
-                    fetch("https://api.web3forms.com/submit", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json"
-                      },
-                      body: json
-                    })
-                      .then(async (response) => {
-                        let json = await response.json();
-                        if (response.status == 200) {
-                          result.innerHTML = json.message;
-                          result.classList.remove("text-gray-500");
-                          result.classList.add("text-green-500");
-                        } else {
-                          console.log(response);
-                          result.innerHTML = json.message;
-                          result.classList.remove("text-gray-500");
-                          result.classList.add("text-red-500");
-                        }
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                        result.innerHTML = "Something went wrong!";
-                      })
-                      .then(function () {
-                        form.reset();
-                        form.classList.remove("was-validated");
-                        setTimeout(() => {
-                          result.style.display = "none";
-                        }, 5000);
-                      });
-                  }
-                  form.classList.add("was-validated");
-                },
-                false
-              );
+              
             });
           })();
         </script>
@@ -2803,7 +2744,116 @@ JEC-Class room  </title>
             </div>
           </div>
         </div>
+<!-- component -->
 
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Subject Code
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Uploaded by
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Title
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Status
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                No.of.Submission
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+View
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-gray-100 border-b">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">cs8622</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                kokila
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                palindrome program
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                status
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                6
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  View
+                </button>
+                
+              </td>
+            </tr>
+            <tr class="bg-white border-b">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                Jacob
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                Dillan
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                @fat
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                Jacob
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  View
+                </button>
+              </td>
+            </tr>
+            <tr class="bg-gray-100 border-b">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                Mark
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                Twen
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                @twitter
+              </td>
+            </tr>    
+            <tr class="bg-white border-b">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                Bob
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                Dillan
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                @fat
+              </td>
+            </tr>
+            <tr class="bg-gray-100 border-b">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
+              <td colspan="2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
+                Larry the Bird
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                @twitter
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
         {% for i in dep %}
         <div class="col-12 mt-4">
           <div class="card mb-4">

@@ -1,0 +1,9 @@
+<!-- Create a form to add a new upload assignment -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="number" name="update_by" placeholder="Update By" required>
+    <input type="file" name="file" required>
+    <input type="number" name="assignment_id" placeholder="Assignment ID" required>
+    <button type="submit">Add Assignment</button>
+  </form>
+  
