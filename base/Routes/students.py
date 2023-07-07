@@ -62,18 +62,6 @@ def staff_list_by_dep(request):
     return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Students',context))
 
 
-def student_profile(request, student_id):
-    student = get_object_or_404(Student, pk=student_id)
-    usr_id = request.user.id
-    usr_obj = User.objects.get(id=usr_id)
-    std_data = Student.objects.get(user=usr_obj) # it's modifyed for admin acces if you have any problem change it usr_obj
-    dict_data = {
-        'usr': std_data,
-        'page': 'Student Profile',
-        'student': student
-    }
-    return render(request, 'student/student_profile.html', student_detials(request, 'Student Profile' ,dict_data))
-
 
 def student_delete(request, student_id):
     student = get_object_or_404(Student, id=student_id)
@@ -87,10 +75,23 @@ def student_delete(request, student_id):
     }
     return render(request, 'student/students_list.html', context)
 
+def student_profile(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+    usr_id = request.user.id
+    usr_obj = User.objects.get(id=usr_id)
+    std_data = get_object_or_404(Student, pk=student_id) # it's modifyed for admin acces if you have any problem change it usr_obj
+    dict_data = {
+        'usr': std_data,
+        'page': 'Student Profile',
+        'student': student
+    }
+    return render(request, 'student/student_profile.html', student_detials(request, 'Student Profile' ,dict_data))
+
 
 def student_edit(request, pk):
     student = get_object_or_404(Student, pk=pk)
     department = Department.objects.all()
+    current_id = request.user.id
     if request.method == 'POST':
         student.user.first_name = request.POST['first_name']
         student.user.last_name = request.POST['last_name']
@@ -113,7 +114,7 @@ def studentclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request, 'student/studentclick.html')
-
+ 
 
 def student_signup_view(request):
     userForm = student_forms.StudentUserForm()
@@ -152,7 +153,7 @@ def add_student_signup_view(request):
             student = studentForm.save(commit=False)
             student.user = user
             student.save()
-            add_user = Users(user_name=user.username,
+            add_user = Users(user_name=user.username, connect_id= user.id,
                              mail_id=user.username, password=user.password, role='4')
             add_user.save()
             my_student_group = Group.objects.get_or_create(name='STUDENT')

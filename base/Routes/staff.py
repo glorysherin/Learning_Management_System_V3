@@ -41,7 +41,7 @@ def teacher_signup_view(request):
             print(teacher.role)
             if teacher.role == 'hod':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='2')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -51,16 +51,16 @@ def teacher_signup_view(request):
             if teacher.role == 'admin':
                 teacher.status = True
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='1')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
                 Fac_del = Faculty_details(user_name=user.username, mail=user.username,
                                           role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
                 Fac_del.save()
-            elif teacher.role == 'staff':
+            elif teacher.role == 'staff': 
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='3')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -92,7 +92,7 @@ def teacher_signup_view1(request):
             print(teacher.role)
             if teacher.role == 'hod':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='2')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -102,7 +102,7 @@ def teacher_signup_view1(request):
             if teacher.role == 'admin':
                 teacher.status = True
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='1')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -111,7 +111,7 @@ def teacher_signup_view1(request):
                 Fac_del.save()
             elif teacher.role == 'staff':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='3')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -144,7 +144,7 @@ def adminsignup(request):
             print(teacher.role)
             if teacher.role == 'hod':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='2')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -154,7 +154,7 @@ def adminsignup(request):
             if teacher.role == 'admin':
                 teacher.status = True
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='1')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -163,7 +163,7 @@ def adminsignup(request):
                 Fac_del.save()
             elif teacher.role == 'staff':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='3')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -200,7 +200,7 @@ def add_admin(request):
             
             if teacher.role == 'hod':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='2')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -210,7 +210,7 @@ def add_admin(request):
             if teacher.role == 'admin':
                 teacher.status = True
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='1')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -219,7 +219,7 @@ def add_admin(request):
                 Fac_del.save()
             elif teacher.role == 'staff':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='3')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -255,7 +255,7 @@ def add_admin1(request):
             
             if teacher.role == 'hod':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='2')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -265,7 +265,7 @@ def add_admin1(request):
             if teacher.role == 'admin':
                 teacher.status = True
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='1')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)
@@ -274,7 +274,7 @@ def add_admin1(request):
                 Fac_del.save()
             elif teacher.role == 'staff':
                 teacher.save()
-                add_user = Users(user_name=user.username,
+                add_user = Users(user_name=user.username, connect_id= user.id,
                                  mail_id=user.username, password=user.password, role='3')
                 add_user.save()
                 current_user = Users.objects.get(mail_id=user.username)

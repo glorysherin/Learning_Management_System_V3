@@ -22,6 +22,7 @@ class Users(models.Model):
     user_name = models.CharField(max_length=200)
     mail_id = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
+    connect_id = models.IntegerField()
     role = models.IntegerField()   # roles {1,2,3} 1(Admin), 2(HOD), 3(Staff)
 
 

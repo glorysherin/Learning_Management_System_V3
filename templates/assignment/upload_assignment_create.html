@@ -18,7 +18,7 @@
 
 {% if file %}
   {% for i in file %}
-    {{ i.File }} <button><a href="{% url 'upload_assignment_delete' pk=i.id qst_id=i.id %}">delete</a></button><br>
+    {{ i.File }} <button><a href="{% url 'upload_assignment_delete' pk=i.id qst_id=qst_id %}">delete</a></button><br>
   {% endfor %}
 {% else %}
   No files are exites
