@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from LMS import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView, LoginView
@@ -564,7 +564,10 @@ assignments = [
 
 upload_assignments = [
     path('upload_assignment/<int:id>', upload_assignment_list, name='upload_assignment_list'),
+    re_path(r'^upload_assignment/(?P<id>\d+)/(?P<a_id>True|False)/(?P<class_id>\w+)/$', upload_assignment_list1, name='upload_assignment_list1'),
+    re_path(r'^assignment_mark/(?P<id>\d+)/(?P<a_id>True|False)/(?P<class_id>\w+)/(?P<student_id>\d+)/$', assignment_mark, name='assignment_mark'),
     path('upload_assignment/create/<int:qst_id>', upload_assignment_create, name='upload_assignment_create'),
+    re_path(r'^staff_upload_assignment_create/create/(?P<qst_id>\d+)/(?P<state>True|False)/(?P<class_id>\w+)/$', staff_upload_assignment_create, name='staff_upload_assignment_create'),
     path('upload_assignment/edit/<int:pk>', upload_assignment_edit, name='upload_assignment_edit'),
     path('upload_assignment/delete/<int:pk>/<int:qst_id>', upload_assignment_delete, name='upload_assignment_delete'),
 ]

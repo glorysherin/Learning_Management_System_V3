@@ -523,6 +523,13 @@ class Assignment(models.Model):
     def __str__(self):
         return self.title
 
+class Assignment_mark(models.Model):
+    id = models.AutoField(primary_key=True)
+    student_id = models.IntegerField()
+    Assignment_id = models.IntegerField()
+    mark = models.IntegerField()
+    
+    
 class Upload_Assignment(models.Model):
     id = models.AutoField(primary_key=True)
     update_by = models.IntegerField()
