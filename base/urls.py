@@ -326,6 +326,8 @@ teacher = [
          see_question_view, name='see-question'),
     path('teacher/remove-question/<int:pk>',
          remove_question_view, name='remove-question'),
+    path('teacher/assignments',
+         assignments, name='assignments'),
 ]
 
 exam = [

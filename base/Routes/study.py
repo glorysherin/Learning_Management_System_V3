@@ -1103,3 +1103,6 @@ def view_attendees_by_roolno_percentage(request, roll_no):
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
     return render(request, 'class_room/percentage_attendees.html', student_detials(request, 'View Attendence', context))
+def assignments(request):
+    return render(request, 'teacher/assignments.html',staff_detials(request,'Assignment'))
+
