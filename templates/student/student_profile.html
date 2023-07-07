@@ -2,42 +2,200 @@
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    #edit{
+      color: white;
+    }
+  </style>
 </head>
-
 <body>
-  <div>
-    <!-- component -->
-    <div style="padding: 5px;" class="bg-gray-200 font-sans h-screen w-full flex flex-row justify-center items-center ">
-      <div style="padding-bottom: 20px;" class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
-        <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white" src="{{ usr.profile_pic.url }}" alt="">
-        <div class="text-center mt-2 text-3xl font-medium">Student Profile</div>
-
-        <div class="px-6 text-center mt-2 font-light text-sm" style="text-align: left;">
-          <p>
-            <b> Name:</b> {{ student.get_name }}
-          </p>
-          <p><b> Address: {{ student.address }}</p>
-          <p><b> Mobile:</b> {{ student.mobile }}</p>
-          <p><b> Joined Year:</b> {{ student.joinned_year }}</p>
-          <p><b> Role No: </b>{{ student.role_no }}</p>
-          <p><b> Department:</b> {{ student.department }}</p>
-          <br>
-          <button style="background-color: rgb(6, 6, 97);color: white;width: 60px;border-radius: 7px; padding: 3px;"><a
-              href="{% url 'student_edit' pk=usr.id %}">EDIT</a></button>
+  <section style="background-color: #eee;">
+    
+    <div class="container py-5">
+      
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <h1 class="text-gray-700 font-bold">
+              Student Profile</h1>
+          </nav>
         </div>
-
-
       </div>
-    </div>
-  </div>
-</body>
+  
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <svg style="margin: 30px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M12 21v-2.125l5.3-5.3l2.125 2.125l-5.3 5.3H12Zm-9-5v-2h7v2H3Zm17.125-1L18 12.875l.725-.725q.275-.275.7-.275t.7.275l.725.725q.275.275.275.7t-.275.7l-.725.725ZM3 12v-2h11v2H3Zm0-4V6h11v2H3Z" /></svg>
+            <div class="card-body text-center">
+              
+              <img src="{{ student.profile_pic.url }}" alt="{{ teacher.get_name }} profile picture"
+                class="rounded-circle img-fluid" style="width: 150px;">
+                {% if student %}
+                <h5 class="my-3">{{ student.get_name }}</h5>
+              <!-- <p class="text-muted mb-1">Full Stack Developer</p>
+              <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+              <div class="d-flex justify-content-center mb-2">
+                <button type="button" class="btn btn-primary">Follow</button>
+                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+              </div> -->
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">https://mdbootstrap.com</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                  <p class="mb-0">mdbootstrap</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                  <p class="mb-0">@mdbootstrap</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                  <p class="mb-0">mdbootstrap</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                  <p class="mb-0">mdbootstrap</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-linkedin fa-lg" style="color: #3b5998;"></i>
+                  <p class="mb-0">mdbootstrap</p>
+                </li>
+              </ul>
+            </div>
+          </div><br>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: #3b5998;margin-left: 60px;border: none;">
+            Update Links
+          </button>
+          <br><br>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ student.get_name }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Address:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ student.address }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Role:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ student.role }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Mobile:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ student.mobile }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Status:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ student.status }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Department:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ student.department }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Salary:</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ student.salary }}</p>
+                </div>
+              </div>
+              <hr>
+              <button id="edit" class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded" style="background-color: #3b5998;margin-left: 60px;border: none;color: white;" ><a style="color: white;"
+                href="{% url 'student_edit' pk=usr.id %}">EDIT</a></button>
 
+              
+            </div>
+          </div>
+          {% else %}
+    <p>student not found.</p>
+          {% endif %}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  </p>
+                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                  <div class="progress rounded mb-2" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <div class="flex justify-center"> <br>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style="background-color: #3b5998; border: none;">
+                      Update Skills
+                    </button>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+           
+  </section>
+</body>
 </html>
-{% endblock %}
+{% endblock content %}
