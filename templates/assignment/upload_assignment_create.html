@@ -1,25 +1,97 @@
-<!-- Create a form to add a new upload assignment -->
+{% extends 'student/studentbase.html' %}
 
-<h1>{{ title }}</h1>
+{% block content %}
 
-<h3>Subject : {{ data.subject }}</h3>
-<h3>Class id : {{ data.class_id }}</h3>
-<h3>Update by : {{ data.update_by }}</h3>
-<h3>Date : {{ data.date }}</h3>
+<div class="container">
+  <div class="card" style="margin: 20px;">
+    <div class="card mb-4">
 
+    <div class="card-body">
+      <h3 class="card-title">Title: {{ title }}</h3>
 
-<h4>{{ data.details }}</h4>
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="flex" style="display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-content: stretch;
+          justify-content: space-between;">
+            <div class="w-1/2">
+              <h4 class="card-title">Subject</h4>
+              <p>{{ data.subject }}</p>
+            </div>
+            <div class="w-1/2">
+              <h4 class="card-title">Class id</h4>
+              <p>{{ data.class_id }}</p>
+            </div>
+          </div>
+          <hr>
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name="file" required>
-    <button type="submit">Add Assignment</button>
-  </form>
+          <div class="flex" style="display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-content: stretch;
+          justify-content: space-between;">
+            <div class="w-1/2">
+              <h4 class="card-title">Update by</h4>
+              <p>{{ data.update_by }}</p>
+            </div>
+            <div class="w-1/2" style="display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-content: flex-end;
+            align-items: flex-end;
+        ">
+              <h4 class="card-title">Date</h4>
+              <p>{{ data.date }}</p>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
 
-{% if file %}
-  {% for i in file %}
-    {{ i.File }} <button><a href="{% url 'upload_assignment_delete' pk=i.id qst_id=qst_id %}">delete</a></button><br>
-  {% endfor %}
-{% else %}
-  No files are exites
-{% endif %}
+      <div class="card bg-light mb-4" style="min-height: 200px;">
+        <div class="card-body">
+          <h4 class="card-title">Details</h4>
+          <p>{{ data.details }}</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+              <input type="file" name="file" required class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Assignment</button>
+          </form>
+        </div>
+      </div>
+
+      {% if file %}
+        <div class="card mt-4">
+          <div class="card-body">
+            <h3>Uploaded Files:</h3>
+            <ul>
+              {% for i in file %}
+                <li>
+                  {{ i.File }}
+                  <button style="border: none;background-color: #FE3F40;margin-left: 30px;" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"><a href="{% url 'upload_assignment_delete' pk=i.id qst_id=qst_id %}" class="text-danger" style="color: white !important;">Delete</a></button>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% else %}
+        <div class="card mt-4">
+          <div class="card-body">
+            <p>No files exist.</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

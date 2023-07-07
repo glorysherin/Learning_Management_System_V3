@@ -54,7 +54,7 @@ def upload_assignment_create(request,qst_id):
         upload_assignment = Upload_Assignment.objects.create(update_by=request.user.id, File=file, Assignment_id=qst_id)
         upload_assignment.save()
         return redirect('upload_assignment_create',qst_id=qst_id)
-    return render(request, 'assignment/upload_assignment_create.html',{'data':obj,"file":file,"qst_id":qst_id})
+    return render(request, 'assignment/upload_assignment_create.html',student_detials(request,"upload Assignment",{'data':obj,"file":file,"qst_id":qst_id}))
 
 def upload_assignment_edit(request, pk):
     upload_assignment = get_object_or_404(Upload_Assignment, pk=pk)
@@ -75,4 +75,4 @@ def upload_assignment_delete(request, pk, qst_id):
     if request.method == 'POST':
         upload_assignment.delete()
         return redirect('upload_assignment_create',qst_id=qst_id)
-    return render(request, 'assignment/upload_assignment_delete.html', {'upload_assignment': upload_assignment,"qst_id":qst_id})
+    return render(request, 'assignment/upload_assignment_delete.html',student_detials(request,"Delete_assignment", {'upload_assignment': upload_assignment,"qst_id":qst_id}))

@@ -1,6 +1,16 @@
-<!-- Delete the selected upload assignment -->
-<p>Are you sure you want to delete "{{ upload_assignment }}"?</p>
-<form method="POST">
-  {% csrf_token %}
-  <button type="submit">Delete</button>
-</form>
+{% extends 'student/studentbase.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+  <div class="max-w-md mx-auto mt-4">
+    <div class="bg-white shadow-md rounded-lg p-6" style="margin-bottom: 30px;">
+      <h2 class="text-xl font-medium mb-4">Delete the uploaded assignment</h2>
+      <p>Are you sure you want to delete "{{ upload_assignment }}"?</p>
+      <form method="POST" class="mt-4">
+        {% csrf_token %}
+        <button style="background-color: rgb(231, 101, 68);border: none;" type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
