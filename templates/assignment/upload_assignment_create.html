@@ -1,9 +1,25 @@
 <!-- Create a form to add a new upload assignment -->
+
+<h1>{{ title }}</h1>
+
+<h3>Subject : {{ data.subject }}</h3>
+<h3>Class id : {{ data.class_id }}</h3>
+<h3>Update by : {{ data.update_by }}</h3>
+<h3>Date : {{ data.date }}</h3>
+
+
+<h4>{{ data.details }}</h4>
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="number" name="update_by" placeholder="Update By" required>
     <input type="file" name="file" required>
-    <input type="number" name="assignment_id" placeholder="Assignment ID" required>
     <button type="submit">Add Assignment</button>
   </form>
-  
+
+{% if file %}
+  {% for i in file %}
+    {{ i.File }} <button><a href="{% url 'upload_assignment_delete' pk=i.id qst_id=i.id %}">delete</a></button><br>
+  {% endfor %}
+{% else %}
+  No files are exites
+{% endif %}

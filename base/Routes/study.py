@@ -15,6 +15,7 @@ import urllib.parse
 from django.db.models import Sum, Max
 from django.http import JsonResponse
 from random import choice
+from django.db.models import Count
 
 from .Tool.Tools import student_detials, staff_detials
 
@@ -113,18 +114,24 @@ def nave_home_classroom(request, pk, class_id):
         updated_by = [get_user_name_byid(i.update_by) for i in table_datas]
         collected = []
         status_data = []
+        notes = []
         for i in table_datas:
             try:
                 datas = Upload_Assignment.objects.filter(Assignment_id=i.id)
-                datas.append(len(datas))
-                if len(peoples) == len(datas):
+                notes.append(datas)
+                user_count = Upload_Assignment.objects.filter(Assignment_id=i.id).values('update_by').distinct().count()
+                collected.append(user_count)
+                print("user_count",user_count)
+                if len(peoples) == user_count:
                     status_data.append(True)
                 else:
                     status_data.append(False)
             except:
+                notes.append(None)
+                print("Error occered.....!")
                 collected.append(0)
                 status_data.append(False)
-                
+        
         empty = True if len(table_datas)>0 else False
                 
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -133,11 +140,11 @@ def nave_home_classroom(request, pk, class_id):
             obj = User.objects.get(id=request.user.id)
             student_data = Student.objects.get(user=obj)
             if Room.objects.filter(name=class_id).exists():
-                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data)})
+                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data,notes)})
             else:
                 new_room = Room.objects.create(name=class_id)
                 new_room.save()
-                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data)})
+                return render(request, 'class_room/student_class_room.html', {'student_data': student_data, 'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data,notes)})
 
         elif is_teacher(request.user):
             print("Teacher are worrking...")

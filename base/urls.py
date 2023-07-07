@@ -563,10 +563,10 @@ assignments = [
 ]
 
 upload_assignments = [
-    path('upload_assignment', upload_assignment_list, name='upload_assignment_list'),
-    path('upload_assignment/create', upload_assignment_create, name='upload_assignment_create'),
+    path('upload_assignment/<int:id>', upload_assignment_list, name='upload_assignment_list'),
+    path('upload_assignment/create/<int:qst_id>', upload_assignment_create, name='upload_assignment_create'),
     path('upload_assignment/edit/<int:pk>', upload_assignment_edit, name='upload_assignment_edit'),
-    path('upload_assignment/delete/<int:pk>', upload_assignment_delete, name='upload_assignment_delete'),
+    path('upload_assignment/delete/<int:pk>/<int:qst_id>', upload_assignment_delete, name='upload_assignment_delete'),
 ]
 
 urlpatterns.extend(Make_Join([upload_assignments, assignments, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
