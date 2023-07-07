@@ -1,6 +1,11 @@
 <!-- Delete the selected upload assignment -->
+{% extends 'student/studentbase.html' %}
+
+{% block content %}
 <p>Are you sure you want to delete "{{ upload_assignment }}"?</p>
 <form method="POST">
   {% csrf_token %}
   <button type="submit">Delete</button>
 </form>
+
+{% endblock content %}
