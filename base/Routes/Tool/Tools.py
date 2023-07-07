@@ -43,6 +43,10 @@ def get_user_name(request):
     faculty_details = Faculty_details.objects.get(mail=usr_obj.username)
     return faculty_details.user_name
 
+def get_user_name_byid(usr_id):
+    usr_obj = User.objects.get(id=usr_id)
+    faculty_details = Faculty_details.objects.get(mail=usr_obj.username)
+    return faculty_details.user_name
 
 def get_user_obj(request):
     usr_id = request.user.id

@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from base.models import Assignment
 
-def assignment_list(request):
-    assignments = Assignment.objects.all()
-    return render(request, 'assignment/assignment_list.html', {'assignments': assignments})
+def assignment_list(request,class_id):
+    assignments = Assignment.objects.filter(class_id=class_id)
+    return render(request, 'assignment/assignment_list.html', {'assignments': assignments,'class_id':class_id})
 
 def assignment_add(request,class_id):
     if request.method == 'POST':
@@ -12,7 +12,7 @@ def assignment_add(request,class_id):
         details = request.POST['details']
         assignment = Assignment(update_by=request.user.id, subject=subject, title=title, details=details,class_id=class_id)
         assignment.save()
-        return redirect('assignment_list')
+        return redirect('assignment_list',class_id=class_id)
     return render(request, 'assignment/assignment_add.html')
 
 def assignment_edit(request, pk):

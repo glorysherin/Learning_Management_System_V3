@@ -7,4 +7,4 @@
     <a href="{% url 'assignment_delete' pk=assignment.pk %}">Delete</a>
   </div>
 {% endfor %}
-<a href="{% url 'assignment_add' %}">Add Assignment</a>
+<a href="{% url 'assignment_add' class_id=class_id %}">Add Assignment</a>

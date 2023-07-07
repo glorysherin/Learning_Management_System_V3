@@ -987,13 +987,16 @@ JEC-Class room  </title>
           <thead class="bg-white border-b">
             <tr>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Subject Code
+                Subject Code 
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Uploaded by
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Title
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Date
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Status
@@ -1007,20 +1010,37 @@ View
             </tr>
           </thead>
           <tbody>
-            
+            {% for i,j,k,l in table_datas %}
             <tr class="bg-gray-100 border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">cs8622</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ i.subject }}</td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                kokila
+                {{ j }}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                palindrome program
+                {{ i.title }}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                status
+                {{ i.date }}
+              </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                {% if l %}
+                <span
+                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden style="    background-color: green; border: 3px solid;
+                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+									<span class="relative">Submited *</span>
+									</span>
+                {% else %}
+                <span
+                                        class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+                                        <span aria-hidden style="    background-color: red; border: 3px solid;"
+                                            class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
+									<span class="relative">Not Submited</span>
+									</span>
+                {% endif %}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                6
+                {{ k }}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -1029,59 +1049,7 @@ View
                 
               </td>
             </tr>
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Jacob
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Dillan
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @fat
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Jacob
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  View
-                </button>
-              </td>
-            </tr>
-            <tr class="bg-gray-100 border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Mark
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Twen
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @twitter
-              </td>
-            </tr>    
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Bob
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Dillan
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @fat
-              </td>
-            </tr>
-            <tr class="bg-gray-100 border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-              <td colspan="2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                Larry the Bird
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @twitter
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
