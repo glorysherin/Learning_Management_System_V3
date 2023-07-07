@@ -30,6 +30,76 @@ JEC-Class room  </title>
           rel="stylesheet">
 </head>
 
+<style>
+  /* CSS */
+.button-86 {
+  all: unset;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  cursor: pointer;
+  z-index: 1;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-86::after,
+.button-86::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all .4s;
+}
+
+.button-86::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #28282d;
+  border-radius: 10px;
+}
+
+.button-86::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.button-86:hover::before {
+  transform: translate(5%, 20%);
+  width: 110%;
+  height: 110%;
+}
+
+.button-86:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.button-86:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
+}
+</style>
+
 <body class="g-sidenav-show bg-gray-100">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
     id="sidenav-main">
@@ -2473,12 +2543,12 @@ JEC-Class room  </title>
          <div class="bg-gray-50 flex-grow p-6"> 
            
             <form
-            action="https://api.web3forms.com/submit"
+            action="{% url 'assignment_add' class_id=detail.subject_code %}"
             method="POST"
             id="form"
             class="needs-validation"
-            novalidate
-          >
+            
+          > {% csrf_token %}
             <input type="hidden" name="apikey" value="YOUR_ACCESS_KEY_HERE" />
             <input
               type="hidden"
@@ -2487,7 +2557,7 @@ JEC-Class room  </title>
             />
             <input
               type="checkbox"
-              name="botcheck"
+              name="subject"
               id=""
               style="display: none;"
             />
@@ -2501,9 +2571,9 @@ JEC-Class room  </title>
                 >
                 <input
                   type="text"
-                  name="name"
+                  name="subject"
                   id="full_name"
-                  placeholder="Enter  subject"
+                  placeholder="Enter subject"
                   required
                   class="w-full px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
                 />
@@ -2521,8 +2591,8 @@ JEC-Class room  </title>
                   >Title</label
                 >
                 <input
-                  type="email"
-                  name="email"
+                  type="text"
+                  name="title"
                   id="email"
                   placeholder="Enter question"
                   required
@@ -2546,7 +2616,7 @@ JEC-Class room  </title>
   
               <textarea
                 rows="4"
-                name="message"
+                name="details"
                 id="message"
                 placeholder="Provide description for assignment."
                 class="w-full h-28 px-3 py-2 bg-white placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300"
@@ -2652,66 +2722,7 @@ JEC-Class room  </title>
             const result = document.getElementById("result");
             // Loop over them and prevent submission
             Array.prototype.slice.call(forms).forEach(function (form) {
-              form.addEventListener(
-                "submit",
-                function (event) {
-                  if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-    
-                    form.querySelectorAll(":invalid")[0].focus();
-                  } else {
-                    /*
-                     * Form Submission using fetch()
-                     */
-    
-                    const formData = new FormData(form);
-                    event.preventDefault();
-                    event.stopPropagation();
-                    const object = {};
-                    formData.forEach((value, key) => {
-                      object[key] = value;
-                    });
-                    const json = JSON.stringify(object);
-                    result.innerHTML = "Please wait...";
-    
-                    fetch("https://api.web3forms.com/submit", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json"
-                      },
-                      body: json
-                    })
-                      .then(async (response) => {
-                        let json = await response.json();
-                        if (response.status == 200) {
-                          result.innerHTML = json.message;
-                          result.classList.remove("text-gray-500");
-                          result.classList.add("text-green-500");
-                        } else {
-                          console.log(response);
-                          result.innerHTML = json.message;
-                          result.classList.remove("text-gray-500");
-                          result.classList.add("text-red-500");
-                        }
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                        result.innerHTML = "Something went wrong!";
-                      })
-                      .then(function () {
-                        form.reset();
-                        form.classList.remove("was-validated");
-                        setTimeout(() => {
-                          result.style.display = "none";
-                        }, 5000);
-                      });
-                  }
-                  form.classList.add("was-validated");
-                },
-                false
-              );
+              
             });
           })();
         </script>
@@ -2805,6 +2816,7 @@ JEC-Class room  </title>
         </div>
 <!-- component -->
 
+{% if empty %}
 <div class="flex flex-col">
   <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -2813,13 +2825,16 @@ JEC-Class room  </title>
           <thead class="bg-white border-b">
             <tr>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                Subject Code
+                Subject Code 
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Uploaded by
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Title
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                Date
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 Status
@@ -2833,19 +2848,37 @@ View
             </tr>
           </thead>
           <tbody>
+            {% for i,j,k,l in table_datas %}
             <tr class="bg-gray-100 border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">cs8622</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ i.subject }}</td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                kokila
+                {{ j }}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                palindrome program
+                {{ i.title }}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                status
+                {{ i.date }}
+              </td>
+              <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                {% if l %}
+                <span
+                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden style="    background-color: green; border: 3px solid;"
+                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+									<span class="relative">Submited</span>
+									</span>
+                {% else %}
+                <span
+                                        class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+                                        <span aria-hidden style="    background-color: red; border: 3px solid;"
+                                            class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
+									<span class="relative">Not Submited</span>
+									</span>
+                {% endif %}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                6
+                {{ k }}
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -2854,66 +2887,39 @@ View
                 
               </td>
             </tr>
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Jacob
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Dillan
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @fat
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Jacob
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  View
-                </button>
-              </td>
-            </tr>
-            <tr class="bg-gray-100 border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Mark
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Twen
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @twitter
-              </td>
-            </tr>    
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Bob
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                Dillan
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @fat
-              </td>
-            </tr>
-            <tr class="bg-gray-100 border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-              <td colspan="2" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-center">
-                Larry the Bird
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                @twitter
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
-        {% for i in dep %}
+{% else %}
+<!-- This is an example component -->
+  <div class='py-8 mx-auto bg-white rounded-lg shadow-xl' style="    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;">
+      <div class=' space-y-6 flex justify-center' style="
+      display: flex;
+      flex-direction: column;
+      width: 173px;
+  ">
+          <h1>The Assignments Not Updated Till Now</h1>
+          <a href="{% url 'assignment_add' class_id=detail.subject_code %}" >
+              <!-- HTML !-->
+<button class="button-86" role="button">Update Assignments</button>
+
+          </a>
+
+      </div>
+  </div>
+
+<h1></h1>
+{% endif %}
+
+
+{% for i in dep %}
         <div class="col-12 mt-4">
           <div class="card mb-4">
             <div class="card-header pb-0 p-3">
