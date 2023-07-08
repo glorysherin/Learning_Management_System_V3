@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from base.models import Upload_Assignment, Assignment,Student, Assignment_mark
 from .Tool.Tools import student_detials, staff_detials
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 def upload_assignment_list(request,id):
     users = Upload_Assignment.objects.filter(Assignment_id=id).values('update_by').distinct()
@@ -13,35 +14,67 @@ def upload_assignment_list(request,id):
         sample.append(student)
     print(sample)
     return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample)}))
-
+ 
 def assignment_mark(request,id,a_id,class_id,student_id):
     mark = request.POST.get('mark')
+    exists = Assignment_mark.objects.filter(Assignment_id=id).exists()
     print("mark is  : ",mark,student_id)
-    # assignment_mark = Assignment_mark(student_id=student_id, Assignment_id=id, mark=mark)
-    # assignment_mark.save()
+    if not exists: 
+       new_assignment_mark = Assignment_mark(
+            student_id=student_id,  # Set the student_id value
+            Assignment_id=id,  # Set the Assignment_id value
+            mark=90  # Set the mark value
+        )
+    else:
+       return render(request,'attandees/mark_already_updated.html')
+    new_assignment_mark.save()
     return redirect('upload_assignment_list1',id=id,a_id=a_id,class_id=class_id)
+
+def edit_assignment_mark(request,id):
+    mark = request.POST.get("mark")
+    try:
+        assignment_mark = Assignment_mark.objects.get(id=id)
+        assignment_mark.mark = mark
+        assignment_mark.save()
+        return redirect("classroom")
+    except Assignment_mark.DoesNotExist:
+        return None
 
 def upload_assignment_list1(request,id,a_id,class_id):
     users = Upload_Assignment.objects.filter(Assignment_id=id).values('update_by','Assignment_id').distinct()
     sample=[]
+    usr = []
     for i in users:
         user = User.objects.get(id=i.get('update_by'))
         student = Student.objects.get(user=user)
         sample.append(student)
+        usr.append(Upload_Assignment.objects.filter(Assignment_id=i.get('update_by')))
     first_user = users.first()
     first_update_by = first_user['Assignment_id']
-    print(first_update_by)
+    print(first_update_by,sample)
     title = Assignment.objects.get(id=first_update_by)
-    return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample),'status':a_id,"class_id":class_id,'id':id,'title':title}))
+    return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample),'status':a_id,"class_id":class_id,'id':id,'title':title,'asm_id':first_update_by}))
 
 
-def staff_upload_assignment_create(request,qst_id,state,class_id):
+def staff_upload_assignment_create(request,qst_id,state,class_id,std):
+    print("std",std)
     try:
-        file = Upload_Assignment.objects.filter()  # Add appropriate filter conditions if needed
+        file = Upload_Assignment.objects.filter(update_by=std)  # Add appropriate filter conditions if needed
     except Upload_Assignment.DoesNotExist:
         file = None
+        
+    obj1 = Assignment.objects.filter(id=qst_id)
     obj = Assignment.objects.get(id=qst_id)
-    return render(request, 'assignment/staff_upload_assignment_create.html',{'data':obj,"file":file,"qst_id":qst_id,"state":state,"class_id":class_id})
+    for i in obj1:
+        print(i.update_by)
+    print(std,qst_id)
+    try:
+        assignment_mark = Assignment_mark.objects.get(student_id=std, Assignment_id=qst_id)
+        mark = assignment_mark
+    except ObjectDoesNotExist:
+        mark = None
+    
+    return render(request, 'assignment/staff_upload_assignment_create.html',{'data':obj,"file":file,"qst_id":qst_id,"state":state,"class_id":class_id,"std":std,"mark":mark})
 
 
 

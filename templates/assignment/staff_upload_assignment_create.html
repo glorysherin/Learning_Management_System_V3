@@ -6,14 +6,26 @@
 <h3>Class id : {{ data.class_id }}</h3>
 <h3>Update by : {{ data.update_by }}</h3>
 <h3>Date : {{ data.date }}</h3>
-
-
+{% if mark %}
+  <h4>Mark : {{ mark.mark }}</h4>
+{% else %}
+  <h4>Mark are not updated</h4>
+{% endif %}
 <h4>{{ data.details }}</h4>
 
-<form method="POST" action="{% url 'assignment_mark' id=data.id a_id=state student_id=data.update_by class_id=class_id %}" >
+{% if mark %}
+<form method="POST" action="{% url 'edit_assignment_mark' id=mark.id %}" >  
+{% else %}
+<form method="POST" action="{% url 'assignment_mark' id=qst_id a_id=state student_id=std class_id=class_id %}" >
+{% endif %}
     {% csrf_token %}
-    <input type="text" name="mark" required>
+    {% if mark %}
+    <input type="number" name="mark" value="{{ mark.mark }}" required>
+    <button type="submit">Edit mark</button>
+    {% else %}
+    <input type="number" name="mark" required>
     <button type="submit">update mark</button>
+    {% endif %}
 </form>
 
 {% if file %}
