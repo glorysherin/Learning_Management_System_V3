@@ -77,7 +77,7 @@ def staff_upload_assignment_create(request,qst_id,state,class_id,std):
     return render(request, 'assignment/staff_upload_assignment_create.html',{'data':obj,"file":file,"qst_id":qst_id,"state":state,"class_id":class_id,"std":std,"mark":mark})
 
 
-
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> student assiment >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def upload_assignment_create(request,qst_id):
     obj = Assignment.objects.get(id=qst_id)
     try:
@@ -90,7 +90,7 @@ def upload_assignment_create(request,qst_id):
         upload_assignment.save()
         return redirect('upload_assignment_create',qst_id=qst_id)
     return render(request, 'assignment/upload_assignment_create.html',student_detials(request,"upload Assignment",{'data':obj,"file":file,"qst_id":qst_id}))
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def upload_assignment_edit(request, pk):
     upload_assignment = get_object_or_404(Upload_Assignment, pk=pk)
     if request.method == 'POST':
