@@ -355,7 +355,7 @@
             <span class="nav-link-text ms-1">Meet</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link  " href="{% url 'admin_chat_lobby' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -383,7 +383,7 @@
             <span class="nav-link-text ms-1">Conference</span>
           </a>
         </li>
-       
+        -->
 
         <li class="nav-item">
           <a class="nav-link  " href=" {% url 'admin_chat_home' %}">
@@ -1084,7 +1084,7 @@
                 <span class="nav-link-text ms-1">Meet</span>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link  " href="{% url 'staff_chat_lobby' %}">
                 <div
                   class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -1115,7 +1115,7 @@
                 </div>
                 <span class="nav-link-text ms-1">Conference</span>
               </a>
-            </li>
+            </li> -->
           
             <li class="nav-item">
               <a class="nav-link  " href="{% url 'staff_chat_home' %}">
@@ -1500,7 +1500,7 @@
               <h6 style="color: black;" class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
             </li>
             <li class="nav-item">
-              <a class="nav-link  active" href=" {% static 'admin/pages/profile.html' %} ">
+              <a class="nav-link  active" href="  {% static 'admin/pages/profile.html' %}  ">
                 <div
                   class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -1683,7 +1683,7 @@
             <span class="nav-link-text ms-1">Meet</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link  " href="{% url 'staff_chat_lobby' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -1714,7 +1714,7 @@
             </div>
             <span class="nav-link-text ms-1">Conference</span>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link  " href="{% url 'staff_list_blog' %}">
             <div
@@ -2050,7 +2050,7 @@
           <h6 style="color: black;" class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link  active" href=" {% static 'admin/pages/profile.html' %} ">
+          <a class="nav-link  active" href="{% url 'teacher_profile' staff_id=pro_id.id %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
