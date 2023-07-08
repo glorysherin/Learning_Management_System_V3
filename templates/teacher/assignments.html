@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                            {% for j,i,k in datas %}
+                            {% for j,i in datas %}
                             <tr>
                                 <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                                     <div class="inline-flex items-center gap-x-3">
@@ -88,11 +88,11 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ k.title }}</td>
+                                <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ title }}</td>
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div class="flex items-center gap-x-6">
                                         <button class="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                            <a href="{% url 'staff_upload_assignment_create' qst_id=k.id state=status class_id=class_id %}">Archive</a>
+                                            <a href="{% url 'staff_upload_assignment_create' qst_id=id state=status class_id=class_id %}">Archive</a>
                                         </button>
                                     </div>
                                 </td>

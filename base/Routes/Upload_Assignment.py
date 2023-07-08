@@ -22,16 +22,17 @@ def assignment_mark(request,id,a_id,class_id,student_id):
     return redirect('upload_assignment_list1',id=id,a_id=a_id,class_id=class_id)
 
 def upload_assignment_list1(request,id,a_id,class_id):
-    table_datas = Assignment.objects.filter(class_id=class_id)
-    users = Upload_Assignment.objects.filter(Assignment_id=id).values('update_by')
+    users = Upload_Assignment.objects.filter(Assignment_id=id).values('update_by','Assignment_id').distinct()
     sample=[]
     for i in users:
-        print("id is....",i.get('update_by'))
         user = User.objects.get(id=i.get('update_by'))
         student = Student.objects.get(user=user)
         sample.append(student)
-    print(sample)
-    return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample,table_datas),'status':a_id,"class_id":class_id}))
+    first_user = users.first()
+    first_update_by = first_user['update_by']
+    print(first_update_by)
+    return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample),'status':a_id,"class_id":class_id,'id':id,'title':"title"}))
+
 
 def staff_upload_assignment_create(request,qst_id,state,class_id):
     try:
