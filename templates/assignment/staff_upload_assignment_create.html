@@ -1,4 +1,7 @@
 <!-- Create a form to add a new upload assignment -->
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
 
 <h1>{{ title }}</h1>
 
@@ -23,3 +26,6 @@
 {% else %}
   No files are exites
 {% endif %}
+
+{% endblock content %}
+
