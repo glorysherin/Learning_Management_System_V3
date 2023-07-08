@@ -10,9 +10,10 @@
 </head>
 
 <body>
-    <div class="mx-auto mt-5 w-11/12 sm:w-2/3 lg:w-1/2 bg-white p-5 rounded-lg shadow-md" style="width: auto;">
+    <div class="mx-auto mt-5 w-11/12 sm:w-2/3 lg:w-1/2 bg-white p-5 rounded-lg shadow-md" style="width: auto;margin-bottom: 30px;">
         <h1 class="text-center text-3xl font-bold mb-5">Get Example Code</h1>
-        <a href="{% url 'toolHome' %}"> <button  style="margin-top: -100px;" class="absolute  left-10 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">Back </button></a> 
+        <a href="{% url 'toolHome' %}"> <button  style="margin-top: -120px;
+            margin-left: -20px;" class="absolute  left-10 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">Back </button></a> 
 
         <form method="post">
             {% csrf_token %}
