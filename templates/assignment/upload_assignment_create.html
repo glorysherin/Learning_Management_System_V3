@@ -76,7 +76,7 @@
             <ul>
               {% for i in file %}
                 <li>
-                  {{ i.File }}
+                  {{ i.File }} 
                   <button style="border: none;background-color: #FE3F40;margin-left: 30px;" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"><a href="{% url 'upload_assignment_delete' pk=i.id qst_id=qst_id %}" class="text-danger" style="color: white !important;">Delete</a></button>
                 </li>
               {% endfor %}
