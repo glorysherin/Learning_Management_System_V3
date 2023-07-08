@@ -59,7 +59,7 @@ def staff_list_by_dep(request):
         'students': students,
         'departments': departments,
     }
-    return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Students',context))
+    return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Staff',context))
 
 
 
