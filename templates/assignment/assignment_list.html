@@ -1,3 +1,7 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+
 {% for assignment in assignments %}
   <div>
     <h3>{{ assignment.title }}</h3>
@@ -8,3 +12,5 @@
   </div>
 {% endfor %}
 <a href="{% url 'assignment_add' class_id=class_id %}">Add Assignment</a>
+
+{% endblock content %}

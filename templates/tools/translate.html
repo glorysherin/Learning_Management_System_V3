@@ -7,7 +7,7 @@
 
     <h1 style="text-align: center;">Google Translate</h1>
 
-    <form style="background-color: white; padding: 20px;" method="post" action="trans">
+    <form style="background-color: white; padding: 20px;margin-bottom: 60px;" method="post" action="trans">
       {% csrf_token %}
       <label for="text">Enter text:</label>
       <input type="text" name="text" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
@@ -27,9 +27,8 @@
         style="background-color: #007bff; color: #fff; padding: 10px; border: none; width: 100%; cursor: pointer;">Translate</button>
     </form>
     {% if translation %}
-    <hr>
-    <h2>Translation:</h2>
-    <p>{{ translation.text }}</p>
+   <div style="margin-bottom: 50px;"><h2>Translation:</h2>
+    <p style="margin-bottom: 30px;">{{ translation.text }}</p></div> 
     {% endif %}
   </div>
 </div>

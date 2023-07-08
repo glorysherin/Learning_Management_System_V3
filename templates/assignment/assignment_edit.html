@@ -1,3 +1,7 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="text" name="subject" placeholder="Subject" value="{{ assignment.subject }}" required><br>
@@ -5,4 +9,7 @@
     <input type="text" name="details" placeholder="Details" value="{{ assignment.details }}" required><br>
     <button type="submit">Save</button>
   </form>
+
+  {% endblock content %}
+
   
