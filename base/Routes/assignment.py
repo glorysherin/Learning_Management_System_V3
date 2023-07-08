@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from base.models import Assignment
+from .Tool.Tools import student_detials, staff_detials
+
 
 def assignment_list(request,class_id):
     assignments = Assignment.objects.filter(class_id=class_id)
-    return render(request, 'assignment/assignment_list.html', {'assignments': assignments,'class_id':class_id})
+    return render(request, 'assignment/assignment_list.html',staff_detials(request,'assignment list',{'assignments': assignments,'class_id':class_id}))
 
 def assignment_add(request,class_id):
     if request.method == 'POST':
@@ -23,7 +25,7 @@ def assignment_edit(request, pk):
         assignment.details = request.POST['details']
         assignment.save()
         return redirect('assignment_list')
-    return render(request, 'assignment/assignment_edit.html', {'assignment': assignment})
+    return render(request, 'assignment/assignment_edit.html',staff_detials(request,' Edit Assignment',{'assignment': assignment}) )
 
 def assignment_delete(request, pk):
     assignment = get_object_or_404(Assignment, pk=pk)

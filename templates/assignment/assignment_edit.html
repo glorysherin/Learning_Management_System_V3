@@ -1,8 +1,30 @@
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="text" name="subject" placeholder="Subject" value="{{ assignment.subject }}" required><br>
-    <input type="text" name="title" placeholder="Title" value="{{ assignment.title }}" required><br>
-    <input type="text" name="details" placeholder="Details" value="{{ assignment.details }}" required><br>
-    <button type="submit">Save</button>
-  </form>
+{% extends 'teacher/teacherbase.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="flex justify-center">
   
+  <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-6" style="display: flex;flex-wrap: wrap;align-content: center;justify-content: flex-start;margin-top: 10px;">
+    <h3 style="text-align: center;">Edit Assignment</h3>
+    <form method="POST" enctype="multipart/form-data" style="margin-top: 10%;">
+      {% csrf_token %}
+      
+      <div class="mb-4">
+        <h4 class="card-title">Subject: </h4>
+        <input type="text" name="subject" placeholder="Subject" value="{{ assignment.subject }}" required class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500">
+      </div>
+      <div class="mb-4">
+        <h4 class="card-title">Title: </h4>
+        <input type="text" name="title" placeholder="Title" value="{{ assignment.title }}" required class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500">
+      </div>
+      <div class="mb-4">
+        <h4 class="card-title">Details: </h4>
+        <input type="text" name="details" placeholder="Details" value="{{ assignment.details }}" required class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500">
+      </div>
+      <button style="background-color: rgb(4, 4, 110) ;color: white;" type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Save</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
