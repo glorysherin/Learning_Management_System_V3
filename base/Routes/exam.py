@@ -126,14 +126,18 @@ def update_teacher_view(request, pk):
     else:
         return render(request, 'exam/update_teacher.html', staff_detials(request,'Update User Details',{'teacher': teacher}))
 
-
+ 
 
 @login_required(login_url='adminlogin')
 def delete_teacher_view(request, pk):
     teacher = TMODEL.Teacher.objects.get(id=pk)
+    print(teacher.user_id)
     user = User.objects.get(id=teacher.user_id)
+    obj= Users.objects.get(connect_id= user.id)
     user.delete()
     teacher.delete()
+    obj.delete()
+    print("both are deleted")
     return HttpResponseRedirect('/admin-view-teacher')
 
 
