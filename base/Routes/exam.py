@@ -144,7 +144,7 @@ def delete_teacher_view(request, pk):
 @login_required(login_url='adminlogin')
 def admin_view_pending_teacher_view(request):
     teachers = TMODEL.Teacher.objects.all().filter(status=False)
-    return render(request, 'exam/admin_view_pending_teacher.html', {'teachers': teachers})
+    return render(request, 'exam/admin_view_pending_teacher.html', staff_detials(request,'Pending Teacher',{'teachers': teachers}))
 
 
 @login_required(login_url='adminlogin')
@@ -160,7 +160,7 @@ def approve_teacher_view(request, pk):
         else:
             print("form is invalid")
         return HttpResponseRedirect('/admin-view-pending-teacher')
-    return render(request, 'exam/salary_form.html', {'teacherSalary': teacherSalary})
+    return render(request, 'exam/salary_form.html', staff_detials(request,'Approve Teacher',{'teacherSalary': teacherSalary}))
 
 
 @login_required(login_url='adminlogin')

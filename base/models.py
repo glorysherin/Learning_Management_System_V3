@@ -472,9 +472,9 @@ class Pages(models.Model):
 
 
 class Department(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,unique=True)
     description = models.TextField()
-    short_name = models.CharField(max_length=100)
+    short_name = models.CharField(max_length=100,unique=True)
 
     def __str__(self):
         return self.name

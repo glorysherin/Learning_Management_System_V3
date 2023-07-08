@@ -29,9 +29,10 @@ def upload_assignment_list1(request,id,a_id,class_id):
         student = Student.objects.get(user=user)
         sample.append(student)
     first_user = users.first()
-    first_update_by = first_user['update_by']
+    first_update_by = first_user['Assignment_id']
     print(first_update_by)
-    return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample),'status':a_id,"class_id":class_id,'id':id,'title':"title"}))
+    title = Assignment.objects.get(id=first_update_by)
+    return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample),'status':a_id,"class_id":class_id,'id':id,'title':title}))
 
 
 def staff_upload_assignment_create(request,qst_id,state,class_id):
