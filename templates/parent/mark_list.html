@@ -5,11 +5,13 @@
 	<input type="text" placeholder="Search by month" id="search-box">
 	<button type="submit" id="search-btn"><i class="fa fa-search">Search</i></button>
   </div>
-  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="card">
     <div class="card-header">
         <h3>Mark List for Roll No. {{ roll_no }}</h1>
     </div>
+    <canvas id="chart"></canvas>
+
     <div class="card-body">
         {% for date, mark_data in mark_dict.items %}
         <div class="mark-section">
@@ -38,6 +40,7 @@
         <p>No marks found for this roll number.</p>
         {% endfor %}
     </div>
+
 </div>
 
 <style>
@@ -133,20 +136,39 @@
 
 </style>
 <script>
-    const searchBtn = document.querySelector('#search-btn');
-    const searchBox = document.querySelector('#search-box');
-    const markSections = document.querySelectorAll('.mark-section');
+    var ctx = document.getElementById('chart').getContext('2d');
+    var labels = [];
+    var marks = [];
 
-    searchBtn.addEventListener('click', () => {
-        const searchTerm = searchBox.value.toLowerCase();
-        markSections.forEach(section => {
-            const sectionDate = section.querySelector('h5').textContent.toLowerCase();
-            if (sectionDate.includes(searchTerm)) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
+    {% for date, data in mark_dict.items %}
+        {% for mark in data.marks %}
+            labels.push("{{ mark.subject }}");
+            marks.push("{{ mark.mark }}");
+        {% endfor %}
+    {% endfor %}
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Marks',
+                data: marks,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
-        });
+        }
     });
 </script>
 </div>

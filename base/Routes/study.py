@@ -16,7 +16,10 @@ from django.db.models import Sum, Max
 from django.http import JsonResponse
 from random import choice
 from django.db.models import Count
-
+from dateutil import rrule
+import xlwt
+from io import BytesIO
+from base.export import Internal_test_markResource
 from .Tool.Tools import student_detials, staff_detials
 
 def is_teacher(user):
@@ -483,7 +486,7 @@ def update_attendes(request):
             obj.save()
         for i in Attendees.objects.all():
             print(i.user_name, i.subject_states)
-    return render(request, 'class_room/attendes.html',staff_detials(request,'Update Attendees'))
+    return render(request, 'msg/edit_attendes_home.html',staff_detials(request,'Update Attendees'))
 
 
 def update_edited_attendes(request):
@@ -518,28 +521,64 @@ def message_possitive(request):
 def edit_attendes_home(request):
     return render(request, 'class_room/edit_attendes_home.html',staff_detials(request,'Edit Attendes'))
 
+from django.http import HttpResponse
+from base.export import AttendeesResource
 
 def edit_attendes(request):
     class_id = request.GET.get('class_id')
     date = request.GET.get('date')
-    print(class_id,date)
-    for i in Attendees.objects.all():
-        print(i.class_id, f"[{i.Date}]", i.user_name)
-    attendees = Attendees.objects.filter(class_id=class_id, Date=date)
-    context = {'attendees': [[i, j] for i, j in enumerate(attendees)],'date':date}
-    print(context)
-    return render(request, 'class_room/edit_attendes.html',staff_detials(request,'Edit Attendes',context))
+    action = request.GET.get('action')
+    if action == 'filter':
+        print(class_id,date)
+        for i in Attendees.objects.all():
+            print(i.class_id, f"[{i.Date}]", i.user_name)
+        attendees = Attendees.objects.filter(class_id=class_id, Date=date)
+        context = {'attendees': [[i, j] for i, j in enumerate(attendees)],'date':date}
+        print(context)
+        return render(request, 'class_room/edit_attendes.html',staff_detials(request,'Edit Attendes',context))
+
+    elif action == 'download':
+        # Get the attendees queryset
+        attendees = Attendees.objects.filter(class_id=class_id, Date=date)
+
+        # Generate the export data
+        resource = AttendeesResource()
+        data = resource.export(attendees)
+
+        # Create a response with the rendered data as a file
+        response = HttpResponse(data.xls, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="upload_assignments.xls"'
+
+        return response
+    
 
 
 def view_attendes(request):
     class_id = request.GET.get('class_id')
     date = request.GET.get('date')
-    for i in Attendees.objects.all():
-        print(i.class_id, f"[{i.Date}]", i.user_name, i.subject_states)
+    action = request.GET.get('action')
     attendees = Attendees.objects.filter(class_id=class_id, Date=date)
     context = {'attendees': attendees}
-    return render(request, 'class_room/sample.html',staff_detials(request,'View Attendes', context))
+    if action == 'filter':
+        for i in Attendees.objects.all():
+            print(i.class_id, f"[{i.Date}]", i.user_name, i.subject_states)
+        attendees = Attendees.objects.filter(class_id=class_id, Date=date)
+        context = {'attendees': attendees}
+    elif action == 'download':
+        # Get the attendees queryset
+        attendees = Attendees.objects.filter(class_id=class_id, Date=date)
 
+        # Generate the export data
+        resource = AttendeesResource()
+        data = resource.export(attendees)
+
+        # Create a response with the rendered data as a file
+        response = HttpResponse(data.xls, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="upload_assignments.xls"'
+
+        return response
+    return render(request, 'class_room/sample.html',staff_detials(request,'View Attendes', context))
+    
 
 def add_class_notes(request, pk):
     if request.method == 'POST':
@@ -631,7 +670,7 @@ def edit_mark(request):
     context = {'attendees': [[i, j]
                              for i, j in enumerate(attendees)], 'courses': courses, 'date': date}
     print(context)
-    return render(request, 'class_room/edit_mark.html', staff_detials(request,'Edit Daily Test Mark',context))
+    return render(request, 'msg/mark_edited.html')
 
 
 def update_edited_mark(request):
@@ -682,14 +721,52 @@ def add_test_marks(request, class_id):
             peoples.append(obj)
         except:
             pass
-    sub = Course.objects.all()
+    sub = NoteCourse.objects.all()
     print("sub", sub)
     context ={'class_id': class_id, 'subjects': sub, 'comp': [[i, j] for i, j in enumerate(peoples)]}
     return render(request, 'class_room/add_test_marks.html', staff_detials(request,'Update mark',context))
   
 def test_marks(request, class_id):
+    
     if request.method == 'POST':
-        pass
+        test_marks = Internal_test_mark.objects.filter(class_id=class_id).order_by('roll_no').order_by('assesment_no')
+        # Create the workbook and worksheet
+        workbook = xlwt.Workbook()
+        worksheet = workbook.add_sheet('Test Marks')
+
+        # Write the headers
+        headers = ['#', 'Roll No', 'Name', 'Assessment No', 'Subject', 'Mark', 'Date']
+        for col, header in enumerate(headers):
+            worksheet.write(0, col, header)
+
+        # Write the data rows
+        row = 1
+        current_assessment_no = None
+        print([[ j, Student.objects.filter(role_no=j.roll_no)[0].get_name] for i, j in enumerate(test_marks)])
+        for mark,name in [[ j, Student.objects.filter(role_no=j.roll_no)[0].get_name] for i, j in enumerate(test_marks)]:
+            if mark.assesment_no != current_assessment_no:
+                if current_assessment_no is not None:
+                    # Add two empty lines between different assessment numbers
+                    row += 2
+                current_assessment_no = mark.assesment_no
+
+            worksheet.write(row, 0, row)
+            worksheet.write(row, 1, mark.roll_no)
+            worksheet.write(row, 2, name if name else '')
+            worksheet.write(row, 3, mark.assesment_no if mark.assesment_no else '')
+            worksheet.write(row, 4, mark.subject)
+            worksheet.write(row, 5, mark.Date.strftime('%Y-%m-%d'))
+            worksheet.write(row, 6, mark.mark)
+
+            row += 1
+
+        # Create a response with the workbook data as a file
+        response = HttpResponse(content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="test_marks.xls"'
+        workbook.save(response)
+
+        return response
+        
     peoples = []
     people = class_enrolled.objects.filter(subject_code=class_id)
     for i in people:
@@ -699,9 +776,12 @@ def test_marks(request, class_id):
             peoples.append(obj)
         except:
             pass
-    test_marks = Internal_test_mark.objects.filter(class_id=class_id)
+    test_marks = Internal_test_mark.objects.filter(class_id=class_id).order_by('roll_no').order_by('assesment_no')
+    
+    test_marks_ass = Internal_test_mark.objects.filter(class_id=class_id).values('assesment_no').distinct()
+    print(test_marks)
    
-    return render(request, 'class_room/test_marks.html',staff_detials(request,'Add test Mark', {'class_id': class_id, 'test_marks': [[i, j, Student.objects.filter(role_no=j.roll_no)[0].get_name] for i, j in enumerate(test_marks)], 'students': peoples}))
+    return render(request, 'class_room/test_marks.html',staff_detials(request,'Add test Mark', {'test_marks_ass':[ i['assesment_no'] for i in test_marks_ass],'class_id': class_id, 'test_marks': [[i, j, Student.objects.filter(role_no=j.roll_no)[0].get_name] for i, j in enumerate(test_marks)], 'students': peoples}))
 
 
 def edit_test_marks(request, class_id, sub, ass_no):
@@ -727,7 +807,7 @@ def edit_test_marks(request, class_id, sub, ass_no):
 
     test = Internal_test_mark.objects.filter(
         class_id=class_id, subject=sub, assesment_no=ass_no)
-    sub = Course.objects.all()
+    sub = NoteCourse.objects.all()
 
     return render(request, 'class_room/edit_test_mark.html',staff_detials(request,'Edit Test Mark', {'subjects': sub, 'class_id': class_id, 'comp': [[i, j] for i, j in enumerate(test)]}))
 
@@ -830,6 +910,7 @@ def user_mark_view(request, class_id):
     peoples = []
     people = class_enrolled.objects.filter(subject_code=class_id)
     test = class_enrolled.objects.all()
+    sub = NoteCourse.objects.all()
     for i in test:
         print(i.class_id, i.mail_id, i.subject_code)
     for i in people:
@@ -853,7 +934,7 @@ def user_mark_view(request, class_id):
                 user_name=user_name, Date=date, subject=department)
         context = {'marks': marks}
         return render(request, 'class_room/user_marks.html', context)
-    return render(request, 'class_room/user_mark_form.html', staff_detials(request,'View Daily Test',{'people': peoples}))
+    return render(request, 'class_room/user_mark_form.html', staff_detials(request,'View Daily Test',{'people': peoples,"sub":sub}))
 
 
 def get_internal_test_marks(request):
@@ -1105,7 +1186,7 @@ def view_attendees_by_roolno_percentage(request, roll_no):
         attendees_list.append(attendee_dict)
 
     context = {
-        'roll_no': roll_no,
+        'roll_no': roll_no, 
         'attendees':attendees,
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
@@ -1113,3 +1194,165 @@ def view_attendees_by_roolno_percentage(request, roll_no):
 def assignments(request):
     return render(request, 'teacher/assignments.html',staff_detials(request,'Assignment'))
 
+from django.core import serializers
+
+def filter_attendees(request):
+    
+    # Get the filter criteria from the request's GET parameters
+    class_id = request.GET.get('class_id')
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    action = request.GET.get('action')
+    context = {}
+    
+    print("action",action)
+    if action == 'Export':
+    
+        attendees = Attendees.objects.filter(class_id=class_id, Date__range=[start_date, end_date])
+
+        # Calculate the counts and percentages
+        total_count = attendees.filter(class_id=class_id).values('Date').distinct().count()
+
+        present_count = attendees.filter(class_id=class_id,subject_states='Present').count()
+        absent_count = attendees.filter(class_id=class_id,subject_states='Absent').count()
+        on_duty_count = attendees.filter(class_id=class_id,subject_states='OnDuty').count()
+
+        if total_count > 0:
+            present_percentage = (present_count / total_count) * 100
+            absent_percentage = (absent_count / total_count) * 100
+            on_duty_percentage = (on_duty_count / total_count) * 100
+        else:
+            present_percentage = 0
+            absent_percentage = 0
+            on_duty_percentage = 0
+
+        # Calculate the person percentages
+        person_percentages = {}
+        for attendee in attendees:
+            person_percentage = (attendee.subject_states.count('Present') / total_count) * 100
+            person_percentages[attendee.user_name] = person_percentage
+            
+        person_present_count = {}
+        for attendee in attendees:
+            if attendee.subject_states == 'Present':
+                person_present_count[attendee.user_name] = person_present_count.get(attendee.user_name, 0) + 1
+
+        # Create the workbook and worksheet
+        workbook = xlwt.Workbook()
+        worksheet = workbook.add_sheet('Attendees')
+
+        # Write the headers
+        headers = ['ID', 'Class ID', 'User Name', 'Roll No', 'Subject States', 'Date', 'Person Percentage', 'Present Count']
+        for col, header in enumerate(headers):
+            worksheet.write(0, col, header)
+
+        # Write the data rows
+        for row, attendee in enumerate(attendees, start=1):
+            worksheet.write(row, 0, attendee.id)
+            worksheet.write(row, 1, attendee.class_id)
+            worksheet.write(row, 2, attendee.user_name)
+            worksheet.write(row, 3, attendee.roll_no)
+            worksheet.write(row, 4, attendee.subject_states)
+            worksheet.write(row, 5, attendee.Date.strftime('%Y-%m-%d'))
+            worksheet.write(row, 6, person_percentages.get(attendee.user_name, 0))
+            worksheet.write(row, 7, person_present_count.get(attendee.user_name, 0))
+
+        # Write the total values
+        total_row = len(attendees) + 2
+        worksheet.write(total_row, 0, 'Total Classes')
+        worksheet.write(total_row, 1, "present_count")
+        worksheet.write(total_row, 2, "absent_count")
+        worksheet.write(total_row, 3, "on_duty_count")
+        worksheet.write(total_row, 4, "present_percentage")
+        worksheet.write(total_row, 5, "absent_percentage")
+        worksheet.write(total_row, 6, "on_duty_percentage")
+        total_row = total_row +1
+        worksheet.write(total_row, 0, total_count)
+        worksheet.write(total_row, 1, present_count)
+        worksheet.write(total_row, 2, absent_count)
+        worksheet.write(total_row, 3, on_duty_count)
+        worksheet.write(total_row, 4, present_percentage)
+        worksheet.write(total_row, 5, absent_percentage)
+        worksheet.write(total_row, 6, on_duty_percentage)
+
+        # Create a BytesIO object to save the workbook
+        output = BytesIO()
+        workbook.save(output)
+
+        # Create a response with the workbook data as a file
+        response = HttpResponse(output.getvalue(), content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="attendees_data.xls"'
+
+        return response
+
+    
+    
+    if action == 'Filter':
+        # Filter the attendees based on the class_id and date range
+        attendees = Attendees.objects.filter(class_id=class_id, Date__range=[start_date, end_date])
+        attendees_json = serializers.serialize('json', attendees)
+        # Calculate the count of present and absent attendees
+        present_count = attendees.filter(subject_states='Present').count()
+        absent_count = attendees.filter(subject_states='absent').count()
+
+        # Calculate the total number of attendees
+        total_count = attendees.filter(class_id=class_id).values('Date').distinct().count()
+
+
+        person_present_count = {}
+        for attendee in attendees:
+            if attendee.subject_states == 'Present':
+                person_present_count[attendee.user_name] = person_present_count.get(attendee.user_name, 0) + 1
+        
+        # Calculate the percentage of each person's attendance
+        person_percentages = {}
+        for attendee in attendees:
+            person_percentage = (attendee.subject_states.count('Present') / total_count) * 100
+            person_percentages[attendee.user_name] = person_percentage
+            
+            # Calculate the count of working days
+        working_days = rrule.rrule(rrule.DAILY, dtstart=datetime.strptime(start_date, '%Y-%m-%d'),
+                                until=datetime.strptime(end_date, '%Y-%m-%d'),
+                                byweekday=(rrule.MO, rrule.TU, rrule.WE, rrule.TH, rrule.FR))
+        attendance_counts = []
+        
+        for i in Attendees.objects.all():
+            print(i.subject_states)
+        
+        for day in working_days:
+            count = Attendees.objects.filter(class_id=class_id, Date=day, subject_states='Present').count()
+            attendance_counts.append(count)
+            
+        working_days_json = json.dumps([date.strftime('%Y-%m-%d') for date in working_days])
+        working_days_count = rrule.rrule(rrule.DAILY, dtstart=datetime.strptime(start_date, '%Y-%m-%d'),
+                                until=datetime.strptime(end_date, '%Y-%m-%d'),
+                                byweekday=(rrule.MO, rrule.TU, rrule.WE, rrule.TH, rrule.FR)).count()
+        # Calculate the absent percentage for each working day
+        total_count = attendees.count()
+        absent_percentages = []
+        for day in working_days:
+            attendees_on_day = attendees.filter(Date=day)
+            attendees_on_day_count = attendees_on_day.count()
+            if attendees_on_day_count > 0:
+                absent_count_on_day = attendees_on_day.filter(subject_states='absent').count()
+                absent_percentage = (absent_count_on_day / attendees_on_day_count) * 100
+            else:
+                absent_percentage = 0
+            absent_percentages.append(absent_percentage)
+        # Calculate the total number of attendees
+        context = {
+            'attendees': attendees,
+            'class_id': class_id,
+            'start_date': start_date,
+            'end_date': end_date,
+            'present_count': present_count,
+            'absent_count': absent_count,
+            'person_percentages': person_percentages,
+            'working_days': zip(working_days,attendance_counts),
+            'working_days_count': working_days_count,
+            'attendees_json': attendees_json,
+            'working_days_json': working_days_json,
+            'absent_percentages': absent_percentages
+        }
+
+    return render(request, 'class_room/filter_attendees.html', context)
