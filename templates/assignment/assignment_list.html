@@ -2,15 +2,27 @@
 
 {% block content %}
 
-{% for assignment in assignments %}
-  <div>
-    <h3>{{ assignment.title }}</h3>
-    <p>{{ assignment.subject }}</p>
-    <p>{{ assignment.details }}</p>
-    <a href="{% url 'assignment_edit' pk=assignment.pk %}">Edit</a>
-    <a href="{% url 'assignment_delete' pk=assignment.pk %}">Delete</a>
+<div class="flex flex-wrap justify-center -mx-4" style="margin-bottom: 60px;">
+  {% for assignment in assignments %}
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+    <div class="bg-white rounded-lg shadow-lg">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">{{ assignment.title }}</h3>
+        <p class="text-gray-600">{{ assignment.subject }}</p>
+        <p class="text-gray-800">{{ assignment.details }}</p>
+      </div>
+      <div class="flex justify-end p-4">
+        <a style="background-color: rgb(118, 102, 189);color: white;" href="{% url 'assignment_edit' pk=assignment.pk %}" class="btn btn-blue mr-2">Edit</a>
+        <a style="background-color: rgb(118, 102, 189);color: white;" href="{% url 'assignment_delete' pk=assignment.pk %}" class="btn btn-red">Delete</a>
+      <!-- </div>
+    </div>
+  </div> -->
+  {% endfor %}
+  <!-- <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+    <div class="bg-white rounded-lg shadow-lg flex items-center justify-center h-full"> -->
+      <a style="background-color: rgb(118, 102, 189);color: white;" href="{% url 'assignment_add' class_id=class_id %}" class="btn btn-green">Add Assignment</a>
+    </div>
   </div>
-{% endfor %}
-<a href="{% url 'assignment_add' class_id=class_id %}">Add Assignment</a>
+</div>
 
 {% endblock content %}
