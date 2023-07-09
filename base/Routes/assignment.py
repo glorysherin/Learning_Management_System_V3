@@ -23,12 +23,12 @@ def assignment_edit(request, pk):
         assignment.title = request.POST['title']
         assignment.details = request.POST['details']
         assignment.save()
-        return redirect('assignment_list')
+        return redirect('assignment_list',class_id=pk)
     return render(request, 'assignment/assignment_edit.html', staff_detials(request,'Edit Assignment',{'assignment': assignment}))
 
 def assignment_delete(request, pk):
     assignment = get_object_or_404(Assignment, pk=pk)
     if request.method == 'POST':
         assignment.delete()
-        return redirect('assignment_list')
+        return redirect('assignment_list',class_id=pk)
     return render(request, 'assignment/assignment_delete.html', staff_detials(request,'Edit Delete',{'assignment': assignment}))
