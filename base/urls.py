@@ -24,7 +24,11 @@ from .Routes.NoCodeViews import *
 from .Routes.manage_links import *
 from .Routes.assignment import *
 from .Routes.Upload_Assignment import *
+<<<<<<< HEAD
+from .Routes.compiler import *
+=======
 from .Routes.social_link import *
+>>>>>>> 7c78ac8366827e6135c15b7c503c4a69dfb54a30
 
 # Initilizes........................
 
@@ -574,11 +578,20 @@ upload_assignments = [
     path('upload_assignment/delete/<int:pk>/<int:qst_id>', upload_assignment_delete, name='upload_assignment_delete'),
 ]
 
+<<<<<<< HEAD
+compile = [
+    path('compiler/', compiler_view, name='compiler')
+    # Add other URL patterns as needed
+]
+
+urlpatterns.extend(Make_Join([compile,upload_assignments, assignments, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+=======
 social = [
     path('edit_social_media', edit_social_media, name='edit_social_media'),
 ]
 
 urlpatterns.extend(Make_Join([social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+>>>>>>> 7c78ac8366827e6135c15b7c503c4a69dfb54a30
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

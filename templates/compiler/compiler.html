@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Compiler</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="code" rows="10" cols="50" placeholder="Enter code here...">{{ code }}</textarea>
+        <br>
+        <select name="language">
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="c">C</option>
+            <option value="html">HTML</option>
+            <option value="css">css</option>
+            <option value="tailwind">Tailwind</option>
+            <option value="bootstrap">Bootstrap</option>
+            <option value="js">js</option>
+        </select>
+            <input type="text" name="input_value" placeholder="Input value">
+            <br>
+        <input type="submit" value="Compile">
+
+    </form>
+
+    {% if result %}
+        <h3>Output:</h3>
+        {% if language == "js" %}
+            <pre>{{ result|safe }}</pre>
+            <script>
+                document.getElementsByTagName('pre')[0].innerHTML = eval(`{{ code|escapejs }}`);
+            </script>
+        {% elif language == 'html' or language == 'tailwind' or language == 'bootstrap' %}
+            <pre>{{ result|safe }}</pre>
+        {% else %}
+            <pre>{{ result }}</pre>
+        {% endif %}
+    {% endif %}
+
+
+    
+</body>
+</html>

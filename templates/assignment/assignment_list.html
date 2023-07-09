@@ -1,4 +1,35 @@
 {% extends 'teacher/teacherbase.html' %}
+<<<<<<< HEAD
+{% load static %}
+{% block content %}
+<div class="card" style="margin-top: 10px;justify-content: center;text-align: right;">
+  <div class="card-body">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- <div class="mb-4">
+        <input type="file" name="file" required class="form-control-file">
+      </div> -->
+      <button style="margin-right: 10%;background-color: rgb(4, 4, 84);" type="submit" ><a href="{% url 'assignment_add' class_id=class_id %}" style="color: white;">Add Assignment</a></button>
+    </form>
+  </div>
+</div><br>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for assignment in assignments %}
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <h3 style="text-align: center;" class="text-lg font-semibold mb-2"><b> Title: </b>{{ assignment.title }}</h3>
+      <p class="text-gray-600 mb-4"><b>Subject:</b>{{ assignment.subject }}</p>
+      <p class="text-gray-800"><b> Details:</b>{{ assignment.details }}</p>
+      <div class="mt-4">
+        <button style="border: none;background-color: #ba0101;margin-left: 30px;color: white !important;" class="inline-block bg-red-500 hover:bg-red-600  font-bold py-2 px-4 rounded"><a href="{% url 'assignment_edit' pk=assignment.pk %}" style="color: white;">Edit</a></button>
+        <button style="border: none;background-color: #ba0101;margin-left: 30px;" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" ><a href="{% url 'assignment_delete' pk=assignment.pk %}" class="text-red-500 hover:text-red-700"style="color: white;">Delete</a></button>
+      </div>
+    </div><br>
+  {% endfor %}
+</div>
+<br>
+
+<!-- <a href="{% url 'assignment_add' class_id=class_id %}" class="block mt-4 text-blue-500 hover:text-blue-700">Add Assignment</a> -->
+=======
 
 {% block content %}
 
@@ -12,5 +43,6 @@
   </div>
 {% endfor %}
 <a href="{% url 'assignment_add' class_id=class_id %}">Add Assignment</a>
+>>>>>>> 03b413a6eca33bae4c2ae75ab9c552ea9a04ddc0
 
 {% endblock content %}

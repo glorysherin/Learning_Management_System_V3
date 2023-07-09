@@ -525,7 +525,7 @@ nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
 
-conversation = {"hello":["hello","hey, hello how can i help you"],"who are you":["i am lms chatbot"," am a chatbot"],"how are you":["I'm great, thank you! How can I assist you today?" ,"I'm great, thank you!"],"what's the weather like today":["The weather is sunny and warm today. It's a perfect day to go outside!"],"How can I reset my password?":["To reset your password, you can go to the login page and click on the 'Forgot Password'."],"what are the tools available":['''<ul>
+conversation = {"hello":["hello","hey, hello how can i help you"],"How can I access the course materials?":[" To access the course materials, log in to your account, go to the course page, and you will find the materials "], "who are you":["i am lms chatbot"," am a chatbot"],"how are you":["I'm great, thank you! How can I assist you today?" ,"I'm great, thank you!"],"what's the weather like today":["The weather is sunny and warm today. It's a perfect day to go outside!"],"How can I reset my password?":["To reset your password, you can go to the login page and click on the 'Forgot Password'."],"what are the tools available":['''<ul>
   <li>User Management</li>
   <li>Course Management</li>
   <li>Content Management</li>
@@ -540,9 +540,9 @@ conversation = {"hello":["hello","hey, hello how can i help you"],"who are you":
   <li><img src="https://github.com/glorysherin/JEC/blob/main/Glory.jpeg" alt="pic "<a href="https://github.com/glorysherin">Glory Sherin</a></li>
   <li><img src="" alt="pic "<a href="https://github.com/MohanKumarMurugan">Mohan Kumar</a></li>
 </ul>
-'''],"  Tell me about yourself.":["I'm an AI-powered chatbot designed to provide assistance and engage in friendly conversations. How can I help you today?"]}
+'''],"Tell me about yourself.":["I'm an AI-powered chatbot designed to provide assistance and engage in friendly conversations. How can I help you today?"]}
 # Define synonyms for common question words
-synonyms = {"what": ["what", "which", "where", "when", "how"],
+synonyms = {"what": ["what", "which", "where", "when", "how","who"],
             "is": ["is", "are", "am", "was", "were", "be", "being", "been"]}
 
 # Generate a list of synonyms for a given word using WordNet
