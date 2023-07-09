@@ -17,7 +17,7 @@ class CustomJSONEncoder(json.JSONEncoder):
 def parent_student_int_test_marks(request, roll_no):
     queryset = Internal_test_mark.objects.filter(
         roll_no=roll_no
-    ).order_by('-assesment_no', '-Date')
+    ).order_by('-Date').order_by('-assesment_no')
 
     year = request.GET.get('year')
     if year:
@@ -101,7 +101,7 @@ def pview_attendees_by_roolno_graph(request, roll_no):
         'attendees':attendees,
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
-    return render(request, 'parent/graph_attendees.html', student_detials(request, 'View Attendence', context))
+    return render(request, 'parent/graph_attendees.html', context)
 
 def pview_attendees_by_roolno_percentage(request, roll_no):
     attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
@@ -119,4 +119,4 @@ def pview_attendees_by_roolno_percentage(request, roll_no):
         'attendees':attendees,
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
     }
-    return render(request, 'parent/percentage_attendees.html', student_detials(request, 'View Attendence', context))
+    return render(request, 'parent/percentage_attendees.html', context)

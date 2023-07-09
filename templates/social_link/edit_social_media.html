@@ -1,0 +1,22 @@
+<form method="POST" action="{% url 'edit_social_media' %}">
+    {% csrf_token %}
+    <label for="portfolio">Portfolio:</label>
+    <input type="url" id="portfolio" name="portfolio" value="{{ social_media.portfolio }}">
+    
+    <label for="twitter">Twitter:</label>
+    <input type="url" id="twitter" name="twitter" value="{{ social_media.twitter }}">
+    
+    <label for="linkedin">LinkedIn:</label>
+    <input type="url" id="linkedin" name="linkedin" value="{{ social_media.linkedin }}">
+    
+    <label for="github">GitHub:</label>
+    <input type="url" id="github" name="github" value="{{ social_media.github }}">
+    
+    <label for="facebook">Facebook:</label>
+    <input type="url" id="facebook" name="facebook" value="{{ social_media.facebook }}">
+    
+    <label for="instagram">Instagram:</label>
+    <input type="url" id="instagram" name="instagram" value="{{ social_media.instagram }}">
+    
+    <button type="submit">Save</button>
+</form>

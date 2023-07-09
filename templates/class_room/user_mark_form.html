@@ -71,7 +71,12 @@
         <input type="date" id="date" name="date"><br><br>
         
         <label for="department">Subject:</label>
-        <input type="text" id="department" name="department"><br><br>
+        <select name="department" id="department">
+            {% for i in sub %}
+            <option value="{{ i.name }}">{{ i.name }}</option>
+            {% endfor %}
+        </select>
+       <br><br>
         
         <input type="submit" value="Submit">
     </form>
