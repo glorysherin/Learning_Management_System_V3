@@ -84,12 +84,17 @@ def upload_assignment_create(request,qst_id):
         file = Upload_Assignment.objects.filter(update_by=request.user.id)  # Add appropriate filter conditions if needed
     except Upload_Assignment.DoesNotExist:
         file = None
+    try:
+        assignment_mark = Assignment_mark.objects.get(student_id=request.user.id, Assignment_id=qst_id)
+        mark = assignment_mark
+    except ObjectDoesNotExist:
+        mark = None
     if request.method == 'POST':
         file = request.FILES['file']
         upload_assignment = Upload_Assignment.objects.create(update_by=request.user.id, File=file, Assignment_id=qst_id)
         upload_assignment.save()
         return redirect('upload_assignment_create',qst_id=qst_id)
-    return render(request, 'assignment/upload_assignment_create.html',student_detials(request,"upload Assignment",{'data':obj,"file":file,"qst_id":qst_id}))
+    return render(request, 'assignment/upload_assignment_create.html',student_detials(request,"upload Assignment",{'data':obj,"file":file,"qst_id":qst_id,"mark":mark}))
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 def upload_assignment_edit(request, pk):
     upload_assignment = get_object_or_404(Upload_Assignment, pk=pk)

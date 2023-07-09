@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        {% load custom_filters %}
+
+        <style>
+            .box-theme {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+        
+            .box-theme .box {
+                width: 48%;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 4px;
+            }
+        
+            .box-theme .box:nth-child(odd) {
+                background-color: white;
+                color: black;
+
+            }
+        
+            .box-theme .box:nth-child(even) {
+                background-color: black;
+                color: white;
+
+            }
+        
+            .box-theme .box p {
+                color: black;
+            }
+        
+            @media (max-width: 768px) {
+                .box-theme .box {
+                    width: 100%;
+                }
+            }
+        </style>
+
+    <link href=
+    "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet">
+    <form method="get" action="{% url 'filter_attendees' %}" class="bg-white p-4 rounded shadow mb-4">
+    <div>
+        <div class="flex flex-col mb-4">
+            <label for="class_id" class="mb-2 text-gray-700">Class ID:</label>
+            <input type="text" id="class_id" name="class_id" value="{{ request.GET.class_id }}"
+            class="border border-gray-300 rounded py-2 px-3">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="start_date" class="mb-2 text-gray-700">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ request.GET.start_date }}"
+            class="border border-gray-300 rounded py-2 px-3">
+        </div>
+        <div class="flex flex-col mb-4">
+            <label for="end_date" class="mb-2 text-gray-700">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ request.GET.end_date }}"
+            class="border border-gray-300 rounded py-2 px-3">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded" name="action" value="Export">Export</button>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded" name="action" value="Filter">Filter</button>
+        </form>
+    </div>
+
+
+<div class="box-theme" style="color: black;">
+    <div class="box">
+        <h1 class="text-2xl font-bold mb-4">Filtered Attendees</h1>
+        <div class="bg-white rounded-lg p-4 shadow-md" style="height: 432px;">
+            <p class="mb-2"><span class="font-semibold">Class ID:</span> {{ class_id }}</p>
+            <p class="mb-2"><span class="font-semibold">Date Range:</span> {{ start_date }} to {{ end_date }}</p>
+            <p>No. of Working Days: {{ working_days_count }}</p>
+
+        </div>
+    </div>
+
+    <div class="box" style="
+    height: 500px;
+    overflow-y: scroll;
+">
+        <h1 class="text-2xl font-bold mb-4">Working Days</h1>
+        <div class="bg-black rounded-lg p-4 shadow-md">
+            <p class="mb-2"><span class="font-semibold">No. of Working Days:</span> {{ working_days_count }}</p>
+            <p class="mb-2">Working Days:</p>
+            <ul>
+                {% for working_day, count in working_days %}
+                <li>{{ working_day|date:"Y-m-d" }} - Present: {{ count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <table class="bg-white rounded shadow">
+    <thead>
+        <tr>
+        <th class="py-2 px-4 bg-gray-100 text-gray-800">User Name</th>
+        <th class="py-2 px-4 bg-gray-100 text-gray-800">States</th>
+        <th class="py-2 px-4 bg-gray-100 text-gray-800">Date</th>
+        <th class="py-2 px-4 bg-gray-100 text-gray-800">Roll No</th>
+        <th class="py-2 px-4 bg-gray-100 text-gray-800">Attendance Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for attendee in attendees %}
+        <tr>
+            <td class="py-2 px-4">{{ attendee.user_name }}</td>
+            <td class="py-2 px-4">{{ attendee.subject_states }}</td>
+            <td class="py-2 px-4">{{ attendee.Date|date:"F d, Y" }}</td>
+            <td class="py-2 px-4">{{ attendee.roll_no }}</td>
+            <td class="py-2 px-4">
+                <div class="progress bg-gray-200 rounded">
+                    <div class="progress-bar bg-blue-500"
+                        role="progressbar"
+                        style="width: {{ person_percentages|get_item:attendee.user_name }}%;"
+                        aria-valuenow="{{ person_percentages|get_item:attendee.user_name }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+                        {{ person_percentages|get_item:attendee.user_name }}%
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% if forloop.last %}
+            <tr class="month-separator">
+                <td colspan="5">
+                    {% with last_month=attendees|last_attendance_month %}
+                    {% if last_month %}
+                        {{ last_month|date:"F Y" }}
+                    {% endif %}
+                    {% endwith %}
+                </td>
+            </tr>
+        {% else %}
+            {% with current_month=attendee.Date|date:"F Y" %}
+                {% with next_attendee=attendees|get_next_attendee:forloop.counter %}
+                    {% if next_attendee and next_attendee.Date|date:"F Y" != current_month %}
+                        <tr class="month-separator">
+                            <td colspan="5">{{ current_month }}</td>
+                        </tr>
+                    {% endif %}
+                {% endwith %}
+            {% endwith %}
+        {% endif %}
+        {% endfor %}
+    </tbody>
+    
+    </table>
+    <canvas id="attendeesChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+    <script>
+        // Get the counts from the server-side context
+        var presentCount = {{ present_count }};
+        var absentCount = {{ absent_count }};
+
+        // Create the chart
+        var ctx = document.getElementById('attendeesChart').getContext('2d');
+        var attendeesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Present', 'Absent'],
+                datasets: [{
+                    label: 'Attendees',
+                    data: [presentCount, absentCount],
+                    backgroundColor: ['green', 'red']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: {{ attendees.count }}
+                    }
+                }
+            }
+        });
+    </script>
+
+
+</html>

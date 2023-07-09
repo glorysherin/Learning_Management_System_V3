@@ -24,7 +24,11 @@ from .Routes.NoCodeViews import *
 from .Routes.manage_links import *
 from .Routes.assignment import *
 from .Routes.Upload_Assignment import *
+<<<<<<< HEAD
 from .Routes.compiler import *
+=======
+from .Routes.social_link import *
+>>>>>>> 7c78ac8366827e6135c15b7c503c4a69dfb54a30
 
 # Initilizes........................
 
@@ -155,8 +159,7 @@ admin = [
     path('students_list_by_dep', students_list_by_dep,
          name='students_list_by_dep'),
     path('class_dates', class_dates, name='class_dates'),
-    path('class_dates/data/<str:class_id>/<str:date>/',
-         export_attendees, name='export_attendees'),
+
     path('class_dates/<int:id>/delete_attendee/',
          delete_attendee, name='delete_attendee'),
     path('class_dates/<int:id>/edit_attendee/',
@@ -256,7 +259,7 @@ classroom = [
     path("mark/<str:class_id>", mark, name='mark'),
     path("update_marks", update_mark),
     path("edit_mark_home", edit_mark_home, name='edit_mark_home'),
-    path("edit_mark", edit_mark),
+    path("edit_mark", edit_mark,name="edit_mark"),
     path("update_edited_mark", update_edited_mark),
     path("marks_by_class/<str:class_id>",
          marks_by_class, name='marks_by_class'),
@@ -265,6 +268,7 @@ classroom = [
     path('class_ebook/<int:pk>/edit/', class_ebook_edit, name='class_ebook_edit'),
     path('class_ebook/<int:pk>/delete/',
          class_ebook_delete, name='class_ebook_delete'),
+    path('filter_attendees', filter_attendees, name='filter_attendees'),
 
 ]
 
@@ -556,7 +560,7 @@ links_management = [
     path('links/delete/<int:pk>/<str:class_id>', delete_youtube_link, name='delete_youtube_link'),
 ]
 
-assignments = [
+assignments_ = [
     path('assignments/list/<str:class_id>', assignment_list, name='assignment_list'),
     path('assignments/add/<str:class_id>', assignment_add, name='assignment_add'),
     path('assignments/edit/<int:pk>', assignment_edit, name='assignment_edit'),
@@ -574,12 +578,20 @@ upload_assignments = [
     path('upload_assignment/delete/<int:pk>/<int:qst_id>', upload_assignment_delete, name='upload_assignment_delete'),
 ]
 
+<<<<<<< HEAD
 compile = [
     path('compiler/', compiler_view, name='compiler')
     # Add other URL patterns as needed
 ]
 
 urlpatterns.extend(Make_Join([compile,upload_assignments, assignments, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+=======
+social = [
+    path('edit_social_media', edit_social_media, name='edit_social_media'),
+]
+
+urlpatterns.extend(Make_Join([social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+>>>>>>> 7c78ac8366827e6135c15b7c503c4a69dfb54a30
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from base import models
 from .Forms import student_forms
-from ..models import Users, Student, Faculty_details, Sec_Daily_test_mark, Department, Teacher
+from ..models import Users, Student, SocialMedia, Sec_Daily_test_mark, Department, Teacher
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -78,12 +78,17 @@ def student_delete(request, student_id):
 def student_profile(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     usr_id = request.user.id
-    usr_obj = User.objects.get(id=usr_id)
+    # usr_obj = User.objects.get(id=usr_id)
     std_data = get_object_or_404(Student, pk=student_id) # it's modifyed for admin acces if you have any problem change it usr_obj
+    try:
+        links = SocialMedia.objects.get(std_id=usr_id)
+    except:
+        links=None
     dict_data = {
         'usr': std_data,
         'page': 'Student Profile',
-        'student': student
+        'student': student,
+        'links':links
     }
     return render(request, 'student/student_profile.html', student_detials(request, 'Student Profile' ,dict_data))
 

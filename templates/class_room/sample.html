@@ -74,7 +74,9 @@
             <input type="text" id="class_id" name="class_id" class="form-input" value="{{ request.GET.class_id }}"><br>
             <label for="date" class="form-label"><b>Date:</b></label><br>
             <input type="date" id="date" name="date" class="form-input" value="{{ request.GET.date }}"><br>
-            <button type="submit" class="form-submit">Filter</button><br>
+            <button type="submit"  class="form-submit" name="action" value="download">Download</button>
+            <button type="submit"  class="form-submit" name="action" value="Filter">Filter</button>
+
         </form>
 
         {% if attendees %}

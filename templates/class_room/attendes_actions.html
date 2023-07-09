@@ -107,6 +107,41 @@
 
                 </div>
             </div>
+            <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                <div class="card" style="    height: 100%;">
+                    <div class="d-flex justify-content-between p-3">
+                        <p class="lead mb-0">View Attendes between the date</p>
+                        <div class="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 small">4</p>
+                        </div>
+                    </div>
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/001/879/509/small/compare-prices-for-individual-stores-and-products-find-the-best-prices-with-more-discounts-and-promos-flat-illustration-for-landing-page-web-website-banner-mobile-apps-flyer-poster-free-vector.jpg"
+                        class="card-img-top" alt="Gaming Laptop" />
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <p class="small"><a href="#!" class="text-muted">{{ class_obj.class_name }}</a></p>
+                            <p class="small text-danger"><s>Sem-{{ class_obj.semester }}</s></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">Subject code</h5>
+                            <h5 class="text-dark mb-0">SubCode {{ class_obj.subject_code }}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted mb-0">department:
+                                <span class="fw-bold">{{ class_obj.department }}</span>
+                            </p>
+                        </div>
+                    </div><a style="    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;" href="{% url 'filter_attendees' %}"><button type="button"
+                            class="btn btn-primary btn-rounded">View</button></a>
+
+                </div>
+            </div>
 
         </div>
     </div>

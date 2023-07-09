@@ -26,6 +26,7 @@
             </div>
           </div>
           <hr>
+          
 
           <div class="flex" style="display: flex;
           flex-direction: row;
@@ -33,8 +34,12 @@
           align-content: stretch;
           justify-content: space-between;">
             <div class="w-1/2">
-              <h4 class="card-title">Update by</h4>
-              <p>{{ data.update_by }}</p>
+              <h4 class="card-title">Mark :</h4>
+              {% if mark %}
+                <p>{{ mark.mark }}</p>
+              {% else %}
+                <p>Mark are not updated</p>
+              {% endif %}
             </div>
             <div class="w-1/2" style="display: flex;
             flex-direction: column;

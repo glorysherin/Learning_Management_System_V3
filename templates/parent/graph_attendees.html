@@ -33,6 +33,7 @@
             </table>
         </div>
     </div>
+    <canvas id="multiline-chart"></canvas>
 </div>
 
 <style>
@@ -202,5 +203,40 @@
         document.getElementById('attendeesChart'),
         config
     );
+    var ctx = document.getElementById('multiline-chart').getContext('2d');
+        var labels = [];
+        var datasets = [];
+        var attendeesData = JSON.parse('{{ attendeesj|escapejs }}');
+
+        attendeesData.forEach(function(data) {
+            labels.push(data.Date);
+            datasets.push({
+                label: 'Subject States - ' + data.Date,
+                data: data.subject_states,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                fill: false
+            });
+        });
+
+        var chartData = {
+            labels: labels,
+            datasets: datasets
+        };
+
+        var chartOptions = {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        var multilineChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: chartOptions
+        });
 </script>
 

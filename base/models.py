@@ -539,3 +539,14 @@ class Upload_Assignment(models.Model):
 
     def __str__(self):
         return f"Upload_Assignment ID: {self.id}"
+
+
+class SocialMedia(models.Model):
+    id = models.IntegerField(primary_key=True)
+    std_id = models.IntegerField(unique=True)
+    portfolio = models.URLField(blank=True, null=True,default="Not Updated")
+    twitter = models.URLField(blank=True, null=True ,default="Not Updated")
+    linkedin = models.URLField(blank=True, null=True ,default="Not Updated")
+    github = models.URLField(blank=True, null=True ,default="Not Updated")
+    facebook = models.URLField(blank=True, null=True ,default="Not Updated")
+    instagram = models.URLField(blank=True, null=True ,default="Not Updated")

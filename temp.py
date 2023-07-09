@@ -57,3 +57,48 @@ while True:
 
 nagipragalathan@gmail.com
 Nagi@7401268091
+
+# download excel sheet
+'''
+# Get the attendees queryset
+        attendees = Attendees.objects.all()
+
+        # Generate the export data
+        resource = AttendeesResource()
+        data = resource.export(attendees)
+
+        # Create a response with the rendered data as a file
+        response = HttpResponse(data.xls, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="upload_assignments.xls"'
+
+        return response
+'''
+
+# download html
+'''
+# Get the attendees queryset
+        attendees = Attendees.objects.all()
+
+        # Generate the export data
+        resource = AttendeesResource()
+        data = resource.export(attendees)
+
+        # Create a response with the rendered data as a file
+        response = HttpResponse(data.xls, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="upload_assignments.xls"'
+
+        return response
+    
+'''
+
+# customized column name 
+'''
+class Upload_AssignmentResource(resources.ModelResource):
+    id = Field(attribute='id', column_name='ID')
+    update_by = Field(attribute='update_by', column_name='Update By')
+    File = Field(attribute='File', column_name='File')
+    Assignment_id = Field(attribute='Assignment_id', column_name='Assignment ID')
+    date = Field(attribute='date', column_name='Date')
+
+    class Meta:
+        model = Upload_Assignment'''

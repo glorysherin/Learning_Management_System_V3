@@ -4,17 +4,47 @@
 
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
 <!-- component -->
+
+<style>
+    .box {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.box-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.box-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+</style>
+
 <section class="container px-4 mx-auto">
     <form>
-        <div>
+        <div class="box">
             <h1>Select Subject</h1>
-            <select name="cars" id="course" name="course" value="{{ attendees.0.1.subject }}">
+            <select class="box-select" id="course" name="course" value="{{ attendees.0.1.subject }}">
                 {% for course in courses %}
                 <option value="{{ course.name }}">{{ course.name }}</option>
                 {% endfor %}
             </select>
-            <input type="date" id="date" name="date">
+            <input class="box-input" type="date" id="date" name="date">
         </div>
+        
         {% csrf_token %}
         <div class="flex flex-col">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -26,8 +56,6 @@
                                     <th scope="col"
                                         class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <div class="flex items-center gap-x-3">
-                                            <input type="checkbox"
-                                                class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
                                             <button class="flex items-center gap-x-2">
                                                 <span>Roll NO</span>
 
@@ -78,8 +106,6 @@
                                     <td
                                         class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                                         <div class="inline-flex items-center gap-x-3">
-                                            <input type="checkbox"
-                                                class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
 
                                             <span>#{{ i.1.roll_no }}</span>
                                         </div>
@@ -106,7 +132,7 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                        <div id="val{{i.0}}">{{ i.1.user_name }}~~{{ i.1.class_id }}~~{{ i.1.roll_no }}</div>
+                                        <div id="val{{i.0}}" style="visibility: hidden;">{{ i.1.user_name }}~~{{ i.1.class_id }}~~{{ i.1.roll_no }}</div>
                                         <input type="text" id="cars{{ i.0 }}" name="{{ i.0.get_name }}"
                                             value="{{ i.1.mark }}"
                                             style="    border: 2px solid;    border-radius: 8px;">

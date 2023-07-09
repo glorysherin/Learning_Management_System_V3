@@ -9,12 +9,12 @@
         <div style="margin-left: 10%;" class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
             <div class="px-6 py-4">
               <div class="font-bold text-xl mb-2">Select Subject</div>
-              <select class="block bg-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="cars" id="course" name="course">
+              <select class="block bg-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="cars" id="course" name="course" required>
                 {% for course in courses %}
                 <option value="{{ course.name }}">{{ course.name }}</option>
                 {% endfor %}
               </select>
-              <input type="date" id="date" name="date" class="block bg-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white">
+              <input type="date" id="date" name="date" class="block bg-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" required>
             </div>
           </div><br>
           
@@ -29,8 +29,6 @@
                                     <th scope="col"
                                         class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                         <div class="flex items-center gap-x-3">
-                                            <input type="checkbox"
-                                                class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
                                             <button class="flex items-center gap-x-2">
                                                 <span>Roll NO</span>
 
@@ -81,8 +79,6 @@
                                     <td
                                         class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                                         <div class="inline-flex items-center gap-x-3">
-                                            <input type="checkbox"
-                                                class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700" />
 
                                             <span>#{{ i.0.role_no }}</span>
                                         </div>
@@ -111,9 +107,9 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                        <div id="val{{ i.1 }}">{{i.0.get_name}}~~{{detail.subject_code}}~~{{i.0.role_no}}</div>
+                                        <div id="val{{ i.1 }}" style="visibility: hidden;">{{i.0.get_name}}~~{{detail.subject_code}}~~{{i.0.role_no}}</div>
                                         <input type="text" id="cars{{ i.1 }}" name="{{ i.0.get_name }}"
-                                            style="    border: 2px solid;    border-radius: 8px;">
+                                            style="    border: 2px solid;    border-radius: 8px;" required>
                                     </td>
                                 </tr>
                                 {% endfor %}
