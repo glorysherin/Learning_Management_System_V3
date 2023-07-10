@@ -450,9 +450,9 @@ https://templatemo.com/tm-565-onix-digital
               <img src="https://i.pinimg.com/originals/4d/00/8b/4d008b130bfc3d54968c88e9cf93c53b.jpg" alt=""
                 style="border-radius: 15px" />
             </div>
-            <p><b>Find the best solution for your questions. </b></p>
+            <p><b>Post the best solution for your students. </b></p>
             <div class="main-blue-button-hover">
-              <a href="{% url 'class_room' %}">View Notes</a>
+              <a href="{% url 'staff_notes_list' %}">View Notes</a>
             </div>
           </div>
         </div>
@@ -464,7 +464,7 @@ https://templatemo.com/tm-565-onix-digital
                 style="border-radius: 15px" />
             </div>
             <p>
-              <b>Video call from long distance to make student future bright.
+              <b>Video call from long distance to make  future bright.
               </b>
             </p>
             <div class="main-blue-button-hover">
@@ -659,17 +659,17 @@ https://templatemo.com/tm-565-onix-digital
             <div class="row">
               <div class="col-lg-10 offset-lg-1">
                 <h2>Get Join your class through link</h2>
-                <div style="
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                      flex-direction: row;
-                    " id="subscribe">
-                  <input type="text" id="join_class" placeholder="Enter the code" style="margin-bottom: 17px"
-                    required="" />
-                  <button id="join_class_btn" onclick="join_class()" class="main-button">
-                    Join ClassRoom
-                  </button>
+                <div  style="display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-content: stretch;
+                justify-content: center;
+                align-items: center;">
+               <div> <input style="margin: 10px;" type="text" id="join_class" placeholder="Enter the code" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
+
+                <div>    <button id="join_class_btn" onclick="join_class()" class="bg-white text-blue-500 hover:bg-blue-500 hover:text-black font-bold py-2 px-4 rounded-full">
+                      Join Classroom
+                    </button></div>
                 </div>
               </div>
             </div>
