@@ -141,6 +141,7 @@ common = [
 admin = [
     path('add_Faculty', add_faculty),
     path('teacher_list', teacher_list, name='teacher_list'),
+    path('handle_toogle/<int:action>', handle_toogle, name='handle_toogle'),
     path('admin_list', admin_list, name='admin_list'),
     path('teacher_delete/<str:teacher_id>',
          teacher_delete, name='teacher_delete'),

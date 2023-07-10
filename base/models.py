@@ -551,3 +551,10 @@ class SocialMedia(models.Model):
     github = models.URLField(blank=True, null=True ,default="Not Updated")
     facebook = models.URLField(blank=True, null=True ,default="Not Updated")
     instagram = models.URLField(blank=True, null=True ,default="Not Updated")
+
+
+class BotControl(models.Model):
+    id = models.IntegerField(primary_key=True)
+    usr_id = models.IntegerField()
+    toggle = models.IntegerField(blank=True)
+    
