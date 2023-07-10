@@ -86,7 +86,7 @@ def admin_teacher_view(request):
         'pending_teacher': TMODEL.Teacher.objects.all().filter(status=False).count(),
         'salary': TMODEL.Teacher.objects.all().filter(status=True).aggregate(Sum('salary'))['salary__sum'],
     }
-    return render(request, 'exam/admin_teacher.html', context=dict)
+    return render(request, 'exam/admin_teacher.html',staff_detials(request,'admin teacher view ', dict))
 
 
 @login_required(login_url='adminlogin')
@@ -189,7 +189,7 @@ def admin_student_view(request):
 @login_required(login_url='adminlogin')
 def admin_view_student_view(request):
     students = SMODEL.Student.objects.all()
-    return render(request, 'exam/admin_view_student.html', {'students': students})
+    return render(request, 'exam/admin_view_student.html',staff_detials(request,'View Students', {'students': students}))
 
 
 @login_required(login_url='adminlogin')
