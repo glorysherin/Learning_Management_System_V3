@@ -2360,6 +2360,8 @@
         </div>
       </div>
     </div>
+    
+    {% if bot == 1 %}
  <!-- CHAT BAR BLOCK -->
  <div class="chat-bar-collapsible">
   <button id="chat-button" type="button" class="collapsible">Chat with us!
@@ -2404,7 +2406,7 @@
   </div>
 
 </div>
-
+{% endif %}
     <div>
       {% block content %}{% endblock %}
     </div>
