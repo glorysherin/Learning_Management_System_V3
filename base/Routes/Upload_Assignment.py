@@ -50,7 +50,10 @@ def upload_assignment_list1(request,id,a_id,class_id):
         sample.append(student)
         usr.append(Upload_Assignment.objects.filter(Assignment_id=i.get('update_by')))
     first_user = users.first()
-    first_update_by = first_user['Assignment_id']
+    try:
+        first_update_by = first_user['Assignment_id']
+    except:
+        return render(request,'msg/no_one_updated.html')
     print(first_update_by,sample)
     title = Assignment.objects.get(id=first_update_by)
     return render(request, 'teacher/assignments.html', staff_detials(request,'Submited Students',{'datas': zip(users,sample),'status':a_id,"class_id":class_id,'id':id,'title':title,'asm_id':first_update_by}))

@@ -195,19 +195,69 @@ margin-bottom:17% ;
                   <p class="mb-4"><span class="text-primary font-italic me-1">Settings</span> 
                   </p>
                   <div style="display: flex;"><p class="mb-1" style="font-size: .77rem;">Chat Bot</p>
-                  <div class="max-w-lg mx-auto">
-                
-                    <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.min.css" />
-                    
-                    <label for="toggle-example" class="flex items-center cursor-pointer relative mb-4">
-                    <input type="checkbox" id="toggle-example" class="sr-only">
-                    <div class="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
-                    <span class="ml-3 text-gray-900 text-sm font-medium"> </span>
-                    </label>
+                    <div class="max-w-lg mx-auto">
+                      <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.min.css" />
+                  
+                      <label for="toggle-example" class="flex items-center cursor-pointer relative mb-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                          <input type="checkbox" id="toggle-example" class="sr-only">
+                          <div class="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
+                          <span class="ml-3 text-gray-900 text-sm font-medium"></span>
+                      </label>
                   </div>
                 </div>
            
   </section>
 </body>
+<script>
+  let count = {{ bot }};
+  console.log("bot : "+count)
+  const toggleExample = document.getElementById('toggle-example');
+  
+  if({{ bot }}==1){
+    toggleExample.click()
+  }else{
+
+  }
+
+  let url; // Declare the url variable outside the if statement
+
+  toggleExample.addEventListener('change', function() {
+    const xhr = new XMLHttpRequest();
+
+    if (count % 2 == 0) {
+      url = "{% url 'handle_toogle' action=1 %}"; // Assign the value to the url variable
+      count++;
+    } else {
+      url = "{% url 'handle_toogle' action=0 %}"; // Assign the value to the url variable
+      count++;
+
+    }
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          location.reload();
+          console.log(response.message);
+          // Handle the response as needed
+        } else {
+          location.reload();
+          console.error('Failed to update toggle state');
+        }
+      }
+    };
+
+    const action = toggleExample.checked ? 1 : 0;
+
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('X-CSRFToken', csrfToken);
+    xhr.send(JSON.stringify({ action: action }));
+  });
+</script>
 </html>
 {% endblock content %}
