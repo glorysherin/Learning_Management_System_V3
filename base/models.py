@@ -125,8 +125,8 @@ class Student(models.Model):
     profile_pic = models.ImageField(
         upload_to='profile_pic/Student/', null=True, blank=True)
     address = models.CharField(max_length=40)
-    mail_id = models.CharField(max_length=40, default="sample@gmail.com") 
-    parent_mail_id = models.CharField(max_length=40, default="sample@gmail.com")
+    mail_id = models.CharField(max_length=40,unique=True) 
+    parent_mail_id = models.CharField(max_length=40, unique=True)
     mobile = models.CharField(max_length=20, null=False)
     joinned_year = models.DateField(default=timezone.now)
     role_no = models.IntegerField(unique=True)

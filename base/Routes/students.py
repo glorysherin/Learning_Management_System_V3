@@ -108,6 +108,7 @@ def student_edit(request, pk):
         student.user.first_name = request.POST['first_name']
         student.user.last_name = request.POST['last_name']
         student.mail_id = request.POST['email']
+        student.parent_mail_id = request.POST['parent_mail_id']
         student.address = request.POST['address']
         student.mobile = request.POST['mobile']
         student.joinned_year = request.POST['joinned_year']
