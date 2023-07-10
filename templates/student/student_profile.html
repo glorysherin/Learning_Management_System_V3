@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col">
           <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-            <h1 class="text-gray-700 font-bold">
+            <h1 class="text-gray-700 font-bold" style="font-size: 30px;">
               Student Profile</h1>
           </nav>
         </div>
@@ -32,7 +32,12 @@
             <a href="{% url 'student_edit' pk=usr.id %}" alt="Edit profile">
             <svg style="margin: 30px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M12 21v-2.125l5.3-5.3l2.125 2.125l-5.3 5.3H12Zm-9-5v-2h7v2H3Zm17.125-1L18 12.875l.725-.725q.275-.275.7-.275t.7.275l.725.725q.275.275.275.7t-.275.7l-.725.725ZM3 12v-2h11v2H3Zm0-4V6h11v2H3Z" /></svg>
           </a>
-            <div class="card-body text-center">
+            <div class="card-body text-center" style="display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: space-evenly;
+            align-items: stretch;">
               
               <img src="{{ student.profile_pic.url }}" alt="{{ teacher.get_name }} profile picture"
                 class="rounded-circle img-fluid" style="width: 150px;">
@@ -124,7 +129,7 @@
                   <p class="text-muted mb-0">{{ student.get_name }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Department :</p>
@@ -133,7 +138,7 @@
                   <p class="text-muted mb-0">{{ student.department }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Role No :</p>
@@ -142,7 +147,7 @@
                   <p class="text-muted mb-0">{{ student.role_no }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Joined Year :</p>
@@ -151,7 +156,7 @@
                   <p class="text-muted mb-0">{{ student.joinned_year }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Mobile :</p>
@@ -160,7 +165,7 @@
                   <p class="text-muted mb-0">{{ student.mobile }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Mail :</p>
@@ -169,7 +174,7 @@
                   <p class="text-muted mb-0">{{ student.mail_id }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Address :</p>
@@ -178,7 +183,7 @@
                   <p class="text-muted mb-0">{{ student.address }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Department :</p>
@@ -187,11 +192,10 @@
                   <p class="text-muted mb-0">{{ student.department }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <button id="edit" class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded" style="background-color: #3b5998;margin-left: 60px;border: none;color: white;" ><a style="color: white;"
                 href="{% url 'student_edit' pk=usr.id %}">EDIT</a></button>
 
-              
             </div>
           </div>
           {% else %}
