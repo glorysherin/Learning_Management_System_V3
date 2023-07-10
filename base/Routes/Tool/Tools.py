@@ -1,6 +1,6 @@
 import openai
 from django.shortcuts import get_object_or_404
-from ...models import Faculty_details, Student, Users, Teacher, Notifications
+from ...models import Faculty_details, Student, Users, Teacher, Notifications, BotControl
 from django.contrib.auth.models import User
 from bs4 import BeautifulSoup
 import requests
@@ -95,6 +95,10 @@ def gpt(queary):
 def student_detials(request, page, dict_inp={}):
     usr_id = request.user.id
     usr_obj = User.objects.get(id=usr_id)
+    try:
+        bot = BotControl.objects.filter(usr_id=request.user.id)[::-1][0].toggle
+    except:
+        bot = 0
     print("working..... role : ",get_current_user_role(request))
     if get_current_user_role(request) == 1:
         dict_={
@@ -117,13 +121,17 @@ def student_detials(request, page, dict_inp={}):
             'usr_role':4
         }
     not_obj =  Notifications.objects.filter(to_user=request.user.id)
-    dict_ = {**dict_,"notification":not_obj}
+    dict_ = {**dict_,"notification":not_obj,'bot':bot}
     print(dict_)
     return {**dict_, **dict_inp}
 
 
 def staff_detials(request, page, dict_inp={}):
     usr_id = request.user.id
+    try:
+        bot = BotControl.objects.filter(usr_id=request.user.id)[::-1][0].toggle
+    except:
+        bot = 0
     usr_obj = User.objects.get(id=usr_id)
     name = Users.objects.get(user_name=usr_obj.username)
     faculty_details = Faculty_details.objects.get(user_name=name.user_name)
@@ -138,7 +146,7 @@ def staff_detials(request, page, dict_inp={}):
         'pro_id':teacher_role
     }
     not_obj =  Notifications.objects.filter(to_user=request.user.id)
-    dict_ = {**dict_,"notification":not_obj}
+    dict_ = {**dict_,"notification":not_obj,'bot':bot}
     return {**dict_, **dict_inp}
 
 def get_current_user_role(request):
