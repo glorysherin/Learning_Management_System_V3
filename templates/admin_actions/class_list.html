@@ -65,7 +65,7 @@
                       <td><a href="class_listout/{{ classroom.subject_code }}">{{ classroom.subject_code }}</a></td>
                       <td>{{ classroom.owner.name }}</td>
                       <td>{{ classroom.discription }}</td>
-                      <td><a href="classroom/class_room/{{classroom.subject_code }}">View</a></td>
+                      <td><button style="background-color: blue;color: white;" type="submit"><a href="classroom/class_room/{{classroom.subject_code }}" style="color: white;">View</a></button></td>
                       <td>
                         <form method="POST">
                           {% csrf_token %}

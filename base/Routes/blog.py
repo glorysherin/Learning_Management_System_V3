@@ -60,7 +60,7 @@ def list_draft_blog(request):
 
 def list_unrevied_draft_blog(request):
     obj =  get_draft_blog_unreview(request)
-    return render(request,"blog/blog_review.html",{"obj":obj})
+    return render(request,"blog/blog_review.html",staff_detials(request,'drafted blog',{"obj":obj}))
 
 def save_edit_blog(request, pk):
     ids = ['#title', '#description', '#content', '#Category', '#Thumbnail']
