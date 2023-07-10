@@ -74,7 +74,7 @@ def staff_upload_assignment_create(request,qst_id,state,class_id,std):
     except ObjectDoesNotExist:
         mark = None
     
-    return render(request, 'assignment/staff_upload_assignment_create.html',{'data':obj,"file":file,"qst_id":qst_id,"state":state,"class_id":class_id,"std":std,"mark":mark})
+    return render(request, 'assignment/staff_upload_assignment_create.html',staff_detials(request,'view Assignment',{'data':obj,"file":file,"qst_id":qst_id,"state":state,"class_id":class_id,"std":std,"mark":mark}))
 
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> student assiment >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

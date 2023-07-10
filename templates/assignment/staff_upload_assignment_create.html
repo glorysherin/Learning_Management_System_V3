@@ -1,43 +1,72 @@
-<!-- Create a form to add a new upload assignment -->
 {% extends 'teacher/teacherbase.html' %}
 
 {% block content %}
+<div class="flex justify-center">
+  <div class="bg-white shadow-md rounded-md p-6">
+    <h1 class="text-2xl font-bold">Datas: {{ title }}</h1>
+  
+    <h3 class="text-lg">Subject: {{ data.subject }}</h3>
+ 
+    <h3 class="text-lg">Class id: {{ data.class_id }}</h3>
+ 
+    <h3 class="text-lg">Update by: {{ data.update_by }}</h3>
+ 
+    <h3 class="text-lg">Date: {{ data.date }}</h3>
+  </div>
+</div>
 
-<h1>{{ title }}</h1>
-
-<h3>Subject : {{ data.subject }}</h3>
-<h3>Class id : {{ data.class_id }}</h3>
-<h3>Update by : {{ data.update_by }}</h3>
-<h3>Date : {{ data.date }}</h3>
 {% if mark %}
-  <h4>Mark : {{ mark.mark }}</h4>
+  <div class="flex justify-center mt-4">
+    <div class="bg-white shadow-md rounded-md p-6">
+      <h4 class="text-lg">Mark: {{ mark.mark }}</h4>
+    </div>
+  </div>
 {% else %}
-  <h4>Mark are not updated</h4>
+  <div class="flex justify-center mt-4">
+    <div class="bg-white shadow-md rounded-md p-6">
+      <h4 class="text-lg">Marks are not updated</h4>
+    </div>
+  </div>
 {% endif %}
-<h4>{{ data.details }}</h4>
+
+<div class="flex justify-center mt-4">
+  <div class="bg-white shadow-md rounded-md p-6">
+    <h4 class="text-lg">{{ data.details }}</h4>
+  </div>
+</div>
 
 {% if mark %}
-<form method="POST" action="{% url 'edit_assignment_mark' id=mark.id %}" >  
+  <div class="flex justify-center mt-4">
+    <div class="bg-white shadow-md rounded-md p-6">
+      <form method="POST" action="{% url 'edit_assignment_mark' id=mark.id %}">
+        {% csrf_token %}
+        <input type="number" name="mark" value="{{ mark.mark }}" required class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Edit Mark</button>
+      </form>
+    </div>
+  </div>
 {% else %}
-<form method="POST" action="{% url 'assignment_mark' id=qst_id a_id=state student_id=std class_id=class_id %}" >
+  <div class="flex justify-center mt-4">
+    <div class="bg-white shadow-md rounded-md p-6">
+      <form method="POST" action="{% url 'assignment_mark' id=qst_id a_id=state student_id=std class_id=class_id %}">
+        {% csrf_token %}
+        <input type="number" name="mark" required class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Update Mark</button>
+      </form>
+    </div>
+  </div>
 {% endif %}
-    {% csrf_token %}
-    {% if mark %}
-    <input type="number" name="mark" value="{{ mark.mark }}" required>
-    <button type="submit">Edit mark</button>
+
+<div class="flex justify-center mt-4">
+  <div class="bg-white shadow-md rounded-md p-6">
+    {% if file %}
+      {% for i in file %}
+        <a href="{{ i.File.url }}" class="text-blue-500">{{ i.File }}</a><br>
+      {% endfor %}
     {% else %}
-    <input type="number" name="mark" required>
-    <button type="submit">update mark</button>
+      <p>No files exist.</p>
     {% endif %}
-</form>
-
-{% if file %}
-  {% for i in file %}
-    <a href="{{ i.File.url }} ">{{ i.File }} </a><br>
-  {% endfor %}
-{% else %}
-  No files are exites
-{% endif %}
+  </div>
+</div>
 
 {% endblock content %}
-
