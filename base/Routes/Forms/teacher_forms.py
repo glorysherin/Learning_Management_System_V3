@@ -27,6 +27,21 @@ class TeacherForm(forms.ModelForm):
                                         to_field_name='short_name',
                                         label='Department')
     role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
+    
+
+class TeacherFormhod(forms.ModelForm):
+    class Meta:
+        model = models.Teacher
+        fields = ['address', 'mobile', 'profile_pic', 'role', 'department']
+
+    ROLE_CHOICES = (
+        ('staff', 'Staff'),
+    )
+    department = forms.ModelChoiceField(queryset=models.Department.objects.all(),
+                                        empty_label='Select department',
+                                        to_field_name='short_name',
+                                        label='Department')
+    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
 
 
 class TeacherForm1(forms.ModelForm):
