@@ -196,10 +196,17 @@ def teacher_list(request):
     return render(request, 'admin_actions/teacher_list.html',staff_detials(request,'Staff Details',{'teachers': teachers}))
 
 
+def admin_list(request):
+    teachers = Teacher.objects.filter(role='admin')
+    return render(request, 'admin_actions/admin_list.html',staff_detials(request,'Staff Details',{'teachers': teachers}))
+
+
 def teacher_delete(request, teacher_id):
     teacher = Teacher.objects.get(id=teacher_id)
     teacher.delete()
     return redirect('teacher_list')
+
+
 
 
 def teacher_edit(request, teacher_id):

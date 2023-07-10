@@ -1,7 +1,7 @@
 import requests
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Users,Department,Upload_Assignment,  Assignment, Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
+from ..models import Users,Department,Upload_Assignment,ClassRooms,  Assignment, Student, Faculty_details, Internal_test_mark, Course, Sec_Daily_test_mark, Room, ClassRooms, class_enrolled, NoteCourse, Attendees, Student, Teacher, EbookForClass, daily_test
 from django.contrib.auth.models import User
 from .Tool.Tools import get_user_mail, get_user_name, get_user_role, get_user_obj, get_user_name_byid
 import datetime
@@ -21,6 +21,13 @@ import xlwt
 from io import BytesIO
 from base.export import Internal_test_markResource
 from .Tool.Tools import student_detials, staff_detials
+from django.core.mail import send_mail
+from django.conf import settings
+import smtplib
+import ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from dateutil.relativedelta import relativedelta
 
 def is_teacher(user):
     return user.groups.filter(name='TEACHER').exists()
@@ -113,7 +120,7 @@ def nave_home_classroom(request, pk, class_id):
         
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         
-        table_datas = Assignment.objects.filter(class_id=class_id)
+        table_datas = Assignment.objects.filter(class_id=class_id)[::-1]
         updated_by = [get_user_name_byid(i.update_by) for i in table_datas]
         collected = []
         status_data = []
@@ -125,15 +132,22 @@ def nave_home_classroom(request, pk, class_id):
                 user_count = Upload_Assignment.objects.filter(Assignment_id=i.id).values('update_by').distinct().count()
                 collected.append(user_count)
                 print("user_count",user_count)
-                if len(peoples) == user_count:
+                if len(peoples) <= user_count:
                     status_data.append(True)
                 else:
-                    status_data.append(False)
+                    if len(peoples) <= user_count:
+                        status_data.append(True)
+                    else:
+                        status_data.append(False)
             except:
+                user_count = Upload_Assignment.objects.filter(Assignment_id=i.id).values('update_by').distinct().count()
                 notes.append(None)
                 print("Error occered.....!")
                 collected.append(0)
-                status_data.append(False)
+                if len(peoples) <= user_count:
+                    status_data.append(True)
+                else:
+                    status_data.append(False)
         
         empty = True if len(table_datas)>0 else False
                 
@@ -480,12 +494,139 @@ def update_attendes(request):
             return JsonResponse({"redirect": 1})
             # return render(request,'attandees/message.html',{'message':'Data Already Exists..!','url':[" {% url 'teacher-dashboard' %}","{% url 'class_room' %}"],'btn':['Dashboard','ClassRoom Dashboard']})
         else :
-            obj = Attendees(
-                class_id=splited[2], user_name=splited[1], subject_states=splited[0], roll_no=splited[3]
-            )
-            obj.save()
+            if splited[0] == "Absent":
+                # date
+                today = date.today()
+                # Set start_date to the beginning of the current month
+                start_date = today.replace(day=1)
+                # Set end_date to today's date
+                end_date = today
+                c_attendees = Attendees.objects.filter(class_id=splited[2], Date__range=[start_date, end_date])
+                total_count = c_attendees.filter(class_id=splited[2]).values('Date').distinct().count()
+                c_attendee = Attendees.objects.get(roll_no=splited[3])
+                current_month = (c_attendee.subject_states.count('Present') / total_count) * 100 # im
+                no_of_days = c_attendee.subject_states.count('Present')
+                # Calculate the start_date of the previous month
+                start_date = today.replace(day=1) - relativedelta(months=1)
+                # Calculate the end_date of the previous month
+                end_date = start_date + relativedelta(day=31)
+                attendees = Attendees.objects.filter(class_id=splited[2], Date__range=[start_date, end_date])
+                total_count = attendees.filter(class_id=splited[2]).values('Date').distinct().count()
+                attendee = Attendees.objects.get(roll_no=splited[3],class_id=splited[2])
+                try:
+                    prev_month = (attendee.subject_states.count('Present') / total_count) * 100 # im
+                except:
+                    prev_month = 0
+                obje = Student.objects.get(role_no=splited[3])
+                sender_email = settings.EMAIL_HOST_USER
+                password = settings.EMAIL_HOST_PASSWORD
+                message = MIMEMultipart("alternative")
+                context = ssl.create_default_context()
+                server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context)
+                server.ehlo()
+                server.login(sender_email, password)
+                subject = f'Absence Notification ({today}) - {obje.get_name} from JEC'
+                
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = ["glorysherin22@gmail.com"]
+                
+                class_obj = ClassRooms.objects.get(subject_code=splited[2])
+                queryset = Internal_test_mark.objects.filter(
+                    roll_no=splited[3]
+                ).order_by('-Date').order_by('-assesment_no')
+
+                year = request.GET.get('year')
+                if year:
+                    start_date = datetime.strptime(f"{year}-01-01", "%Y-%m-%d").date()
+                    end_date = datetime.strptime(f"{year}-12-31", "%Y-%m-%d").date()
+
+                    queryset = queryset.filter(
+                        Date__range=(start_date, end_date)
+                    )
+
+                # Generate HTML table with inline styles
+                html_table = '<table style="width: 100%; border-collapse: collapse;">'
+                html_table += '<thead><tr><th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">ID</th><th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Class ID</th><th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Roll No</th><th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Subject</th><th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Mark</th><th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Assessment No</th><th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Date</th></tr></thead>'
+                html_table += '<tbody>'
+                for item in queryset:
+                    html_table += f'<tr><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{item.id}</td><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{item.class_id}</td><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{item.roll_no}</td><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{item.subject}</td><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{item.mark}</td><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{item.assesment_no}</td><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">{item.Date}</td></tr>'
+                html_table += '</tbody>'
+                html_table += '</table>'
+                
+                # send_mail( subject, message, email_from, recipient_list )
+                from django.core.mail import EmailMultiAlternatives
+                
+                html_content = f"""
+
+<!-- email_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+<body>
+    <p>Dear Parent,</p>
+    <p>
+        I hope this email finds you well. I am writing to inform you that your child, { obje.get_name }, was absent from college today.
+    </p>
+    <p>
+        <strong>Reason for Absence (if known):</strong> 
+    </p>
+    <p>
+        <strong>Absence Today:</strong> I would like to inform you that your child was absent from college today. The reason for their absence, if known, is illness, personal reasons, etc.
+        We understand that occasional absences may occur due to unforeseen circumstances, and we appreciate your prompt communication regarding your child's absence.
+        If there are any extenuating circumstances or if your child requires any academic support to catch up on missed work, please let us know, and we will be happy to assist.
+    </p>
+    <p>
+        <strong>Attendance Percentage:</strong> Your child, { obje.get_name }, has maintained a regular presence in the college. The attendance percentage for the current academic month is { current_month }%.
+    </p>
+    <p>
+        <strong>Number of Working Days:</strong> During the past month, our college had a total of { total_count } working days.
+        I am pleased to inform you that your child attended { no_of_days } days out of these, which demonstrates their dedication towards their studies.
+    </p>
+    <p>
+        <strong>Last Month Attendance Percentage:</strong> In the previous month, { obje.get_name } achieved an attendance percentage of { prev_month }%.
+    </p>
+    <p>
+        <strong>Test Marks:</strong> Regarding academic performance, I am delighted to share that { obje.get_name } 
+        Their test marks demonstrate a thorough understanding of the subjects and reflect their consistent efforts and hard work.
+    </p>
+    <h2>Internal Test Mark :</h2>
+    {html_table}
+    <p>
+        Should you have any concerns or queries regarding your child's progress or any other matter, please do not hesitate to reach out to us.
+        We are always here to provide guidance and support.
+    </p>
+    <p>
+        Thank you for your understanding and cooperation.
+    </p>
+    <p>
+        Warm regards,
+        <br>
+        { class_obj.owner.name }
+        <br>
+        { class_obj.department }
+        <br>
+        Jaya Engineering College
+    </p>
+</body>
+</html>
+"""
+                
+                text_content = 'JEC Site'  
+                email = EmailMultiAlternatives(subject, text_content, email_from, [obje.parent_mail_id])
+                email.attach_alternative(html_content, "text/html")
+                email.send()
+        
+                
         for i in Attendees.objects.all():
             print(i.user_name, i.subject_states)
+        obj = Attendees(
+                class_id=splited[2], user_name=splited[1], subject_states=splited[0], roll_no=splited[3]
+            )
+        obj.save()
     return render(request, 'msg/edit_attendes_home.html',staff_detials(request,'Update Attendees'))
 
 

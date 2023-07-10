@@ -45,8 +45,8 @@ def staff_home(request):
     department = Department.objects.all()
     context = {
         'total_student': SMODEL.Student.objects.all().count(),
-        'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
-        'total_course': models.Course.objects.all().count(),
+        'total_teacher': TMODEL.Teacher.objects.filter(status=True,role="staff").count(),
+        'total_course': models.NoteCourse.objects.all().count(),
         'user_name': usr_obj.username, 'detials': faculty_details,
         'name_s': faculty_details.name.split(' '),
         'rolenum':name.role,
