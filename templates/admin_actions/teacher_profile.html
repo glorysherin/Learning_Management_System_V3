@@ -36,17 +36,14 @@ margin-bottom:17% ;
           <div class="card mb-4">
             <a href="{% url 'teacher_edit' teacher_id=teacher_id  %}">
             <svg style="margin: 30px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M12 21v-2.125l5.3-5.3l2.125 2.125l-5.3 5.3H12Zm-9-5v-2h7v2H3Zm17.125-1L18 12.875l.725-.725q.275-.275.7-.275t.7.275l.725.725q.275.275.275.7t-.275.7l-.725.725ZM3 12v-2h11v2H3Zm0-4V6h11v2H3Z" /></svg>
-<<<<<<< HEAD
           </a>
-            <div class="card-body text-center">
-=======
+            
             <div class="card-body text-center" style="display: flex;
             flex-direction: column;
             flex-wrap: wrap;
             align-content: center;
             justify-content: space-evenly;
             align-items: stretch;">
->>>>>>> 210e9edc54ed90e9bfc13739e2badd23f6b0b42e
               
               <img src="{{ teacher.profile_pic.url }}" alt="{{ teacher.get_name }} profile picture"
                 class="rounded-circle img-fluid" style="width: 150px;">
@@ -123,7 +120,7 @@ margin-bottom:17% ;
             {% endif %}
           </div><br>
           <button id="edit" class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded" style="background-color: #3b5998;margin-left: 60px;border: none;color: white;" ><a style="color: white;"
-            href="{% url 'staff_edit_social_media' %}">EDIT</a></button>
+            href="{% url 'teacher_edit' teacher_id=teacher_id %}">EDIT</a></button>
           <br><br>
         </div>
         <div class="col-lg-8">
