@@ -141,6 +141,7 @@ common = [
 admin = [
     path('add_Faculty', add_faculty),
     path('teacher_list', teacher_list, name='teacher_list'),
+    path('admin_list', admin_list, name='admin_list'),
     path('teacher_delete/<str:teacher_id>',
          teacher_delete, name='teacher_delete'),
     path('teacher_edit/<str:teacher_id>', teacher_edit, name='teacher_edit'),
@@ -244,7 +245,7 @@ classroom = [
     path("class_added", class_added,name="class_added"),
     path("edit_classroom/<str:classroom_id>",
          edit_classroom, name='edit_classroom'),
-    path("attendes", attendes),
+    path("attendes", attendes,name="attendes"),
     path("update_attendes", update_attendes, name='update_attendes'),
     path("mark_list/<str:roll_no>", mark_list, name='mark_list'),
     path("update_edited_attendes", update_edited_attendes),
@@ -584,7 +585,11 @@ social = [
     path('edit_social_media', edit_social_media, name='edit_social_media'),
 ]
 
+<<<<<<< HEAD
 urlpatterns.extend(Make_Join([social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+=======
+urlpatterns.extend(Make_Join([compile, social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+>>>>>>> 3d759f951bbe35ceb0df89aa18e454c5b354ec05
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

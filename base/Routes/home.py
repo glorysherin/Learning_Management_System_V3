@@ -2,12 +2,12 @@ from django.shortcuts import render
 from .Tool.blogTool import get_images
 
 
-from django.core.mail import send_mail
-from django.conf import settings
-import smtplib
-import ssl
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+# from django.core.mail import send_mail
+# from django.conf import settings
+# import smtplib
+# import ssl
+# from email.mime.text import MIMEText
+# from email.mime.multipart import MIMEMultipart
 
 
 def pre_home(request):

@@ -65,15 +65,22 @@ def staff_list_by_dep(request):
 
 def student_delete(request, student_id):
     student = get_object_or_404(Student, id=student_id)
-    student.delete()
+    user = User.objects.get(id=student.user.id)
+    obj= Users.objects.get(connect_id= user.id)
+    
     students = Student.objects.all()
     departments = set([student.department for student in students])
+    user.delete()
+    obj.delete()
+    student.delete()
+    print("both are deleted")
+    
     context = {
         'students': students,
         'departments': departments,
         'student': student
     }
-    return render(request, 'student/students_list.html', context)
+    return redirect('admin_students_list')
 
 def student_profile(request, student_id):
     student = get_object_or_404(Student, pk=student_id)

@@ -51,7 +51,6 @@ def parentmark_list(request, roll_no):
         ).values('subject', 'mark')
         total_marks = marks.aggregate(Sum('mark'))['mark__sum']
         mark_dict[query_date] = {'marks': marks, 'total_marks': total_marks}
-
     context = {'roll_no': roll_no, 'mark_dict': mark_dict}
     return render(request, 'parent/mark_list.html', context)
 
@@ -67,7 +66,7 @@ def parentview_attendees_by_roolno(request, roll_no):
         }
         attendees_list.append(attendee_dict)
 
-    context = {
+    context = { 
         'roll_no': roll_no,
         'attendees':attendees,
         'attendeesj': json.dumps(attendees_list, cls=CustomJSONEncoder),
