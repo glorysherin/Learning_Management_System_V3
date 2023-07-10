@@ -141,6 +141,7 @@ common = [
 admin = [
     path('add_Faculty', add_faculty),
     path('teacher_list', teacher_list, name='teacher_list'),
+    path('handle_toogle/<int:action>', handle_toogle, name='handle_toogle'),
     path('admin_list', admin_list, name='admin_list'),
     path('teacher_delete/<str:teacher_id>',
          teacher_delete, name='teacher_delete'),
@@ -583,9 +584,15 @@ compile = [
 
 social = [
     path('edit_social_media', edit_social_media, name='edit_social_media'),
+    path('staff_edit_social_media', staff_edit_social_media, name='staff_edit_social_media'),
+    
 ]
 
 urlpatterns.extend(Make_Join([compile, social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
+<<<<<<< HEAD
+=======
+>>>>>>> 210e9edc54ed90e9bfc13739e2badd23f6b0b42e
+>>>>>>> 2849b03bee2040818c70aff72f4d80bcc982f203
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

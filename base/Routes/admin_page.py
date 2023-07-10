@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees, Note, Department
+from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees, Note, Department,SocialMedia, BotControl
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import xlwt
 from .Tool.Tools import student_detials, staff_detials
 from .study import is_admin
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import JsonResponse
+
 
 
 def add_faculty(request):
@@ -62,7 +64,11 @@ def teachers(request):
 def teacher_profile(request, staff_id):
     # teacher = get_object_or_404(Teacher, id=pk)
     teacher = Teacher.objects.get(id=staff_id)
-    return render(request, 'admin_actions/teacher_profile.html', staff_detials(request, teacher.role+' Profile', {'teacher': teacher}))
+    try:
+        links = SocialMedia.objects.get(std_id=request.user.id)
+    except:
+        links=None
+    return render(request, 'admin_actions/teacher_profile.html', staff_detials(request, teacher.role+' Profile', {'links':links,'teacher': teacher,'teacher_id':teacher.id}))
 
 # classes
  
@@ -198,7 +204,7 @@ def teacher_list(request):
 
 def admin_list(request):
     teachers = Teacher.objects.filter(role='admin')
-    return render(request, 'admin_actions/admin_list.html',staff_detials(request,'Staff Details',{'teachers': teachers}))
+    return render(request, 'admin_actions/admin_list.html',{'teachers': teachers})
 
 
 def teacher_delete(request, teacher_id):
@@ -234,3 +240,17 @@ def teacher_edit(request, teacher_id):
 
 # def teacher_edit_msg(request):
 #     return render(request, 'attandees/teacher_edit_message.html')
+
+
+def handle_toogle(request,action):
+    # Create a dictionary or any data structure containing the JSON response
+    obj = BotControl(usr_id=request.user.id,toggle=action)
+    obj.save()
+    data = {
+        'message': action,
+        'status': 'success'
+    }
+    
+    # Return the JSON response using JsonResponse
+    return JsonResponse(data)
+
