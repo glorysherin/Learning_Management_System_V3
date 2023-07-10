@@ -86,11 +86,7 @@ def admin_teacher_view(request):
         'pending_teacher': TMODEL.Teacher.objects.all().filter(status=False).count(),
         'salary': TMODEL.Teacher.objects.all().filter(status=True).aggregate(Sum('salary'))['salary__sum'],
     }
-<<<<<<< HEAD
     return render(request, 'exam/admin_teacher.html',staff_detials(request,'admin teacher view ', dict))
-=======
-    return render(request, 'exam/admin_teacher.html',staff_detials(request,'Staff Details', dict))
->>>>>>> 3d759f951bbe35ceb0df89aa18e454c5b354ec05
 
 
 @login_required(login_url='adminlogin')

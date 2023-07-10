@@ -2,46 +2,93 @@
 <html>
 <head>
     <title>Online Compiler</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <style>
-        /* Add your CSS styles here */
+        .code-editor {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .line-numbers {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            user-select: none;
+            color: #a0aec0;
+        }
+
+        .line-numbers span {
+            margin-bottom: 0.25rem;
+        }
+
+        .code-input {
+            flex-grow: 1;
+            resize: none; /* Disable resizing */
+            padding-left: 1.5rem;
+            line-height: 1.5rem; /* Adjust line height to match line numbers */
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            font-family: monospace;
+        }
     </style>
 </head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-        <textarea name="code" rows="10" cols="50" placeholder="Enter code here...">{{ code }}</textarea>
-        <br>
-        <select name="language">
-            <option value="python">Python</option>
-            <option value="java">Java</option>
-            <option value="c">C</option>
-            <option value="html">HTML</option>
-            <option value="css">css</option>
-            <option value="tailwind">Tailwind</option>
-            <option value="bootstrap">Bootstrap</option>
-            <option value="js">js</option>
-        </select>
-            <input type="text" name="input_value" placeholder="Input value">
-            <br>
-        <input type="submit" value="Compile">
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-4">Online Compiler</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="code-editor">
+                <div class="line-numbers">
+                    <span>1</span>
+                </div>
+                <textarea name="code" rows="10" cols="50" placeholder="Enter code here..." class="code-input p-2 border rounded-lg focus:outline-none" id="code-input"></textarea>
+            </div>
+            <div class="flex mb-4">
+                <select name="language" class="p-2 border rounded-lg focus:outline-none">
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="c">C</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="tailwind">Tailwind</option>
+                    <option value="bootstrap">Bootstrap</option>
+                    <option value="js">JavaScript</option>
+                </select>
+                <input type="text" name="input_value" placeholder="Input value" class="p-2 ml-2 border rounded-lg focus:outline-none">
+            </div>
+            <input type="submit" value="Compile" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        </form>
 
-    </form>
-
-    {% if result %}
-        <h3>Output:</h3>
-        {% if language == "js" %}
-            <pre>{{ result|safe }}</pre>
-            <script>
-                document.getElementsByTagName('pre')[0].innerHTML = eval(`{{ code|escapejs }}`);
-            </script>
-        {% elif language == 'html' or language == 'tailwind' or language == 'bootstrap' %}
-            <pre>{{ result|safe }}</pre>
-        {% else %}
-            <pre>{{ result }}</pre>
+        {% if result %}
+            <h3 class="text-xl font-bold mt-4">Output:</h3>
+            {% if language == "js" %}
+                <pre class="bg-gray-200 p-2 mt-2 rounded">{{ result|safe }}</pre>
+                <script>
+                    document.getElementsByTagName('pre')[0].innerHTML = eval(`{{ code|escapejs }}`);
+                </script>
+            {% elif language == 'html' or language == 'tailwind' or language == 'bootstrap' %}
+                <pre class="bg-gray-200 p-2 mt-2 rounded">{{ result|safe }}</pre>
+            {% else %}
+                <pre class="bg-gray-200 p-2 mt-2 rounded">{{ result }}</pre>
+            {% endif %}
         {% endif %}
-    {% endif %}
+    </div>
+    <script>
+        const codeInput = document.getElementById('code-input');
+        const lineNumbers = document.querySelector('.line-numbers');
 
+        codeInput.addEventListener('input', updateLineNumbers);
 
-    
+        function updateLineNumbers() {
+            const lines = codeInput.value.split('\n');
+            lineNumbers.innerHTML = '';
+            for (let i = 0; i < lines.length; i++) {
+                const line = document.createElement('span');
+                line.textContent = i + 1;
+                lineNumbers.appendChild(line);
+            }
+        }
+    </script>
 </body>
 </html>
