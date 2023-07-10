@@ -307,6 +307,7 @@ teacher = [
          name='add_student_signup_view'),
     path('teacher/teachersignup', teacher_signup_view, name='teachersignup'),
     path('teacher/user_added_message', user_added_message, name='user_added_message'),
+    path('user_added_message', user_added_message, name='user_added_message'),
     path('teacher/teachersignup1', teacher_signup_view1, name='teachersignup1'),
     path('teacher/admin_added', admin_added, name='admin_added'),
     path('teacher/adminsignup', adminsignup, name='adminsignup'),
@@ -330,8 +331,9 @@ teacher = [
          see_question_view, name='see-question'),
     path('teacher/remove-question/<int:pk>',
          remove_question_view, name='remove-question'),
-    path('teacher/assignments',
-         assignments, name='assignments'),
+    path('teacher/assignments', assignments, name='assignments'),
+    path('add_teacher_hod', add_teacher_hod, name='add_teacher_hod'),
+    path('teacher_signup_viewhod', teacher_signup_viewhod, name='teacher_signup_viewhod'),
 ]
 
 exam = [

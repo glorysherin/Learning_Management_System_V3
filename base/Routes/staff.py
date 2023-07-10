@@ -1,7 +1,7 @@
 
 import datetime
 from django.shortcuts import render
-from ..models import Faculty_details, Users
+from ..models import Faculty_details, Users, Teacher
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from .Forms import teacher_forms
@@ -23,7 +23,8 @@ def teacherclick_view(request):
 
 
 def user_added_message(request):
-    return render(request,'attandees/add_staff_message.html')
+    obj = Teacher.objects.get(user=User.objects.get(id=request.user.id)).role
+    return render(request,'attandees/add_staff_message.html',{'role':obj})
 
 def teacher_signup_view(request):
     userForm = teacher_forms.TeacherUserForm()
@@ -77,6 +78,57 @@ def teacher_signup_view(request):
     return render(request, 'teacher/teachersignup.html',staff_detials(request, 'Add Marks',mydict))
 
 def teacher_signup_view1(request):
+    userForm = teacher_forms.TeacherUserForm()
+    teacherForm = teacher_forms.TeacherForm()
+    mydict = {'userForm': userForm, 'teacherForm': teacherForm}
+    if request.method == 'POST':
+        userForm = teacher_forms.TeacherUserForm(request.POST)
+        teacherForm = teacher_forms.TeacherForm(request.POST, request.FILES)
+        if userForm.is_valid() and teacherForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            teacher = teacherForm.save(commit=False)
+            teacher.user = user
+            print(teacher.role)
+            if teacher.role == 'hod':
+                teacher.save()
+                add_user = Users(user_name=user.username, connect_id= user.id,
+                                 mail_id=user.username, password=user.password, role='2')
+                add_user.save()
+                current_user = Users.objects.get(mail_id=user.username)
+                Fac_del = Faculty_details(user_name=user.username, mail=user.username,
+                                          role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
+                Fac_del.save()
+            if teacher.role == 'admin':
+                teacher.status = True
+                teacher.save()
+                add_user = Users(user_name=user.username, connect_id= user.id,
+                                 mail_id=user.username, password=user.password, role='1')
+                add_user.save()
+                current_user = Users.objects.get(mail_id=user.username)
+                Fac_del = Faculty_details(user_name=user.username, mail=user.username,
+                                          role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
+                Fac_del.save()
+            elif teacher.role == 'staff':
+                teacher.save()
+                add_user = Users(user_name=user.username, connect_id= user.id,
+                                 mail_id=user.username, password=user.password, role='3')
+                add_user.save()
+                current_user = Users.objects.get(mail_id=user.username)
+                Fac_del = Faculty_details(user_name=user.username, mail=user.username,
+                                          role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
+                Fac_del.save()
+
+            my_teacher_group = Group.objects.get_or_create(name='TEACHER')
+            my_teacher_group[0].user_set.add(user)
+        else:
+            print("not valied....1")
+        return HttpResponseRedirect('teacherlogin')
+    
+    return render(request, 'teacher/teachersignup.html',mydict)
+
+def teacher_signup_viewhod(request):
     userForm = teacher_forms.TeacherUserForm()
     teacherForm = teacher_forms.TeacherForm()
     mydict = {'userForm': userForm, 'teacherForm': teacherForm}
@@ -234,7 +286,7 @@ def add_admin(request):
             print("Form data is not valid")
             print(userForm.errors)
             print(teacherForm.errors)
-        return HttpResponseRedirect('teacherlogin')
+        return HttpResponseRedirect('user_added_message')
     return render(request, 'teacher/addadmin.html',mydict)
 
 def add_admin1(request):
@@ -291,6 +343,62 @@ def add_admin1(request):
             print(teacherForm.errors)
         return HttpResponseRedirect('admin_added')
     return render(request, 'teacher/addadmin.html',mydict)
+
+def add_teacher_hod(request):
+    userForm = teacher_forms.TeacherUserForm()
+    teacherForm = teacher_forms.TeacherFormhod()
+    mydict = {'userForm': userForm, 'teacherForm': teacherForm}
+    if request.method == 'POST':
+        userForm = teacher_forms.TeacherUserForm(request.POST)
+        teacherForm = teacher_forms.TeacherFormhod(request.POST, request.FILES)
+        if userForm.is_valid() and teacherForm.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            teacher = teacherForm.save(commit=False)
+            teacher.user = user
+            print(teacher.role)
+            
+            
+            if teacher.role == 'hod':
+                teacher.save()
+                add_user = Users(user_name=user.username, connect_id= user.id,
+                                 mail_id=user.username, password=user.password, role='2')
+                add_user.save()
+                current_user = Users.objects.get(mail_id=user.username)
+                Fac_del = Faculty_details(user_name=user.username, mail=user.username,
+                                          role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
+                Fac_del.save()
+            if teacher.role == 'admin':
+                teacher.status = True
+                teacher.save()
+                add_user = Users(user_name=user.username, connect_id= user.id,
+                                 mail_id=user.username, password=user.password, role='1')
+                add_user.save()
+                current_user = Users.objects.get(mail_id=user.username)
+                Fac_del = Faculty_details(user_name=user.username, mail=user.username,
+                                          role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
+                Fac_del.save()
+            elif teacher.role == 'staff':
+                teacher.save()
+                add_user = Users(user_name=user.username, connect_id= user.id,
+                                 mail_id=user.username, password=user.password, role='3')
+                add_user.save()
+                current_user = Users.objects.get(mail_id=user.username)
+                Fac_del = Faculty_details(user_name=user.username, mail=user.username,
+                                          role=current_user, id_number=0, name=str(user.first_name)+" "+str(user.last_name))
+                Fac_del.save()
+
+            my_teacher_group = Group.objects.get_or_create(name='TEACHER')
+            my_teacher_group[0].user_set.add(user)
+        else:
+            print("not valied")
+            print("Form data is not valid")
+            print(userForm.errors)
+            print(teacherForm.errors)
+        return HttpResponseRedirect('user_added_message')
+
+    return render(request, 'teacher/adminsignup.html',staff_detials(request,'Add User',mydict))
 
 def admin_added(request):
     return render(request,"attandees/admin_message.html")

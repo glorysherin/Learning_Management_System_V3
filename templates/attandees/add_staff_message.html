@@ -20,9 +20,15 @@
             <h1 class="mt-2 text-center text-2xl font-bold text-gray-500">Success</h1>
             <p class="my-4 text-center text-sm text-gray-500">User Added Sucessfully...!</p>
             <div class="space-x-4 bg-gray-100 py-4 text-center">
+                {% if role == 'hod' %}
+                <button
+                    class="inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400"><a
+                        href="{% url 'add_teacher_hod' %}">Add New User</a></button>
+                {% else %}
                 <button
                     class="inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400"><a
                         href="{% url 'teachersignup' %}">Add New User</a></button>
+                {% endif %}
                 <button
                     class="inline-block rounded-md bg-green-500 px-6 py-2 font-semibold text-green-100 shadow-md duration-75 hover:bg-green-400"><a
                         href="{% url 'admin-view-pending-teacher' %}">Approve Staff</a>

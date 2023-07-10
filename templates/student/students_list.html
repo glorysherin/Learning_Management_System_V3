@@ -79,7 +79,7 @@ a:hover {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Joined Year</th>
+                        <th>Department</th>
                         <th>Role No</th>
                         <th>Mobile</th>
                         <th>Actions</th>
@@ -90,8 +90,8 @@ a:hover {
                     {% if student.department == dept %}
                     <tr>
                         <td>{{ student.get_name }}</td>
-                        <td>{{ student.joinned_year|date:"Y" }}</td>
-                        <td>{{ student.role_no }}</td>
+                        <td>{{ student.department }}</td>
+                        <td>{{ student.role }}</td>
                         <td>{{ student.mobile }}</td>
                         <td>
                             <a href="students/{{ student.id}}">View</a>
