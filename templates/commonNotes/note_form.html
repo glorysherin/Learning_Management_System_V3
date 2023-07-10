@@ -18,7 +18,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-    <div style="margin: 0 auto ; width: 500px;" class="flex flex-col justify-center items-center h-[100vh]">
+    <div style="margin: 0 auto ; width: 500px;margin-bottom: 10%;" class="flex flex-col justify-center items-center h-[100vh]">
         <div style="margin-top: 10px; padding:  30px "
             class="!z-5 relative flex flex-col rounded-[20px] max-w-[300px] md:max-w-[400px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 flex flex-col w-full !p-6 3xl:p-![18px] bg-white undefined">
 
@@ -74,10 +74,11 @@
             <!-- {% if note.file %} -->
             <p>Current File: <a href="{{ note.file.url }}" target="_blank">{{ note.file.name }}</a></p>
             <!-- {% endif %} -->
-           
-            <button type="submit" style="background-color: rgb(14, 11, 173); color: azure;border-radius: 10px; width: 50px;">Save</button>
+           <div>
+            <button type="submit" style="background-color: rgb(14, 11, 173); color: azure;border-radius: 5px; width: 50px;padding: 2px 5px">Save</button>
             
-            <a href="{% url 'notes_list' %}" style="">Cancel</a>
+            <button type="cancel" style="background-color: rgb(14, 11, 173); color: azure;border-radius: 5px; width: 60px;padding: 2px 5px;padding-right: 6px;"><a href="{% url 'notes_list' %}" style="color: white;">Cancel</a></button>
+        </div>
         </div>
     </div>
     

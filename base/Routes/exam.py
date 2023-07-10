@@ -183,7 +183,7 @@ def admin_student_view(request):
     dict = {
         'total_student': SMODEL.Student.objects.all().count(),
     }
-    return render(request, 'exam/admin_student.html', context=dict)
+    return render(request, 'exam/admin_student.html',staff_detials(request,'Student MCQ', dict))
 
 
 @login_required(login_url='adminlogin')
@@ -254,7 +254,7 @@ def delete_course_view(request, pk):
 
 @login_required(login_url='adminlogin')
 def admin_question_view(request):
-    return render(request, 'exam/admin_question.html')
+    return render(request, 'exam/admin_question.html' ,staff_detials(request,' Manage MCQ'))
 
 
 @login_required(login_url='adminlogin')
@@ -270,13 +270,13 @@ def admin_add_question_view(request):
         else:
             print("form is invalid")
         return HttpResponseRedirect('/admin-view-question')
-    return render(request, 'exam/admin_add_question.html', {'questionForm': questionForm})
+    return render(request, 'exam/admin_add_question.html', staff_detials(request,'Add Question',{'questionForm': questionForm}))
 
 
 @login_required(login_url='adminlogin')
 def admin_view_question_view(request):
     courses = models.Course.objects.all()
-    return render(request, 'exam/admin_view_question.html', {'courses': courses})
+    return render(request, 'exam/admin_view_question.html',staff_detials(request,'View Questions', {'courses': courses}))
 
 
 @login_required(login_url='adminlogin')
@@ -295,14 +295,13 @@ def delete_question_view(request, pk):
 @login_required(login_url='adminlogin')
 def admin_view_student_marks_view(request):
     students = SMODEL.Student.objects.all()
-    return render(request, 'exam/admin_view_student_marks.html', {'students': students})
+    return render(request, 'exam/admin_view_student_marks.html',staff_detials(request,'Student Marks', {'students': students}))
 
 
 @login_required(login_url='adminlogin')
 def admin_view_marks_view(request, pk):
     courses = models.Course.objects.all()
-    response = render(request, 'exam/admin_view_marks.html',
-                      {'courses': courses})
+    response = render(request, 'exam/admin_view_marks.html',staff_detials(request,'view marks', {'courses': courses}))
     response.set_cookie('student_id', str(pk))
     return response
 

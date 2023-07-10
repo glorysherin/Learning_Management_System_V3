@@ -26,6 +26,18 @@
     <link rel="stylesheet" href=" {% static 'css/home.css' %} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   {% comment %} =============================================================================================================================== {% endcomment %}
+<style>
+  /* Styles for devices with a minimum width of 601px */
+  @media (min-width: 601px) {
+    /* CSS rules for larger screens or desktops */
+   
+.card h-1001{   
+     margin-bottom: 25%;
+    }
+  
+  }
+
+</style>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -315,7 +327,7 @@
                 <span class="nav-link-text ms-1">Meet</span>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link  " href="{% url 'staff_chat_lobby' %}">
                 <div
                   class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -346,7 +358,7 @@
                 </div>
                 <span class="nav-link-text ms-1">Conference</span>
               </a>
-            </li>
+            </li> -->
 
             <li class="nav-item">
               <a class="nav-link  " href="{% url 'staff_chat_home' %}">
@@ -856,7 +868,7 @@
             <span class="nav-link-text ms-1">Meet</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link  " href="{% url 'staff_chat_lobby' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -887,7 +899,7 @@
             </div>
             <span class="nav-link-text ms-1">Conference</span>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link  " href="{% url 'staff_list_blog' %}">
             <div
@@ -1604,7 +1616,8 @@
           </div>
         </div>
         <div class="col-12 col-xl-6">
-          <div class="card h-100">
+          <div id="new">
+          <div class="card h-1001" style="margin-bottom: 20%;">
               <div class="card-header pb-0 p-3">
                   <h6 class="mb-0">Selected Subjects</h6>
               </div>
@@ -1681,6 +1694,7 @@
               </div>
           </div>
       </div>
+    </div>
   </div>
   {% endfor %}
 </div>

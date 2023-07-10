@@ -54,9 +54,9 @@
   <a href="{% url 'toolHome' %}"> <button  style="margin-top: 60px;margin-left: 90px;border-radius: 5px;border-style: none; background-color: #007bff; color: #fff;" class="absolute  left-0 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">Back </button></a> 
 
   <div class="flex justify-center items-center h-screen">
-    <div style="margin: 0 auto;margin-top: 30px;margin-bottom: 80px;" id="card" class="bg-white shadow-md p-8 rounded-lg w-full sm:w-96">
+    <div style="margin: 0 auto;margin-top: 30px;margin-bottom: 100px;" id="card" class="bg-white shadow-md p-9 rounded-lg w-full sm:w-96">
       <h2 class="text-2xl font-semibold mb-4">Convert PDF to Excel</h2>
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" style="margin-bottom: 30px;">
         {% csrf_token %}
         <label class="text-lg" for="pdf_file">Select a PDF file to convert:</label>
         <input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
