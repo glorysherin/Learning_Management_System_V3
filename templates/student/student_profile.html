@@ -254,17 +254,25 @@
   <script src="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.bundle.js"></script>
   <script>
     let count = {{ bot }};
+    console.log("bot : "+count)
     const toggleExample = document.getElementById('toggle-example');
+    
+    if({{ bot }}==1){
+      toggleExample.click()
+    }else{
+
+    }
+
     let url; // Declare the url variable outside the if statement
   
     toggleExample.addEventListener('change', function() {
       const xhr = new XMLHttpRequest();
   
       if (count % 2 == 0) {
-        url = "{% url 'handle_toogle' action=0 %}"; // Assign the value to the url variable
+        url = "{% url 'handle_toogle' action=1 %}"; // Assign the value to the url variable
         count++;
       } else {
-        url = "{% url 'handle_toogle' action=1 %}"; // Assign the value to the url variable
+        url = "{% url 'handle_toogle' action=0 %}"; // Assign the value to the url variable
         count++;
 
       }
@@ -284,6 +292,7 @@
       };
   
       const action = toggleExample.checked ? 1 : 0;
+
       const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
   
       xhr.open('POST', url);

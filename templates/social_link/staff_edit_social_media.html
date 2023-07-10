@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Social Media</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto my-4">
+        <h1 class="text-3xl font-bold mb-4">Edit Social Media</h1>
+        <form method="POST" action="{% url 'staff_edit_social_media' %}" class="max-w-sm mx-auto bg-white rounded-lg shadow-md p-6">
+            {% csrf_token %}
+            <button style="background-color: rgb(193, 212, 228);margin-left: 80%;padding: 4px;">Home</button>
+            <div class="mb-4">
+                <label for="portfolio" class="block text-gray-700 "><b> Portfolio:</b></label>
+                <input type="url" id="portfolio" name="portfolio" value="{{ social_media.portfolio }}" class="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="twitter" class="block text-gray-700"><b>Twitter:</b></label>
+                <input type="url" id="twitter" name="twitter" value="{{ social_media.twitter }}" class="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="linkedin" class="block text-gray-700"><b>LinkedIn:</b></label>
+                <input type="url" id="linkedin" name="linkedin" value="{{ social_media.linkedin }}" class="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="github" class="block text-gray-700"><b>GitHub:</b></label>
+                <input type="url" id="github" name="github" value="{{ social_media.github }}" class="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="facebook" class="block text-gray-700"><b>Facebook:</b></label>
+                <input type="url" id="facebook" name="facebook" value="{{ social_media.facebook }}" class="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="instagram" class="block text-gray-700"><b>Instagram:</b></label>
+                <input type="url" id="instagram" name="instagram" value="{{ social_media.instagram }}" class="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm">
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Save</button>
+        </form>
+    </div>
+</body>
+</html>

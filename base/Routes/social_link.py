@@ -43,13 +43,13 @@ def staff_edit_social_media(request):
         social_media.instagram = request.POST.get('instagram')
         social_media.save()
         usr = User.objects.get(id=request.user.id)
-        staff_id = Teacher.objects.get(usr)
+        staff_id = Teacher.objects.get(user=usr)
         return redirect('teacher_profile', staff_id=staff_id.id )
     
     context = {
         'social_media': social_media
     }
     if social_media:
-        return render(request, 'social_link/edit_social_media.html', context)
+        return render(request, 'social_link/staff_edit_social_media.html', context)
     else:
        return render(request, 'msg/data_doesnot_create.html')

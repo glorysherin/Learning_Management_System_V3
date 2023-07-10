@@ -589,10 +589,6 @@ social = [
 ]
 
 urlpatterns.extend(Make_Join([compile, social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
-<<<<<<< HEAD
-=======
-
->>>>>>> 3cf1bba3a24ff1660b78c00d953e43887d9b0581
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

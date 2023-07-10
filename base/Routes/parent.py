@@ -78,8 +78,11 @@ def parent_home(request):
     if request.method == 'POST':
         role_no = request.POST.get("role_no")
         print(role_no)
-        obj = Student.objects.get(role_no=role_no)
-        return render(request,'parent/parent_home.html',{'role_no':role_no,'std':obj})
+        try:
+            obj = Student.objects.get(role_no=role_no)
+            return render(request,'parent/parent_home.html',{'role_no':role_no,'std':obj})
+        except:
+            return render(request,'msg/std_doesn_exist.html')
     return render(request,'pre_home/parentsession.html')
 
 
