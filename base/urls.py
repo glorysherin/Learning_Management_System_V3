@@ -583,13 +583,11 @@ compile = [
 
 social = [
     path('edit_social_media', edit_social_media, name='edit_social_media'),
+    path('staff_edit_social_media', staff_edit_social_media, name='staff_edit_social_media'),
+    
 ]
 
-<<<<<<< HEAD
 urlpatterns.extend(Make_Join([social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
-=======
-urlpatterns.extend(Make_Join([compile, social, upload_assignments, assignments_, links_management, parent,department,tools, chatbot, NoCodeMaker, common_tool, note, gallery_, blog_url, common, event,
->>>>>>> 3d759f951bbe35ceb0df89aa18e454c5b354ec05
                    admin, chatroom, classroom, videochat, studet, teacher, exam, dynamicFunctionality, alternative_url, Staff_tool,error]))
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

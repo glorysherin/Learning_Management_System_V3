@@ -121,6 +121,27 @@ def student_edit(request, pk):
         context = {'student': student,'department':department}
         return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
 
+def staff_edit(request, pk):
+    student = get_object_or_404(Teacher, pk=pk)
+    department = Department.objects.all()
+    current_id = request.user.id
+    if request.method == 'POST':
+        student.user.first_name = request.POST['first_name']
+        student.user.last_name = request.POST['last_name']
+        student.mail_id = request.POST['email']
+        student.address = request.POST['address']
+        student.mobile = request.POST['mobile']
+        student.joinned_year = request.POST['joinned_year']
+        student.role_no = request.POST['role_no']
+        student.department = request.POST['department']
+        student.profile_pic = request.FILES['file_']
+        student.user.save()
+        student.save()
+        return redirect('student_edit',pk=pk)
+    else:
+        context = {'student': student,'department':department}
+        return render(request, 'student/edit_staff_profile.html', staff_detials(request, 'Edit Detials', context))
+
 
 def studentclick_view(request):
     if request.user.is_authenticated:

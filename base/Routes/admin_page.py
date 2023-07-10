@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees, Note, Department
+from ..models import Faculty_details, Users, Teacher, ClassRooms, class_enrolled, Student, Attendees, Note, Department,SocialMedia
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 import xlwt
@@ -62,7 +62,8 @@ def teachers(request):
 def teacher_profile(request, staff_id):
     # teacher = get_object_or_404(Teacher, id=pk)
     teacher = Teacher.objects.get(id=staff_id)
-    return render(request, 'admin_actions/teacher_profile.html', staff_detials(request, teacher.role+' Profile', {'teacher': teacher}))
+    links = SocialMedia.objects.get(std_id=request.user.id)
+    return render(request, 'admin_actions/teacher_profile.html', staff_detials(request, teacher.role+' Profile', {'links':links,'teacher': teacher,'teacher_id':teacher.id}))
 
 # classes
  
@@ -198,7 +199,7 @@ def teacher_list(request):
 
 def admin_list(request):
     teachers = Teacher.objects.filter(role='admin')
-    return render(request, 'admin_actions/admin_list.html',staff_detials(request,'Staff Details',{'teachers': teachers}))
+    return render(request, 'admin_actions/admin_list.html',{'teachers': teachers})
 
 
 def teacher_delete(request, teacher_id):
