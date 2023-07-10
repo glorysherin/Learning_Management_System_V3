@@ -197,8 +197,8 @@ def checkview(request):
 
 
 def staff_checkview(request):
-    room = request.GET['room_name']
-    username = request.GET['username']
+    room = request.POST['room_name']
+    username = request.POST['username']
 
     if Room.objects.filter(name=room).exists():
         return redirect('/staffchat'+'/'+room+'/?username='+username)
