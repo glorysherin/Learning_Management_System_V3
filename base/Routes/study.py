@@ -638,6 +638,7 @@ def update_attendes(request):
                 class_id=splited[2], user_name=splited[1], subject_states=splited[0], roll_no=splited[3]
             )
         obj.save()
+        print("Attendees Updated")
     return render(request, 'msg/staff_class_404.html',staff_detials(request,'Update Attendees'))
 
 
