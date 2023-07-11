@@ -253,6 +253,8 @@ classroom = [
     path("message_possitive", message_possitive,name="message_possitive"),
     path("edit_attendes_home", edit_attendes_home, name='edit_attendes_home'),
     path("view_attendes", view_attendes, name='view_attendes'),
+    path("no_usr_exit", no_usr_exit, name='no_usr_exit'),
+    path("attendes_added", attendes_added, name='attendes_added'),
     path("attendes_error", attendes_error, name='attendes_error'),
     path("edit_attendes", edit_attendes),
     path("mark/<str:class_id>", mark, name='mark'),

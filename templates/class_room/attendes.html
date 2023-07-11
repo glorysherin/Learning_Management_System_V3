@@ -132,6 +132,7 @@
     send_data(url, ids);
   }
   function send_data(url, datas) {
+    event.preventDefault();
     let ids = [];
     for (i = 0; i < datas.length; i++) {
       ids.push($('#val' + i).text());
@@ -144,6 +145,7 @@
     }
     data.append("length", {{ people| length}})
   console.log(data)
+  event.preventDefault();
   $.ajax({
     method: "POST",
     url: url,
@@ -154,12 +156,16 @@
     success: function (data_val) {
       let data = JSON.parse(data_val)
       console.log(data)
-      console.log(data.redirect)
-      if (data.redirect == 1) {
-        console.log(data.redirect)
-        console.log("data.redirect")
-        window.location.href = "{% url 'attendes_error' %}"
-      }
+      if (data.status === "no_usr") {
+      // Redirect to the error page
+      window.location.href = "{% url 'no_usr_exit' %}";
+    } else  if(data.status === "error"){
+      // Redirect to the chat page
+      window.location.href = "{% url 'attendes_error' %}";
+    }else{
+      window.location.href = "{% url 'attendes_added' %}";
+    }
+
     }
   })
               }

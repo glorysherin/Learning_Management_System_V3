@@ -490,10 +490,20 @@ def attendes(request):
 def attendes_error(request):
     return render(request,'attandees/message.html')
 
+def attendes_added(request):
+    return render(request,'msg/attendes_updated.html')
+
+def no_usr_exit(request):
+    return render(request,'msg/no_usr_exit.html')
+
 def update_attendes(request):
     my_date_time = timezone.now()
     data: str = []
     print("length is : ", request.POST.get('length'))
+    if request.POST.get('length') == '0':
+        print("runned")
+        return JsonResponse({"status":"no_usr","msg":"Empty Users"})
+        
     for i in range(int(request.POST.get('length'))):
         datas = request.POST.get('#cars'+str(i))
         data.append(datas)
@@ -639,7 +649,7 @@ def update_attendes(request):
             )
         obj.save()
         print("Attendees Updated")
-    return render(request, 'msg/staff_class_404.html',staff_detials(request,'Update Attendees'))
+    return JsonResponse({"status":"sucess"})
 
 
 def update_edited_attendes(request):
