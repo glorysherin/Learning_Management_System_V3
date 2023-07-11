@@ -1,8 +1,14 @@
 {% extends 'teacher/teacherbase.html' %}
 
 {% block content %}
-<div class="flex justify-center">
-  <div class="bg-white shadow-md rounded-md p-6">
+<head>
+  <!-- <link href=
+  "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+            rel="stylesheet"> -->
+</head>
+<div class="flex justify-center" style="margin-top: 20px;margin-right: 30px;margin-left: 30px;">
+  <div>
+  <div class="bg-white shadow-md rounded-md p-4" style="margin-bottom: 100px;">
     <h1 class="text-2xl font-bold">Datas: {{ title }}</h1>
   
     <h3 class="text-lg">Subject: {{ data.subject }}</h3>
@@ -12,16 +18,28 @@
     <h3 class="text-lg">Update by: {{ data.update_by }}</h3>
  
     <h3 class="text-lg">Date: {{ data.date }}</h3>
+    
+{% if mark %}
+<div class="flex justify-center mt-4 " style="display: flex;
+flex-direction: row-reverse;margin-top: -500px;" >
+  <div class="bg-gray-200 shadow-md rounded-md p-5" style="border-radius: 60%;height: 100px;width: 100px;display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: stretch;">
+    <h4 style="" class="text-lg">Mark: {{ mark.mark }}</h4>
+  </div>
+  <div class="flex justify-center mt-0 p-3"style="width: 100%"; >
+    <div class="bg-gray-200 shadow-md rounded-md p-6"style="width: 100%;margin-left: 60px;margin-top: 30px;">
+      <h4 class="text-lg">Details: {{ data.details }}</h4>
+    </div>
+  </div>
+</div>
+{% else %}
   </div>
 </div>
 
-{% if mark %}
-  <div class="flex justify-center mt-4">
-    <div class="bg-white shadow-md rounded-md p-6">
-      <h4 class="text-lg">Mark: {{ mark.mark }}</h4>
-    </div>
-  </div>
-{% else %}
   <div class="flex justify-center mt-4">
     <div class="bg-white shadow-md rounded-md p-6">
       <h4 class="text-lg">Marks are not updated</h4>
@@ -29,11 +47,7 @@
   </div>
 {% endif %}
 
-<div class="flex justify-center mt-4">
-  <div class="bg-white shadow-md rounded-md p-6">
-    <h4 class="text-lg">{{ data.details }}</h4>
-  </div>
-</div>
+
 
 {% if mark %}
   <div class="flex justify-center mt-4">
@@ -41,7 +55,7 @@
       <form method="POST" action="{% url 'edit_assignment_mark' id=mark.id %}">
         {% csrf_token %}
         <input type="number" name="mark" value="{{ mark.mark }}" required class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Edit Mark</button>
+        <button style="background-color: blue;border-radius: 5px;border: none;" type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Edit Mark</button>
       </form>
     </div>
   </div>
@@ -58,7 +72,7 @@
 {% endif %}
 
 <div class="flex justify-center mt-4">
-  <div class="bg-white shadow-md rounded-md p-6">
+  <div style="margin-bottom: 30px;" class="bg-white shadow-md rounded-md p-6">
     {% if file %}
       {% for i in file %}
         <a href="{{ i.File.url }}" class="text-blue-500">{{ i.File }}</a><br>
@@ -67,6 +81,7 @@
       <p>No files exist.</p>
     {% endif %}
   </div>
+</div>
 </div>
 
 {% endblock content %}
