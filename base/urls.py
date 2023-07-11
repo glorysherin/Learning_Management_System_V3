@@ -268,6 +268,7 @@ classroom = [
     path('class_ebook/<int:pk>/delete/',
          class_ebook_delete, name='class_ebook_delete'),
     path('filter_attendees', filter_attendees, name='filter_attendees'),
+    path('leave_classroom/<str:class_id>', leave_classroom, name='leave_classroom'),
 
 ]
 
@@ -570,7 +571,7 @@ assignments_ = [
 
 upload_assignments = [
     path('upload_assignment/<int:id>', staff_upload_assignment_create, name='upload_assignment_list'),
-    path('edit_assignment_mark/<int:id>', edit_assignment_mark, name='edit_assignment_mark'),
+    path(r'^edit_assignment_mark/(?P<id>\d+)/(?P<a_id>True|False)/(?P<class_id>\w+)/(?P<student_id>\d+)/$', edit_assignment_mark, name='edit_assignment_mark'),
     re_path(r'^upload_assignment/(?P<id>\d+)/(?P<a_id>True|False)/(?P<class_id>\w+)/$', upload_assignment_list1, name='upload_assignment_list1'),
     re_path(r'^assignment_mark/(?P<id>\d+)/(?P<a_id>True|False)/(?P<class_id>\w+)/(?P<student_id>\d+)/$', assignment_mark, name='assignment_mark'),
     path('upload_assignment/create/<int:qst_id>', upload_assignment_create, name='upload_assignment_create'),

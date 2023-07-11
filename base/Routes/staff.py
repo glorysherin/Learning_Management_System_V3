@@ -497,6 +497,10 @@ def remove_question_view(request, pk):
     question.delete()
     return HttpResponseRedirect('/teacher/teacher-view-question')
 
+from base import models as TMODEL
+from base import models as SMODEL
+from base import models
+from ..models import Department
 
 # --------------------------
 def Personal_detials(request):
@@ -525,7 +529,7 @@ def Personal_detials(request):
     edit = Faculty_details.objects.get(mail=usr_obj.username)
     print(edit.mail)
     edit.role = role
-    edit.name = name
+    edit.name = name 
     edit.id_number = id_number
     edit.designation = designation
     edit.department = department
@@ -536,4 +540,19 @@ def Personal_detials(request):
     edit.image = my_uploaded_file
     edit.bio = bio
     edit.save()
-    return render(request, "home/staff.html", {'user_name': usr_obj.username, 'detials': faculty_details})
+    usr_id = request.user.id
+    usr_obj = User.objects.get(id=usr_id)
+    name = Users.objects.get(user_name=usr_obj.username)
+    faculty_details = Faculty_details.objects.get(user_name=name.user_name)
+    department = Department.objects.all()
+    context = {
+        'total_student': SMODEL.Student.objects.all().count(),
+        'total_teacher': TMODEL.Teacher.objects.filter(status=True,role="staff").count(),
+        'total_course': models.NoteCourse.objects.all().count(),
+        'user_name': usr_obj.username, 'detials': faculty_details,
+        'name_s': faculty_details.name.split(' '),
+        'rolenum':name.role,
+        'department':department,
+        'user_name': usr_obj.username, 'detials': faculty_details
+    }
+    return render(request, "home/staff.html", context)

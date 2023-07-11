@@ -42,6 +42,10 @@
           {% render_field studentForm.mobile|attr:'required:true' class="form-control" placeholder="Contact Number" %}
         </div>
         <div class="form-group">
+          <label for="mobile">Student Email</label>
+          {% render_field studentForm.mail_id|attr:'required:true' class="form-control" placeholder="Student Email" %}
+        </div>
+        <div class="form-group">
           <label for="mobile">Parent Email</label>
           {% render_field studentForm.parent_mail_id|attr:'required:true' class="form-control" placeholder="Parent Email" %}
         </div>

@@ -25,4 +25,4 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = models.Student
         fields = ['address', 'mobile', 'profile_pic',
-                  'joinned_year', 'role_no', 'department','parent_mail_id']
+                  'joinned_year', 'role_no', 'department','parent_mail_id','mail_id']

@@ -927,7 +927,7 @@ https://templatemo.com/tm-565-onix-digital
                         </div>
                         <div class="row">
                           <div class="col-md-6">
-                            <label>Qualififcation</label>
+                            <label>Qualification</label>
                           </div>
                           <div class="col-md-6">
                             <p>{{ detials.qualififcation }}</p>
@@ -1011,19 +1011,19 @@ https://templatemo.com/tm-565-onix-digital
                   <div class="col-lg-12">
                     <fieldset>
                       <input type="text" name="designation" id="designation" value="{{ detials.designation }}"
-                        placeholder="designation" required="" />
+                        placeholder="Designation" required="" />
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
                       <input type="date" name="date" id="date" value="{{ detials.experience }}"
-                        placeholder="date of join" required />
+                        placeholder="Date of join" required />
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
                       <input type="text" name="qualififcation" id="qualififcation" value="{{ detials.qualififcation }}"
-                        placeholder="qualififcation" required="" />
+                        placeholder="Qualification" required="" />
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
@@ -1047,13 +1047,13 @@ https://templatemo.com/tm-565-onix-digital
                   <div class="col-lg-12">
                     <fieldset>
                       <input type="file" name="file_upload" id="file_upload" value="{{ detials.experience }}"
-                        placeholder="image" required="" />
-                    </fieldset>
+                        placeholder="Image" required="" />
+                    </fieldset> 
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
                       <label for="department">Department:</label>
-                      <select class="form-control" name="department" id="department">
+                      <select class="form-control" name="department" id="department" required>
                         {% for i in department %}
                           <option value="{{ i.name }}">{{ i.name }}</option>
                         {% endfor %}
