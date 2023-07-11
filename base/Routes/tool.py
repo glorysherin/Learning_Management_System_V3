@@ -468,7 +468,7 @@ def admin_meeting(request, room_id):
     context = {
         'room_id': room_id,
     }
-    return render(request, 'tools/admin_video_meeting.html', context)
+    return render(request, 'tools/admin_video_meeting.html',staff_detials(request,'Admin Video Meet',context))
 
 
 def common_join_meeting(request):

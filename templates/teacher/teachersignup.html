@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+
 {% extends 'teacher/teacherbase.html' %}
 {% load widget_tweaks %}
 {% block content %}
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
-  <style>
+  <!-- <style>
     form {
       margin: 50px;
 
@@ -25,6 +26,14 @@
       align-items: center;
       margin-bottom: 25px;
     }
+  </style> -->
+  <style>
+    @media (min-width:680px) {
+      form{
+      margin-bottom: 30px;
+    }
+    }
+    
   </style>
 </head>
 
