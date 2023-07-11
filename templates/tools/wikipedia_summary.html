@@ -76,10 +76,10 @@
 				{% csrf_token %}
 				<label class="text-lg" for="keyword">Enter a keyword:</label>
 				<input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-					type="text" name="keyword" id="keyword">
+					type="text" required name="keyword" id="keyword">
 				<label class="text-lg mt-2" for="sentence">Sentence Count :</label>
 				<input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-					type="number" name="sentence" id="sentence">
+					type="number" required name="sentence" id="sentence">
 				<div class="flex mt-4">
 					<button style="border-radius: 13px;"
 						class="flex-1 mr-2 bg-blue-500 hover:bg-blue-600 text-black  rounded-md" type="submit"
