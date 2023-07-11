@@ -30,13 +30,13 @@ def assignment_mark(request,id,a_id,class_id,student_id):
     new_assignment_mark.save()
     return redirect('upload_assignment_list1',id=id,a_id=a_id,class_id=class_id)
 
-def edit_assignment_mark(request,id):
+def edit_assignment_mark(request,id,a_id,class_id,student_id):
     mark = request.POST.get("mark")
     try:
         assignment_mark = Assignment_mark.objects.get(id=id)
         assignment_mark.mark = mark
         assignment_mark.save()
-        return redirect("classroom")
+        return redirect('upload_assignment_list1',id=student_id,a_id=a_id,class_id=class_id)
     except Assignment_mark.DoesNotExist:
         return None
 

@@ -41,6 +41,10 @@ def is_admin(user):
 def is_student(user):
     return user.groups.filter(name='STUDENT').exists()
 
+def leave_classroom(request,class_id):
+    a = class_enrolled.objects.get(user_id=request.user.id,class_id=class_id)
+    a.delete()
+    return render(request,"msg/leave_class.html")
 
 def nave_home_classroom(request, pk, class_id):
     if pk == "join":
@@ -1026,7 +1030,7 @@ def Dailytest_marksby_date(request, user_name):
 
     context = {'marks_table': table}
     # return render(request, 'user_marks.html', context)
-    return render(request, 'class_room/Dailytest_marksby_date.html', student_detials(request,"Student Test Mark", context))
+    return render(request, 'class_room/Dailytest_marksby_date.html', staff_detials(request,"Student Test Mark", context))
 
 
 def list_user_for_mark(request, class_id):

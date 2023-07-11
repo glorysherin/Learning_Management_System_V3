@@ -36,9 +36,9 @@
 </div>
 
 {% if mark %}
-  <div class="flex justify-center mt-4">
+  <div class="flex justify-center mt-4"> 
     <div class="bg-white shadow-md rounded-md p-6">
-      <form method="POST" action="{% url 'edit_assignment_mark' id=mark.id %}">
+      <form method="POST" action="{% url 'edit_assignment_mark' id=mark.id a_id=state student_id=qst_id class_id=class_id %}">
         {% csrf_token %}
         <input type="number" name="mark" value="{{ mark.mark }}" required class="border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Edit Mark</button>

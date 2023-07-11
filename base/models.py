@@ -38,7 +38,7 @@ class Faculty_details(models.Model):
     designation = models.CharField(max_length=200, default='designation')
     date_of_join = models.DateField(default=timezone.now)
     department = models.CharField(max_length=200, default='department')
-    qualififcation = models.CharField(max_length=200, default='qualififcation')
+    qualififcation = models.CharField(max_length=200, default='qualification')
     assessment_period = models.IntegerField(default=0)  # auto update....
     experience = models.IntegerField(default=0)
     bio = models.CharField(max_length=200, default='No Bio yet.')
