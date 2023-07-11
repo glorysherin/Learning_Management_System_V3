@@ -75,7 +75,14 @@ def nave_home_classroom(request, pk, class_id):
                 pass
                 # obj = Teacher.objects.get(user=person_obj) if database are clear it will work properly
                 # print(obj.role)
-        detials = ClassRooms.objects.get(subject_code=class_id)
+        try:
+            detials = ClassRooms.objects.get(subject_code=class_id)
+        except:
+            try:
+                Teacher.objects.get(user=User.objects.get(id=request.user.id))
+                return render(request,'msg/staff_class_404.html')
+            except:
+                return render(request,'msg/std_class_404.html')
 
         # create new chat room..........
 
@@ -631,7 +638,7 @@ def update_attendes(request):
                 class_id=splited[2], user_name=splited[1], subject_states=splited[0], roll_no=splited[3]
             )
         obj.save()
-    return render(request, 'msg/edit_attendes_home.html',staff_detials(request,'Update Attendees'))
+    return render(request, 'msg/staff_class_404.html',staff_detials(request,'Update Attendees'))
 
 
 def update_edited_attendes(request):

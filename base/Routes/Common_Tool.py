@@ -260,7 +260,7 @@ def Common_convert_jpg_to_pdf(request):
                     destination.write(chunk)
 
         # Convert images to PDF
-        pdf_file = convert_images_to_pdf(
+        pdf_file = Common_convert_images_to_pdf(
             [os.path.join(temp_dir, f.name) for f in files])
 
         # Serve the PDF file for download
@@ -270,7 +270,6 @@ def Common_convert_jpg_to_pdf(request):
             return response
 
         # Delete temporary files
-        shutil.rmtree(temp_dir)
 
     return render(request, 'Common_Page_Tools/convert_jpg_to_pdf.html')
 

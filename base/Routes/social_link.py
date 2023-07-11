@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from ..models import SocialMedia, Teacher
 from django.contrib.auth.models import User
 
-def edit_social_media(request):
+def edit_social_media(request,id):
     if request.user.id:
         try:
-            social_media =  SocialMedia.objects.get(std_id=request.user.id)
+            try:
+                social_media =  SocialMedia.objects.get(std_id=id)
+            except:
+                social_media =  SocialMedia.objects.get(std_id=request.user.id)
         except:
             social_media = SocialMedia.objects.create(std_id=request.user.id)
             
@@ -17,10 +20,12 @@ def edit_social_media(request):
         social_media.facebook = request.POST.get('facebook')
         social_media.instagram = request.POST.get('instagram')
         social_media.save()
-        return redirect('student_detail')
+
+        return redirect('student_detail',student_id=id)
     
     context = {
-        'social_media': social_media
+        'social_media': social_media,
+        'usr_id':id
     }
     if social_media:
         return render(request, 'social_link/edit_social_media.html', context)

@@ -586,7 +586,7 @@ compile = [
 ]
 
 social = [
-    path('edit_social_media', edit_social_media, name='edit_social_media'),
+    path('edit_social_media/<int:id>', edit_social_media, name='edit_social_media'),
     path('staff_edit_social_media', staff_edit_social_media, name='staff_edit_social_media'),
     
 ]
