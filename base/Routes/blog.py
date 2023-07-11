@@ -56,7 +56,7 @@ def blog_draft_saved(request):
 
 def list_draft_blog(request):
     obj =  get_draft_blog(request)
-    return render(request,"blog/draft_blog.html",{"obj":obj})
+    return render(request,"blog/draft_blog.html",staff_detials(request,'Drafted Blog',{"obj":obj}))
 
 def list_unrevied_draft_blog(request):
     obj =  get_draft_blog_unreview(request)
