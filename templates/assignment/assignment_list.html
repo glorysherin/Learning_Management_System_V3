@@ -1,5 +1,4 @@
 {% extends 'teacher/teacherbase.html' %}
-<<<<<<< HEAD
 {% load static %}
 {% block content %}
 <div class="card" style="margin-top: 10px;justify-content: center;text-align: right;">
@@ -20,7 +19,8 @@
       <p class="text-gray-600 mb-4"><b>Subject:</b>{{ assignment.subject }}</p>
       <p class="text-gray-800"><b> Details:</b>{{ assignment.details }}</p>
       <div class="mt-4">
-        <button style="border: none;background-color: #ba0101;margin-left: 30px;color: white !important;" class="inline-block bg-red-500 hover:bg-red-600  font-bold py-2 px-4 rounded"><a href="{% url 'assignment_edit' pk=assignment.pk %}" style="color: white;">Edit</a></button>
+        <button style="border: none;background-color: #ba0101;margin-left: 
+        30px;color: white !important;" class="inline-block bg-red-500 hover:bg-red-600  font-bold py-2 px-4 rounded"><a href="{% url 'assignment_edit' pk=assignment.pk %}" style="color: white;">Edit</a></button>
         <button style="border: none;background-color: #ba0101;margin-left: 30px;" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" ><a href="{% url 'assignment_delete' pk=assignment.pk %}" class="text-red-500 hover:text-red-700"style="color: white;">Delete</a></button>
       </div>
     </div><br>
@@ -28,38 +28,7 @@
 </div>
 <br>
 
-<!-- <a href="{% url 'assignment_add' class_id=class_id %}" class="block mt-4 text-blue-500 hover:text-blue-700">Add Assignment</a> -->
-=======
 
-{% block content %}
 
-<div class="flex flex-wrap justify-center -mx-4" style="margin-bottom: 60px;">
-  {% for assignment in assignments %}
-  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-    <div class="bg-white rounded-lg shadow-lg">
-      <div class="p-4">
-        <h3 class="text-lg font-semibold">{{ assignment.title }}</h3>
-        <p class="text-gray-600">{{ assignment.subject }}</p>
-        <p class="text-gray-800">{{ assignment.details }}</p>
-      </div>
-      <div class="flex justify-end p-4">
-        <a style="background-color: rgb(118, 102, 189);color: white;" href="{% url 'assignment_edit' pk=assignment.pk %}" class="btn btn-blue mr-2">Edit</a>
-        <a style="background-color: rgb(118, 102, 189);color: white;" href="{% url 'assignment_delete' pk=assignment.pk %}" class="btn btn-red">Delete</a>
-      <!-- </div>
-    </div>
-  </div> -->
-  {% endfor %}
-  <!-- <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-    <div class="bg-white rounded-lg shadow-lg flex items-center justify-center h-full"> -->
-      <a style="background-color: rgb(118, 102, 189);color: white;" href="{% url 'assignment_add' class_id=class_id %}" class="btn btn-green">Add Assignment</a>
-    </div>
-  </div>
-<<<<<<< HEAD
-{% endfor %}
-<a href="{% url 'assignment_add' class_id=class_id %}">Add Assignment</a>
->>>>>>> 03b413a6eca33bae4c2ae75ab9c552ea9a04ddc0
-=======
-</div>
->>>>>>> 4976275f5a84eeeb1ef1da611ec9da954c9311fc
 
 {% endblock content %}
