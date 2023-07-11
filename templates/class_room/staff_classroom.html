@@ -1816,18 +1816,21 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
     function join_room(username, roomname) {
-      console.log(username, roomname)
-      $.ajax({
-        method: "GET",
-        url: "{% url 'staff_checkview' %}",
-        data: {
-          'room_name': roomname,
-          'username': username,
-        }, success: function (data) {
-          window.location.href = "/staffchat/" + roomname + "/?username=" + username;
-        }
-      });
+  console.log("sample", username, roomname);
+
+  $.ajax({
+    method: "POST",
+    url: "{% url 'staff_checkview' %}",
+    data: {
+      room_name: roomname,
+      username: username,
+      csrfmiddlewaretoken: '{{ csrf_token }}'  // Include the CSRF token
+    },
+    success: function(data) {
+      window.location.href = "/staffchat/" + roomname + "/?username=" + username;
     }
+  });
+}
   </script>
   <!-- jquary -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

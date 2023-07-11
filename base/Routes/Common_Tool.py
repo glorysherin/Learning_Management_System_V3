@@ -270,7 +270,6 @@ def Common_convert_jpg_to_pdf(request):
             return response
 
         # Delete temporary files
-        shutil.rmtree(temp_dir)
 
     return render(request, 'Common_Page_Tools/convert_jpg_to_pdf.html')
 

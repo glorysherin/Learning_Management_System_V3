@@ -46,6 +46,7 @@ def students_list_by_dep(request):
     context = {
         'students': students,
         'departments': departments,
+        'data':'std'
     }
     return render(request, 'student/students_list.html',  staff_detials(request, 'Manage Students',context))
 
@@ -80,7 +81,11 @@ def student_delete(request, student_id):
         'departments': departments,
         'student': student
     }
-    return redirect('admin_students_list')
+    
+    if Teacher.objects.get(user=User.objects.get(id=request.user.id)).role == 'admin':
+        return redirect('admin_students_list')
+    else:
+        return render(request,'msg/std_deleted.html')
 
 def student_profile(request, student_id):
     student = get_object_or_404(Student, pk=student_id)

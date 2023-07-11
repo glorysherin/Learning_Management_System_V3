@@ -91,7 +91,11 @@ a:hover {
                     <tr>
                         <td>{{ student.get_name }}</td>
                         <td>{{ student.department }}</td>
+                        {% if data == 'std' %}
+                        <td>{{ student.role_no }}</td>
+                        {% else %}
                         <td>{{ student.role }}</td>
+                        {% endif %}
                         <td>{{ student.mobile }}</td>
                         <td>
                             <a href="students/{{ student.id}}">View</a>
