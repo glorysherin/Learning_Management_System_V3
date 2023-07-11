@@ -30,6 +30,15 @@ TemplateMo 565 Onix Digital
 https://templatemo.com/tm-565-onix-digital
 
 -->
+
+
+<style>
+  @media (min-width:680px) {
+    #svg_type1{
+justify-content: ;
+    }
+  }
+</style>
 </head>
 <script>
   let count = 0;
@@ -566,7 +575,7 @@ https://templatemo.com/tm-565-onix-digital
     </div>
   </div>
 
-  <div id="subscribe" class="subscribe">
+  <div id="subscribe1" class="subscribe">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -590,16 +599,19 @@ https://templatemo.com/tm-565-onix-digital
                       flex-direction: row;
                     ">
                   {% csrf_token %}
-                  <input id="input1" placeholder="Enter RoomCode" class="form-control" aria-label="With textarea"
-                    type="text" name="room_name" id="room_name" style="margin-top: 10px" />
+                  <div style="display: flex;margin-left: -10px;flex-direction: column;">
+                    <input  id="input1" placeholder="Enter RoomCode" class="form-control" aria-label="With textarea"
+                    type="text" name="room_name" id="room_name" style="margin-top: 10px;width: fit-content;" />
                   <input id="input2" placeholder="Enter Name" class="form-control" aria-label="With textarea"
-                    type="text" name="username" id="username" style="margin-top: 10px" />
+                    type="text" name="username" id="username" style="margin-top: 10px;width: fit-content;" />
+                  </div>
                   <input type="submit" style="
                         padding: 10px;
                         background-color: #03a4ed;
                         border-radius: 16px;
                         margin-top: 1px;
-                      " id="form-submit" value="Join the room" class="main-button" />
+                        margin-left: -20%;
+                      " id="form-submit" value="Join  room" class="main-button" />
                 </form>
                 <br />
                 <div style="
@@ -607,7 +619,7 @@ https://templatemo.com/tm-565-onix-digital
                       justify-content: space-between;
                       align-items: center;
                       flex-direction: row;
-                    " id="subscribe" action="" method="get">
+                    " id="subscribe1" action="" method="get">
                   <div style="
                         display: flex;
                         padding: 11px;
@@ -632,8 +644,8 @@ https://templatemo.com/tm-565-onix-digital
                      " onclick="gen1()">
                    Generate
                  </button>
-                    <input type="text" name="room" placeholder="Here you can get the room code...." id="Generate1"
-                      style="margin-top: 3px" disabled />
+                    <input type="text" name="room" placeholder="" id="Generate1"
+                      style="margin-top: 3px;width: 30%;padding-right: -70%;" disabled />
                     <button onclick="copyToClipboard1()">
                       <svg id="svg_type1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                         <path fill="currentColor"
