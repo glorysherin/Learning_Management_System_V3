@@ -37,8 +37,9 @@ def save_blog(request):
             obj.save()
             response_data = {'status': 'success', 'message': 'Blog published successfully'}
         elif action == 'Save Draft':
+            print("Submitreview False")
             obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
-                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
+                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=False)
             obj.save()
             response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
         else:
@@ -60,6 +61,7 @@ def list_draft_blog(request):
 
 def list_unrevied_draft_blog(request):
     obj =  get_draft_blog_unreview(request)
+    print(obj)
     return render(request,"blog/blog_review.html",staff_detials(request,'drafted blog',{"obj":obj}))
 
 def save_edit_blog(request, pk):
@@ -69,18 +71,48 @@ def save_edit_blog(request, pk):
     content = request.POST.get(ids[2])
     Category = request.POST.get(ids[3])
     Thumbnail = request.POST.get(ids[4])
+    blog_type = request.POST.get('#type_')
+    action = request.POST.get('#action')
+    
+    if title and description and content and Category and Thumbnail :
+        print("action : ",action)
+        if action == 'Save and Publish':
+            obj = Draft_blog.objects.get(id=pk)
+            obj.content = content
+            obj.blog_type=blog_type
+            obj.title = title
+            obj.description = description
+            obj.categories = Category
+            obj.blog_profile_img = Thumbnail
+            obj.reviewed=False
+            obj.Submitreview=True
+            obj.save()
+            response_data = {'status': 'success', 'message': 'Blog published successfully'}
+        elif action == 'Save Draft':
+            print("Submitreview False")
+            obj = Draft_blog.objects.get(id=pk)
+            obj.content = content
+            obj.blog_type=blog_type
+            obj.title = title
+            obj.description = description
+            obj.categories = Category
+            obj.blog_profile_img = Thumbnail
+            obj.reviewed=False
+            obj.Submitreview=False
+            obj.save()
 
-    obj = Draft_blog.objects.get(id=pk)
-    obj.content = content
-    obj.title = title
-    obj.description = description
-    obj.categories = Category
-    obj.blog_profile_img = Thumbnail
-    obj.save()
+            print("Saved...........")
+            
+            response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+        else:
+            response_data = {'status': 'error', 'message': 'Invalid action'}
+    else:
+        response_data = {'status': 'err', 'message': 'Please Provide the all of details'}
 
-    print("Saved...........")
 
-    return render(request, "blog/blog_edit.html")
+
+    response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+    return JsonResponse(response_data) 
 
 
 def draft_save_blog(request, pk):

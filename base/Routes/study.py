@@ -143,10 +143,14 @@ def nave_home_classroom(request, pk, class_id):
                 user_count = Upload_Assignment.objects.filter(Assignment_id=i.id).values('update_by').distinct().count()
                 collected.append(user_count)
                 print("user_count",user_count)
-                if len(peoples) <= user_count:
+                if len(peoples) == 0:
+                    status_data.append(False)
+                elif len(peoples) <= user_count:
                     status_data.append(True)
                 else:
-                    if len(peoples) <= user_count:
+                    if len(peoples) == 0:
+                        status_data.append(False)
+                    elif len(peoples) <= user_count:
                         status_data.append(True)
                     else:
                         status_data.append(False)
@@ -155,11 +159,13 @@ def nave_home_classroom(request, pk, class_id):
                 notes.append(None)
                 print("Error occered.....!")
                 collected.append(0)
-                if len(peoples) <= user_count:
+                if len(peoples) == 0:
+                    status_data.append(False)
+                elif len(peoples) <= user_count:
                     status_data.append(True)
                 else:
                     status_data.append(False)
-        
+            
         empty = True if len(table_datas)>0 else False
                 
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

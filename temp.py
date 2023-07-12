@@ -1674,3 +1674,6 @@ def filter_attendees(request):
     return render(request, 'class_room/filter_attendees.html', context)
 
 '''
+
+
+
