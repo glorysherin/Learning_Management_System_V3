@@ -25,7 +25,7 @@ margin-bottom:17% ;
       <div class="row">
         <div class="col">
           <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-            <h1 class="text-gray-700 font-bold">
+            <h1 style="font-size: 30px;" class="text-gray-700 font-bold">
               Teacher Profile</h1>
           </nav>
         </div>
@@ -37,7 +37,10 @@ margin-bottom:17% ;
             <a href="{% url 'teacher_edit' teacher_id=teacher_id  %}">
             <svg style="margin: 30px;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M12 21v-2.125l5.3-5.3l2.125 2.125l-5.3 5.3H12Zm-9-5v-2h7v2H3Zm17.125-1L18 12.875l.725-.725q.275-.275.7-.275t.7.275l.725.725q.275.275.275.7t-.275.7l-.725.725ZM3 12v-2h11v2H3Zm0-4V6h11v2H3Z" /></svg>
           </a>
-            <div class="card-body text-center">
+            <div class="card-body text-center" style="display: flex;
+            flex-direction: column;
+            align-content: center;
+            flex-wrap: wrap;">
               
               <img src="{{ teacher.profile_pic.url }}" alt="{{ teacher.get_name }} profile picture"
                 class="rounded-circle img-fluid" style="width: 150px;">
@@ -57,27 +60,27 @@ margin-bottom:17% ;
               <ul class="list-group list-group-flush rounded-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="fas fa-globe fa-lg text-warning"></i>
-                  <p class="mb-0">{{ links.portfolio }}</p>
+                  <p class="mb-0"><a href="{{ links.portfolio }}"  target="_blank">Porfolio </a> </p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                  <p class="mb-0">{{ links.github }}</p>
+                  <p class="mb-0"><a href="{{ links.github }}"  target="_blank">Github</a> </p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                  <p class="mb-0">{{ links.twitter }}</p>
+                  <p class="mb-0"><a href="{{ links.twitter }}" target="_blank">Twitter</a></p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                  <p class="mb-0">{{ links.instagram }}</p>
+                  <p class="mb-0"><a href="{{ links.instagram }}"  target="_blank">Instagram</a></p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                  <p class="mb-0">{{ links.facebook }}</p>
+                  <p class="mb-0"><a href="{{ links.facebook }}"  target="_blank">Facebook</a></p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="fab fa-linkedin fa-lg" style="color: #3b5998;"></i>
-                  <p class="mb-0">{{ links.linkedin }}</p>
+                  <p class="mb-0"><a href="{{ links.linkedin }}"  target="_blank">Linkedin</a></p>
                 </li>
               </ul>
             </div>
@@ -128,7 +131,7 @@ margin-bottom:17% ;
                   <p class="text-muted mb-0">{{ teacher.get_name }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Address:</p>
@@ -137,7 +140,7 @@ margin-bottom:17% ;
                   <p class="text-muted mb-0">{{ teacher.address }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Role:</p>
@@ -146,7 +149,7 @@ margin-bottom:17% ;
                   <p class="text-muted mb-0">{{ teacher.role }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Mobile:</p>
@@ -155,7 +158,7 @@ margin-bottom:17% ;
                   <p class="text-muted mb-0">{{ teacher.mobile }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Status:</p>
@@ -164,7 +167,7 @@ margin-bottom:17% ;
                   <p class="text-muted mb-0">{{ teacher.status }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Department:</p>
@@ -173,7 +176,7 @@ margin-bottom:17% ;
                   <p class="text-muted mb-0">{{ teacher.department }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Salary:</p>
@@ -182,7 +185,7 @@ margin-bottom:17% ;
                   <p class="text-muted mb-0">{{ teacher.salary }}</p>
                 </div>
               </div>
-              <hr>
+              <hr><br>
             </div>
           </div>
           {% else %}
