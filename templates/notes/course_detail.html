@@ -16,4 +16,6 @@
   {% else %}
     <p>No subjects found for this course.</p>
   {% endif %}
+  <button><a href="{% url 'course_edit' pk=pk %}">Edit</a></button>
+  <button><a href="{% url 'course_delete' pk=pk %}">Delete</a></button>
 {% endblock %}

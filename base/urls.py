@@ -445,7 +445,8 @@ gallery_ = [
 
 note = [
     path('course_list', course_list, name='course_list'),
-    path('course/course_edit/<int:pk>', course_detail, name='course_detail'),
+    path('course_edit/<int:pk>', course_edit, name='course_edit'),
+    path('course_delete/<int:pk>', course_delete, name='course_delete'),
     path('course/<int:pk>/', course_detail, name='course_detail'),
     path('course/add/', course_add, name='course_add'),
 
