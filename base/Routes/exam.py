@@ -209,7 +209,7 @@ def update_student_view(request, pk):
             user.save()
             studentForm.save()
             return redirect('admin-view-student')
-    return render(request, 'exam/update_student.html', context=mydict)
+    return render(request, 'exam/update_student.html',staff_detials(request,'Update Student', mydict))
 
 
 @login_required(login_url='adminlogin')
@@ -282,7 +282,7 @@ def admin_view_question_view(request):
 @login_required(login_url='adminlogin')
 def view_question_view(request, pk):
     questions = models.Question.objects.all().filter(course_id=pk)
-    return render(request, 'exam/view_question.html', {'questions': questions})
+    return render(request, 'exam/view_question.html',staff_detials(request,'View Questions',{'questions': questions}))
 
 
 @login_required(login_url='adminlogin')
@@ -314,7 +314,7 @@ def admin_check_marks_view(request, pk):
 
     results = models.Result.objects.all().filter(
         exam=course).filter(student=student)
-    return render(request, 'exam/admin_check_marks.html', {'results': results})
+    return render(request, 'exam/admin_check_marks.html', staff_detials(request,'Check mark',{'results': results}))
 
 
 def aboutus_view(request):
