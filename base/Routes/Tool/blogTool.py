@@ -19,7 +19,7 @@ def get_blog():
     return items
 
 def get_draft_blog(request):
-    images = Draft_blog.objects.filter(userid=request.user.id,reviewed=False)
+    images = Draft_blog.objects.filter(userid=request.user.id,reviewed=False,Submitreview=False)
     cat = []
     temp = []
     items = []
@@ -36,7 +36,7 @@ def get_draft_blog(request):
     return items
 
 def get_draft_blog_unreview(request):
-    images = Draft_blog.objects.filter(userid=request.user.id,reviewed=True)
+    images = Draft_blog.objects.filter(userid=request.user.id,Submitreview=False)
     cat = []
     temp = []
     items = []

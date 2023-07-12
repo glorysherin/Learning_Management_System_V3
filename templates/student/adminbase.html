@@ -237,7 +237,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{% url 'staff_list_blog' %}">
+          <a class="nav-link  " href="{% url 'review_list_blog' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="m23.589 22.261l-2.102-2.101a4.978 4.978 0 0 0-3.115-7.594l-.033-.006V8.491a1.01 1.01 0 0 0-.233-.646l.001.002v-.005a.94.94 0 0 0-.06-.066l-.008-.009l-.027-.027L10.572.3a.91.91 0 0 0-.065-.059l-.026-.018a.938.938 0 0 0-.05-.038l-.025-.018l-.054-.034l-.023-.012q-.034-.02-.075-.037l-.032-.013l-.051-.018l-.036-.011l-.058-.015l-.028-.006a.81.81 0 0 0-.086-.013H1.015A1.019 1.019 0 0 0 0 1.02v20.377a1.02 1.02 0 0 0 1.015 1.019h16.31a4.924 4.924 0 0 0 2.74-.827l-.018.011l2.102 2.102a1.019 1.019 0 0 0 1.439-1.44l.001.001zm-3.325-4.827a2.943 2.943 0 1 1-5.887.001a2.943 2.943 0 0 1 5.887-.002zM10.868 3.478l3.993 3.994h-3.993zm-8.83-1.44h6.793v6.453c0 .563.456 1.019 1.019 1.019h6.453v3.05c-2.278.487-3.962 2.483-3.962 4.873c0 1.109.362 2.133.975 2.96l-.01-.013H2.037z"/></svg>
@@ -266,7 +266,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{% url 'admin_list_blog_course' %}">
+          <a class="nav-link  " href="{% url 'list_draft_blog' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M20 2a1 1 0 0 1 1 1v3.757l-8.999 9l-.006 4.238l4.246.006L21 15.242V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16Zm1.778 6.808l1.414 1.414L15.414 18l-1.416-.002l.002-1.412l7.778-7.778ZM12 12H7v2h5v-2Zm3-4H7v2h8V8Z"/></svg>                  <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -798,7 +798,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Admin</span>
+            <span class="nav-link-text ms-1">{{ role }}</span>
           </a>
         </li>
         <li class="nav-item">
@@ -958,7 +958,7 @@
               </a>
             </li>          <p style="background-color:rgba(211, 209, 206, 0.897);height: 1px;margin:0px 30px 0px 30px;box-shadow: 10px;"></p>
             <li class="nav-item">
-              <a class="nav-link  " href="{% url 'staff_list_blog' %}">
+              <a class="nav-link  " href="{% url 'review_list_blog' %}">
                 <div
                   class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="m23.589 22.261l-2.102-2.101a4.978 4.978 0 0 0-3.115-7.594l-.033-.006V8.491a1.01 1.01 0 0 0-.233-.646l.001.002v-.005a.94.94 0 0 0-.06-.066l-.008-.009l-.027-.027L10.572.3a.91.91 0 0 0-.065-.059l-.026-.018a.938.938 0 0 0-.05-.038l-.025-.018l-.054-.034l-.023-.012q-.034-.02-.075-.037l-.032-.013l-.051-.018l-.036-.011l-.058-.015l-.028-.006a.81.81 0 0 0-.086-.013H1.015A1.019 1.019 0 0 0 0 1.02v20.377a1.02 1.02 0 0 0 1.015 1.019h16.31a4.924 4.924 0 0 0 2.74-.827l-.018.011l2.102 2.102a1.019 1.019 0 0 0 1.439-1.44l.001.001zm-3.325-4.827a2.943 2.943 0 1 1-5.887.001a2.943 2.943 0 0 1 5.887-.002zM10.868 3.478l3.993 3.994h-3.993zm-8.83-1.44h6.793v6.453c0 .563.456 1.019 1.019 1.019h6.453v3.05c-2.278.487-3.962 2.483-3.962 4.873c0 1.109.362 2.133.975 2.96l-.01-.013H2.037z"/></svg>
@@ -987,7 +987,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link  " href="{% url 'admin_list_blog_course' %}">
+              <a class="nav-link  " href="{% url 'list_draft_blog' %}">
                 <div
                   class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M20 2a1 1 0 0 1 1 1v3.757l-8.999 9l-.006 4.238l4.246.006L21 15.242V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16Zm1.778 6.808l1.414 1.414L15.414 18l-1.416-.002l.002-1.412l7.778-7.778ZM12 12H7v2h5v-2Zm3-4H7v2h8V8Z"/></svg>                  <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -1712,7 +1712,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{% url 'staff_list_blog' %}">
+          <a class="nav-link  " href="{% url 'review_list_blog' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="m23.589 22.261l-2.102-2.101a4.978 4.978 0 0 0-3.115-7.594l-.033-.006V8.491a1.01 1.01 0 0 0-.233-.646l.001.002v-.005a.94.94 0 0 0-.06-.066l-.008-.009l-.027-.027L10.572.3a.91.91 0 0 0-.065-.059l-.026-.018a.938.938 0 0 0-.05-.038l-.025-.018l-.054-.034l-.023-.012q-.034-.02-.075-.037l-.032-.013l-.051-.018l-.036-.011l-.058-.015l-.028-.006a.81.81 0 0 0-.086-.013H1.015A1.019 1.019 0 0 0 0 1.02v20.377a1.02 1.02 0 0 0 1.015 1.019h16.31a4.924 4.924 0 0 0 2.74-.827l-.018.011l2.102 2.102a1.019 1.019 0 0 0 1.439-1.44l.001.001zm-3.325-4.827a2.943 2.943 0 1 1-5.887.001a2.943 2.943 0 0 1 5.887-.002zM10.868 3.478l3.993 3.994h-3.993zm-8.83-1.44h6.793v6.453c0 .563.456 1.019 1.019 1.019h6.453v3.05c-2.278.487-3.962 2.483-3.962 4.873c0 1.109.362 2.133.975 2.96l-.01-.013H2.037z"/></svg>
@@ -1741,7 +1741,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{% url 'admin_list_blog_course' %}">
+          <a class="nav-link  " href="{% url 'list_draft_blog' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#67748e" d="M20 2a1 1 0 0 1 1 1v3.757l-8.999 9l-.006 4.238l4.246.006L21 15.242V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16Zm1.778 6.808l1.414 1.414L15.414 18l-1.416-.002l.002-1.412l7.778-7.778ZM12 12H7v2h5v-2Zm3-4H7v2h8V8Z"/></svg>                  <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -2103,7 +2103,7 @@
                 href=" {% url 'admin-dashboard' %} ">Home</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">{{ page }}</li>
           </ol>
-          <h6 class="text-white font-weight-bolder ms-2">Admin</h6>
+          <h6 class="text-white font-weight-bolder ms-2">{{ role }}</h6>
         </nav>
         <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
