@@ -8,12 +8,9 @@ def compiler_view(request):
         input_value = request.POST.get('input_value', '')
         result = compile_and_execute(code, language, input_value)
 
-        if language in ['html', 'tailwind', 'bootstrap']:
-            return render(request, 'compiler/compiler.html', {'code': code, 'result': result, 'language': language})
-
-        return render(request, 'compiler/compiler.html', {'code': code, 'result': result})
-    
-    return render(request, 'compiler/compiler.html')
+        return render(request, 'compiler/compiler.html', {'code': code, 'result': result,'language':language})
+    else:
+        return render(request, 'compiler/compiler.html')
 
 def compile_and_execute(code, language, input_value):
     if language == 'python':
