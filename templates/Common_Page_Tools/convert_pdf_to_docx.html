@@ -43,7 +43,7 @@ margin-bottom: 50px;
         <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <label class="text-base" for="pdf_file">Select a PDF file to convert:</label>
-          <input type="file" name="pdf_file" accept=".pdf" class="block mt-2 mb-4">
+          <input type="file" required name="pdf_file" accept=".pdf" class="block mt-2 mb-4">
           <button  style="border-radius: 8px;" type="submit" class="bg-blue-500 text-black px-4 py-2 rounded-md">Convert</button>
         </form>
       </div>

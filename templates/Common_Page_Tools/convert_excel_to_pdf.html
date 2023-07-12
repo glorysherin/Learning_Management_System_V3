@@ -45,7 +45,7 @@ h2 {
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label class="block text-gray-700 font-bold mb-2" for="excel_file">Select Excel file to convert:</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="file" name="excel_file" id="excel_file" /><br><br>
+            <input required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="file" name="excel_file" id="excel_file" /><br><br>
             <input class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Convert to PDF" />
           </form>
         </div>
