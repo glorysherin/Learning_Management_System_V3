@@ -454,10 +454,12 @@ def save_add_class(request):
     department = request.POST.get('department')
     semester = request.POST.get('semester')
     discription = request.POST.get('discription')
-
-    class_room = ClassRooms(class_image=choice(get_image_url(class_name+" logos")), class_name=class_name, subject_code=subject_code,
-                            department=department, semester=semester, discription=discription, owner=Faculty_details.objects.get(mail=get_user_mail(request)))
-    class_room.save()
+    try:
+        class_room = ClassRooms(class_image=choice(get_image_url(class_name+" logos")), class_name=class_name, subject_code=subject_code,
+                                department=department, semester=semester, discription=discription, owner=Faculty_details.objects.get(mail=get_user_mail(request)))
+        class_room.save()
+    except:
+        return render(request,'msg/subject_code_unique.html')
     class_id = ClassRooms.objects.get(subject_code=subject_code)
     enroll_class = class_enrolled(
         user_id=request.user.id, mail_id=request.user.username, subject_code=subject_code, class_id=class_id.id)
