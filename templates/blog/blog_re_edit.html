@@ -49,6 +49,16 @@
                                         </div>
 
                                         <div class="mb-4">
+                                          <label class="text-xl text-gray-600">Type( Blog/Course )<span
+                                            class="text-red-500">*</span></label></br>
+                                          <select class="border-2 border-gray-300 p-2 w-full" name="type_" id="type_"
+                                              placeholder="Type( Blog/Course )">
+                                              <option value="Blog">Blog</option>
+                                              <option value="Course">Course</option>
+                                          </select>
+                                      </div>
+
+                                        <div class="mb-4">
                                             <label class="text-xl text-gray-600">Thumbnail image</label></br>
                                             <input type="text" value="{{ obj.blog_profile_img }}" class="border-2 border-gray-300 p-2 w-full" name="Thumbnail" id="Thumbnail" placeholder="(Optional)">
                                         </div>
@@ -70,7 +80,7 @@
                                             <option value="Save Draft">Save Draft</option>
                                             <option value="Save and Publish">Submit for Review</option>
                                         </select>
-                                            <button onclick="img_upload(`{% url 'save_edit_blog' pk=obj.id %}`,'#content',['#title','#description','#Category','#Thumbnail'],{{ obj.id }})" class="p-3 bg-blue-500 text-white hover:bg-blue-400" required>Submit</button>
+                                            <button onclick="img_upload(`{% url 'save_edit_blog' pk=obj.id %}`,'#content',['#action','#type_','#title','#description','#Category','#Thumbnail'],{{ obj.id }})" class="p-3 bg-blue-500 text-white hover:bg-blue-400" required>Submit</button>
                                         </div>
                                     </form>
                                 </div>

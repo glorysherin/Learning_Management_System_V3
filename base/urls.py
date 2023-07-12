@@ -567,8 +567,8 @@ links_management = [
 assignments_ = [
     path('assignments/list/<str:class_id>', assignment_list, name='assignment_list'),
     path('assignments/add/<str:class_id>', assignment_add, name='assignment_add'),
-    path('assignments/edit/<int:pk>', assignment_edit, name='assignment_edit'),
-    path('assignments/delete/<int:pk>', assignment_delete, name='assignment_delete'),
+    path('assignments/edit/<int:pk>/<str:class_id>', assignment_edit, name='assignment_edit'),
+    path('assignments/delete/<int:pk>/<str:class_id>', assignment_delete, name='assignment_delete'),
 ]
 
 upload_assignments = [

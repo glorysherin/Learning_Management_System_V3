@@ -71,16 +71,45 @@ def save_edit_blog(request, pk):
     content = request.POST.get(ids[2])
     Category = request.POST.get(ids[3])
     Thumbnail = request.POST.get(ids[4])
+    blog_type = request.POST.get('#type_')
+    action = request.POST.get('#action')
+    
+    if title and description and content and Category and Thumbnail :
+        print("action : ",action)
+        if action == 'Save and Publish':
+            obj = Draft_blog.objects.get(id=pk)
+            obj.content = content
+            obj.blog_type=blog_type
+            obj.title = title
+            obj.description = description
+            obj.categories = Category
+            obj.blog_profile_img = Thumbnail
+            obj.reviewed=False
+            obj.Submitreview=True
+            obj.save()
+            response_data = {'status': 'success', 'message': 'Blog published successfully'}
+        elif action == 'Save Draft':
+            print("Submitreview False")
+            obj = Draft_blog.objects.get(id=pk)
+            obj.content = content
+            obj.blog_type=blog_type
+            obj.title = title
+            obj.description = description
+            obj.categories = Category
+            obj.blog_profile_img = Thumbnail
+            obj.reviewed=False
+            obj.Submitreview=False
+            obj.save()
 
-    obj = Draft_blog.objects.get(id=pk)
-    obj.content = content
-    obj.title = title
-    obj.description = description
-    obj.categories = Category
-    obj.blog_profile_img = Thumbnail
-    obj.save()
+            print("Saved...........")
+            
+            response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+        else:
+            response_data = {'status': 'error', 'message': 'Invalid action'}
+    else:
+        response_data = {'status': 'err', 'message': 'Please Provide the all of details'}
 
-    print("Saved...........")
+
 
     response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
     return JsonResponse(response_data) 
