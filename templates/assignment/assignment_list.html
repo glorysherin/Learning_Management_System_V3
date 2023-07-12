@@ -3,12 +3,17 @@
 {% block content %}
 <div class="card" style="margin-top: 10px;justify-content: center;text-align: right;">
   <div class="card-body">
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" style="    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+">
       {% csrf_token %}
       <!-- <div class="mb-4">
         <input type="file" name="file" required class="form-control-file">
       </div> -->
-      <button style="margin-right: 10%;background-color: rgb(4, 4, 84);" type="submit" ><a href="{% url 'assignment_add' class_id=class_id %}" style="color: white;">Add Assignment</a></button>
+      <button style="margin-right: 10%;background-color: rgb(105, 19, 185); border: none;padding: 7px;border-radius: 5px;" type="submit" ><a href="{% url 'class_room' %}" style="color: white;">Back</a></button>
+
+      <button style="margin-right: 10%;background-color: rgb(105, 19, 185); border: none;padding: 7px;border-radius: 5px;" type="submit" ><a href="{% url 'assignment_add' class_id=class_id %}" style="color: white;">Add Assignment</a></button>
     </form>
   </div>
 </div><br>
