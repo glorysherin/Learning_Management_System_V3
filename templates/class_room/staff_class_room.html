@@ -424,7 +424,7 @@ JEC-Class room  </title>
             <span class="nav-link-text ms-1">Meet</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link  " href="{% url 'admin_chat_lobby' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -451,7 +451,7 @@ JEC-Class room  </title>
             </div>
             <span class="nav-link-text ms-1">Conference</span>
           </a>
-        </li>
+        </li> -->
        
 
         <li class="nav-item">
@@ -1182,7 +1182,7 @@ JEC-Class room  </title>
               <span class="nav-link-text ms-1">Meet</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link  " href="{% url 'staff_chat_lobby' %}">
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -1214,7 +1214,7 @@ JEC-Class room  </title>
               <span class="nav-link-text ms-1">Conference</span>
             </a>
           </li>
-         
+          -->
           <li class="nav-item">
             <a class="nav-link  " href="{% url 'staff_chat_home' %}">
               <div
@@ -1506,7 +1506,7 @@ JEC-Class room  </title>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="/teacher/teacher-exam">
+            <a class="nav-link  " href="{% url 'course_list' %}">
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="38" viewBox="0 0 24 24">
@@ -1753,7 +1753,7 @@ JEC-Class room  </title>
           <span class="nav-link-text ms-1">Meet</span>
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link  " href="{% url 'staff_chat_lobby' %}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -1784,7 +1784,7 @@ JEC-Class room  </title>
           </div>
           <span class="nav-link-text ms-1">Conference</span>
         </a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link  " href="{% url 'staff_list_blog' %}">
           <div
@@ -1901,7 +1901,7 @@ JEC-Class room  </title>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link  " href="/teacher/teacher-exam">
+        <a class="nav-link  " href="{% url 'course_list' %}">
           <div
             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="38" viewBox="0 0 24 24">
@@ -2406,7 +2406,7 @@ JEC-Class room  </title>
                         </g>
                       </g>
                     </svg>
-                    <span class="ms-1">Attendes</span>
+                    <span class="ms-1">Attendance</span>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -2831,12 +2831,14 @@ JEC-Class room  </title>
               </ul>
             </div>
           </div>
-        </div>
+        </div><br><br>
 <!-- component -->
 
 {% if empty %}
 <div class="flex flex-col">
-  <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+  <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5"><br><br>
+    <h2 style="font-size: 30px;margin-left: 10px;">Assignment:</h2><br><br>
+
     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
       <div class="overflow-hidden">
         <table class="min-w-full">
