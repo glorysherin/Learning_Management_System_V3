@@ -19,6 +19,21 @@
       border-color: #4F46E5;
       box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
     }
+
+
+    @media (max-width: 768px) {
+      /* .max-w-md {
+        max-width: 400% !important;
+      } */
+      input {
+        width:200%;
+        margin-left: -50%;
+      }
+      .all{
+        
+      }
+
+    }
     </style>
     
 </head>
@@ -45,10 +60,10 @@
 </div> -->
 
 
-<div class="flex justify-center">
+<div id="all" class="flex justify-center">
   
   <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-6" style="display: flex;flex-wrap: wrap;align-content: center;justify-content: flex-start;margin: 70px;">
-    <h3 style="text-align: center;">Edit Assignment</h3>
+    <h3 style="text-align: center;">Edit Assignment</h3><br>
     <form method="POST" enctype="multipart/form-data" style="margin-top: 10%;">
       {% csrf_token %}
       
