@@ -80,7 +80,7 @@ a:hover {
                     <tr>
                         <th>Name</th>
                         <th>Department</th>
-                        <th>Role No</th>
+                        <th>Role No</th> 
                         <th>Mobile</th>
                         <th>Actions</th>
                     </tr>
@@ -98,9 +98,15 @@ a:hover {
                         {% endif %}
                         <td>{{ student.mobile }}</td>
                         <td>
+                          {% if data == 'std' %}
                             <a href="students/{{ student.id}}">View</a>
                             <a href="student/{{ student.id }}/edit">Edit</a>
                             <a href="students_delete/{{ student.id }}/delete">Delete</a>
+                          {% else %}
+                            <a href=" {% url 'teacher_profile' staff_id=student.id %}">View</a>
+                            <a href=" {% url 'teacher_edit' teacher_id=student.id %}">Edit</a>
+                            <a href="{% url 'teacher_delete' teacher_id=student.id %}">Delete</a>
+                          {% endif %}
                         </td>
                     </tr>
                     {% endif %}
