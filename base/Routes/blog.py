@@ -152,12 +152,12 @@ def admin_list_blog(request):
 
 def admin_list_blog_course(request):
     items = get_course()
-    return render(request, "blog/adminblog.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
+    return render(request, "blog/adminblog.html", staff_detials(request,'Blog List',{'page': 'Course', 'blogs': items}))
 
 def review_list_blog(request):
     items = get_course_review(request)
     print(items)
-    return render(request, "blog/blog_review.html", staff_detials(request,'Blog List',{'page': 'Blog', 'blogs': items}))
+    return render(request, "blog/blog_review.html", staff_detials(request,'Blog List',{'page': 'Review Blog', 'blogs': items}))
 
 def accept_the_art(request,id):
     obj = Draft_blog.objects.get(id=id)

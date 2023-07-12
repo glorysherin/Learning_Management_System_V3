@@ -21,13 +21,14 @@ def save_youtube_link(request,class_id):
         
         YouTubeLink.objects.create(title=title, link=link, category=category,class_id=class_id)
         
-        return redirect('list_youtube_links', args=[class_id])
+        return redirect('list_youtube_links', class_id=class_id)
 
 def list_youtube_links(request,class_id):
     links = YouTubeLink.objects.filter(class_id=class_id)
+    print(get_user_role(request))
     if get_user_role(request) == "Student":
         return render(request, 'youtube_links/st_list_youtube_links.html',student_detials(request,'list link', {'links': links,'class_id':class_id}))
-    elif get_user_role(request) == "staff":
+    else:
         return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links,'class_id':class_id}))
 
 

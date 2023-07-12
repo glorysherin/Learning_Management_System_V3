@@ -1,12 +1,12 @@
 
 {% extends 'student/adminbase.html' %}
 {% block content %}
-<div class="card" style="width: 90%;
-margin-left: 30px;">
-    <div class="card-header">
-      <h2 class="card-title">{% if department %}Edit department{% else %}Create department{% endif %}</h2>
+<div class="card1" style="width: 90%;margin-top: 10px;
+margin-left: 20px;">
+    <div class="card-header1">
+      <h2 class="card-title1">{% if department %}Edit department{% else %}Create department{% endif %}</h2>
     </div>
-    <div class="card-body">
+    <div class="card-body1">
       <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -26,7 +26,7 @@ margin-left: 30px;">
     </div>
   </div>
   <style>
-    .card {
+    .card1 {
   width: 100%;
   background-color: #fff;
   border: 1px solid #e2e8f0;
@@ -36,13 +36,13 @@ margin-left: 30px;">
   overflow: hidden;
 }
 
-.card-header {
+.card-header1 {
   background-color: #f7fafc;
   padding: 1.25rem 1.5rem;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.card-title {
+.card-title1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-size: 1.5rem;
@@ -50,7 +50,7 @@ margin-left: 30px;">
   color: #1a202c;
 }
 
-.card-body {
+.card-body1 {
   padding: 1.5rem;
 }
 
