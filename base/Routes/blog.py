@@ -37,8 +37,9 @@ def save_blog(request):
             obj.save()
             response_data = {'status': 'success', 'message': 'Blog published successfully'}
         elif action == 'Save Draft':
+            print("Submitreview False")
             obj = Draft_blog(title=title, userid=request.user.id, blog_type=blog_type, description=description, content=content,
-                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=True)
+                    categories=Category, blog_profile_img=Thumbnail,reviewed=False,Submitreview=False)
             obj.save()
             response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
         else:
@@ -60,6 +61,7 @@ def list_draft_blog(request):
 
 def list_unrevied_draft_blog(request):
     obj =  get_draft_blog_unreview(request)
+    print(obj)
     return render(request,"blog/blog_review.html",staff_detials(request,'drafted blog',{"obj":obj}))
 
 def save_edit_blog(request, pk):
@@ -80,7 +82,8 @@ def save_edit_blog(request, pk):
 
     print("Saved...........")
 
-    return render(request, "blog/blog_edit.html")
+    response_data = {'status': 'success', 'message': 'Blog draft saved successfully'}
+    return JsonResponse(response_data) 
 
 
 def draft_save_blog(request, pk):
