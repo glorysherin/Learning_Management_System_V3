@@ -1,182 +1,169 @@
-{% load compiler_tags %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Online Compiler</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        ::-moz-selection {
-            background: #222725;
-            color: #FFFFFF;
-        }
-        ::selection {
-            background: #222725;
-            color: #FFFFFF;
-        }
-        body {
-            overflow-x: hidden;
-            background: #E4E6C3;
-        }
-        .custom-textarea {
-            position: relative;
-            width: 800px;
-            max-width: 90%;
-            margin: 20px auto;
-            border-radius: 5px;
-            box-shadow: 0 0 16px rgba(34,39,37,0.3);
-            overflow: hidden;
-        }
-        .custom-textarea::after {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 42px;
-            width: 16px;
-            height: 100%;
-            background: #FFFFFF;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .custom-textarea > .textarea {
-            display: block;
-            position: relative;
-            z-index: 1;
-            width: calc(100%);
-            height: 280px;
-            min-height: 150px;
-            max-height: 90vh;
-            margin-left: 58px;
-            font-size: 16px;
-            line-height: 24px;
-            font-family: 'Ubuntu Mono', monospace;
-            outline: none;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            resize: vertical;
-            white-space: pre;
-            overflow: auto;
-            word-wrap: normal;
-            color: #121113;
-            background: #FFFFFF;
-        }
-        .custom-textarea > .textarea::-webkit-scrollbar-track {
-            border-radius: 0;
-            background-color: #899878;
-        }
-        .custom-textarea > .textarea::-webkit-scrollbar {
-            width: 12px;
-            background-color: #FFFFFF;
-        }
-        .custom-textarea > .textarea::-webkit-scrollbar-thumb {
-            border-radius: 0;
-            background-color: #E4E6C3;
-        }
-        .custom-textarea > .linenumbers {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 42px;
-            background: #899878;
-        }
-        .custom-textarea > .linenumbers > .number {
-            font-family: 'Ubuntu Mono', monospace;
-            font-size: 16px;
-            line-height: 24px;
-            padding-left: 6px;
-            color: #222725;
-        }
         .code-editor {
-            position: relative;
             display: flex;
             align-items: flex-start;
             gap: 0.5rem;
         }
+
         .line-numbers {
-            position: absolute;
-            top: 0;
-            left: 0;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             user-select: none;
             color: #a0aec0;
-            pointer-events: none;
-            padding-right: 0.5rem;
-            font-size: 14px;
-            line-height: 1.5rem;
         }
+
         .line-numbers span {
             margin-bottom: 0.25rem;
         }
-        .code-input-wrapper {
-            position: relative;
-            flex-grow: 1;
-            overflow: hidden;
-        }
+
         .code-input {
-            width: 100%;
-            height: 100%;
+            flex-grow: 1;
             resize: none; /* Disable resizing */
             padding-left: 1.5rem;
             line-height: 1.5rem; /* Adjust line height to match line numbers */
             border: 1px solid #ccc;
             border-radius: 0.25rem;
             font-family: monospace;
-            overflow-y: scroll;
-            box-sizing: border-box;
         }
-        .output {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #f7fafc;
-            border-radius: 0.25rem;
-            white-space: pre-wrap;
-        }
+
+
+        @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+::-moz-selection {
+  background: #222725;
+  color: #FFFFFF;
+}
+::selection {
+  background: #222725;
+  color: #FFFFFF;
+}
+body {
+  overflow-x: hidden;
+  background: #E4E6C3;
+}
+.custom-textarea {
+  position: relative;
+  width: 1000px;
+  max-width: 90%;
+  margin: 20px auto;
+  border-radius: 5px;
+  box-shadow: 0 0 16px rgba(34,39,37,0.3);
+  overflow: hidden;
+}
+.custom-textarea::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 42px;
+  width: 16px;
+  height: 100%;
+  background: #FFFFFF;
+  pointer-events: none;
+  z-index: 1;
+}
+.custom-textarea > .textarea {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: calc(100%);
+  height: 250px;
+  min-height: 150px;
+  max-height: 90vh;
+  margin-left: 58px;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Ubuntu Mono', monospace;
+  outline: none;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  resize: vertical;
+  white-space: pre;
+  overflow: auto;
+  word-wrap: normal;
+  color: #121113;
+  background: #FFFFFF;
+}
+.custom-textarea > .textarea::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: #899878;
+}
+.custom-textarea > .textarea::-webkit-scrollbar {
+  width: 12px;
+  background-color: #FFFFFF;
+}
+.custom-textarea > .textarea::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: #E4E6C3;
+}
+.custom-textarea > .linenumbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 42px;
+  background: #899878;
+}
+.custom-textarea > .linenumbers > .number {
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 6px;
+  color: #222725;
+}
     </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold mb-4">Online Compiler</h1>
-        <div class="code-editor">
-            {% if code|count_lines > 10 %} {# Display line numbers only if the code has more than 10 lines #}
-                <div class="line-numbers">
-                    {% for line in code|linebreaks %}
-                        {% if forloop.counter <= 10 %} {# Display line numbers up to 10 initially #}
-                            <span>{{ forloop.counter }}</span>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <div class="code-input-wrapper custom-textarea">
-                <textarea class='textarea' name="code" rows="10" cols="50" placeholder="Enter code here..." class="code-input p-2 border rounded-lg focus:outline-none" id="code-input">{{ code }}</textarea>
+        <h1 class="text-3xl font-bold mb-4"  id="compile-form">Online Compiler</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="code-editor">
+                <!-- <div class="line-numbers">
+                    <span>1</span>
+                </div> -->
+                <div class='custom-textarea'>
+                <textarea class='textarea' name="code" rows="10" cols="50" placeholder="Enter code here..." class="code-input p-2 border rounded-lg focus:outline-none" id="code-input"></textarea>
                 <div class='linenumbers'></div>
+            </div>  
             </div>
-        </div>
-        <div class="flex mb-4">
-            <select name="language" class="p-2 border rounded-lg focus:outline-none">
-                <option value="python">Python</option>
-                <option value="java">Java</option>
-                <option value="c">C</option>
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
-                <option value="tailwind">Tailwind</option>
-                <option value="bootstrap">Bootstrap</option>
-                <option value="js">JavaScript</option>
-            </select>
-            <input type="text" name="input_value" placeholder="Input value" class="p-2 ml-2 border rounded-lg focus:outline-none">
-        </div>
-        <button type="button" onclick="compileCode()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Compile</button>        {% if result %}
-            <div class="output">
-                <h3 class="text-xl font-bold mt-4">Output:</h3>
-                <pre>{{ result }}</pre>
+            <div class="flex mb-4">
+                <select name="language" class="p-2 border rounded-lg focus:outline-none">
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="c">C</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="tailwind">Tailwind</option>
+                    <option value="bootstrap">Bootstrap</option>
+                    <option value="js">JavaScript</option>
+                </select>
+                <input type="text" name="input_value" placeholder="Input value" class="p-2 ml-2 border rounded-lg focus:outline-none">
             </div>
+            <input type="submit" value="Compile" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        </form>
+        {{ language }}
+        {% if result %}
+            <h3 class="text-xl font-bold mt-4">Output:</h3>
+            {% if language == "js" %}
+                <pre class="bg-gray-200 p-2 mt-2 rounded">{{ result|safe }}</pre>
+                <script>
+                    document.getElementsByTagName('pre')[0].innerHTML = eval(`{{ code|escapejs }}`);
+                </script>
+            {% elif language == 'html' or language == 'tailwind' or language == 'bootstrap' %}
+                <pre class="output">{{ result|safe }}</pre>
+            {% else %}
+                <pre class="bg-gray-200 p-2 mt-2 rounded output">{{ result|safe }}</pre>
+            {% endif %}
         {% endif %}
     </div>
     <script>
@@ -194,67 +181,77 @@
                 lineNumbers.appendChild(line);
             }
         }
-
-        //stack
+        //stackcode
         class CustomTextarea {
-            constructor(element) {
-                this.element = element;
-                this.textarea = this.element.querySelector('.textarea');
-                this.numbers = this.element.querySelector('.linenumbers');
+    constructor(element) {
+        this.element = element;
+        this.textarea = this.element.querySelector('.textarea');
+        this.numbers = this.element.querySelector('.linenumbers');
+        
+        this.numberOfNumbers = 0;
 
-                this.numberOfNumbers = 0;
+        this.addMoreNumbers();
+        this.initEventListeners();
+    }
 
-                this.addMoreNumbers();
-                this.initEventListeners();
-            }
+    addMoreNumbers() {
+        let html = '';
 
-            addMoreNumbers() {
-                let html = '';
-
-                for (let i = this.numberOfNumbers; i < this.numberOfNumbers + 100; i++) {
-                    html += `<div class='number'>${ i }</div>`;
-                }
-
-                this.numberOfNumbers += 100;
-                this.numbers.innerHTML += html;
-            }
-
-            initEventListeners() {
-                this.textarea.addEventListener('scroll', () => {
-                    this.numbers.style.transform = `translateY(-${ this.textarea.scrollTop }px)`;
-
-                    if (Math.abs(
-                        this.numbers.offsetHeight
-                            - this.textarea.offsetHeight
-                            - this.textarea.scrollTop) < 100) {
-                        this.addMoreNumbers();
-                    }
-                });
-            }
-        };
-
-        function compileCode() {
-            const compileForm = document.getElementById('compile-form');
-            const formData = new FormData(compileForm);
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/compile', true); // Replace '/compile' with the appropriate URL for your server-side compilation endpoint
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    const response = xhr.responseText;
-                    // Handle the response (update the UI with the result)
-                    console.log(response);
-                } else {
-                    // Handle the error
-                    console.error(xhr.statusText);
-                }
-            };
-            xhr.onerror = function() {
-                // Handle the error
-                console.error(xhr.statusText);
-            };
-            xhr.send(formData);
+        for (let i = this.numberOfNumbers; i < this.numberOfNumbers + 100; i++) {
+            html += `<div class='number'>${ i }</div>`;
         }
-        const textarea = new CustomTextarea(document.querySelector('.custom-textarea'));
+
+        this.numberOfNumbers += 100;
+        this.numbers.innerHTML += html;
+    }
+
+    initEventListeners() {
+        this.textarea.addEventListener('scroll', () => {
+            this.numbers.style.transform = `translateY(-${ this.textarea.scrollTop }px)`;
+            
+            if (Math.abs(
+                this.numbers.offsetHeight
+                    - this.textarea.offsetHeight
+                    - this.textarea.scrollTop) < 100) {
+                this.addMoreNumbers();
+            }
+        });
+    }
+};
+
+const textarea = new CustomTextarea(document.querySelector('.custom-textarea'));
     </script>
+<script>
+    document.getElementById('compile-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const codeInput = document.getElementById('code-input');
+        const languageSelect = document.querySelector('select[name="language"]');
+        const inputValue = document.querySelector('input[name="input_value"]');
+
+        const formData = new FormData();
+        formData.append('code', codeInput.value);
+        formData.append('language', languageSelect.value);
+        formData.append('input_value', inputValue.value);
+
+        fetch('/compile', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}' // Include the CSRF token in the request header
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultOutput = document.querySelector('.output');
+            resultOutput.innerHTML = `
+                <h3 class="text-xl font-bold mt-4">Output:</h3>
+                <pre>${data.result}</pre>
+            `;
+        })
+        .catch(error => console.error(error));
+    });
+</script>
+
 </body>
 </html>

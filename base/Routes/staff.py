@@ -75,7 +75,7 @@ def teacher_signup_view(request):
             print("not valied....at staff/teacher_signup_view")
         return HttpResponseRedirect('user_added_message')
     
-    return render(request, 'teacher/teachersignup.html',staff_detials(request, 'Add Signup',mydict))
+    return render(request, 'teacher/teachersignup.html',staff_detials(request, 'Add Staff',mydict))
 
 def teacher_signup_view1(request):
     userForm = teacher_forms.TeacherUserForm()
