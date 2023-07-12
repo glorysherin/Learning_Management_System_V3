@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<div style="margin-top: 5%;margin-bottom: 10%;margin-left: 10%;">
   <h2>{{ course.name }}</h2>
   <p><strong>Code:</strong> {{ course.course_id }}</p> 
   <p><strong>Description:</strong> {{ course.description }}</p>
@@ -18,4 +19,5 @@
   {% endif %}
   <button><a href="{% url 'course_edit' pk=pk %}">Edit</a></button>
   <button><a href="{% url 'course_delete' pk=pk %}">Delete</a></button>
+</div>
 {% endblock %}
