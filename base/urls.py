@@ -379,7 +379,7 @@ exam = [
 
     path('admin-course',  admin_course_view, name='admin-course'),
     path('admin-add-course',  admin_add_course_view, name='admin-add-course'),
-    path('admin-view-course',  admin_view_course_view, name='admin-view-course'),
+    path('admin-view-course',  admin_view_course_view, name='admin-view-course'), 
     path('delete-course/<int:pk>',  delete_course_view, name='delete-course'),
 
     path('admin-question',  admin_question_view, name='admin-question'),
