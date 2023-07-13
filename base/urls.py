@@ -550,14 +550,17 @@ error=[
         path('fournotthree',fournotthree,name='fournotthree'),
         path('fourhundred',fourhundred,name='fourhundred'),
 ]
+
 parent = [
      path('parent_home', parent_home, name='parent_home'),
-     path('parent_student_int_test_marks/<int:roll_no>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
-     path('parentmark_list/<int:roll_no>', parentmark_list, name='parentmark_list'),
-     path('parentview_attendees_by_roolno/<int:roll_no>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
-     path('pview_attendees_by_roolno_graph/<int:roll_no>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
-     path('pview_attendees_by_roolno_percentage/<int:roll_no>', pview_attendees_by_roolno_percentage, name='pview_attendees_by_roolno_percentage'),
-     path('pview_attendees_by_roolno_graph/<int:roll_no>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
+     path('view_data/<int:roll_no>/<str:class_id>', view_data, name='view_data'),
+     path('parent_class_list/<int:roll_no>', parent_class_list, name='parent_class_list'),
+     path('parent_student_int_test_marks/<int:roll_no>/<str:class_id>', parent_student_int_test_marks, name='parent_student_int_test_marks'),
+     path('parentmark_list/<int:roll_no>/<str:class_id>', parentmark_list, name='parentmark_list'),
+     path('parentview_attendees_by_roolno/<int:roll_no>/<str:class_id>', parentview_attendees_by_roolno, name='parentview_attendees_by_roolno'),
+     path('pview_attendees_by_roolno_graph/<int:roll_no>/<str:class_id>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
+     path('pview_attendees_by_roolno_percentage/<int:roll_no>/<str:class_id>', pview_attendees_by_roolno_percentage, name='pview_attendees_by_roolno_percentage'),
+     path('pview_attendees_by_roolno_graph/<int:roll_no>/<str:class_id>', pview_attendees_by_roolno_graph, name='pview_attendees_by_roolno_graph'),
 ]
 
 links_management = [
@@ -596,6 +599,7 @@ compile = [
 social = [
     path('edit_social_media/<int:id>', edit_social_media, name='edit_social_media'),
     path('staff_edit_social_media', staff_edit_social_media, name='staff_edit_social_media'),
+    path('classroom/join/', class_blank, name='class_blank'),
     
 ]
 
