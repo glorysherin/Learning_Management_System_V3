@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from base.models import YouTubeLink, Category
+from base.models import YouTubeLink, Category, Teacher
 from .Tool.Tools import student_detials, staff_detials, get_user_role
+from django.contrib.auth.models import User
 
 
 def add_youtube_link(request,class_id):
@@ -26,10 +27,16 @@ def save_youtube_link(request,class_id):
 def list_youtube_links(request,class_id):
     links = YouTubeLink.objects.filter(class_id=class_id)
     print(get_user_role(request))
-    if get_user_role(request) == "Student":
-        return render(request, 'youtube_links/st_list_youtube_links.html',student_detials(request,'list link', {'links': links,'class_id':class_id}))
-    else:
+    try:
+        Teacher.objects.get(user=User.objects.get(id=request.user.id))
         return render(request, 'youtube_links/list_youtube_links.html',staff_detials(request,'list link', {'links': links,'class_id':class_id}))
+    except:
+        return render(request, 'youtube_links/st_list_youtube_links.html',student_detials(request,'list link', {'links': links,'class_id':class_id}))
+
+def std_list_youtube_links(request,class_id):
+    links = YouTubeLink.objects.filter(class_id=class_id)
+
+    return render(request, 'youtube_links/st_list_youtube_links.html',student_detials(request,'list link', {'links': links,'class_id':class_id}))
 
 
 def edit_youtube_link(request, pk,class_id):
@@ -63,5 +70,6 @@ def delete_youtube_link(request, pk,class_id):
     
     return render(request, 'youtube_links/delete_youtube_link.html',staff_detials(request,'delete link', {'link': link, 'class_id':class_id}))
 
-def list_notes(request):
-    return render(request,'youtube_links/list_notes.html',student_detials(request,"List notes"))
+def list_notes(request,class_id):
+    return render(request,'youtube_links/list_notes.html',student_detials(request,"List notes",{'class_id':class_id}))
+

@@ -1174,10 +1174,12 @@ def Dailystudenttest_marksby_date(request, user_name):
 
 
 def ToDoList(request):
+    print(student_detials(request, 'ToDo-List'))
     return render(request, "ToDoList/index.html", student_detials(request, 'ToDo-List'))
 
 
 def staffToDoList(request):
+    print(staff_detials(request, 'ToDo-List'))
     return render(request, "ToDoList/staff_index.html", staff_detials(request, 'ToDo-List'))
 
 

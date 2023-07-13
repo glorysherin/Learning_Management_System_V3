@@ -1,0 +1,96 @@
+{% extends 'teacher/teacherbase.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student</title>
+    <style>
+        /* Style for the card container */
+        .card-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        /* Style for the form inside the card */
+        .card-container form {
+            display: grid;
+            gap: 10px;
+        }
+
+        /* Style for the form labels */
+        .card-container label {
+            font-weight: bold;
+        }
+
+        /* Style for the form input fields */
+        .card-container input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        /* Style for the form submit button */
+        .card-container input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Style for the form submit button on hover */
+        .card-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-top: 20px;margin-bottom: 7%;" class="card-container">
+        <h2>Edit Student</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="first_name">First Name:</label>
+            <input type="text" required name="first_name" value="{{ student.user.first_name }}"><br>
+            <label for="last_name">Last Name:</label>
+            <input type="text" required name="last_name" value="{{ student.user.last_name }}"><br>
+            <label for="email">Email:</label>
+            <input type="email" required name="email" value="{{ student.mail_id }}"><br>
+            <label for="email">Parent Email: <span style="color: gray;"></span></label>
+            <input type="email" required name="parent_mail_id" value="{{ student.parent_mail_id }}"><br>
+            <label for="address">Address:</label>
+            <input type="text" required name="address" value="{{ student.address }}"><br>
+            <label for="mobile">Mobile:</label>
+            <input type="text" required name="mobile" value="{{ student.mobile }}"><br>
+            <label for="joinned_year">Joined Year:</label>
+            <input type="date" required name="joinned_year" id="joinned_year"><br>
+            <label for="role_no">Role No: <span style="color: gray;">( readonly )</span></label>
+            <input type="text" required name="role_no" value="{{ student.role_no }}" readonly><br>
+            <label for="file_">Profile photo: <span style="color: gray;"> ( Remember to select a profile picture. )</span></label>
+            <input type="file" required name="file_"><br>
+            <label for="joinned_year">Department:<span style="color: gray;">( Remember to select a Department. )</span></label>
+            <select name="department">
+                {% for i in department %}
+                  <option value="{{ i.name }}" {% if i.name == student.department %}selected{% endif %}>{{ i.name }}</option>
+                {% endfor %}
+              </select>
+            <input type="submit" value="Save">
+        </form>
+        <script>
+            const dateStr = "{{ student.joinned_year }}";
+            const date = new Date(dateStr);
+            const day = ("0" + date.getDate()).slice(-2);
+            const month = ("0" + (date.getMonth() + 1)).slice(-2);
+            const year = date.getFullYear();
+            const formattedDate = `${year}-${month}-${day}`;
+            document.getElementById("joinned_year").defaultValue = formattedDate;
+        </script>
+    </div>
+</body>
+</html>
+
+{% endblock content %}

@@ -141,6 +141,7 @@ common = [
 admin = [
     path('add_Faculty', add_faculty),
     path('teacher_list', teacher_list, name='teacher_list'),
+    path('hod_list', hod_list, name='hod_list'),
     path('handle_toogle/<int:action>', handle_toogle, name='handle_toogle'),
     path('admin_list', admin_list, name='admin_list'),
     path('teacher_delete/<str:teacher_id>',
@@ -307,6 +308,8 @@ teacher = [
     path('teacher/addstudentlogin',
          LoginView.as_view(template_name='student/studentadded.html'), name='addstudentlogin'),
     path('teacher/addstudentsignup', add_student_signup_view,
+         name='add_student_signup_view'),
+    path('department/teacher/addstudentsignup', add_student_signup_view,
          name='add_student_signup_view'),
     path('teacher/teachersignup', teacher_signup_view, name='teachersignup'),
     path('teacher/user_added_message', user_added_message, name='user_added_message'),
@@ -561,10 +564,10 @@ links_management = [
     path('links/add/<str:class_id>', add_youtube_link, name='add_youtube_link'),
     path('links/save/<str:class_id>', save_youtube_link, name='save_youtube_link'),
     path('links/list/<str:class_id>', list_youtube_links, name='list_youtube_links'),
+    path('stdlinks/list/<str:class_id>', std_list_youtube_links, name='std_list_youtube_links'),
     path('links/edit/<int:pk>/<str:class_id>', edit_youtube_link, name='edit_youtube_link'),
     path('links/delete/<int:pk>/<str:class_id>', delete_youtube_link, name='delete_youtube_link'),
-    path('list_notes', list_notes, name='list_notes'),
-
+    path('list_notes/<str:class_id>', list_notes, name='list_notes'),
 ]
 
 assignments_ = [

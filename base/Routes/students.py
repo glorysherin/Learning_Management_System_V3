@@ -102,7 +102,11 @@ def student_profile(request, student_id):
         'student': student,
         'links':links
     }
-    return render(request, 'student/student_profile.html', student_detials(request, 'Student Profile' ,dict_data))
+    try:
+        Teacher.objects.get(user=User.objects.get(id=request.user.id))
+        return render(request, 'student/student_profile.html', staff_detials(request, 'Student Profile' ,dict_data))
+    except:
+        return render(request, 'student/student_profile.html', student_detials(request, 'Student Profile' ,dict_data))
 
 
 def student_edit(request, pk):
@@ -122,10 +126,15 @@ def student_edit(request, pk):
         student.profile_pic = request.FILES['file_']
         student.user.save()
         student.save()
-        return redirect('student_edit',pk=pk)
+        return render(request, 'msg/profile_updated.html', {'pk':pk})
     else:
         context = {'student': student,'department':department}
-        return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
+        try:
+            Teacher.objects.get(user=User.objects.get(id=request.user.id))
+            return render(request, 'student/eddit_staff_handle.html', staff_detials(request, 'Edit Detials', context))
+        except Exception as e:
+            print(e)
+            return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
 
 def staff_edit(request, pk):
     student = get_object_or_404(Teacher, pk=pk)

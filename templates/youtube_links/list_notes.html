@@ -23,11 +23,11 @@
 
     <div style="margin-top: -60px;">
       <div>
-        <button class="minecraft-btn mx-auto w-64 text-center text-white truncate p-1 border-2 border-b-4 hover:text-yellow-200">Notes</button>
+        <button class="minecraft-btn mx-auto w-64 text-center text-white truncate p-1 border-2 border-b-4 hover:text-yellow-200"><a href="{% url 'note_by_class' class_id=class_id %}">Notes</a></button>
       </div>
       <br><br>
       <div>
-        <button class="minecraft-btn mx-auto w-64 text-center text-white truncate p-1 border-2 border-b-4 hover:text-yellow-200">Links</button>
+        <button class="minecraft-btn mx-auto w-64 text-center text-white truncate p-1 border-2 border-b-4 hover:text-yellow-200"><a href="{% url 'std_list_youtube_links' class_id=class_id %}">Link</a></button>
       </div>
     </div>
   </div>
