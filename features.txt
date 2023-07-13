@@ -91,3 +91,10 @@ add admin to hod's nav bar
 
 
 
+=========================================================
+
+link view
+notes view
+leave classroom
+parent main file classroom
+ 

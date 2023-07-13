@@ -58,3 +58,7 @@ def staff_edit_social_media(request):
         return render(request, 'social_link/staff_edit_social_media.html', context)
     else:
        return render(request, 'msg/data_doesnot_create.html')
+
+
+def class_blank(request):
+    return render(request,'msg/class_blank.html')

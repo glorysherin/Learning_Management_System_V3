@@ -1684,17 +1684,81 @@
               </div>
           </div>
       </div>
+
+
+
+
+
+
+      <div class="col-12 mt-4">
+        <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+                <h6 class="mb-1"><b>Classes List</b></h6>
+                <p class="text-sm">{{ j.semester }}</p>
+            </div>
+            <div class="card-body p-3">
+                <div class="row">
+                    {% for j in classes %}
+                    {% if 'class' == j.0.class_type %}
+                    <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                        <div class="card card-blog card-plain">
+                            <div class="position-relative">
+                                <a class="d-block shadow-xl border-radius-xl">
+                                    <img src="{{ j.0.class_image }}" alt="img-blur-shadow"
+                                        class="img-fluid shadow border-radius-xl">
+                                </a>
+                            </div>
+                            <div class="card-body px-1 pb-0">
+                                <p class="text-gradient text-dark mb-2 text-sm">{{ j.0.subject_code }}</p>
+                                <a href=" {% static 'javascript:;' %} ">
+                                    <h5>
+                                        {{ j.0.subject_name }}
+                                    </h5>
+                                </a>
+                                <p class="mb-4 text-sm">
+                                    {{ j.0.discription }}
+                                </p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <button type="button" onclick="add_sub('{{ j.0.subject_code }}')"
+                                        class="btn btn-outline-primary btn-sm mb-0">View Class</button>
+                                    <div class="avatar-group mt-2">
+                                        {% for k in j.1 %}
+                                        <a href=" {% static 'javascript:;' %} "
+                                            class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="{{ k.get_name }}">
+                                            <img alt="{{ k.get_name }}" src="{{ k.profile_pic.url }}">
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
       {% for i in dep %}
       <div class="col-12 mt-4">
           <div class="card mb-4">
               <div class="card-header pb-0 p-3">
                   <h6 class="mb-1">{{ i }}</h6>
-                  <p class="text-sm">{{ j.semester }}</p>
+                  <p class="text-sm">Subject List</p>
               </div>
               <div class="card-body p-3">
                   <div class="row">
                       {% for j in classes %}
-                      {% if i == j.0.department %}
+                      {% if i == j.0.department and 'class' != j.0.class_type %}
                       <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                           <div class="card card-blog card-plain">
                               <div class="position-relative">
@@ -1737,6 +1801,11 @@
       </div>
   </div>
   {% endfor %}
+
+    
+
+
+
 </div>
   </div>
   <div class="fixed-plugin">

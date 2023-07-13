@@ -189,7 +189,7 @@ def student_list_blog_course(request):
 
 def staff_list_blog_course(request):
     items = get_course()
-    return render(request, "blog/staffblog.html", staff_detials(request, 'Blog', {'blogs': items}))
+    return render(request, "blog/staffblog.html", staff_detials(request, 'Course', {'blogs': items}))
 
 
 def view_blog(request, pk):

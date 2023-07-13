@@ -125,6 +125,7 @@ def teacher_signup_view1(request):
             my_teacher_group[0].user_set.add(user)
         else:
             print("not valied....1")
+            return render(request,'msg/user_cant_create.html')
         return HttpResponseRedirect('teacherlogin')
     
     return render(request, 'teacher/teachersignup.html',mydict)
@@ -176,6 +177,7 @@ def teacher_signup_viewhod(request):
             my_teacher_group[0].user_set.add(user)
         else:
             print("not valied....1")
+            return render(request,'msg/user_cant_create.html')
         return HttpResponseRedirect('teacherlogin')
     
     return render(request, 'teacher/teachersignup.html',mydict)
@@ -227,7 +229,7 @@ def adminsignup(request):
             my_teacher_group = Group.objects.get_or_create(name='TEACHER')
             my_teacher_group[0].user_set.add(user)
         else:
-            print("not valied....1")
+            return render(request,'msg/user_cant_create.html')
         return HttpResponseRedirect('teacherlogin')
     
     return render(request, 'teacher/adminsignup.html',mydict)
@@ -283,6 +285,7 @@ def add_admin(request):
             my_teacher_group = Group.objects.get_or_create(name='TEACHER')
             my_teacher_group[0].user_set.add(user)
         else:
+            return render(request,'msg/user_cant_create.html')
             print("not valied")
             print("Form data is not valid")
             print(userForm.errors)
@@ -342,6 +345,7 @@ def add_admin1(request):
             print("Form data is not valid")
             print(userForm.errors)
             print(teacherForm.errors)
+            return render(request,'msg/user_cant_create.html')
         return HttpResponseRedirect('admin_added')
     return render(request, 'teacher/addadmin.html',mydict)
 
@@ -397,6 +401,7 @@ def add_teacher_hod(request):
             print("Form data is not valid")
             print(userForm.errors)
             print(teacherForm.errors)
+            return render(request,'msg/user_cant_create.html')
         return HttpResponseRedirect('user_added_message')
 
     return render(request, 'teacher/adminsignup.html',staff_detials(request,'Add User',mydict))
@@ -419,7 +424,7 @@ def teacher_dashboard_view(request):
     }
     return render(request, 'teacher/teacher_dashboard.html', staff_detials(request, 'Dashboard', dict))
 
-
+ 
 @login_required(login_url='teacherlogin')
 @user_passes_test(is_teacher)
 def teacher_exam_view(request):

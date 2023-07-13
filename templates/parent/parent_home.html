@@ -111,13 +111,13 @@
     <script>
       function locate(op){
         if(op == 1){
-          window.location.href ='parent_student_int_test_marks/{{ role_no }}';
+          window.location.href ="{% url 'parent_student_int_test_marks' roll_no=role_no class_id=class_id %}";
         }
         else if(op == 2){
-          window.location.href ='parentmark_list/{{ role_no }}';
+          window.location.href ="{% url 'parentmark_list' roll_no=role_no class_id=class_id %}"
         }
         else if(op == 3){
-          window.location.href ='parentview_attendees_by_roolno/{{ role_no }}';
+          window.location.href ="{% url 'parentview_attendees_by_roolno' roll_no=role_no class_id=class_id %}";
         }
       }
     </script>

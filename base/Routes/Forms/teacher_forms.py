@@ -26,7 +26,8 @@ class TeacherForm(forms.ModelForm):
                                         empty_label='Select department',
                                         to_field_name='short_name',
                                         label='Department')
-    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
+    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}), initial='admin', label='Role')
+
     
 
 class TeacherFormhod(forms.ModelForm):
@@ -41,7 +42,7 @@ class TeacherFormhod(forms.ModelForm):
                                         empty_label='Select department',
                                         to_field_name='short_name',
                                         label='Department')
-    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
+    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}), initial='admin', label='Role')
 
 
 class TeacherForm1(forms.ModelForm):
@@ -59,7 +60,8 @@ class TeacherForm1(forms.ModelForm):
     )
     department = forms.ChoiceField(choices=DEPARTMENT_CHOICES,
                                     label='Department')
-    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.RadioSelect, initial='admin')
+    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}), initial='admin', label='Role')
+
 
 
 class DepartmentForm(forms.ModelForm):

@@ -86,14 +86,14 @@ button:hover {
             <option value="{{ i.name }}">{{ i.name }}</option>
           {% endfor %}
         </select>
-      </div>
+      </div> 
       <div class="form-group">
         <label for="image_url">Image URL:</label>
         <input type="text" name="image_url" required value="{{ classroom.class_image }}">
       </div>
       <div class="form-group">
         <label for="discription">Description:</label>
-        <textarea name="discription">{{ classroom.description }}</textarea>
+        <textarea name="discription">{{ classroom.discription }}</textarea>
       </div>
       <button type="submit" class="btn-primary">Save Changes</button>
     </form>

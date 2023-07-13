@@ -454,8 +454,9 @@ def save_add_class(request):
     department = request.POST.get('department')
     semester = request.POST.get('semester')
     discription = request.POST.get('discription')
+    ctype = request.POST.get('type')
     try:
-        class_room = ClassRooms(class_image=choice(get_image_url(class_name+" logos")), class_name=class_name, subject_code=subject_code,
+        class_room = ClassRooms(class_type=ctype,class_image=choice(get_image_url(class_name+" logos")), class_name=class_name, subject_code=subject_code,
                                 department=department, semester=semester, discription=discription, owner=Faculty_details.objects.get(mail=get_user_mail(request)))
         class_room.save()
     except:
@@ -485,7 +486,7 @@ def edit_classroom(request, classroom_id):
         classroom.save()
 
         # Redirect to the detail view of the updated classroom
-        return render(request, 'class_room/edit_class.html', staff_detials(request,'Edit Classroom',{'classroom': classroom}))
+        return render(request, 'msg/class_edited.html')
 
     # If the request method is not POST, render the edit form with the current data
     # return render(request, 'class_room/edit_class.html', {'classroom': classroom})

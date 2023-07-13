@@ -203,7 +203,8 @@ https://templatemo.com/tm-565-onix-digital
                       <a href="#contact">Message Us Now</a>
                     </div>
                     <div class="call-button">
-                      <a href="#"><i class="fa fa-phone"></i> 010-020-0340</a>
+                      <a href="#"><i class="fa fa-phone"></i> 
+                         26341264</a>
                     </div>
                   </div>
                 </div>
@@ -216,7 +217,8 @@ https://templatemo.com/tm-565-onix-digital
                       <a href="#services">Our Services</a>
                     </div>
                     <div class="call-button">
-                      <a href="#"><i class="fa fa-phone"></i> 090-080-0760</a>
+                      <a href="#"><i class="fa fa-phone"></i> 
+                       044-26300982</a>
                     </div>
                   </div>
                 </div>
@@ -232,10 +234,11 @@ https://templatemo.com/tm-565-onix-digital
                   </p>
                   <div class="down-buttons">
                     <div class="main-blue-button-hover">
-                      <a href="#video">Watch Videos</a>
+                      <a href="{% url 'student-dashboard' %}">Workspace</a>
                     </div>
                     <div class="call-button">
-                      <a href="#"><i class="fa fa-phone"></i> 050-040-0320</a>
+                      <a href="#"><i class="fa fa-phone"></i> 
+                        044-26300982</a>
                     </div>
                   </div>
                 </div>
@@ -370,7 +373,7 @@ https://templatemo.com/tm-565-onix-digital
         <div class="col-lg-6">
           <div class="section-heading">
             <h2>
-              Grow your website with our
+              Grow your Organization with our
               <span>LMS</span> System
             </h2>
             <p>
@@ -482,7 +485,7 @@ https://templatemo.com/tm-565-onix-digital
                 alt="" style="border-radius: 15px" />
             </div>
             <p>
-              <b>Chatbots can fulfil guests needs quicker than you can dial a
+              <b>Chatbots can fulfill guest needs quicker than you can dial a
                 phone number.
               </b>
             </p>
@@ -591,16 +594,19 @@ https://templatemo.com/tm-565-onix-digital
                       flex-direction: row;
                     ">
                   {% csrf_token %}
-                  <input id="input1" placeholder="Enter RoomCode" class="form-control" aria-label="With textarea"
-                    type="text" name="room_name" id="room_name" style="margin-top: 10px" />
-                  <input id="input2" placeholder="Enter Name" class="form-control" aria-label="With textarea"
-                    type="text" name="username" id="username" style="margin-top: 10px" />
+                  <div style="display: flex;margin-left: -10px;flex-direction: column;">
+                    <input  id="input1" placeholder="Enter RoomCode" class="form-control" aria-label="With textarea"
+                    type="text" name="room_name" id="room_name" style="margin-top: 10px;width: fit-content;" required/>
+                  <input id="input2" placeholder="Enter Name" required class="form-control" aria-label="With textarea"
+                    type="text" name="username" id="username" style="margin-top: 10px;width: fit-content;" />
+                  </div>
                   <input type="submit" style="
                         padding: 10px;
                         background-color: #03a4ed;
                         border-radius: 16px;
                         margin-top: 1px;
-                      " id="form-submit" value="Join the room" class="main-button" />
+                        margin-left: -20%;
+                      " id="form-submit" value="Join  room" class="main-button" />
                 </form>
                 <br />
                 <div style="
@@ -608,7 +614,7 @@ https://templatemo.com/tm-565-onix-digital
                       justify-content: space-between;
                       align-items: center;
                       flex-direction: row;
-                    " id="subscribe" action="" method="get">
+                    " id="subscribe1" action="" method="get">
                   <div style="
                         display: flex;
                         padding: 11px;
@@ -625,23 +631,22 @@ https://templatemo.com/tm-565-onix-digital
                         flex-direction: row;
                       ">
                        <button style="
-                        background-color: #03a4ed;
-                        border: 2px solid white;
-                        height: 47px;
-                        border-radius: 21px;
-                        padding: 10px;
-                      " onclick="gen1()">
-                    Generate
-                  </button>
-                    <input type="text" name="room" placeholder="Here you can get the room code...." id="Generate1"
-                      style="margin-top: 3px" disabled />
+                       background-color: #03a4ed;
+                       border: 2px solid white;
+                       height: 47px;
+                       border-radius: 21px;
+                       padding: 10px;
+                     " onclick="gen1()">
+                   Generate
+                 </button>
+                    <input type="text" name="room" placeholder="" id="Generate1"
+                      style="margin-top: 3px;width: 30%;padding-right: -70%;" disabled />
                     <button onclick="copyToClipboard1()">
                       <svg id="svg_type1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                         <path fill="currentColor"
                           d="M9 18q-.825 0-1.413-.588T7 16V4q0-.825.588-1.413T9 2h9q.825 0 1.413.588T20 4v12q0 .825-.588 1.413T18 18H9Zm-4 4q-.825 0-1.413-.588T3 20V7q0-.425.288-.713T4 6q.425 0 .713.288T5 7v13h10q.425 0 .713.288T16 21q0 .425-.288.713T15 22H5Z" />
                       </svg>
                     </button>
-                    
                   </div>
                  
                 </div>
@@ -652,24 +657,23 @@ https://templatemo.com/tm-565-onix-digital
       </div>
     </div>
   </div>
-
   <div id="subscribe1" class="subscribe">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="inner-content">
             <div class="row">
-              <div class="col-lg-10 offset-lg-1">
-                <h2>Get Join your class through link</h2>
+              <div class="col-lg-10 offset-lg-1" id="join_class_id">
+                <h2>Get Join your class through Code</h2>
                 <div  style="display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 align-content: stretch;
                 justify-content: center;
                 align-items: center;">
-               <div> <input style="margin: 10px;" type="text" id="join_class" placeholder="Enter the code" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required></div>
+               <div> <input required style="margin: 10px;" type="text" id="join_class"   placeholder="Enter the code" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" ></div>
 
-                <div>    <button id="join_class_btn" onclick="join_class()" class="bg-white text-blue-500 hover:bg-blue-500 hover:text-black font-bold py-2 px-4 rounded-full">
+                <div>    <button  id="join_class_btn" onclick="join_class()" class="bg-white text-blue-500 hover:bg-blue-500 hover:text-black font-bold py-2 px-4 rounded-full">
                       Join Classroom
                     </button></div>
                   </div>
@@ -720,9 +724,9 @@ https://templatemo.com/tm-565-onix-digital
                             alt="Certificate of Accreditation">
                           <div class="overlay-effect">
                             <a href="#">
-                              <h4>Second Project</h4>
+                              <h4>Certificate of Accreditation</h4>
                             </a>
-                            <span>Advertising &amp; Marketing</span>
+                            <!-- <span>Advertising &amp; Marketing</span> -->
                           </div>
                         </div>
                       </div>
@@ -817,10 +821,8 @@ https://templatemo.com/tm-565-onix-digital
         <div class=" row">
           <div class="col-lg-6 wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.25s">
             <div class="section-heading">
-              <h2 style="margin-bottom: 67px">
-                Here is your Profile<em> You can</em> Edit the
-                <span>profile</span>
-              </h2>
+              <h2>Anyhow, your details can be respected here !</h2>
+
             </div>
            <div style="width: 100%;height: 100%;"> 
             <div class="container emp-profile" style="width: 175%">
@@ -968,7 +970,7 @@ https://templatemo.com/tm-565-onix-digital
           <div class="col-lg-6 align-self-center wow fadeInLeft" style="width: 76%" data-wow-duration="0.5s"
             data-wow-delay="0.25s">
             <div class="section-heading">
-              <h2>Anyhow, your details can be respected here !</h2>
+             
               <h4>Jaya Engineering College</h4>
               <p>
                 Approved by AICTE, New Delhi, Affilliated to Anna University,

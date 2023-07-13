@@ -115,6 +115,7 @@ class ClassRooms(models.Model):
     subject_code = models.CharField(max_length=200, unique=True)
     semester = models.IntegerField()
     department = models.CharField(max_length=200)
+    class_type = models.CharField(max_length=200)
     discription = models.CharField(
         max_length=200, default='No Discription yet.')
 
