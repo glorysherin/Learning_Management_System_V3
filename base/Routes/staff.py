@@ -73,6 +73,7 @@ def teacher_signup_view(request):
             my_teacher_group[0].user_set.add(user)
         else:
             print("not valied....at staff/teacher_signup_view")
+            return render(request,'msg/user_cant_create.html')
         return HttpResponseRedirect('user_added_message')
     
     return render(request, 'teacher/teachersignup.html',staff_detials(request, 'Add Staff',mydict))
