@@ -174,93 +174,112 @@
             }
 
             $(document).ready(function() {
-                // Function to filter and display messages based on the search input
-                function searchMessages() {
-                    var searchTerm = $('#search-input').val().toLowerCase();
+    // Flag variable to track if search is in progress
+    let isSearching = false;
 
-                    // Hide all messages initially
-                    $('.message-container').hide();
+    // Function to filter and display messages based on the search input
+    function searchMessages() {
+        var searchTerm = $('#search-input').val().toLowerCase();
 
-                    // Loop through each message and check if it matches the search term
-                    $('.message-container').each(function() {
-                        var message = $(this).text().toLowerCase();
-                        if (message.includes(searchTerm)) {
-                            $(this).show();
+        // Hide all messages initially
+        $('.message-container').hide();
+
+        // Loop through each message and check if it matches the search term
+        $('.message-container').each(function() {
+            var message = $(this).text().toLowerCase();
+            if (message.includes(searchTerm)) {
+                $(this).show();
+            }
+        });
+    }
+
+    // Attach click event to the search icon
+    $('#search-icon').click(function() {
+        searchMessages();
+    });
+
+    // Attach keyup event to the search input
+    $('#search-input').keyup(function() {
+        searchMessages();
+    });
+
+    setInterval(function() {
+        // Check if search is in progress, if true, return
+
+        // Perform AJAX request to fetch messages
+        $.ajax({
+            type: "GET",
+            url: "/getMessages/{{room}}/",
+            success: function(response) {
+                console.log(response);
+                $("#display").empty();
+                dup = users_.slice(0, 4);
+                joinned_users = dup.join(', ') + '...';
+                document.getElementById("users_data").innerHTML = joinned_users;
+                
+                console.log("runned..")
+                for (var key in response.messages) {
+                    const dateString = response.messages[key].date;
+                    const date = new Date(dateString);
+                    const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                   
+                    if (response.messages[key].user != "{{ username }}") {
+                        if (users_.indexOf(response.messages[key].user) !== -1) {
+                            console.log('user exists..');
+                        } else {
+                            users_.push(response.messages[key].user);
+                            color_.push(generateRandomColor());
                         }
-                    });
+                        console.log(color_[users_.indexOf(response.messages[key].user)]);
+                        var temp =
+                            "<div class='flex mb-2 message-container'>" +
+                            "<div class='rounded py-2 px-3' style='background-color: #F2F2F2'>" +
+                            "<p class='text-sm text-teal' style='color:" + color_[users_.indexOf(response.messages[key].user)] + "'>" +
+                            response.messages[key].user +
+                            "</p>" +
+                            "<p class='text-sm mt-1'>" +
+                            response.messages[key].value +
+                            "</p>" +
+                            "<p class='text-right text-xs text-grey-dark mt-1'>" +
+                            timeString +
+                            "</p>" +
+                            "</div>" +
+                            "</div>";
+                        $("#display").append(temp);
+                    } else {
+                        var temp =
+                            "<div class='flex justify-end mb-2 message-container'>" +
+                            "<div class='rounded py-2 px-3' style='background-color: #E2F7CB'>" +
+                            "<p class='text-sm mt-1'>" + response.messages[key].value + "</p>" +
+                            "<p class='text-right text-xs text-grey-dark mt-1'>" +
+                            timeString +
+                            "</p></div></div>";
+                        $("#display").append(temp);
+                    }
                 }
+                const display = document.getElementById("post-form");
+                display.scrollTop = display.scrollHeight;
+                var chatMessages = $('#post-form');
+                chatMessages.scrollTop(chatMessages.prop('scrollHeight'));
+                 // Hide all messages initially
+        $('.message-container').hide();
 
-                // Attach click event to the search icon
-                $('#search-icon').click(function() {
-                    searchMessages();
-                });
+// Loop through each message and check if it matches the search term
+$('.message-container').each(function() {
+    var searchTerm = $('#search-input').val().toLowerCase();
+    var message = $(this).text().toLowerCase();
+    if (message.includes(searchTerm)) {
+        $(this).show();
+    }
+});
+            },
+            error: function(response) {
+                // alert('An error occurred')
+            }
+        });
+    }, 1000);
+});
 
-                // Attach keyup event to the search input
-                $('#search-input').keyup(function() {
-                    searchMessages();
-                });
-
-                setInterval(function() {
-                    $.ajax({
-                        type: "GET",
-                        url: "/getMessages/{{room}}/",
-                        success: function(response) {
-                            console.log(response);
-                            $("#display").empty();
-                            dup = users_.slice(0, 4)
-                            joined_users = dup.join(', ') + '...'
-                            document.getElementById("users_data").innerHTML = joined_users
-                            for (var key in response.messages) {
-                                const dateString = response.messages[key].date;
-                                const date = new Date(dateString);
-                                const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-                                if (response.messages[key].user != "{{ username }}") {
-                                    if (users_.indexOf(response.messages[key].user) !== -1) {
-                                        console.log('user exists..')
-                                    } else {
-                                        users_.push(response.messages[key].user)
-                                        color_.push(generateRandomColor())
-                                    }
-                                    console.log(color_[users_.indexOf(response.messages[key].user)])
-                                    var temp =
-                                        "<div class='message-container'>" +
-                                        "<div class='rounded py-2 px-3' style='background-color: #F2F2F2'>" +
-                                        "<p class='text-sm text-teal' style='color:" + color_[users_.indexOf(response.messages[key].user)] + "'>" +
-                                        response.messages[key].user +
-                                        "</p>" +
-                                        "<p class='text-sm mt-1'>" +
-                                        response.messages[key].value +
-                                        "</p>" +
-                                        "<p class='text-right text-xs text-grey-dark mt-1'>" +
-                                        timeString +
-                                        "</p>" +
-                                        "</div>" +
-                                        "</div>";
-                                    $("#display").append(temp);
-                                } else {
-                                    var temp =
-                                        "<div class='message-container'>" +
-                                        "<div class='rounded py-2 px-3' style='background-color: #E2F7CB'>" +
-                                        "<p class='text-sm mt-1'>" + response.messages[key].value + "</p>" +
-                                        "<p class='text-right text-xs text-grey-dark mt-1'>" +
-                                        timeString +
-                                        "</p></div></div>";
-                                    $("#display").append(temp);
-                                }
-                                const display = document.getElementById("post-form");
-                                display.scrollTop = display.scrollHeight;
-                                var chatMessages = $('post-form');
-
-                                // set the scrollTop property to the maximum value
-                                chatMessages.scrollTop(chatMessages.prop('scrollHeight'));
-                            }
-                        },
-                        error: function(response) {
-                            // alert('An error occurred')
-                        },
-                    });
-                }, 1000);
-            });
         </script>
     </body>
 </div>

@@ -1,4 +1,4 @@
-{% extends 'student/studentbase.html' %}
+{% extends 'teacher/teacherbase.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -34,25 +34,15 @@
 
             <div class="flex">
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <svg id="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                         <path fill="#263238" fill-opacity=".5"
                             d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6 3 9.7s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.8l5.1 5.1 1.5-1.5-5-5.2zm-6.2 0c-2.6 0-4.6-2.1-4.6-4.6s2.1-4.6 4.6-4.6 4.6 2.1 4.6 4.6-2 4.6-4.6 4.6z">
                         </path>
                     </svg>
                 </div>
                 <div class="ml-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                        <path fill="#263238" fill-opacity=".5"
-                            d="M1.816 15.556v.002c0 1.502.584 2.912 1.646 3.972s2.472 1.647 3.974 1.647a5.58 5.58 0 0 0 3.972-1.645l9.547-9.548c.769-.768 1.147-1.767 1.058-2.817-.079-.968-.548-1.927-1.319-2.698-1.594-1.592-4.068-1.711-5.517-.262l-7.916 7.915c-.881.881-.792 2.25.214 3.261.959.958 2.423 1.053 3.263.215l5.511-5.512c.28-.28.267-.722.053-.936l-.244-.244c-.191-.191-.567-.349-.957.04l-5.506 5.506c-.18.18-.635.127-.976-.214-.098-.097-.576-.613-.213-.973l7.915-7.917c.818-.817 2.267-.699 3.23.262.5.501.802 1.1.849 1.685.051.573-.156 1.111-.589 1.543l-9.547 9.549a3.97 3.97 0 0 1-2.829 1.171 3.975 3.975 0 0 1-2.83-1.173 3.973 3.973 0 0 1-1.172-2.828c0-1.071.415-2.076 1.172-2.83l7.209-7.211c.157-.157.264-.579.028-.814L11.5 4.36a.572.572 0 0 0-.834.018l-7.205 7.207a5.577 5.577 0 0 0-1.645 3.971z">
-                        </path>
-                    </svg>
-                </div>
-                <div class="ml-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                        <path fill="#263238" fill-opacity=".6"
-                            d="M12 7a2 2 0 1 0-.001-4.001A2 2 0 0 0 12 7zm0 2a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 9zm0 6a2 2 0 1 0-.001 3.999A2 2 0 0 0 12 15z">
-                        </path>
-                    </svg>
+                    <input type="text" id="search-input" placeholder="Search messages"
+                        class="rounded-md border-gray-400 py-2 px-3">
                 </div>
             </div>
         </div>
@@ -69,25 +59,26 @@
         <div class="flex justify-center mb-4">
             <div class="rounded py-2 px-4" style="background-color: #FCF4CB">
                 <p class="text-xs">
-                    Messages to this chats are now secured with end-to-end encryption. Tap for more info.
+                    Messages to this chat are now secured with end-to-end encryption. Tap for more info.
                 </p>
             </div>
         </div>
 
-        <div id="display" style="    width: 100%;
-    padding: 16px;">
-            <div class="flex flex-col space-y-2" style="width:93%;">
+        <div id="display" style="width: 100%; padding: 16px;">
+            {% for message in messages %}
+            <div class="message-container">
                 <div
                     class="rounded-lg overflow-hidden shadow-lg bg-white dark:bg-gray-800 transform transition duration-500 hover:scale-105">
                     <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2 text-gray-800 dark:text-white">{{room}}</div>
-                        <p class="text-gray-700 dark:text-gray-400">{{username}}</p>
+                        <div class="font-bold text-xl mb-2 text-gray-800 dark:text-white">{{ message.room }}</div>
+                        <p class="text-gray-700 dark:text-gray-400">{{ message.username }}</p>
                     </div>
                     <div class="px-6 py-4">
-                        <p class="text-gray-700 dark:text-gray-400">{{message}}</p>
+                        <p class="text-gray-700 dark:text-gray-400">{{ message.message }}</p>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
 
 
@@ -95,16 +86,16 @@
             <div>
                 <form id="post-form" class="bg-white rounded-lg shadow-md p-4">
                     {% csrf_token %}
-                    <input type="hidden" name="username" id="username" value="{{username}}" />
-                    <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}" />
+                    <input type="hidden" name="username" id="username" value="{{ username }}" />
+                    <input type="hidden" name="room_id" id="room_id" value="{{ room_details.id }}" />
                     <div class="mb-6">
                         <label for="message" class="block text-gray-700 font-bold mb-2">Message:</label>
                         <textarea class="form-control h-24 rounded-md border-gray-400 py-2 px-3" type="text"
                             name="message" id="message" placeholder="Type your message here"></textarea>
-                    </div>
-                    <div class="flex justify-center" style="margin-bottom: 5%;">
-                        <input type="submit" value="Send" style="margin-bottom: 15%;"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        <div class="flex justify-end">
+                            <input style="margin-top: 10px;" type="submit" value="Send"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        </div>
                     </div>
                     
                 </form>
@@ -118,140 +109,179 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
             crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            function getRandomImage() {
+                // array of image URLs
+               var images = [
+                    "https://static.vecteezy.com/system/resources/thumbnails/004/646/409/small/freelancer-concept-flat-illustration-design-happy-freelancer-working-at-home-guy-sitting-on-armchair-using-laptop-online-chatting-smiling-illustration-for-working-at-home-distance-work-free-vector.jpg",
+                    "https://static.vecteezy.com/system/resources/thumbnails/003/475/016/small/remote-meeting-concept-flat-illustration-free-vector.jpg",
+                    "https://static.vecteezy.com/system/resources/thumbnails/017/451/539/small/woman-chatting-in-smartphone-with-friends-chat-digital-communication-online-vector.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6j65CdvFAmiAs6jprWRpmq5hKmx1bH3m9YAxVjkeMBUo5fsE4UbRAlleU6G2bxBSjd9JWVPBOuUY&usqp=CAU&ec=48665699",
+                    "https://img.freepik.com/free-vector/tiny-people-sitting-large-speech-bubbles-smartphone-online-message-flat-vector-illustration-social-media-digital-technology_74855-13259.jpg?w=2000",
+                    "https://img.freepik.com/free-vector/illustration-with-business-people_23-2148467326.jpg",
+                    "https://img.freepik.com/free-vector/multitasking-concept-with-woman-working_52683-30957.jpg?w=360",
+                    // add more image URLs here
+                ];
+
+                // get a random image URL from the array
+                var randomIndex = Math.floor(Math.random() * images.length);
+                var randomImage = images[randomIndex];
+
+                // return the random image URL
+                return randomImage;
+            }
+
+            // example usage
+            var imageUrl = getRandomImage();
+            const img = document.getElementById('myImage');
+            img.src = imageUrl;
+
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date().toLocaleDateString('en-US', options);
+            document.getElementById("dates").innerHTML = today;
+            const display = document.getElementById("display");
+            display.scrollTop = display.scrollHeight;
+            $(document).on("submit", "#post-form", function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/send",
+                    data: {
+                        username: $("#username").val(),
+                        room_id: $("#room_id").val(),
+                        message: $("#message").val(),
+                        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                    },
+                    success: function(data) {
+                        // alert(data)
+                    },
+                });
+                document.getElementById("message").value = "";
+            });
+            const users_ = []
+            const color_ = []
+
+            // Function to generate random color
+            function generateRandomColor() {
+                const letters = "0123456789ABCDEF";
+                let color = "#";
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            $(document).ready(function() {
+    // Flag variable to track if search is in progress
+    let isSearching = false;
+
+    // Function to filter and display messages based on the search input
+    function searchMessages() {
+        var searchTerm = $('#search-input').val().toLowerCase();
+
+        // Hide all messages initially
+        $('.message-container').hide();
+
+        // Loop through each message and check if it matches the search term
+        $('.message-container').each(function() {
+            var message = $(this).text().toLowerCase();
+            if (message.includes(searchTerm)) {
+                $(this).show();
+            }
+        });
+    }
+
+    // Attach click event to the search icon
+    $('#search-icon').click(function() {
+        searchMessages();
+    });
+
+    // Attach keyup event to the search input
+    $('#search-input').keyup(function() {
+        searchMessages();
+    });
+
+    setInterval(function() {
+        // Check if search is in progress, if true, return
+
+        // Perform AJAX request to fetch messages
+        $.ajax({
+            type: "GET",
+            url: "/getMessages/{{room}}/",
+            success: function(response) {
+                console.log(response);
+                $("#display").empty();
+                dup = users_.slice(0, 4);
+                joinned_users = dup.join(', ') + '...';
+                document.getElementById("users_data").innerHTML = joinned_users;
+                
+                console.log("runned..")
+                for (var key in response.messages) {
+                    const dateString = response.messages[key].date;
+                    const date = new Date(dateString);
+                    const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                   
+                    if (response.messages[key].user != "{{ username }}") {
+                        if (users_.indexOf(response.messages[key].user) !== -1) {
+                            console.log('user exists..');
+                        } else {
+                            users_.push(response.messages[key].user);
+                            color_.push(generateRandomColor());
+                        }
+                        console.log(color_[users_.indexOf(response.messages[key].user)]);
+                        var temp =
+                            "<div class='flex mb-2 message-container'>" +
+                            "<div class='rounded py-2 px-3' style='background-color: #F2F2F2'>" +
+                            "<p class='text-sm text-teal' style='color:" + color_[users_.indexOf(response.messages[key].user)] + "'>" +
+                            response.messages[key].user +
+                            "</p>" +
+                            "<p class='text-sm mt-1'>" +
+                            response.messages[key].value +
+                            "</p>" +
+                            "<p class='text-right text-xs text-grey-dark mt-1'>" +
+                            timeString +
+                            "</p>" +
+                            "</div>" +
+                            "</div>";
+                        $("#display").append(temp);
+                    } else {
+                        var temp =
+                            "<div class='flex justify-end mb-2 message-container'>" +
+                            "<div class='rounded py-2 px-3' style='background-color: #E2F7CB'>" +
+                            "<p class='text-sm mt-1'>" + response.messages[key].value + "</p>" +
+                            "<p class='text-right text-xs text-grey-dark mt-1'>" +
+                            timeString +
+                            "</p></div></div>";
+                        $("#display").append(temp);
+                    }
+                }
+                const display = document.getElementById("post-form");
+                display.scrollTop = display.scrollHeight;
+                var chatMessages = $('#post-form');
+                chatMessages.scrollTop(chatMessages.prop('scrollHeight'));
+                 // Hide all messages initially
+        $('.message-container').hide();
+
+// Loop through each message and check if it matches the search term
+$('.message-container').each(function() {
+    var searchTerm = $('#search-input').val().toLowerCase();
+    var message = $(this).text().toLowerCase();
+    if (message.includes(searchTerm)) {
+        $(this).show();
+    }
+});
+            },
+            error: function(response) {
+                // alert('An error occurred')
+            }
+        });
+    }, 1000);
+});
+
+        </script>
     </body>
 </div>
-
-<script type="text/javascript">
-    function getRandomImage() {
-        // array of image URLs
-        var images = [
-            "https://static.vecteezy.com/system/resources/thumbnails/004/646/409/small/freelancer-concept-flat-illustration-design-happy-freelancer-working-at-home-guy-sitting-on-armchair-using-laptop-online-chatting-smiling-illustration-for-working-at-home-distance-work-free-vector.jpg",
-            "https://static.vecteezy.com/system/resources/thumbnails/003/475/016/small/remote-meeting-concept-flat-illustration-free-vector.jpg",
-            "https://static.vecteezy.com/system/resources/thumbnails/017/451/539/small/woman-chatting-in-smartphone-with-friends-chat-digital-communication-online-vector.jpg",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6j65CdvFAmiAs6jprWRpmq5hKmx1bH3m9YAxVjkeMBUo5fsE4UbRAlleU6G2bxBSjd9JWVPBOuUY&usqp=CAU&ec=48665699",
-            "https://img.freepik.com/free-vector/tiny-people-sitting-large-speech-bubbles-smartphone-online-message-flat-vector-illustration-social-media-digital-technology_74855-13259.jpg?w=2000",
-            "https://img.freepik.com/free-vector/illustration-with-business-people_23-2148467326.jpg",
-            "https://img.freepik.com/free-vector/multitasking-concept-with-woman-working_52683-30957.jpg?w=360",
-            // add more image URLs here
-        ];
-
-        // get a random image URL from the array
-        var randomIndex = Math.floor(Math.random() * images.length);
-        var randomImage = images[randomIndex];
-
-        // return the random image URL
-        return randomImage;
-    }
-
-    // example usage
-    var imageUrl = getRandomImage();
-    const img = document.getElementById('myImage');
-    img.src = imageUrl;
-
-
-
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const today = new Date().toLocaleDateString('en-US', options);
-    document.getElementById("dates").innerHTML = today;
-    const display = document.getElementById("display");
-    display.scrollTop = display.scrollHeight;
-    $(document).on("submit", "#post-form", function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: "POST",
-            url: "/send",
-            data: {
-                username: $("#username").val(),
-                room_id: $("#room_id").val(),
-                message: $("#message").val(),
-                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
-            },
-            success: function (data) {
-                // alert(data)
-            },
-        });
-        document.getElementById("message").value = "";
-    });
-    const users_ = []
-    const color_ = []
-    function generateRandomColor() {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    $(document).ready(function () {
-          setInterval(function () {
-              $.ajax({
-                  type: "GET",
-                  url: "/getMessages/{{room}}/",
-                  success: function (response) {
-                    console.log(response);
-                    $("#display").empty();
-                    dup = users_.slice(0, 4)
-                    joinned_users = dup.join(', ') + '...'
-                    document.getElementById("users_data").innerHTML = joinned_users
-                    for (var key in response.messages) {
-                        const dateString = response.messages[key].date;
-                        const date = new Date(dateString);
-                        const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-                        if (response.messages[key].user != "{{ username }}") {
-                            if (users_.indexOf(response.messages[key].user) !== -1) {
-                                console.log('user exits..')
-                            } else {
-                                users_.push(response.messages[key].user)
-                                color_.push(generateRandomColor())
-                            }
-                            console.log(color_[users_.indexOf(response.messages[key].user)])
-                            var temp =
-                                "<div class='flex mb-2'>" +
-                                "<div class='rounded py-2 px-3' style='background-color: #F2F2F2'>" +
-                                "<p class='text-sm text-teal' style='color:" + color_[users_.indexOf(response.messages[key].user)] + "'>" +
-                                response.messages[key].user +
-                                "</p>" +
-                                "<p class='text-sm mt-1'>" +
-                                response.messages[key].value +
-                                "</p>" +
-                                "<p class='text-right text-xs text-grey-dark mt-1'>" +
-                                timeString +
-                                "</p>" +
-                                "</div>" +
-                                "</div>";
-                            $("#display").append(temp);
-                        } else {
-                            var temp =
-                                "<div class='flex justify-end mb-2'>" +
-                                "<div class='rounded py-2 px-3' style='background-color: #E2F7CB'>" +
-                                "<p class='text-sm mt-1'>" + response.messages[key].value + "</p>" +
-                                "<p class='text-right text-xs text-grey-dark mt-1'>" +
-                                timeString +
-                                "</p></div></div>";
-                            $("#display").append(temp);
-                        }
-                        const display = document.getElementById("post-form");
-                        display.scrollTop = display.scrollHeight;
-                        var chatMessages = $('post-form');
-
-                        // set the scrollTop property to the maximum value
-                        chatMessages.scrollTop(chatMessages.prop('scrollHeight'));
-
-                    }
-                },
-                error: function (response) {
-                    // alert('An error occurred')
-                 // Scroll to the bottom after new messages are added
-                      scrollToBottom();
-                  },
-              });
-          }, 5000);
-      });
-      
-</script>
-
-
 </html>
 {% endblock content %}
