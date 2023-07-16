@@ -1310,7 +1310,7 @@ def mark_list(request, roll_no):
 def parent_session(request):
     return render(request,"")
 
-def fournotfourerror(request):
+def fournotfourerror(request, exception):
     return render(request,'error/404.html')
 
 def fivehundrederror(request):
@@ -1324,10 +1324,11 @@ def stafferror(request):
 
 def adminerror(request):
     return render(request,'error/adminerror.html')
-def fournotthree(request):
+
+def fournotthree(request,exception):
     return render(request,'error/403.html')
 
-def fourhundred(request):
+def fourhundred(request, exception):
     return render(request,'error/400.html')
 
 def view_attendees_by_roolno_graph(request, roll_no):
