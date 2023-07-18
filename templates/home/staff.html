@@ -592,7 +592,7 @@ justify-content: ;
                       flex-direction: row;
                       width: 100%;
                       background: white;
-                      height: 34%;
+                      height: 50%;
                       border-radius: 38px;
                       justify-content: space-between;
                       align-items: center;
@@ -600,18 +600,20 @@ justify-content: ;
                     ">
                   {% csrf_token %}
                   <div style="display: flex;margin-left: -10px;flex-direction: column;">
-                    <input  id="input1" placeholder="Enter RoomCode" class="form-control" aria-label="With textarea"
+                    <input  id="input1" required placeholder="Enter RoomCode" class="form-control" aria-label="With textarea"
                     type="text" name="room_name" id="room_name" style="margin-top: 10px;width: fit-content;" />
-                  <input id="input2" placeholder="Enter Name" class="form-control" aria-label="With textarea"
+                  <input id="input2" required placeholder="Enter Name" class="form-control" aria-label="With textarea"
                     type="text" name="username" id="username" style="margin-top: 10px;width: fit-content;" />
-                  </div>
-                  <input type="submit" style="
+                    <input type="submit" style="
                         padding: 10px;
                         background-color: #03a4ed;
                         border-radius: 16px;
-                        margin-top: 1px;
-                        margin-left: -20%;
+                        margin-left: 30px;
+                        margin-bottom: 30px;
+                        width: 50%;
                       " id="form-submit" value="Join  room" class="main-button" />
+                  </div> 
+                  
                 </form>
                 <br />
                 <div style="
