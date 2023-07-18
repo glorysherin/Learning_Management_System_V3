@@ -230,6 +230,8 @@ classroom = [
     path('mark_option/<str:class_id>', mark_option, name='mark_option'),
     path('attendes_option/<str:class_id>',
          attendes_option, name='attendes_option'),
+    path('attendes_option1/<str:class_id>',
+         attendes_option1, name='attendes_option1'),
     path('note_by_class/<str:class_id>/', note_by_class, name='note_by_class'),
     path('note_by_class_staff/<str:class_id>/',
          note_by_class_staff, name='note_by_class_staff'),
