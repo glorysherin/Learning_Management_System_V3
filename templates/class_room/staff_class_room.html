@@ -2743,10 +2743,12 @@ JEC-Class room  </title>
                   <h6 class="mb-0">Class Details</h6>
                 </div>
                 <div class="col-md-4 text-end">
+                  {% if stusr.user_name == detail.owner.user_name %}
                   <a href="{% url 'edit_classroom' classroom_id=detail.subject_code %}">
                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top"
                       title="Edit Class Detials"></i>
                   </a>
+                  {% endif %}
                 </div>
               </div>
             </div>

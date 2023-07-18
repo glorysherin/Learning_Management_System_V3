@@ -1110,10 +1110,6 @@ def user_mark_view(request, class_id):
 
 
 def get_internal_test_marks(request):
-    marks = None
-    class_id = ''
-    assesment_no = ''
-    date_str = ''
 
     if request.method == 'GET':
         class_id = request.GET.get('class_id')
@@ -1131,6 +1127,14 @@ def get_internal_test_marks(request):
 
                 # Filter marks based on year
                 marks = marks.filter(Date__year=year)
+                context = {
+                    'marks': marks,
+                    'class_id': class_id,
+                    'assesment_no': assesment_no,
+                    'date': date_str,
+                }
+                return render(request, 'class_room/internal_test_marks.html',staff_detials(request,'Get Internal Test Mark',context))
+                
 
     context = {
         'marks': marks,
@@ -1351,7 +1355,6 @@ def view_attendees_by_roolno_graph(request, roll_no):
 
 def view_attendees_by_roolno_percentage(request, roll_no):
     attendees = Attendees.objects.filter(roll_no=roll_no).order_by('-Date')
-
     attendees_list = []
     for attendee in attendees:
         attendee_dict = {
