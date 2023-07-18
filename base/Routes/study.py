@@ -192,7 +192,7 @@ def nave_home_classroom(request, pk, class_id):
                 else:
                     new_room = Room.objects.create(name=class_id)
                     new_room.save()
-                    return render(request, 'class_room/staff_class_room.html', {'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data),"empty":empty})
+                    return render(request, 'class_room/staff_class_room.html', staff_detials({'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data),"empty":empty}))
             else:
                 return render(request, 'teacher/teacher_wait_for_approval.html')
         if get_role.role == 1:
@@ -1026,6 +1026,10 @@ def mark_option(request, class_id):
 def attendes_option(request, class_id):
     cls_obj = ClassRooms.objects.get(subject_code=class_id)
     return render(request, "class_room/attendes_actions.html", staff_detials(request,'Attendes Options',{'class_obj': cls_obj}))
+
+def attendes_option1(request, class_id):
+    cls_obj = ClassRooms.objects.get(subject_code=class_id)
+    return render(request, "class_room/attendes_actions1.html", staff_detials(request,'Attendes Options',{'class_obj': cls_obj}))
 
 
 def Dailytest_marksby_date(request, user_name):
