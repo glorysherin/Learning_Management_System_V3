@@ -307,6 +307,8 @@ teacher = [
          LoginView.as_view(template_name='login/login.html'), name='teacherlogin'),
     path('teacher/addstudentlogin',
          LoginView.as_view(template_name='student/studentadded.html'), name='addstudentlogin'),
+     path('department/teacher/addstudentlogin',
+         LoginView.as_view(template_name='student/studentadded.html'), name='addstudentlogin'),
     path('teacher/addstudentsignup', add_student_signup_view,
          name='add_student_signup_view'),
     path('department/teacher/addstudentsignup', add_student_signup_view,
