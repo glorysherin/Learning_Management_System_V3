@@ -2386,8 +2386,13 @@ JEC-Class room  </title>
                   </a>
                 </li>
                 <li class="nav-item">
+                  {% if stusr.user_name == detail.owner.user_name %}
                   <a style="display: flex;" class="nav-link mb-0 px-0 py-1 "
                     href="{% url 'attendes_option' class_id=detail.subject_code %}" role="tab" aria-selected="false">
+                  {% else %}
+                  <a style="display: flex;" class="nav-link mb-0 px-0 py-1 "
+                    href="{% url 'attendes_option1' class_id=detail.subject_code %}" role="tab" aria-selected="false">
+                  {% endif %}
                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>document</title>
