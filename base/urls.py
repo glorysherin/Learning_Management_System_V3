@@ -206,6 +206,7 @@ classroom = [
     path('course_material/<str:class_id>', course_material, name='course_material'),
     path('view_attendees_by_roolno/<int:roll_no>',
          view_attendees_by_roolno, name='view_attendees_by_roolno'),
+    path('export_filtered_attendees/', export_filtered_attendees, name='export_filtered_attendees'),
     path('view_attendees_by_roolno_percentage/<int:roll_no>',
          view_attendees_by_roolno_percentage, name='view_attendees_by_roolno_percentage'),
     path('view_attendees_by_roolno_graph/<int:roll_no>',
