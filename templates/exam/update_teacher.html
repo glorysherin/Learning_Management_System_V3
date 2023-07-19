@@ -15,7 +15,12 @@
       <label for="id_address" class="block mb-2">Address:</label>
       <input type="text" id="id_address" name="address" value="{{ teacher.address }}" required class="w-full p-2 border border-gray-300 rounded">
     </div>
-    
+     
+    <div class="mb-4">
+      <label for="id_address" class="block mb-2">Password:</label>
+      <input type="text" id="new_password" name="new_password" value="{{ teacher.user.password }}" required class="w-full p-2 border border-gray-300 rounded">
+    </div>
+     
     <div class="mb-4">
       <label for="id_mobile" class="block mb-2">Mobile:</label>
       <input type="text" id="id_mobile" name="mobile" value="{{ teacher.mobile }}" required class="w-full p-2 border border-gray-300 rounded">
@@ -32,7 +37,15 @@
     
     <div class="mb-4">
       <label for="id_department" class="block mb-2">Department:</label>
-      <input type="text" id="id_department" name="department" value="{{ teacher.department }}" required class="w-full p-2 border border-gray-300 rounded">
+      <select id="id_department" name="department" class="w-full p-2 border border-gray-300 rounded" required name="department">
+        {% for i in obj %}
+          {% if i.name == teacher.department %}
+            <option value="{{ i.name }}" selected>{{ i.name }}</option>
+          {% else %}
+            <option value="{{ i.name }}">{{ i.name }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
     </div>
     
     <div class="mb-4">
@@ -42,7 +55,7 @@
     
     <div class="mb-4">
       <label for="id_profile_pic" class="block mb-2">Profile Picture:</label>
-      <input type="file" id="id_profile_pic" name="profile_pic" required class="w-full">
+      <input type="file" id="id_profile_pic" name="profile_pic" class="w-full">
     </div>
     
     <div class="text-center">

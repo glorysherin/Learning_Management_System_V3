@@ -12,7 +12,7 @@ from .Forms import teacher_forms as TFORM
 from .Forms import student_forms as SFORM
 from django.contrib.auth.models import User
 from .common import staff_home, student_home
-from ..models import Users,Teacher
+from ..models import Users,Teacher, Department
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .Tool.Tools import student_detials, staff_detials
 
@@ -98,14 +98,17 @@ def admin_view_teacher_view(request):
 @login_required(login_url='adminlogin')
 def update_teacher_view(request, pk):
     teacher = Teacher.objects.get(id=pk)
+    user_pass = teacher.user.id
+    user = User.objects.get(id = user_pass)
+    obj = Department.objects.all()
+    print(obj)
     if request.method == 'POST':
         address = request.POST.get('address')
         mobile = request.POST.get('mobile')
         role = request.POST.get('role')
-        status = request.POST.get('status')
         department = request.POST.get('department')
-        salary = request.POST.get('salary')
         annauni_num = request.POST.get('Annauni_num')
+        new_password = request.POST.get('new_password')
 
         # Update the fields with the new values
         teacher.address = address
@@ -113,6 +116,7 @@ def update_teacher_view(request, pk):
         teacher.role = role
         teacher.department = department
         teacher.Annauni_num = annauni_num
+        user.set_password(new_password)
 
         # Check if a new profile picture is selected
         if 'profile_pic' in request.FILES:
@@ -124,7 +128,7 @@ def update_teacher_view(request, pk):
         teacher.save()
         return redirect('admin-view-teacher')
     else:
-        return render(request, 'exam/update_teacher.html', staff_detials(request,'Update User Details',{'teacher': teacher}))
+        return render(request, 'exam/update_teacher.html', staff_detials(request,'Update User Details',{'teacher': teacher,'obj':obj}))
 
  
 
