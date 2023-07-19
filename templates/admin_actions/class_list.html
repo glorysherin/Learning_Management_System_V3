@@ -30,10 +30,22 @@
 </head>
 
 <body>
+  <div class="container mt-4">
+    <h2>Classrooms</h2>
+  
+    <!-- Search Bar -->
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search by Year, Semester, or Subject Code">
+      </div>
+    </div>
+  </div>
+  
+  
 
   {% if class_dict.items %}
   <div class="container mt-4">
-    <h1>Classrooms</h1>
+    
     {% for semester, department_dict in class_dict.items %}
     <div class="card mt-3">
       <div class="card-header">
@@ -52,7 +64,7 @@
                     <tr>
                       <th>Class Name</th>
                       <th>Subject Code</th>
-                      <th>Owner</th>
+                      <th>Created by</th>
                       <th>Description</th>
                       <th>View</th>
                       <th>Delete</th>
@@ -103,6 +115,36 @@
       <p>The Class Are Not Created Yet.</p>
     </div>
   {% endif %}
+
+  <script>
+    // Function to filter classrooms based on search criteria
+    function filterClassrooms() {
+      // Get the search input
+      var searchValue = document.getElementById("searchInput").value.toUpperCase();
+  
+      // Get all the table rows
+      var rows = document.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+  
+      // Loop through each row and hide/show based on search criteria
+      for (var i = 0; i < rows.length; i++) {
+        var year = rows[i].getElementsByTagName("td")[0].innerText.toUpperCase();
+        var semester = rows[i].getElementsByTagName("td")[1].innerText.toUpperCase();
+        var subjectCode = rows[i].getElementsByTagName("td")[2].innerText.toUpperCase();
+  
+        var shouldShow =
+          year.includes(searchValue) ||
+          semester.includes(searchValue) ||
+          subjectCode.includes(searchValue);
+  
+        rows[i].style.display = shouldShow ? "" : "none";
+      }
+    }
+  
+    // Attach event listener to search input
+    document.getElementById("searchInput").addEventListener("input", filterClassrooms);
+  </script>
+  
+  
 </body>
 </div>
 </html>
