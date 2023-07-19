@@ -27,13 +27,17 @@ def students_list(request):
 @user_passes_test(is_admin)
 def admin_students_list(request):
     students = Student.objects.all()
+
+    # Get unique departments, joined years, and semesters
     departments = set([student.department for student in students])
+    joined_years = set([student.joinned_year for student in students])
+
     context = {
         'students': students,
         'departments': departments,
+        'joined_years': joined_years,
     }
-    return render(request, 'student/admin_students_list.html',staff_detials(request,'Students Details',context))
-
+    return render(request, 'student/admin_students_list.html',staff_detials(request,'Student list',context) )
 
 def students_list_by_dep(request):
     usr_id = request.user.id

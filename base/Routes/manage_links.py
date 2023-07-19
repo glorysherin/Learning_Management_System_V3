@@ -96,4 +96,6 @@ def delete_youtube_link(request, pk,class_id):
 
 def list_notes(request,class_id):
     return render(request,'youtube_links/list_notes.html',student_detials(request,"List notes",{'class_id':class_id}))
+def st_list_notes(request,class_id):
+    return render(request,'youtube_links/st_list_notes.html',staff_detials(request,"List notes",{'class_id':class_id}))
 
