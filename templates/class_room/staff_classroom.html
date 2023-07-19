@@ -2063,7 +2063,11 @@
           </a>
         </li>
         <li class="nav-item">
+<<<<<<< HEAD
+          <a class="nav-link  " href="{% url 'logout' %}s">
+=======
           <a class="nav-link  " href=" {% url 'logout' %} ">
+>>>>>>> 7aac8f619ad6112ca6f3f1e20c3167d7d17ebcf8
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="38" size="12px" viewBox="0 0 24 24">
@@ -2419,7 +2423,9 @@
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">Selected Subjects</h6>
               <!-- Search Box -->
-             
+              <!-- <div class="input-group mt-3">
+                <input type="text" id="searchSubjects" class="form-control" placeholder="Search by Subject Code or Name">
+              </div> -->
             </div>
             <div class="card-body p-3">
               <ul class="list-group">
@@ -2640,33 +2646,7 @@
   <script src=" {% static 'admin/assets/js/plugins/perfect-scrollbar.min.js' %} "></script>
   <script src=" {% static 'admin/assets/js/plugins/smooth-scrollbar.min.js' %} "></script>
 
-<script>
-  // Function to filter classes based on search criteria
-  function filterItems() {
-    // Get the search input value
-    var searchValue = document.getElementById("searchInput").value.toLowerCase();
 
-    // Get the class cards
-    var classCards = document.querySelectorAll(".col-xl-3");
-
-    // Loop through each class card and hide/show based on search criteria
-    classCards.forEach(function (card) {
-      var subjectCode = card.querySelector(".text-gradient").innerText.toLowerCase();
-      var subjectName = card.querySelector("h5").innerText.toLowerCase();
-      var description = card.querySelector(".text-sm").innerText.toLowerCase();
-
-      var shouldShow =
-        subjectCode.includes(searchValue) ||
-        subjectName.includes(searchValue) ||
-        description.includes(searchValue);
-
-      card.style.display = shouldShow ? "" : "none";
-    });
-  }
-
-  // Attach event listener to search input
-  document.getElementById("searchInput").addEventListener("input", filterItems);
-</script>
 
   <script>
     // Function to filter classes based on search criteria
