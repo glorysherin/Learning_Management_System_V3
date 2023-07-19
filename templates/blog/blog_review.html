@@ -94,7 +94,7 @@ body {
   }
 }
 </style>
-<div class="button_container1">
+<div class="button_container1" style="margin-top: -1px;">
   <a href="{% url 'staff_list_blog_course' %}">
     <button class="btn1"><span>Courses</span></button>
   </a>
@@ -109,7 +109,7 @@ body {
   </a>
   
 </div>
-<div style="" class="p-6">
+<div style="margin-top: 20%; " class="p-6" >
     {% for i in blogs %}
     <div style="    display: flex;align-items: center;justify-content: center;">
         <h1 style="    font-weight: bold; font-size: 28px;">{{ i.0.categories }}</h1>
@@ -164,7 +164,7 @@ body {
                     </p>
                     <p  class="inline-flex items-center text-gray-600">
                         <!-- HTML !--> <div style="width: 900px;display: flex;">
-                        <button class="button-86" style="width: fit-content;display: flex;padding-left: 14px;padding-right: 14px;" role="button"><a href="{% url 'accept_the_art' id=j.id %}">Accept</a></button>
+                        <button class="button-86" style="width: fit-content;display: flex;padding-left: 14px;padding-right: 14px;box-shadow:(#000 ,borderbox,1px)" role="button"><a href="{% url 'accept_the_art' id=j.id %}">Accept</a></button>
                         <button class="button-86" style="width: fit-content;display: flex;padding-left: 14px;padding-right: 14px;margin-left: 8px;" role="button"><a href="{% url 'reject_the_art' id=j.id %}">Reject</a></button>
                     </div> </p>
                 </div>

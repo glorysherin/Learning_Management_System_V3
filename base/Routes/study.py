@@ -192,7 +192,7 @@ def nave_home_classroom(request, pk, class_id):
                 else:
                     new_room = Room.objects.create(name=class_id)
                     new_room.save()
-                    return render(request, 'class_room/staff_class_room.html', staff_detials({'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data),"empty":empty}))
+                    return render(request, 'class_room/staff_class_room.html', staff_detials(request,'Classroom created',{'people': peoples, "detail": detials, 'books': books, 'recent_books': books[::-1][0:4],'table_datas':zip(table_datas,updated_by,collected,status_data),"empty":empty}))
             else:
                 return render(request, 'teacher/teacher_wait_for_approval.html')
         if get_role.role == 1:

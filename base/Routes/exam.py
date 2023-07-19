@@ -12,7 +12,7 @@ from .Forms import teacher_forms as TFORM
 from .Forms import student_forms as SFORM
 from django.contrib.auth.models import User
 from .common import staff_home, student_home
-from ..models import Users,Teacher
+from ..models import Users,Teacher, Department
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .Tool.Tools import student_detials, staff_detials
 
@@ -89,23 +89,28 @@ def admin_teacher_view(request):
     return render(request, 'exam/admin_teacher.html',staff_detials(request,'admin teacher view ', dict))
 
 
-@login_required(login_url='adminlogin')
 def admin_view_teacher_view(request):
-    teachers = TMODEL.Teacher.objects.all().filter(status=True).exclude(role='admin')
+    if Teacher.objects.get(user=request.user.id).role == 'admin':
+        teachers = TMODEL.Teacher.objects.all().filter(status=True).exclude(role='admin')
+    elif Teacher.objects.get(user=request.user.id).role == 'hod':
+        teachers = TMODEL.Teacher.objects.all().filter(status=True,role='staff')
     return render(request, 'exam/admin_view_teacher.html', staff_detials(request,'Staff Details',{'teachers': teachers}))
 
 
 @login_required(login_url='adminlogin')
 def update_teacher_view(request, pk):
     teacher = Teacher.objects.get(id=pk)
+    user_pass = teacher.user.id
+    user = User.objects.get(id = user_pass)
+    obj = Department.objects.all()
+    print(obj)
     if request.method == 'POST':
         address = request.POST.get('address')
         mobile = request.POST.get('mobile')
         role = request.POST.get('role')
-        status = request.POST.get('status')
         department = request.POST.get('department')
-        salary = request.POST.get('salary')
         annauni_num = request.POST.get('Annauni_num')
+        new_password = request.POST.get('new_password')
 
         # Update the fields with the new values
         teacher.address = address
@@ -113,6 +118,7 @@ def update_teacher_view(request, pk):
         teacher.role = role
         teacher.department = department
         teacher.Annauni_num = annauni_num
+        user.set_password(new_password)
 
         # Check if a new profile picture is selected
         if 'profile_pic' in request.FILES:
@@ -124,7 +130,7 @@ def update_teacher_view(request, pk):
         teacher.save()
         return redirect('admin-view-teacher')
     else:
-        return render(request, 'exam/update_teacher.html', staff_detials(request,'Update User Details',{'teacher': teacher}))
+        return render(request, 'exam/update_teacher.html', staff_detials(request,'Update User Details',{'teacher': teacher,'obj':obj}))
 
  
 
@@ -141,9 +147,11 @@ def delete_teacher_view(request, pk):
     return HttpResponseRedirect('/admin-view-teacher')
 
 
-@login_required(login_url='adminlogin')
 def admin_view_pending_teacher_view(request):
-    teachers = TMODEL.Teacher.objects.all().filter(status=False)
+    if Teacher.objects.get(user=request.user.id).role == 'hod':
+        teachers = TMODEL.Teacher.objects.all().filter(status=False)
+    elif Teacher.objects.get(user=request.id).role == 'admin':
+        teachers = TMODEL.Teacher.objects.all().filter(status=False,role='staff')
     return render(request, 'exam/admin_view_pending_teacher.html', staff_detials(request,'Pending Teacher',{'teachers': teachers}))
 
 
