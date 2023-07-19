@@ -7,7 +7,7 @@
 
 body {
   margin: 0;
-} 
+}
 
 .button_container1 {
   position: absolute;
@@ -16,8 +16,9 @@ body {
   top: 65%;
   display: flex;
   height: fit-content;
-  margin-top: 10%;
-justify-content: center;
+  margin-top: 5%;
+  justify-content: center;
+  margin-bottom: 10%;
 }
 
 .btn1 {
@@ -89,32 +90,32 @@ justify-content: center;
   .btn1 {
     margin: 10px;
   }
-  .p-6{ 
+  .p-6{
     margin-top: 80%;
   }
 }
 </style>
 <div class="button_container1">
-  <a href="{% url 'student_list_blog_course' %}">
+  <a href="{% url 'admin_list_blog_course' %}">
     <button class="btn1"><span>Courses</span></button>
   </a>
-  <a href="{% url 'list_blog' %}">
+  <a href="{% url 'admin_list_blog' %}">
     <button class="btn1"><span>Blog</span></button>
   </a>
-  <a href="{% url 'create_blog' %}">
+  <a href="{% url 'admin_create_blog' %}">
     <button class="btn1"><span>Create Blog</span></button>
   </a>
-  
-  <a href="{% url 'st_list_draft_blog' %}">
-    <button class="btn1"><span>Drafted Articles</span></button>
+  <a href="{% url 'admin_list_edit_blog' %}">
+    <button class="btn1"><span>Manage Blog</span></button>
   </a>
+  
 </div>
-         <br>
+<br>
 <div class="p-6">
-    {% for i in blogs %}
-    <div style="    display: flex;align-items: center;justify-content: center;">
-        <h1 style="    font-weight: bold; font-size: 28px;">{{ i.0.categories }}</h1>
-        <hr style="    margin-top: 10px; margin-bottom: 15px;">
+    {% for i in obj %}
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <h1 style="font-weight: bold; font-size: 28px;">{{ i.0.categories }}</h1>
+        <hr style="margin-top: 10px; margin-bottom: 15px;">
     </div>
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
         {% for j in i %}
@@ -133,8 +134,8 @@ justify-content: center;
 
                 <hr class="mt-4 mb-4" />
 
-                <div class="flex flex-wrap justify-between" style="    line-height: 36px;">
-                    <p class="inline-flex items-center">
+                <div class="flex flex-wrap justify-between" style="line-height: 36px;">
+                    <p class="items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-orange-400" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -142,16 +143,21 @@ justify-content: center;
                         </svg>
 
                         <span class="ml-2 text-gray-600">{{ j.updated_date }}</span>
-                        <span class="mx-2">•</span>
+                        <span class="mx-2">•</span> 
                         <span class="text-gray-400">Last Updated</span>
                     </p>
-                    <p class="inline-flex items-center text-gray-600">
+                    <p class="text-gray-600">
                         <button onclick="get_blog('{{ j.id }}')"
-                            class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
-
-                            <a href="{% url 'view_blog' pk=j.id %}"
-                                class="button button--aylen px-5 py-3 bg-gray-800 hover:bg-gray-700 hover:text-white relative block focus:outline-none border-2 border-solid rounded-lg text-sm text-center font-semibold uppercase tracking-widest overflow-hidden">
+                            class="button button--aylen flex-grow w-full p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
+                            <a href="{% url 'draft_view_blog' pk=j.id %}"
+                                class="relative inline-flex items-center justify-center w-full h-full px-5 py-3 bg-gray-800 hover:bg-gray-700 hover:text-white block focus:outline-none border-2 border-solid rounded-lg text-sm text-center font-semibold uppercase tracking-widest overflow-hidden">
                                 View
+                            </a>
+                        </button>
+                        <button onclick="edit_blog('{{ j.id }}')"
+                            class="button button--aylen flex-grow w-full p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
+                            <a href="#" class="relative inline-flex items-center justify-center w-full h-full px-5 py-3 bg-gray-800 hover:bg-gray-700 hover:text-white block focus:outline-none border-2 border-solid rounded-lg text-sm text-center font-semibold uppercase tracking-widest overflow-hidden">
+                                Edit
                             </a>
                         </button>
                     </p>
@@ -162,39 +168,13 @@ justify-content: center;
     </div>
     {% endfor %}
 </div>
+
 {% endblock content %}
 
 {% block script %}
 <script>
-    function get_blog(id) {
-        location.href = "view_blog/" + id;
+    function edit_blog(id) {
+        window.location.replace("draft_edit_blog/" + id)
     }
 </script>
-<script>
-    function searchBlogs() {
-        // Get the input value
-        var input = document.getElementById("searchInput").value.toLowerCase();
-
-        // Get all blog elements
-        var blogs = document.querySelectorAll(".grid > div");
-
-        // Loop through all blog elements
-        for (var i = 0; i < blogs.length; i++) {
-            var blog = blogs[i];
-
-            // Get the title, category and author name
-            var title = blog.querySelector("h2").textContent.toLowerCase();
-            var category = blog.querySelector("p").textContent.toLowerCase();
-            var author = blog.querySelector(".text-gray-600").textContent.toLowerCase();
-
-            // Check if the input matches the title, category or author name
-            if (title.indexOf(input) > -1 || category.indexOf(input) > -1 || author.indexOf(input) > -1) {
-                blog.style.display = "";
-            } else {
-                blog.style.display = "none";
-            }
-        }
-    }
-</script>
-
 {% endblock script %}

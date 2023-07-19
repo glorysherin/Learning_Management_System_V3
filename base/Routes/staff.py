@@ -13,7 +13,10 @@ from base import models as QMODEL
 from base import models as SMODEL
 from .Forms import exam_forms as QFORM
 from .Tool.Tools import student_detials, staff_detials
+from django.contrib.auth.decorators import user_passes_test
 
+def is_superuser(user):
+    return user.is_superuser
 
 # for showing signup/login button for teacher
 def teacherclick_view(request):
@@ -293,6 +296,9 @@ def add_admin(request):
         return HttpResponseRedirect('user_added_message')
     return render(request, 'teacher/addadmin.html',mydict)
 
+
+
+@user_passes_test(is_superuser)
 def add_admin1(request):
     userForm = teacher_forms.TeacherUserForm()
     teacherForm = teacher_forms.TeacherForm1()
