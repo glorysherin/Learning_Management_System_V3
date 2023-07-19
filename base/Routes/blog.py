@@ -55,6 +55,9 @@ def blog_saved(request):
 def blog_draft_saved(request):
     return render(request,'attandees/Blog_draft_Saved.html',staff_detials(request,"Draft Articals"))
 
+def st_blog_draft_saved(request):
+    return render(request,'attandees/st_Blog_draft_Saved.html',student_detials(request,"Draft Articals"))
+
 def list_draft_blog(request):
     obj =  get_draft_blog(request)
     return render(request,"blog/draft_blog.html",staff_detials(request,'Drafted Blog',{"obj":obj}))
