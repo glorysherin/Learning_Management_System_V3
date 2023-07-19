@@ -432,6 +432,7 @@ blog_url = [
     path('save_blog', save_blog),
     path('blog_draft_saved', blog_draft_saved,name="blog_draft_saved"),
     path('list_draft_blog', list_draft_blog,name="list_draft_blog"),
+    path('st_list_draft_blog', st_list_draft_blog,name="st_list_draft_blog"),
     path('list_unrevied_draft_blog', list_unrevied_draft_blog,name="list_unrevied_draft_blog"),
     path('blog_saved', blog_saved,name="blog_saved"),
     path('delete_blog', delete_blog),
