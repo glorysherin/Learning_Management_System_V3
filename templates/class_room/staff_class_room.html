@@ -2358,6 +2358,7 @@ JEC-Class room  </title>
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+                {% if role != 'admin' %}
                 <li class="nav-item" onclick="window.location.href = '/course_material/{{ detail.subject_code }}'">
                   <a style="display: flex;" class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab"
                     href="{% url 'course_material' class_id=detail.subject_code %}" onclick="window.location.href='/add_class_notes'"
@@ -2385,8 +2386,9 @@ JEC-Class room  </title>
                     <span class="ms-1">Add Notes</span>
                   </a>
                 </li>
+                {% endif %}
                 <li class="nav-item">
-                  {% if stusr.user_name == detail.owner.user_name %}
+                  {% if role != 'admin' %}
                   <a style="display: flex;" class="nav-link mb-0 px-0 py-1 "
                     href="{% url 'attendes_option' class_id=detail.subject_code %}" role="tab" aria-selected="false">
                   {% else %}
@@ -2415,8 +2417,13 @@ JEC-Class room  </title>
                   </a>
                 </li>
                 <li class="nav-item">
+                  {% if role != 'admin' %}
                   <a style="display: flex;" class="nav-link mb-0 px-0 py-1 "
                     href="{% url 'show_actions' class_id=detail.subject_code %}" role="tab" aria-selected="false">
+                    {% else %}
+                    <a style="display: flex;" class="nav-link mb-0 px-0 py-1 "
+                    href="{% url 'mark_option' class_id=detail.subject_code %}" role="tab" aria-selected="false">
+                    {% endif %}
                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 40" version="1.1"
                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -2531,7 +2538,62 @@ JEC-Class room  </title>
                 <li>No books yet.</li>
                 {% endfor %}
                 <a href="{% url 'note_by_class_staff' class_id=detail.subject_code %}">view More</a>
-          
+                      
+<style>
+  /* CSS */
+.button-64 {
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 140px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button-64:active,
+.button-64:hover {
+  outline: 0;
+}
+
+.button-64 span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.button-64:hover span {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .button-64 {
+    font-size: 24px;
+    min-width: 196px;
+  }
+}  
+</style>
+
+             
+<button class="button-64" role="button" style="width: 50%;"><span class="text"><a href="{% url 'st_list_notes' class_id=detail.subject_code %}">Notes</a></span></button>
+
             </div>
                     <!-- component -->
  
@@ -2899,12 +2961,14 @@ View
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   <a href="{% url 'upload_assignment_list1' id=i.id a_id=l class_id=detail.subject_code %}">View</a> 
                 </button>
+                {% if role != 'admin' %}
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   <a href="{% url 'assignment_edit' pk=i.id class_id=detail.subject_code %}">Edit</a> 
                 </button>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   <a href="{% url 'assignment_delete' pk=i.id class_id=detail.subject_code %}">Delete</a> 
                 </button>
+                {% endif %}
               </td>
             </tr>
             {% endfor %}
@@ -3183,11 +3247,12 @@ View
               function join_room(username, roomname) {
                 console.log(username, roomname)
                 $.ajax({
-                  method: "GET",
+                  method: "post",
                   url: "{% url 'staff_checkview' %}",
                   data: {
                     'room_name': roomname,
                     'username': username,
+                    "csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()
                   }, success: function (data) {
                     window.location.href = "/staffchat/" + roomname + "/?username=" + username;
                   }

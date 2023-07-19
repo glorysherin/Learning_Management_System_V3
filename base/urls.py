@@ -155,12 +155,12 @@ admin = [
     path('class_listout/<str:class_id>',
          get_class_peoples, name='class_listout'),
     path('students_list', students_list, name='students_list'),
-    path('admin_students_list', admin_students_list, name='admin_students_list'),
+    path('admin_students_list', admin_students_list, name='admin_students_list'), 
     path('students_list_by_dep', students_list_by_dep,
          name='students_list_by_dep'),
     path('class_dates', class_dates, name='class_dates'),
 
-    path('class_dates/<int:id>/delete_attendee/',
+    path('class_dates/<int:id>/delete_attendee/', 
          delete_attendee, name='delete_attendee'),
     path('class_dates/<int:id>/edit_attendee/',
          edit_attendee, name='edit_attendee'),
@@ -575,6 +575,7 @@ links_management = [
     path('links/edit/<int:pk>/<str:class_id>', edit_youtube_link, name='edit_youtube_link'),
     path('links/delete/<int:pk>/<str:class_id>', delete_youtube_link, name='delete_youtube_link'),
     path('list_notes/<str:class_id>', list_notes, name='list_notes'),
+    path('st_list_notes/<str:class_id>', st_list_notes, name='st_list_notes'),
 ]
 
 assignments_ = [

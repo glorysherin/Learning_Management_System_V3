@@ -29,6 +29,10 @@
           <input type="text" id="id_mobile" name="mobile" value="{{ teacher.mobile }}" required
             class="w-full p-2 border border-gray-300 rounded">
         </div>
+        <div class="mb-4">
+          <label for="id_address" class="block mb-2">Password:</label>
+          <input type="text" id="new_password" name="new_password" value="{{ teacher.user.password }}" required class="w-full p-2 border border-gray-300 rounded">
+        </div>
         
 
         <div>
@@ -40,10 +44,17 @@
           </select>
         </div>
 
-        <div>
+        <div class="mb-4">
           <label for="id_department" class="block mb-2">Department:</label>
-          <input type="text" id="id_department" name="department" value="{{ teacher.department }}" required
-            class="w-full p-2 border border-gray-300 rounded">
+          <select id="id_department" name="department" class="w-full p-2 border border-gray-300 rounded" required name="department">
+            {% for i in obj %}
+              {% if i.name == teacher.department %}
+                <option value="{{ i.name }}" selected>{{ i.name }}</option>
+              {% else %}
+                <option value="{{ i.name }}">{{ i.name }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
         </div>
 
         <div>
