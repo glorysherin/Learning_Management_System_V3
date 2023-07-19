@@ -345,9 +345,10 @@ def add_admin1(request):
             print("Form data is not valid")
             print(userForm.errors)
             print(teacherForm.errors)
-            return render(request,'msg/user_cant_create.html')
+            return render(request,'msg/admin_user_error.html')
         return HttpResponseRedirect('admin_added')
     return render(request, 'teacher/addadmin.html',mydict)
+
 
 def add_teacher_hod(request):
     userForm = teacher_forms.TeacherUserForm()

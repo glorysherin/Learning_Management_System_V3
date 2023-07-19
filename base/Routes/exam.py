@@ -89,9 +89,11 @@ def admin_teacher_view(request):
     return render(request, 'exam/admin_teacher.html',staff_detials(request,'admin teacher view ', dict))
 
 
-@login_required(login_url='adminlogin')
 def admin_view_teacher_view(request):
-    teachers = TMODEL.Teacher.objects.all().filter(status=True).exclude(role='admin')
+    if Teacher.objects.get(user=request.user.id).role == 'admin':
+        teachers = TMODEL.Teacher.objects.all().filter(status=True).exclude(role='admin')
+    elif Teacher.objects.get(user=request.user.id).role == 'hod':
+        teachers = TMODEL.Teacher.objects.all().filter(status=True,role='staff')
     return render(request, 'exam/admin_view_teacher.html', staff_detials(request,'Staff Details',{'teachers': teachers}))
 
 
@@ -145,9 +147,11 @@ def delete_teacher_view(request, pk):
     return HttpResponseRedirect('/admin-view-teacher')
 
 
-@login_required(login_url='adminlogin')
 def admin_view_pending_teacher_view(request):
-    teachers = TMODEL.Teacher.objects.all().filter(status=False)
+    if Teacher.objects.get(user=request.user.id).role == 'hod':
+        teachers = TMODEL.Teacher.objects.all().filter(status=False)
+    elif Teacher.objects.get(user=request.id).role == 'admin':
+        teachers = TMODEL.Teacher.objects.all().filter(status=False,role='staff')
     return render(request, 'exam/admin_view_pending_teacher.html', staff_detials(request,'Pending Teacher',{'teachers': teachers}))
 
 
