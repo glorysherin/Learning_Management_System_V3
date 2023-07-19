@@ -1,67 +1,98 @@
 {% extends 'student/adminbase.html' %}
 {% load widget_tweaks %}
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <style media="screen">
-    /* Add any custom styles if needed */
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Template</title>
+  <!-- Include the Tailwind CSS stylesheet -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<br><br>
-<h2 class="text-center">Update Teacher</h2>
-<div style="width: 90%;" class="max-w-md mx-auto bg-white rounded p-8 mt-8">
-  <form style="margin-left: -50px;" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="mb-4">
-      <label for="id_address" class="block mb-2">Address:</label>
-      <input type="text" id="id_address" name="address" value="{{ teacher.address }}" required class="w-full p-2 border border-gray-300 rounded">
-    </div>
-     
-    <div class="mb-4">
-      <label for="id_address" class="block mb-2">Password:</label>
-      <input type="text" id="new_password" name="new_password" value="{{ teacher.user.password }}" required class="w-full p-2 border border-gray-300 rounded">
-    </div>
-     
-    <div class="mb-4">
-      <label for="id_mobile" class="block mb-2">Mobile:</label>
-      <input type="text" id="id_mobile" name="mobile" value="{{ teacher.mobile }}" required class="w-full p-2 border border-gray-300 rounded">
-    </div>
-    
-    <div class="mb-4">
-      <label for="id_role" class="block mb-2">Role:</label>
-      <select id="id_role" name="role" required class="w-full p-2 border border-gray-300 rounded">
-        <option value="staff" {% if 'staff' in teacher.role %}selected{% endif %}>Staff</option>
-        <option value="admin" {% if 'admin' in teacher.role %}selected{% endif %}>Admin</option>
-        <option value="hod" {% if 'hod' in teacher.role %}selected{% endif %}>HOD</option>
-      </select>
-    </div>
-    
-    <div class="mb-4">
-      <label for="id_department" class="block mb-2">Department:</label>
-      <select id="id_department" name="department" class="w-full p-2 border border-gray-300 rounded" required name="department">
-        {% for i in obj %}
-          {% if i.name == teacher.department %}
+
+<body class="bg-gray-100">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-md mx-auto bg-white rounded p-8" style="display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: center;">
+      <h2 class="text-center text-2xl font-semibold mb-6">Update Teacher</h2>
+      <form class="space-y-4">
+        {% csrf_token %}
+        <div class="mb-4">
+          <label for="id_address" class="block mb-2">Address:</label>
+          <input type="text" id="id_address" name="address" value="{{ teacher.address }}" required
+            class="w-full sm:w-64 p-2 border border-gray-300 rounded-sm focus:ring focus:ring-indigo-300">
+        </div>
+
+        <div class="mb-4">
+          <label for="id_mobile" class="block mb-2">Mobile:</label>
+          <input type="text" id="id_mobile" name="mobile" value="{{ teacher.mobile }}" required
+            class="w-full sm:w-64 p-2 border border-gray-300 rounded-sm focus:ring focus:ring-indigo-300">
+        </div>
+
+        <div class="mb-4">
+          <label for="new_password" class="block mb-2">Password:</label>
+          <input type="text" id="new_password" name="new_password" value="{{ teacher.user.password }}" required
+            class="w-full sm:w-64 p-2 border border-gray-300 rounded-sm focus:ring focus:ring-indigo-300">
+        </div>
+
+        <div class="mb-4">
+          <label for="id_role" class="block mb-2">Role:</label>
+          <select id="id_role" name="role" required
+            class="w-full sm:w-64 p-2 border border-gray-300 rounded-sm focus:ring focus:ring-indigo-300">
+            <option value="staff" {% if 'staff' in teacher.role %}selected{% endif %}>Staff</option>
+            <option value="admin" {% if 'admin' in teacher.role %}selected{% endif %}>Admin</option>
+            <option value="hod" {% if 'hod' in teacher.role %}selected{% endif %}>HOD</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label for="id_department" class="block mb-2">Department:</label>
+          <select id="id_department" name="department"
+            class="w-full sm:w-64 p-2 border border-gray-300 rounded-sm focus:ring focus:ring-indigo-300" required>
+            {% for i in obj %}
+            {% if i.name == teacher.department %}
             <option value="{{ i.name }}" selected>{{ i.name }}</option>
-          {% else %}
+            {% else %}
             <option value="{{ i.name }}">{{ i.name }}</option>
-          {% endif %}
-        {% endfor %}
-      </select>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label for="id_Annauni_num" class="block mb-2">Annauni Num:</label>
+          <input type="text" id="id_Annauni_num" name="Annauni_num" value="{{ teacher.Annauni_num }}" required
+            class="w-full sm:w-64 p-2 border border-gray-300 rounded-sm focus:ring focus:ring-indigo-300">
+        </div>
+
+        <div class="mb-4">
+          <label for="id_profile_pic" class="block mb-2">Profile Picture:</label>
+          <input type="file" id="id_profile_pic" name="profile_pic" required
+            class="w-full sm:w-64 p-2 border border-gray-300 rounded-sm focus:ring focus:ring-indigo-300">
+        </div>
+
+        <div class="text-center">
+          <button style="background-color: blue; border: none;" type="submit"
+            class="bg-green-500 text-white px-4 py-2 rounded cursor-pointer">Save</button>
+        </div>
+      </form>
     </div>
-    
-    <div class="mb-4">
-      <label for="id_Annauni_num" class="block mb-2">Annauni Num:</label>
-      <input type="text" id="id_Annauni_num" name="Annauni_num" value="{{ teacher.Annauni_num }}" required class="w-full p-2 border border-gray-300 rounded">
-    </div>
-    
-    <div class="mb-4">
-      <label for="id_profile_pic" class="block mb-2">Profile Picture:</label>
-      <input type="file" id="id_profile_pic" name="profile_pic" class="w-full">
-    </div>
-    
-    <div class="text-center">
-      <button style="background-color: blue;border: none;" type="submit" class="bg-green-500 text-white px-4 py-2 rounded cursor-pointer">Save</button>
-    </div>
-  </form>
-</div>
-<br><br><br><br>
+  </div>
+</body>
+
+<style>
+  @media (max-width: 640px) {
+    .sm\:w-64 {
+      width: 140px;
+    }
+  }
+</style>
+
+</html>
+
 {% endblock content %}

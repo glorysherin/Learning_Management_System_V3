@@ -828,7 +828,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="/logout">
+          <a class="nav-link  " href=" {% url 'logout' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="38" size="12px" viewBox="0 0 24 24">
@@ -1519,7 +1519,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link  " href="/logout">
+              <a class="nav-link  " href=" {% url 'logout' %}">
                 <div
                   class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="38" size="12px" viewBox="0 0 24 24">
@@ -2069,7 +2069,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="/logout">
+          <a class="nav-link  " href=" {% url 'logout' %}">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="38" size="12px" viewBox="0 0 24 24">
@@ -2147,7 +2147,7 @@
               <a class="btn btn-outline-white btn-sm mb-0 me-3" target="_blank" href="https://jec.ac.in/">JEC</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a href="logout" onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''" class="nav-link text-white font-weight-bold px-0 test1">
+              <a href=" {% url 'logout' %} " onmouseover="this.style.backgroundColor='rgba(212, 212, 212, 0.0)'" onmouseout="this.style.backgroundColor=''" class="nav-link text-white font-weight-bold px-0 test1">
                 <i class="fa fa-user me-sm-1"></i>
                 <span id="test" class="d-sm-inline d-none" style="pointer-events: none;">Sign Out</span>
               </a>
