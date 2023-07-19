@@ -160,7 +160,7 @@ admin = [
          name='students_list_by_dep'),
     path('class_dates', class_dates, name='class_dates'),
 
-    path('class_dates/<int:id>/delete_attendee/',
+    path('class_dates/<int:id>/delete_attendee/', 
          delete_attendee, name='delete_attendee'),
     path('class_dates/<int:id>/edit_attendee/',
          edit_attendee, name='edit_attendee'),
