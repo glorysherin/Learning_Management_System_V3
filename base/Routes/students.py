@@ -115,9 +115,11 @@ def student_profile(request, student_id):
 
 def student_edit(request, pk):
     student = get_object_or_404(Student, pk=pk)
+    user = User.objects.get(id=student.user.id)
     department = Department.objects.all()
     current_id = request.user.id
     if request.method == 'POST':
+        user.set_password(request.POST['password'])
         student.user.first_name = request.POST['first_name']
         student.user.last_name = request.POST['last_name']
         student.mail_id = request.POST['email']

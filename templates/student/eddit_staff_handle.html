@@ -62,6 +62,8 @@
             <input type="email" required name="email" value="{{ student.mail_id }}"><br>
             <label for="email">Parent Email: <span style="color: gray;"></span></label>
             <input type="email" required name="parent_mail_id" value="{{ student.parent_mail_id }}"><br>
+            <label for="email">Password: <span style="color: gray;">(The password is hidden from view, but it is changeable.)</span></label>
+            <input type="text" required name="password" value="{{ student.user.password }}"><br>
             <label for="address">Address:</label>
             <input type="text" required name="address" value="{{ student.address }}"><br>
             <label for="mobile">Mobile:</label>
