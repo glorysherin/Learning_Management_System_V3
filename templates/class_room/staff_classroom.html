@@ -2416,37 +2416,41 @@
         </div>
         <div class="col-12 col-xl-6">
           <div class="card h-100">
-              <div class="card-header pb-0 p-3">
-                  <h6 class="mb-0">Selected Subjects</h6>
-              </div>
-              <div class="card-body p-3">
-                  <ul class="list-group">
-                      {% for i in classes %}
-                      <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                          <div class="avatar me-3">
-
-                              <img src=" {{ i.0.class_image }} " alt="{{ i.0.department }}"
-                                  style="height: 50px;" class="border-radius-lg shadow">
-
-                          </div>
-                          <div class="d-flex align-items-start flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm">{{ i.0.subject_code }}</h6>
-                              <p class="mb-0 text-xs">{{ i.0.class_name }}</p>
-                          </div>
-                          <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto"
-                              onclick="join_room('{{ i.0.subject_code }}','{{ i.0.class_name }}')">GroupChat</a>
-                      </li>
-                      {% endfor %}
-                  </ul>
-              </div>
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">Selected Subjects</h6>
+              <!-- Search Box -->
+             
+            </div>
+            <div class="card-body p-3">
+              <ul class="list-group">
+                {% for i in classes %}
+                <li class="list-group-items border-0 d-flex align-items-center px-0 mb-2">
+                  <div class="avatar me-3">
+                    <img src="{{ i.0.class_image }}" alt="{{ i.0.department }}" style="height: 50px;" class="border-radius-lg shadow">
+                  </div>
+                  <div class="d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm subject-code">{{ i.0.subject_code }}</h6>
+                    <p class="mb-0 text-xs subject-name">{{ i.0.class_name }}</p>
+                  </div>
+                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" onclick="join_room('{{ i.0.subject_code }}','{{ i.0.class_name }}')">GroupChat</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
           </div>
-      </div>
-
-
-
-
-
-
+        </div>
+        
+        <div class="col-12 mt-4">
+          <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-1">Search</h6>
+              <input type="text"  id="searchInput" class="form-control" placeholder="Search by Subject Code or Class name"><br>
+            </div>
+          </div>
+        </div>
+        
+        
+        
       <div class="col-12 mt-4">
         <div class="card mb-4">
             <div class="card-header pb-0 p-3">
@@ -2498,11 +2502,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 
       {% for i in dep %}
@@ -2640,7 +2639,65 @@
   <script src=" {% static 'admin/assets/js/core/bootstrap.min.js' %} "></script>
   <script src=" {% static 'admin/assets/js/plugins/perfect-scrollbar.min.js' %} "></script>
   <script src=" {% static 'admin/assets/js/plugins/smooth-scrollbar.min.js' %} "></script>
+
+<script>
+  // Function to filter classes based on search criteria
+  function filterItems() {
+    // Get the search input value
+    var searchValue = document.getElementById("searchInput").value.toLowerCase();
+
+    // Get the class cards
+    var classCards = document.querySelectorAll(".col-xl-3");
+
+    // Loop through each class card and hide/show based on search criteria
+    classCards.forEach(function (card) {
+      var subjectCode = card.querySelector(".text-gradient").innerText.toLowerCase();
+      var subjectName = card.querySelector("h5").innerText.toLowerCase();
+      var description = card.querySelector(".text-sm").innerText.toLowerCase();
+
+      var shouldShow =
+        subjectCode.includes(searchValue) ||
+        subjectName.includes(searchValue) ||
+        description.includes(searchValue);
+
+      card.style.display = shouldShow ? "" : "none";
+    });
+  }
+
+  // Attach event listener to search input
+  document.getElementById("searchInput").addEventListener("input", filterItems);
+</script>
+
   <script>
+    // Function to filter classes based on search criteria
+    function filterItems() {
+      // Get the search input value
+      var searchValue = document.getElementById("searchInput").value.toLowerCase();
+  
+      // Get the class cards
+      var classCards = document.querySelectorAll(".col-xl-3");
+  
+      // Loop through each class card and hide/show based on search criteria
+      classCards.forEach(function (card) {
+        var subjectCode = card.querySelector(".text-gradient").innerText.toLowerCase();
+        var subjectName = card.querySelector("h5").innerText.toLowerCase();
+        var description = card.querySelector(".text-sm").innerText.toLowerCase();
+  
+        var shouldShow =
+          subjectCode.includes(searchValue) ||
+          subjectName.includes(searchValue) ||
+          description.includes(searchValue);
+  
+        card.style.display = shouldShow ? "" : "none";
+      });
+    }
+  
+    // Attach event listener to search input
+    document.getElementById("searchInput").addEventListener("input", filterItems);
+  </script>
+  
+  <script>
+  
     function delete_class(id) {
       const confirmation = confirm('Are you sure you want to Delete this Class Note{ if you delete the class can not retrive the data }?');
 
@@ -2674,6 +2731,8 @@
       });
     }
   </script>
+  
+  
   <script>
     var setdate = document.querySelector(".set_date");
     var settime = document.querySelector(".set_time");
@@ -2710,6 +2769,8 @@
   });
 }
   </script>
+
+  
   <!-- jquary -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -2722,6 +2783,33 @@
 	<script src=" {% static 'scripts/responses.js' %} "></script>
 	<script src=" {% static 'scripts/chat.js' %} "></script>
 	{% comment %} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> {% endcomment %}
+
+  <script>
+  // Function to filter selected subjects based on search criteria
+  function filterSubjects() {
+    // Get the search input value
+    var searchValue = document.getElementById("searchSubjects").value.toLowerCase();
+
+    // Get the selected subjects list items
+    var subjectItems = document.querySelectorAll(".list-group-item");
+
+    // Loop through each subject item and hide/show based on search criteria
+    subjectItems.forEach(function (item) {
+      var subjectCode = item.querySelector(".text-sm").innerText.toLowerCase();
+      var subjectName = item.querySelector(".text-xs").innerText.toLowerCase();
+
+      var shouldShow =
+        subjectCode.includes(searchValue) ||
+        subjectName.includes(searchValue);
+
+      item.style.display = shouldShow ? "" : "none";
+    });
+  }
+
+  // Attach event listener to search input
+  document.getElementById("searchSubjects").addEventListener("input", filterSubjects);
+</script>
+
 </body>
 
 </html>
