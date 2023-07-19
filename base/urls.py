@@ -155,7 +155,7 @@ admin = [
     path('class_listout/<str:class_id>',
          get_class_peoples, name='class_listout'),
     path('students_list', students_list, name='students_list'),
-    path('admin_students_list', admin_students_list, name='admin_students_list'),
+    path('admin_students_list', admin_students_list, name='admin_students_list'), 
     path('students_list_by_dep', students_list_by_dep,
          name='students_list_by_dep'),
     path('class_dates', class_dates, name='class_dates'),
