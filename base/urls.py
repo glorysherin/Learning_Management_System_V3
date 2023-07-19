@@ -575,6 +575,7 @@ links_management = [
     path('links/edit/<int:pk>/<str:class_id>', edit_youtube_link, name='edit_youtube_link'),
     path('links/delete/<int:pk>/<str:class_id>', delete_youtube_link, name='delete_youtube_link'),
     path('list_notes/<str:class_id>', list_notes, name='list_notes'),
+    path('st_list_notes/<str:class_id>', st_list_notes, name='st_list_notes'),
 ]
 
 assignments_ = [
