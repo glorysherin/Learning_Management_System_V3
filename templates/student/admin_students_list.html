@@ -4,8 +4,8 @@
 <div class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto mt-4">
   <div class="flex flex-wrap justify-between mb-4" style="display: flex;">
     <div class="mb-4 sm:w-1/3">
-      <label for="department" class="block mb-2">Department:</label>
-      <select id="department" onchange="filterTable()" class="w-full px-3 py-2 border border-gray-300 rounded">
+      <label for="department" class="block mb-2" hidden>Department:</label>
+      <select id="department" onchange="filterTable()" class="w-full px-3 py-2 border border-gray-300 rounded" hidden>
         <option value="">All Departments</option>
         {% for dept in departments %}
           <option value="{{ dept }}">{{ dept }}</option>
@@ -14,8 +14,8 @@
     </div>
 
     <div class="mb-4 sm:w-1/3">
-      <label for="joined_year" class="block mb-2">Joined Year:</label>
-      <select id="joined_year" onchange="filterTable()" class="w-full px-3 py-2 border border-gray-300 rounded">
+      <label for="joined_year" class="block mb-2" hidden>Joined Year:</label>
+      <select id="joined_year" onchange="filterTable()" class="w-full px-3 py-2 border border-gray-300 rounded" hidden>
         <option value="">All Joined Years</option>
         {% for year in joined_years %}
           <option value="{{ year }}">{{ year }}</option>
