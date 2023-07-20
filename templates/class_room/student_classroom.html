@@ -959,7 +959,7 @@
                     // Function to filter selected subjects based on search criteria
                     function filterSubjects() {
                       // Get the search input value
-                      var searchValue = document.getElementById("searchSubjects").value.toLowerCase();
+                      var searchValue = document.getElementById("searchSubjects").value.trim().toLowerCase();
                   
                       // Get the selected subject list items
                       var subjectItems = document.querySelectorAll(".subject-item");
@@ -969,12 +969,10 @@
                   
                       // Loop through each subject item and hide/show based on search criteria
                       subjectItems.forEach(function (item) {
-                        var subjectCode = item.querySelector(".text-sm").innerText.toLowerCase();
-                        var subjectName = item.querySelector(".text-xs").innerText.toLowerCase();
+                        var subjectCode = item.querySelector(".text-sm").innerText.trim().toLowerCase();
+                        var subjectName = item.querySelector(".text-xs").innerText.trim().toLowerCase();
                   
-                        var shouldShow =
-                          subjectCode.includes(searchValue) ||
-                          subjectName.includes(searchValue);
+                        var shouldShow = subjectCode.includes(searchValue) || subjectName.includes(searchValue);
                   
                         item.style.display = shouldShow ? "" : "none";
                   
@@ -985,19 +983,22 @@
                   
                       // Show/hide the "No subjects found" message and the selected subjects list
                       var messageDiv = document.getElementById("noSubjectsFoundMessage");
-                      var selectedSubjectsList = document.getElementById("selectedSubjectsList");
+                      var searchResults = document.getElementById("searchResults");
                       if (anySubjectsFound) {
                         messageDiv.style.display = "none";
-                        selectedSubjectsList.style.display = "block";
+                        searchResults.style.display = "block";
                       } else {
                         messageDiv.style.display = "block";
-                        selectedSubjectsList.style.display = "none";
+                        searchResults.style.display = "none";
                       }
                     }
                   
                     // Attach event listener to search input
                     document.getElementById("searchSubjects").addEventListener("input", filterSubjects);
                   </script>
+                  
+                  
+                  
                   
                 <div class="col-12 mt-4">
                     <div class="card mb-4">

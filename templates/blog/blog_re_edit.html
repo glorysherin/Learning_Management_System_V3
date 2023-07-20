@@ -153,7 +153,7 @@
             window.location.replace('blog_saved');
           } else if (parsedResponse.message === "Blog draft saved successfully") {
             // Redirect to the draft blog page
-            window.location.replace("{% url 'blog_draft_saved' %}");
+            window.location.replace("{% url 'st_blog_draft_saved' %}");
           }
           } else if (parsedResponse.status === "err") {
             // Redirect to the draft blog page
