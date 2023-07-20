@@ -23,19 +23,41 @@ class StudentUserForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
 
+from django import forms
+from django.core.validators import RegexValidator
+from base.models import Student, Department
+
 class StudentForm(forms.ModelForm):
 
     joinned_year = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}))
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+
     role_no = forms.IntegerField()
-    department = forms.ModelChoiceField(queryset=models.Department.objects.all(),
-                                        empty_label='Select department',
-                                        to_field_name='short_name',
-                                        label='Department')
-    profile_pic = forms.ImageField(validators=[validate_image_file], label='Profile Picture')
+
+    department = forms.ModelChoiceField(
+        queryset=Department.objects.all(),
+        empty_label='Select department',
+        to_field_name='short_name',
+        label='Department'
+    )
+
+    profile_pic = forms.ImageField(
+        validators=[validate_image_file],
+        label='Profile Picture',
+        required=False
+    )
+
+    # Regular expression to validate the mobile field (only numeric values allowed)
+    numeric_validator = RegexValidator(
+        regex=r'^[0-9]+$',
+        message='Mobile number must contain only numeric digits.'
+    )
+
+    mobile = forms.CharField(validators=[numeric_validator])
 
     class Meta:
-        model = models.Student
+        model = Student
         fields = ['address', 'mobile', 'profile_pic', 'joinned_year', 'role_no', 'department', 'parent_mail_id', 'mail_id']
 
     def clean(self):
