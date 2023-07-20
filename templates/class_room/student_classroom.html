@@ -997,7 +997,14 @@
                     document.getElementById("searchSubjects").addEventListener("input", filterSubjects);
                   </script>
                   
-                  
+                  <div class="col-12 mt-4">
+                    <div class="card mb-4">
+                      <div class="card-header pb-0 p-3">
+                        <h6 class="mb-1">Search</h6>
+                        <input type="text"  id="searchInput" class="form-control" placeholder="Search by Subject Code or Class name"><br>
+                      </div>
+                    </div>
+                  </div>
                   
                   
                 <div class="col-12 mt-4">
@@ -1051,7 +1058,33 @@
                     </div>
                 </div>
             </div>
-            
+            <script>
+                // Function to filter classes based on search criteria
+                function filterItems() {
+                  // Get the search input value
+                  var searchValue = document.getElementById("searchInput").value.toLowerCase();
+              
+                  // Get the class cards
+                  var classCards = document.querySelectorAll(".col-xl-3");
+              
+                  // Loop through each class card and hide/show based on search criteria
+                  classCards.forEach(function (card) {
+                    var subjectCode = card.querySelector(".text-gradient").innerText.toLowerCase();
+                    var subjectName = card.querySelector("h5").innerText.toLowerCase();
+                    var description = card.querySelector(".text-sm").innerText.toLowerCase();
+              
+                    var shouldShow =
+                      subjectCode.includes(searchValue) ||
+                      subjectName.includes(searchValue) ||
+                      description.includes(searchValue);
+              
+                    card.style.display = shouldShow ? "" : "none";
+                  });
+                }
+              
+                // Attach event listener to search input
+                document.getElementById("searchInput").addEventListener("input", filterItems);
+              </script>
 
                 {% for i in dep %}
                 <div class="col-12 mt-4">
