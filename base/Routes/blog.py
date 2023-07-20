@@ -55,9 +55,16 @@ def blog_saved(request):
 def blog_draft_saved(request):
     return render(request,'attandees/Blog_draft_Saved.html',staff_detials(request,"Draft Articals"))
 
+def st_blog_draft_saved(request):
+    return render(request,'attandees/st_Blog_draft_Saved.html',student_detials(request,"Draft Articals"))
+
 def list_draft_blog(request):
     obj =  get_draft_blog(request)
     return render(request,"blog/draft_blog.html",staff_detials(request,'Drafted Blog',{"obj":obj}))
+
+def st_list_draft_blog(request):
+    obj =  get_draft_blog(request)
+    return render(request,"blog/st_draft_blog.html",student_detials(request,'Drafted Blog',{"obj":obj}))
 
 def list_unrevied_draft_blog(request):
     obj =  get_draft_blog_unreview(request)
@@ -196,6 +203,7 @@ def view_blog(request, pk):
     page = blog.objects.get(id=pk)
     items = get_blog_by_cat(page.categories).remove(page) if page in get_blog_by_cat(
         page.categories) else get_blog_by_cat(page.categories)
+    print(items)
     return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
 
 def draft_view_blog(request, pk):
