@@ -355,6 +355,33 @@
                 <!-- /.widget -->
 
                 </aside>
+                <script>
+                    function filterBlogsByCategory() {
+                      const searchInput = document.getElementById("search-form");
+                      const categorySearch = searchInput.value.toLowerCase();
+                      const blogItems = document.querySelectorAll(".swiper-slide");
+                  
+                      blogItems.forEach(function (blogItem) {
+                        const category = blogItem.dataset.category;
+                  
+                        if (category.includes(categorySearch) || categorySearch === '') {
+                          blogItem.style.display = "block";
+                        } else {
+                          blogItem.style.display = "none";
+                        }
+                      });
+                    }
+                  
+                    document.addEventListener("DOMContentLoaded", function () {
+                      const searchInput = document.getElementById("search-form");
+                  
+                      searchInput.addEventListener("input", function () {
+                        filterBlogsByCategory();
+                      });
+                  
+                      filterBlogsByCategory(); // Call the filter function on page load
+                    });
+                  </script>
                 <!-- /column .sidebar -->
             </div>
             <!-- /.row -->
