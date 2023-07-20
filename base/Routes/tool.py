@@ -540,7 +540,8 @@ conversation = {"hello":["hello","hey, hello how can i help you"],"How can I acc
   <li><img src="https://github.com/glorysherin/JEC/blob/main/Glory.jpeg" alt="pic "<a href="https://github.com/glorysherin">Glory Sherin</a></li>
   <li><img src="" alt="pic "<a href="https://github.com/MohanKumarMurugan">Mohan Kumar</a></li>
 </ul>
-'''],"Tell me about yourself.":["I'm an AI-powered chatbot designed to provide assistance and engage in friendly conversations. How can I help you today?"]}
+'''],"Tell me about yourself.":["I'm an AI-powered chatbot designed to provide assistance and engage in friendly conversations. How can I help you today?"],
+"how can i accessthe notes?":["to access the "] }
 # Define synonyms for common question words
 synonyms = {"what": ["what", "which", "where", "when", "how","who"],
             "is": ["is", "are", "am", "was", "were", "be", "being", "been"]}
