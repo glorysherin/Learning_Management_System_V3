@@ -127,6 +127,7 @@ def update_teacher_view(request, pk):
         teacher.department = department
         teacher.Annauni_num = annauni_num
         user.set_password(new_password)
+        user.save()
 
         # Check if a new profile picture is selected
         if 'profile_pic' in request.FILES:
