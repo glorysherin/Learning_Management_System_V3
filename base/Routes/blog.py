@@ -203,6 +203,7 @@ def view_blog(request, pk):
     page = blog.objects.get(id=pk)
     items = get_blog_by_cat(page.categories).remove(page) if page in get_blog_by_cat(
         page.categories) else get_blog_by_cat(page.categories)
+    print(items)
     return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
 
 def draft_view_blog(request, pk):
