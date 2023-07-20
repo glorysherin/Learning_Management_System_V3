@@ -30,6 +30,7 @@ def admin_students_list(request):
 
     # Get unique departments, joined years, and semesters
     departments = set([student.department for student in students])
+    department = Department.objects.all()
     joined_years = set([student.joinned_year for student in students])
 
     context = {
@@ -119,7 +120,6 @@ def student_edit(request, pk):
     department = Department.objects.all()
     current_id = request.user.id
     if request.method == 'POST':
-        user.set_password(request.POST['password'])
         student.user.first_name = request.POST['first_name']
         student.user.last_name = request.POST['last_name']
         student.mail_id = request.POST['email']
@@ -130,7 +130,12 @@ def student_edit(request, pk):
         student.role_no = request.POST['role_no']
         student.department = request.POST['department']
         student.profile_pic = request.FILES['file_']
-        student.user.save()
+        try:
+            if request.POST['password']:
+                user.set_password(request.POST['password'])
+                student.user.save()
+        except:
+            pass
         student.save()
         return render(request, 'msg/profile_updated.html', {'pk':pk})
     else:
