@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from ... import models
+from base.models import Student
 
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -22,7 +23,6 @@ class StudentUserForm(forms.ModelForm):
             'password': forms.PasswordInput()
         }
 
-
 class StudentForm(forms.ModelForm):
 
     joinned_year = forms.DateField(
@@ -33,9 +33,20 @@ class StudentForm(forms.ModelForm):
                                         to_field_name='short_name',
                                         label='Department')
     profile_pic = forms.ImageField(validators=[validate_image_file], label='Profile Picture')
-    
 
     class Meta:
         model = models.Student
-        fields = ['address', 'mobile', 'profile_pic',
-                  'joinned_year', 'role_no', 'department','parent_mail_id','mail_id']
+        fields = ['address', 'mobile', 'profile_pic', 'joinned_year', 'role_no', 'department', 'parent_mail_id', 'mail_id']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        parent_mail_id = cleaned_data.get("parent_mail_id")
+        mail_id = cleaned_data.get("mail_id")
+
+        # Check if the parent_mail_id and mail_id are unique
+        if Student.objects.filter(parent_mail_id=parent_mail_id).exists():
+            raise forms.ValidationError("Parent email already exists.")
+        if Student.objects.filter(mail_id=mail_id).exists():
+            raise forms.ValidationError("Email already exists.")
+
+        return cleaned_data
