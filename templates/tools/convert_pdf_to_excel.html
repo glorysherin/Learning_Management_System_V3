@@ -12,7 +12,7 @@
     #card {
 
       width: 400px;
-      height: 250px;
+      height: 400px;
       background-color: #e1ebe4;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(14, 13, 13, 0.2);
@@ -55,14 +55,16 @@
 
   <div class="flex justify-center items-center h-screen">
     <div style="margin: 0 auto;margin-top: 30px;margin-bottom: 100px;" id="card" class="bg-white shadow-md p-9 rounded-lg w-full sm:w-96">
-      <h2 class="text-2xl font-semibold mb-4">Convert PDF to Excel</h2>
+      <h2 class="text-2xl font-semibold mb-4" style="width: 250%;">Convert PDF to Excel</h2>
       <form method="post" enctype="multipart/form-data" style="margin-bottom: 30px;">
         {% csrf_token %}
         <label class="text-lg" for="pdf_file">Select a PDF file to convert:</label>
         <input class="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
           type="file" name="pdf_file" required>
+        
         <button style="border: 0.5px;padding: 8px;border-radius: 13px;"
           class="mt-4 bg-blue-500 hover:bg-blue-600 text-black   rounded-md" type="submit">Convert to Excel</button>
+          <p>Note: It only converts the pdf that contains tables.</p>
       </form>
     </div>
   </div>

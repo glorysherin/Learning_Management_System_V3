@@ -41,7 +41,7 @@
                     </svg>
                 </div>
                 <div class="ml-6">
-                    <input type="text" id="search-input" placeholder="Search messages"
+                    <input type="text" id="search-input" required placeholder="Search messages"
                         class="rounded-md border-gray-400 py-2 px-3">
                 </div>
             </div>
@@ -90,7 +90,7 @@
                     <input type="hidden" name="room_id" id="room_id" value="{{ room_details.id }}" />
                     <div class="mb-6">
                         <label for="message" class="block text-gray-700 font-bold mb-2">Message:</label>
-                        <textarea class="form-control h-24 rounded-md border-gray-400 py-2 px-3" type="text"
+                        <textarea required class="form-control h-24 rounded-md border-gray-400 py-2 px-3" type="text"
                             name="message" id="message" placeholder="Type your message here"></textarea>
                         <div class="flex justify-end">
                             <input style="margin-top: 10px;" type="submit" value="Send"
