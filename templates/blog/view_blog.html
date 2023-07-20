@@ -267,7 +267,7 @@
                                                                 <a href="#" class="hover" rel="category">{{ i.0.categories }}</a>
                                                             </div>
                                                             <!-- /.post-category -->
-                                                            <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark"
+                                                            <h2 class="post-title h3 mt-1 mb-3"><a class="link-dark" style="color: black;"
                                                                     href=" {% static 'blog-post.html' %} ">{{ i.0.title}}</a></h2>
                                                         </div>
                                                         <!-- /.post-header -->
@@ -324,8 +324,8 @@
                                 <li>
                                     <figure class="rounded"><a onclick="get_blog({{ i.0.id }})"><img onclick="get_blog({{ i.0.id }})"
                                                 src=" {{ i.0.blog_profile_img }} " alt="" /></a></figure>
-                                    <div class="post-content">
-                                        <h6 class="mb-2"> <a class="link-dark" onclick="get_blog({{ i.0.id }})" >{{ i.0.title }}</a> </h6>
+                                    <div class="post-content" style="color: black;">
+                                        <h6 class="mb-2" style="color: black;"> <a class="link-dark" onclick="get_blog({{ i.0.id }})" style="color: black;" >{{ i.0.title }}</a> </h6>
                                         <ul class="post-meta">
                                             <iconify-icon icon="system-uicons:calendar-date" width="15"
                                                 height="15"></iconify-icon><span> {{ i.0.updated_date }}</span>
