@@ -199,11 +199,11 @@ def listout_notes(request):
 
 def teacher_list(request):
     staff = Teacher.objects.filter(role='staff')
-    return render(request, 'admin_actions/teacher_list.html',staff_detials(request,'Staff Details',{'teachers': staff}))
+    return render(request, 'admin_actions/teacher_list.html',staff_detials(request,'Staff Details',{'teachers': staff,'type':1}))
 
 def hod_list(request):
     hod = Teacher.objects.filter(role='hod')
-    return render(request, 'admin_actions/teacher_list.html',staff_detials(request,'Hod Details',{'teachers': hod}))
+    return render(request, 'admin_actions/teacher_list.html',staff_detials(request,'Hod Details',{'teachers': hod,'type':0}))
 
 def admin_list(request):
     teachers = Teacher.objects.filter(role='admin')

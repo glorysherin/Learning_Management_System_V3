@@ -60,6 +60,25 @@ def get_blog_by_cat(cat):
     items = []
     for i in images:
         cat.append(i.categories)
+    print(cat)
+    for i in list(set(cat)):
+        temp = []
+        for j in images:
+            if i == j.categories:
+                temp.append(j)
+        items.append(temp)
+    for x, i in enumerate(items):
+        items[x] = i[::-1]
+    return items
+
+def get_blog_by_cat1():
+    images = blog.objects.filter()
+    cat = []
+    temp = []
+    items = []
+    for i in images:
+        cat.append(i.categories)
+    print(cat)
     for i in list(set(cat)):
         temp = []
         for j in images:

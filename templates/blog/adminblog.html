@@ -113,11 +113,11 @@ body {
          <br> 
 <div class="p-6">
     {% for i in blogs %}
-    <div style="    display: flex;align-items: center;justify-content: center;">
+    <div style="    display: flex;align-items: center;justify-content: center;     margin-top: 22%;">
         <h1 style="    font-weight: bold; font-size: 28px;">{{ i.0.categories }}</h1>
         <hr style="    margin-top: 10px; margin-bottom: 15px;">
     </div>
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3" style="margin-top: 22%;">
         {% for j in i %}
         <div class="overflow-hidden rounded-2xl bg-gray-50">
             <div class="flex items-center h-[180px] overflow-hidden">

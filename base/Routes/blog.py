@@ -1,7 +1,7 @@
 from base.models import blog, Draft_blog
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .Tool.blogTool import get_blog, get_course, get_blog_by_cat, get_draft_blog, get_course_review, get_draft_blog_by_cat, get_draft_blog_unreview
+from .Tool.blogTool import get_blog, get_course, get_blog_by_cat,get_blog_by_cat1, get_draft_blog, get_course_review, get_draft_blog_by_cat, get_draft_blog_unreview
 from .Tool.Tools import student_detials, staff_detials
 from django.http import JsonResponse
 
@@ -201,8 +201,13 @@ def staff_list_blog_course(request):
 
 def view_blog(request, pk):
     page = blog.objects.get(id=pk)
+<<<<<<< HEAD
+    items = get_blog_by_cat1().remove(page) if page in get_blog_by_cat1() else get_blog_by_cat1()
+=======
     items = get_blog_by_cat(page.categories).remove(page) if page in get_blog_by_cat(
         page.categories) else get_blog_by_cat(page.categories)
+>>>>>>> 6a82c6d7aff2047e4f3ea37ea2fb37c8d6e6ad80
+    print(items)
     return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
 
 def draft_view_blog(request, pk):

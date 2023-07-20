@@ -35,7 +35,12 @@
           <td>{{ teacher.Annauni_num }}</td>
           <td>
             <a class="btn btn-success btn-sm" href="{% url 'update-teacher' teacher.id %}">Edit</a>
+            {% if type == 0 %}
+            <a class="btn btn-danger btn-sm" href="{% url 'delete-teacher1' teacher.id %}">Delete</a>
+            {% elif  type == 1 %}
             <a class="btn btn-danger btn-sm" href="{% url 'delete-teacher' teacher.id %}">Delete</a>
+            {% endif %}
+
           </td>
         </tr>
         {% endfor %}

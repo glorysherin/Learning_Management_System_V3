@@ -10,12 +10,21 @@
         <canvas id="attendeesChart"></canvas>
     </div>
     <div class="card-body">
-        <div class="date-filter">
-            <label for="startDate"style="margin-left: 15%;">Start Date:</label>
-            <input type="date"style="margin-left: .9%;" id="startDate">
-            <label for="endDate" style="margin-left: 20%;">End Date:</label>
-            <input type="date"style="margin-left: .9%;" id="endDate">
+        <div class="date-filter row">
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label for="startDate" class="form-label">Start Date:</label>
+                <input type="date" id="startDate" class="form-control">
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <label for="endDate" class="form-label">End Date:</label>
+                <input type="date" id="endDate" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <button id="downloadButton" class="btn btn-primary w-100">Download Excel</button>
+            </div>
         </div>
+        
+        
         <div class="table-responsive">
             <table id="attendeesTable" class="table">
                 <thead>
@@ -191,5 +200,19 @@
         document.getElementById('attendeesChart'),
         config
     );
+    const downloadButton = document.getElementById('downloadButton');
+
+    // Add a click event listener to the download button
+    downloadButton.addEventListener('click', function () {
+        // Get the selected start date and end date
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+
+        // Create the URL for exporting the filtered data
+        const url = `/export_filtered_attendees/?start_date=${startDate}&end_date=${endDate}`;
+
+        // Trigger the download by opening the URL in a new tab
+        window.open(url, '_blank');
+    });
 </script>
 {% endblock content %}

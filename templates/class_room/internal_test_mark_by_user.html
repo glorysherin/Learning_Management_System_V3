@@ -80,8 +80,11 @@
         <div style="display: flex;margin-top: 10px;">
         <button type="submit"id="bttn"  style="width: fit-content;margin-bottom: 10px;">View Graph</button>
          <button type="submit"id="bttn"style="width: fit-content;margin-left:10px;height:36px" >Percentage</button></div>
-
-        <table>
+         <div class="date-filter row">
+            <!-- ... Existing date filter elements ... -->
+            <button style="width: 30%;" id="downloadButton" class="btn btn-primary ml-2">Export Excel</button>
+        </div>
+         <table id="filteredTable" style="display: none;">
             <thead>
                 <tr>
                     <th>Assessment No.</th>
@@ -103,6 +106,8 @@
         </table>
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.full.min.js"></script>
+
 <script>
     // Retrieve data from the table
     var marksByDate = {};
@@ -173,6 +178,44 @@
                 }]
             }
         }
+    });
+     // Function to convert the filtered table data to an array of arrays (Excel format)
+     function convertToExcelData(table) {
+        var data = [];
+        var rows = table.querySelectorAll('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var row = [], cols = rows[i].querySelectorAll('td, th');
+
+            for (var j = 0; j < cols.length; j++)
+                row.push(cols[j].innerText);
+
+            data.push(row);
+        }
+
+        return data;
+    }
+
+    // Function to export the data as an Excel file
+    function exportExcel(data, filename) {
+        var ws = XLSX.utils.aoa_to_sheet(data);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        /* Generate XLSX file and trigger download */
+        XLSX.writeFile(wb, filename);
+    }
+
+    // Add event listener to the download button
+    document.getElementById('downloadButton').addEventListener('click', function() {
+        // Get the filtered table data and convert to Excel format
+        var filteredTable = document.getElementById('filteredTable');
+        var excelData = convertToExcelData(filteredTable);
+
+        // Export the Excel file with a filename including the current date
+        var currentDate = new Date().toISOString().slice(0, 10);
+        var filename = 'filtered_data_' + currentDate + '.xlsx';
+        exportExcel(excelData, filename);
     });
 </script>
 </div>

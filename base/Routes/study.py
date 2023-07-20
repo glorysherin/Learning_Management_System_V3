@@ -28,6 +28,9 @@ import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dateutil.relativedelta import relativedelta
+import openpyxl
+from django.http import HttpResponse
+from io import BytesIO
 
 def is_teacher(user):
     return user.groups.filter(name='TEACHER').exists()
@@ -1114,31 +1117,22 @@ def user_mark_view(request, class_id):
 
 
 def get_internal_test_marks(request):
+    class_id = request.GET.get('class_id')
+    assesment_no = request.GET.get('assesment_no')
+    date_str = request.GET.get('date')
+    marks = None
 
-    if request.method == 'GET':
-        class_id = request.GET.get('class_id')
-        assesment_no = request.GET.get('assesment_no')
-        date_str = request.GET.get('date')
+    if class_id and assesment_no:
+        marks = Internal_test_mark.objects.filter(
+            class_id=class_id, assesment_no=assesment_no)
 
-        if class_id and assesment_no:
-            marks = Internal_test_mark.objects.filter(
-                class_id=class_id, assesment_no=assesment_no)
+        if date_str:
+            # Parse the date string to get the year
+            date = datetime.strptime(date_str, '%Y-%m-%d').date()
+            year = date.year
 
-            if date_str:
-                # Parse the date string to get the year
-                date = datetime.strptime(date_str, '%Y-%m-%d').date()
-                year = date.year
-
-                # Filter marks based on year
-                marks = marks.filter(Date__year=year)
-                context = {
-                    'marks': marks,
-                    'class_id': class_id,
-                    'assesment_no': assesment_no,
-                    'date': date_str,
-                }
-                return render(request, 'class_room/internal_test_marks.html',staff_detials(request,'Get Internal Test Mark',context))
-                
+            # Filter marks based on year
+            marks = marks.filter(Date__year=year)
 
     context = {
         'marks': marks,
@@ -1147,7 +1141,7 @@ def get_internal_test_marks(request):
         'date': date_str,
     }
 
-    return render(request, 'class_room/internal_test_marks.html',staff_detials(request,'Get Internal Test Mark',context))
+    return render(request, 'class_room/internal_test_marks.html', staff_detials(request, 'Get Internal Test Mark', context))
 
 
 def Dailystudenttest_marksby_date(request, user_name):
@@ -1260,6 +1254,43 @@ class CustomJSONEncoder(json.JSONEncoder):
         if isinstance(obj, date):
             return obj.isoformat()
         return super().default(obj)
+
+
+def export_filtered_attendees(request):
+    # Get the start date and end date from the request parameters
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+
+    # Filter the attendees based on the date range
+    attendees = Attendees.objects.filter(Date__range=[start_date, end_date])
+
+    # Create an Excel workbook and worksheet
+    workbook = openpyxl.Workbook()
+    worksheet = workbook.active
+    worksheet.title = 'Attendees Data'
+
+    # Write headers to the worksheet
+    worksheet.append(['Date', 'Class ID', 'User Name', 'Roll No', 'Subject/State'])
+
+    # Write attendees data to the worksheet
+    for attendee in attendees:
+        worksheet.append([attendee.Date, attendee.class_id, attendee.user_name, attendee.roll_no, attendee.subject_states])
+
+    # Create a BytesIO object to store the Excel file in memory
+    excel_file = BytesIO()
+
+    # Save the workbook to the BytesIO object
+    workbook.save(excel_file)
+
+    # Set the response headers for Excel download
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=filtered_attendees.xlsx'
+
+    # Write the Excel file from the BytesIO object to the response
+    excel_file.seek(0)
+    response.write(excel_file.read())
+
+    return response
 
 
 def view_attendees_by_roolno(request, roll_no):
