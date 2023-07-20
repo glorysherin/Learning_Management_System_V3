@@ -201,12 +201,7 @@ def staff_list_blog_course(request):
 
 def view_blog(request, pk):
     page = blog.objects.get(id=pk)
-<<<<<<< HEAD
     items = get_blog_by_cat1().remove(page) if page in get_blog_by_cat1() else get_blog_by_cat1()
-=======
-    items = get_blog_by_cat(page.categories).remove(page) if page in get_blog_by_cat(
-        page.categories) else get_blog_by_cat(page.categories)
->>>>>>> 6a82c6d7aff2047e4f3ea37ea2fb37c8d6e6ad80
     print(items)
     return render(request, "blog/view_blog.html", {'blog': page, 'item': items})
 
