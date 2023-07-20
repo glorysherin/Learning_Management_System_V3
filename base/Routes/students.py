@@ -59,7 +59,7 @@ def staff_list_by_dep(request):
     usr_id = request.user.id
     usr_obj = User.objects.get(id=usr_id)
     faculty_details = Teacher.objects.get(user=usr_obj)
-    students = Teacher.objects.filter(department=faculty_details.department,role=faculty_details.role)
+    students = Teacher.objects.filter(department=faculty_details.department,role='staff')
     departments = set([student.department for student in students])
     context = {
         'students': students,
@@ -158,6 +158,7 @@ def student_edit(request, pk):
         except Exception as e:
             print(e)
             return render(request, 'student/edit_student_profile.html', student_detials(request, 'Edit Detials', context))
+
 def staff_edit(request, pk):
     student = get_object_or_404(Teacher, pk=pk)
     department = Department.objects.all()

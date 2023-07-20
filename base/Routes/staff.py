@@ -411,7 +411,7 @@ def add_teacher_hod(request):
             return render(request,'msg/user_cant_create.html')
         return HttpResponseRedirect('user_added_message')
 
-    return render(request, 'teacher/adminsignup.html',staff_detials(request,'Add User',mydict))
+    return render(request, 'teacher/hodsignup.html',staff_detials(request,'Add User',mydict))
 
 def admin_added(request):
     return render(request,"attandees/admin_message.html")

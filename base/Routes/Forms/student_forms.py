@@ -26,6 +26,7 @@ class StudentUserForm(forms.ModelForm):
 from django import forms
 from django.core.validators import RegexValidator
 from base.models import Student, Department
+from django.core.validators import RegexValidator, validate_email
 
 class StudentForm(forms.ModelForm):
 
@@ -54,7 +55,9 @@ class StudentForm(forms.ModelForm):
         message='Mobile number must contain only numeric digits.'
     )
 
-    mobile = forms.CharField(validators=[numeric_validator])
+    mobile = forms.IntegerField(validators=[numeric_validator])
+    parent_mail_id = forms.EmailField(validators=[validate_email])
+    mail_id = forms.EmailField(validators=[validate_email])
 
     class Meta:
         model = Student

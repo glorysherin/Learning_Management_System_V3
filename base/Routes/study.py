@@ -135,7 +135,12 @@ def nave_home_classroom(request, pk, class_id):
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         
         table_datas = Assignment.objects.filter(class_id=class_id)[::-1]
-        updated_by = [get_user_name_byid(i.update_by) for i in table_datas]
+        try:
+            updated_by = [get_user_name_byid(i.update_by) for i in table_datas]
+        except:
+            updated_by=[]
+            # updated_by = [get_user_name_byid(i.update_by) for i in table_datas]
+            
         collected = []
         status_data = []
         notes = []
@@ -1318,12 +1323,19 @@ def search_view(request):
     if request.method == 'GET':
         query = request.GET.get('google_search')
         if query:
-            query = urllib.parse.quote(query)
-            results = []
-            for url in search(query, num_results=50):
-                # process the search results
-                results.append(url)
-            return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
+            try:
+                query = urllib.parse.quote(query)
+                results = []
+                for url in search(query, num_results=50):
+                    # process the search results
+                    results.append(url)
+                return render(request, 'class_room/search_results.html', {'results': results, 'query': query})
+            except:
+                try:
+                    Teacher.objects.get(user=User.objects.get(id=request.user.id))
+                    return render(request, 'msg/search_404.html',{'role':1})
+                except:
+                    return render(request, 'msg/search_404.html',{'role':0})
     return render(request, 'class_room/search_results.html',staff_detials(request,'Search Results',))
 
 
