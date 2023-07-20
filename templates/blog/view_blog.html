@@ -301,15 +301,15 @@
                     </div>
                     <!-- /column -->
                     <aside class="col-lg-4 sidebar mt-11 mt-lg-6">
-                        <div class="widget">
+                        <!-- <div class="widget">
                             <form class="search-form">
-                                <div class="form-floating mb-0">
-                                    <input id="search-form" type="text" class="form-control" placeholder="Search">
-                                    <label for="search-form">Search</label>
-                                </div>
+                              <div class="form-floating mb-0">
+                                <input id="categorySearch" type="text" class="form-control" placeholder="Search by category">
+                                <label for="categorySearch">Search</label>
+                              </div>
                             </form>
-                            <!-- /.search-form -->
-                        </div>
+                            /.search-form -->
+                          <!-- </div> --> 
                         <!-- /.widget -->
                         <div class="widget">
                             <h4 class="widget-title mb-3">Description</h4>
@@ -318,7 +318,7 @@
                         </div>
                         <!-- /.widget -->
                         <div class="widget">
-                            <h4 class="widget-title mb-3">Also you must linke this Posts</h4>
+                            <h4 class="widget-title mb-3">Also you must like this Posts</h4>
                             <ul class="image-list">
                                 {% for i in item %}
                                 <li>
@@ -344,18 +344,62 @@
                         <!-- /.image-list -->
                 </div>
                 <!-- /.widget -->
+
+
+
                 <div class="widget">
+                    <form class="search-form">
+                      <div class="form-floating mb-0">
+                        <input id="categorySearch" type="text" class="form-control" placeholder="Search by category">
+                        <label for="categorySearch">Search</label>
+                      </div>
+                    </form>
+                    <!-- /.search-form -->
+                  </div>
+                  
+                  <div class="widget">
                     <h4 class="widget-title mb-3">Categories</h4>
-                    <ul class="unordered-list bullet-primary text-reset">
-                        {% for i in item %}
-                        <li><a href="{%url  'list_blog' %}">{{ i.0.categories }} ({{ i|length }})</a></li>
-                        {% endfor %}
+                    <ul class="unordered-list bullet-primary text-reset" id="categoryList">
+                      {% for i in item %}
+                      <li><a href="{% url 'list_blog' %}">{{ i.0.categories }} ({{ i|length }})</a></li>
+                      {% endfor %}
                     </ul>
-                </div>
+                  </div>
+                  
+                  <script>
+                    function filterCategories() {
+                      const searchInput = document.getElementById("categorySearch");
+                      const categorySearch = searchInput.value.toLowerCase();
+                      const categoryList = document.getElementById("categoryList");
+                      const categories = categoryList.getElementsByTagName("li");
+                  
+                      for (const category of categories) {
+                        const categoryName = category.textContent.toLowerCase();
+                  
+                        if (categoryName.includes(categorySearch) || categorySearch === "") {
+                          category.style.display = "block";
+                        } else {
+                          category.style.display = "none";
+                        }
+                      }
+                    }
+                  
+                    document.addEventListener("DOMContentLoaded", function () {
+                      const searchInput = document.getElementById("categorySearch");
+                  
+                      searchInput.addEventListener("input", function () {
+                        filterCategories();
+                      });
+                  
+                      filterCategories(); // Call the filter function on page load
+                    });
+                  </script>
+                  
+                
                 <!-- /.widget -->
 
                 </aside>
-                <script>
+                <!-- <script>
                     function filterBlogsByCategory() {
                       const searchInput = document.getElementById("search-form");
                       const categorySearch = searchInput.value.toLowerCase();
@@ -381,7 +425,7 @@
                   
                       filterBlogsByCategory(); // Call the filter function on page load
                     });
-                  </script>
+                  </script> -->
                 <!-- /column .sidebar -->
             </div>
             <!-- /.row -->

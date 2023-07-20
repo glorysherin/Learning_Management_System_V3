@@ -983,10 +983,7 @@ JEC-Class room  </title>
       </div>
       <div class="col-12 col-xl-4">
         <div class="card h-100">
-          <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">Search People</h6>
-            <input type="text" id="searchPeople" class="form-control" placeholder="Search by Name or Role No">
-          </div>
+          
           <div class="card-body p-3" style="overflow-y: scroll">
             <ul class="list-group" id="peopleList">
               {% for i in people %}
@@ -1011,6 +1008,10 @@ JEC-Class room  </title>
 
 <div class="flex flex-col">
   <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+    <h2 style="font-size: 30px;margin-left: 10px;">Assignment:</h2><br><br>
+    <div class="flex justify-end mt-4 mx-6">
+      <input type="text" id="searchInput" class="border border-gray-400 rounded py-2 px-3 mr-4 focus:outline-none" placeholder="Search by Uploaded by or Subject Code">
+    </div>
     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
       <div class="overflow-hidden">
         <table class="min-w-full">
@@ -1086,6 +1087,37 @@ View
     </div>
   </div>
 </div>
+<script>
+  function filterTable() {
+    // Get the input value from the search bar
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    
+    // Get the table body
+    table = document.querySelector("table");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those that don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td");
+      for (var j = 0; j < td.length; j++) {
+        if (td[j]) {
+          txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            break; // Break if at least one cell matches the filter
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  }
+
+  // Add an event listener to the search input to trigger filtering on input change
+  document.getElementById("searchInput").addEventListener("input", filterTable);
+</script>
       {% for i in dep %}
       <div class="col-12 mt-4">
         <div class="card mb-4">
