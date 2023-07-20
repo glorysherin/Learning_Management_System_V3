@@ -135,6 +135,18 @@ def update_teacher_view(request, pk):
  
 
 @login_required(login_url='adminlogin')
+def delete_teacher_view1(request, pk):
+    teacher = TMODEL.Teacher.objects.get(id=pk)
+    print(teacher.user_id)
+    user = User.objects.get(id=teacher.user_id)
+    obj= Users.objects.get(connect_id= user.id)
+    user.delete()
+    teacher.delete()
+    obj.delete()
+    print("both are deleted")
+    return redirect('hod_list')
+
+@login_required(login_url='adminlogin')
 def delete_teacher_view(request, pk):
     teacher = TMODEL.Teacher.objects.get(id=pk)
     print(teacher.user_id)
@@ -144,14 +156,17 @@ def delete_teacher_view(request, pk):
     teacher.delete()
     obj.delete()
     print("both are deleted")
-    return HttpResponseRedirect('/admin-view-teacher')
+    return redirect('teacher_list')
 
 
 def admin_view_pending_teacher_view(request):
-    if Teacher.objects.get(user=request.user.id).role == 'hod':
-        teachers = TMODEL.Teacher.objects.all().filter(status=False)
-    elif Teacher.objects.get(user=request.id).role == 'admin':
-        teachers = TMODEL.Teacher.objects.all().filter(status=False,role='staff')
+    try:
+        if Teacher.objects.get(user=request.user.id).role == 'hod':
+            teachers = TMODEL.Teacher.objects.all().filter(status=False,role='staff')
+        elif Teacher.objects.get(user=request.user.id).role == 'admin':
+            teachers = TMODEL.Teacher.objects.all().filter(status=False)
+    except:
+        return render(request,"msg/already_accept.html")
     return render(request, 'exam/admin_view_pending_teacher.html', staff_detials(request,'Pending Teacher',{'teachers': teachers}))
 
 

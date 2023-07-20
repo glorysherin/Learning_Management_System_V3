@@ -365,6 +365,7 @@ exam = [
     path('admin-teacher',  admin_teacher_view, name='admin-teacher'),
     path('admin-view-teacher',  admin_view_teacher_view, name='admin-view-teacher'),
     path('update-teacher/<int:pk>',  update_teacher_view, name='update-teacher'),
+    path('delete-teacher1/<int:pk>',  delete_teacher_view1, name='delete-teacher1'),
     path('delete-teacher/<int:pk>',  delete_teacher_view, name='delete-teacher'),
     path('admin-view-pending-teacher',  admin_view_pending_teacher_view,
          name='admin-view-pending-teacher'),
