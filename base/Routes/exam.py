@@ -81,11 +81,18 @@ def admin_dashboard_view(request):
 
 @login_required(login_url='adminlogin')
 def admin_teacher_view(request):
-    dict = {
-        'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).count(),
-        'pending_teacher': TMODEL.Teacher.objects.all().filter(status=False).count(),
-        'salary': TMODEL.Teacher.objects.all().filter(status=True).aggregate(Sum('salary'))['salary__sum'],
-    }
+    if Teacher.objects.get(user=request.user.id).role == 'admin':
+        dict = {
+            'total_teacher': TMODEL.Teacher.objects.all().filter(status=True).exclude(role='admin').count(),
+            'pending_teacher': TMODEL.Teacher.objects.all().filter(status=False).count(),
+            'salary': TMODEL.Teacher.objects.all().filter(status=True).aggregate(Sum('salary'))['salary__sum'],
+        }
+    elif Teacher.objects.get(user=request.user.id).role == 'hod':
+        dict = {
+            'total_teacher': TMODEL.Teacher.objects.all().filter(status=True,role='staff').count(),
+            'pending_teacher': TMODEL.Teacher.objects.all().filter(status=False).count(),
+            'salary': TMODEL.Teacher.objects.all().filter(status=True).aggregate(Sum('salary'))['salary__sum'],
+        }
     return render(request, 'exam/admin_teacher.html',staff_detials(request,'admin teacher view ', dict))
 
 

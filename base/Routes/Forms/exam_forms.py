@@ -8,7 +8,7 @@ class ContactusForm(forms.Form):
     Message = forms.CharField(max_length=500,widget=forms.Textarea(attrs={'rows': 3, 'cols': 30}))
 
 class TeacherSalaryForm(forms.Form):
-    salary=forms.IntegerField()
+    salary=forms.IntegerField(widget=forms.NumberInput())
 
 class CourseForm(forms.ModelForm):
     class Meta:
