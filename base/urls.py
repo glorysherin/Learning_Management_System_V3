@@ -274,7 +274,7 @@ classroom = [
     path('class_ebook/<int:pk>/delete/',
          class_ebook_delete, name='class_ebook_delete'),
     path('filter_attendees', filter_attendees, name='filter_attendees'),
-    path('leave_classroom/<str:class_id>', leave_classroom, name='leave_classroom'),
+    path('leave_classroom/<str:class_id>/<int:owner>', leave_classroom, name='leave_classroom'),
 
 ]
 
